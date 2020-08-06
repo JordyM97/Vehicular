@@ -1,9 +1,9 @@
 
 # GRUPO VEHICULAR
 
-###Jordy Medina
-###Leonardo Gomez
-###Gustavo Matamoros
+-Jordy Medina
+-Leonardo Gomez
+-Gustavo Matamoros
 
 ------REQUISITOS-----
 ===

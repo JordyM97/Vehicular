@@ -1,9 +1,18 @@
 
 # GRUPO VEHICULAR
 
--Jordy Medina
--Leonardo Gomez
--Gustavo Matamoros
+
+-----INSTALAR ------------
+===
+https://ionicframework.com/docs/v3/intro/installation/
+-1)   instalar version LTS de NodeJS 
+      npm install -g ionic cordova
+
+-2)   de ahi correr el programa con:  
+        ionic serve
+
+-para revisar version instalada de todo usar el comando
+        Ionic info
 
 ------REQUISITOS-----
 ===
@@ -26,3 +35,7 @@ System:
  -  NodeJS : v12.18.3 
  - npm    : 6.14.6
  - OS     : Windows 10
+
+-Jordy Medina
+-Leonardo Gomez
+-Gustavo Matamoros

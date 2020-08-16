@@ -4,14 +4,14 @@
 
 -----INSTALAR ------------
 ===
-https://ionicframework.com/docs/v3/intro/installation/
--1)   instalar version LTS de NodeJS 
-      npm install -g ionic cordova
+- https://ionicframework.com/docs/v3/intro/installation/
+-  instalar version LTS de NodeJS 
+-     npm install -g ionic cordova
 
--2)   de ahi correr el programa con:  
+-  de ahi correr el programa con:  
         ionic serve
 
--para revisar version instalada de todo usar el comando
+- para revisar version instalada de todo usar el comando
         Ionic info
 
 ------REQUISITOS-----

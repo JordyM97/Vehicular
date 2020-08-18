@@ -1,19 +1,8 @@
-#content {
-  text-align: center;
-  color: black;
-  
-  background: black;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+
+#map {
+  height: 100%;
 }
-ion-content {
-  --ion-background-color:white;
+#menu{
+  height: 12px;
+  width: 10px;
 }
-ion-toolbar {
-  --background: white;
-  --ion-color-base: black !important;
-  --color: black;
-  }

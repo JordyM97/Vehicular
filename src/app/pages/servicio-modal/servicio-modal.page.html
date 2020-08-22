@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>servicioModal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label class="ion-text-wrap">Seleccione el tipo de servicio: </ion-label>
+    <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
+      <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio">
+        {{servicio.tipoServicio}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">Seleccione el tipo de transporte: </ion-label>
+    <ion-select (ionChange)="vehiculoSeleccion($event)" interface="action-sheet">
+      <ion-select-option *ngFor="let vehiculo of vehiculos" [value]="vehiculos.tipoVehiculo">
+        {{vehiculo.tipoVehiculo}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">Seleccione punto de inicio: </ion-label>
+    <ion-button (click)="seleccionarFin()">Aceptar Inicio</ion-button>
+  </ion-item>
+
+  <div #map id="map"></div>
+
+  <ion-button (click)="salirConInformacion()">Salir con argumentos</ion-button>
+  <ion-button>GG</ion-button>
+
+</ion-content>

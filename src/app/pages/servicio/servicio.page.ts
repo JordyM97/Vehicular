@@ -15,7 +15,7 @@ export class ServicioPage implements OnInit {
   }
 
   async iniciarServicio(){
-
+    
     const modalIniciarServicio = await this.modalCtrl.create({
       component: ServicioModalPage, //Importa desde el modal
       componentProps: {

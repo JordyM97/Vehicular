@@ -32,11 +32,11 @@ destination = { lat: -2.14218, lng: -79.96161 };
       zoom: 15
     });
 
-    this.directionsDisplay.setMap(this.map);
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      mapEle.classList.add('show-map');
-      this.calculateRoute();
-    });
+    //this.directionsDisplay.setMap(this.map);
+    //google.maps.event.addListenerOnce(this.map, 'idle', () => {
+    //  mapEle.classList.add('show-map');
+    //  this.calculateRoute();
+    //});
   }
 
   private calculateRoute() {

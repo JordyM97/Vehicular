@@ -1,10 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>servicioModal</ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
+  <h1>Iniciar un Servicioo</h1>
   <ion-item>
     <ion-label class="ion-text-wrap">Seleccione el tipo de servicio: </ion-label>
     <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
@@ -27,10 +26,11 @@
     <ion-label class="ion-text-wrap">Seleccione punto de inicio: </ion-label>
     <ion-button (click)="seleccionarFin()">Aceptar Inicio</ion-button>
   </ion-item>
+  <ion-button (click)="salirConInformacion()">Salir con argumentos</ion-button>
+  <ion-button>GG</ion-button>
 
   <div #map id="map"></div>
 
-  <ion-button (click)="salirConInformacion()">Salir con argumentos</ion-button>
-  <ion-button>GG</ion-button>
+  
 
 </ion-content>

@@ -1,4 +1,32 @@
+page-home{
+    background-color: red;
+}
 .center{
     margin-left: 10%;
     margin-right: 10%;
+    border : solid black 1px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    
+}
+ion-list{
+    background-color: white;
+    padding-left: 12px;
+    padding-right: 12px;;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}   
+ion-content{
+    text-align: center;
+    --ion-background-color: white;
+   
+    
+}
+ion-item{
+   
+    border-radius: 12px;
+    border-top: solid white;
+    border-left: solid white;
+    border-bottom: solid white;
+    border-right: solid white;
 }

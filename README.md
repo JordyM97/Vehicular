@@ -14,6 +14,12 @@ AIzaSyBe_BjkNrd70aYC9Vs5O4fEiulwPDvQf2M
 - para revisar version instalada de todo usar el comando
         Ionic info
 
+-ionic cordova plugin add cordova-plugin-nativegeocoder
+npm install @ionic-native/native-geocoder
+ionic cordova plugin add cordova-plugin-geolocation
+npm install @ionic-native/geolocation
+
+
 ------REQUISITOS-----
 ===
 Ionic:

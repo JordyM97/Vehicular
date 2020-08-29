@@ -27,6 +27,10 @@ export class HomePage implements OnInit {
   GoogleAutocomplete: any;
   geocoder: any;
   pagos: any[]=[];
+  startMarker: any;
+  EndMarker: any;
+
+
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
 // Ejemplo
@@ -45,6 +49,7 @@ export class HomePage implements OnInit {
     this.autocompleteItems = [];
     this.autocompleteItems2 = [];
     this.pagos = [{id: 1, tipoPago:'Efectivo'},{id:2, tipoPago:'MasterCard XXX92'}]
+   
     
   }
   pagoSeleccion(event){
@@ -65,12 +70,22 @@ export class HomePage implements OnInit {
       this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude); 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions); 
       this.map.addListener('tilesloaded', () => {
-        console.log('accuracy',this.map, this.map.center.lat());
+        //console.log('accuracy',this.map, this.map.center.lat());
         this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
         this.lat = this.map.center.lat()
         this.long = this.map.center.lng()
       }); 
       this.geocoder = new google.maps.Geocoder();
+      this.startMarker= new google.maps.Marker({
+        map: this.map,
+        draggable: true,
+        position: latLng,
+      });
+      this.EndMarker = new google.maps.Marker({
+        map: this.map,
+        draggable: true,
+      });
+
 
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -155,21 +170,23 @@ export class HomePage implements OnInit {
         if (results[0]) {
           map.setZoom(16);
           map.setCenter(results[0].geometry.location);
-          const marker = new google.maps.Marker({
-            map,
-            position: results[0].geometry.location
-          });
-          console.log("Marcador puesto:",marker.getPosition().toString());
-          console.log(results[0].formatted_address);
+    
           this.ClearAutocomplete();
-          if(number==1){ this.lat=marker.getPosition().lat(); this.long=marker.getPosition().lng();
-            this.origin.lat=marker.getPosition().lat();
-            this.origin.lng=marker.getPosition().lng();
+          if(number==1){ 
+            this.startMarker.setPosition(results[0].geometry.location);
+            
+            this.lat=this.startMarker.getPosition().lat(); this.long=this.startMarker.getPosition().lng();
+            this.origin.lat=this.startMarker.getPosition().lat();
+            this.origin.lng=this.startMarker.getPosition().lng();
           }
-          else{ this.destlat=marker.getPosition().lat(); this.destlong=marker.getPosition().lng();
-            this.destination.lat=marker.getPosition().lat();
-            this.destination.lat=marker.getPosition().lng();
+          else{ 
+            this.EndMarker.setPosition(results[0].geometry.location);
+            this.destlat=this.EndMarker.getPosition().lat(); this.destlong=this.EndMarker.getPosition().lng();
+            this.destination.lat=this.EndMarker.getPosition().lat();
+            this.destination.lat=this.EndMarker.getPosition().lng();
           }
+          console.log("End:",this.EndMarker.getPosition().toString());
+          console.log(results[0].formatted_address);
         } else {
           window.alert("No results found");
         }

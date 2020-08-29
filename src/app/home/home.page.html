@@ -22,9 +22,6 @@
   </ion-fab>-->
 
   <div class="map-wrapper" style="height: 100%;">      
-    <div id="map_center">
-      <ion-icon name="pin" size="large" color="danger"></ion-icon>      
-    </div>
     <div #map id="map"  style="height: 100%;"></div>
   </div>  
 
@@ -67,8 +64,8 @@
         <ion-searchbar id="Destino" [(ngModel)]="autocomplete2.input" (ionInput)="UpdateSearchResults2()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         
         <ion-item>
-          <ion-label class="ion-text-wrap">Seleccione el tipo de pago: </ion-label>
-          <ion-select (ionChange)="pagoSeleccionSeleccion($event)" interface="action-sheet">
+          <ion-label class="pago ion-text-wrap">Pagar con: </ion-label>
+          <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
             <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
               {{pago.tipoPago}}
             </ion-select-option>

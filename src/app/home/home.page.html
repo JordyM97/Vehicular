@@ -4,30 +4,78 @@
   
 
 <ion-content> 
-  <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-  
   <ion-list [hidden]="autocompleteItems.length == 0">
-    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item,1)">
       {{ item.description }}
     </ion-item>
   </ion-list>
-  <ion-row>    
-    <ion-col  size="6">
-      <ion-button (click)="loadMap()" shape="round" fill="outline">
-        <ion-icon slot="start" name="locate"></ion-icon>
-          Where I Am
-        </ion-button>
-    </ion-col>
-  </ion-row>  
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-list [hidden]="autocompleteItems2.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems2" tappable (click)="SelectSearchResult(item,2)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+
+  <!--<ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button (click)="ShowCords()" ion-fab color="tertiary">
       <ion-icon name="information-circle-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
+
   <div class="map-wrapper" style="height: 100%;">      
     <div id="map_center">
       <ion-icon name="pin" size="large" color="danger"></ion-icon>      
     </div>
     <div #map id="map"  style="height: 100%;"></div>
-  </div>   
+  </div>  
+
+  <div>
+    <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
+      <ion-fab-button  menu="main-menu">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+  <div class="menuop">
+    <ion-grid>
+      <ion-row class="vehiculo`">
+        <ion-segment scrollable value="1">
+          <ion-segment-button value="1" onclick="print(value)">
+            <ion-icon name="car-outline"></ion-icon>
+            <ion-label> Carro</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-icon name="bicycle-outline"></ion-icon>
+            <ion-label> Tricimoto</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-icon name="car-sport-outline"></ion-icon>
+            <ion-label> Carro XL</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-icon name="car-sport-outline"></ion-icon>
+            <ion-label> Carro</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-icon name="car-sport-outline"></ion-icon>
+            <ion-label> Carro</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+      </ion-row>
+      <ion-row>
+        <ion-searchbar id="Inicio" [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Busca un lugar"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+        <ion-searchbar id="Destino" [(ngModel)]="autocomplete2.input" (ionInput)="UpdateSearchResults2()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+        
+        <ion-item>
+          <ion-label class="ion-text-wrap">Seleccione el tipo de pago: </ion-label>
+          <ion-select (ionChange)="pagoSeleccionSeleccion($event)" interface="action-sheet">
+            <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
+              {{pago.tipoPago}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button  (click)="calculateRoute()" color="success">GET</ion-button>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

@@ -18,7 +18,8 @@ AIzaSyBe_BjkNrd70aYC9Vs5O4fEiulwPDvQf2M
 npm install @ionic-native/native-geocoder
 ionic cordova plugin add cordova-plugin-geolocation
 npm install @ionic-native/geolocation
-
+ionic cordova plugin add cordova-plugin-advanced-http
+npm install @ionic-native/http
 
 ------REQUISITOS-----
 ===

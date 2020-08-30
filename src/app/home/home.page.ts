@@ -2,6 +2,8 @@ import { Component, OnInit,NgZone } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../popover/popover.component';
 
 declare var google;
 
@@ -24,22 +26,19 @@ export class HomePage implements OnInit {
   placeid: any;
   GoogleAutocomplete: any;
   geocoder: any;
-  pagos: any[]=[];
+  pagos: any[];
+  pagoSeleccionado: any;
   startMarker: any;
   EndMarker: any;
 
 
   directionsService : any;
-  directionsDisplay : any;
-// Ejemplo
-  origin = { lat: -2.189327, lng: -79.889532 };
-  destination = { lat: -2.14218, lng: -79.96161 };
-  
+  directionsRenderer : any;
+
 
   constructor(
-    private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,    
-    public zone: NgZone,
+    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
+    public popovercontroller: PopoverController
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
@@ -50,16 +49,26 @@ export class HomePage implements OnInit {
    
     
   }
+  async conductorEncontrado(ev: any){
+    const popover= await this.popovercontroller.create({
+      component: PopoverComponent,
+      event: ev,
+      translucent: true,
+      cssClass: 'contact-popover',
+      
+    }); 
+    return await popover.present();
+
+  }
   pagoSeleccion(event){
-    this.pagos = event.target.value;
+    this.pagoSeleccionado = event.target.value;
   }
   ngOnInit(){
     this.loadMap()
   }
   loadMap() {       
-    this.directionsService = new google.maps.DirectionsService();
-    
-    
+    this.directionsService= new google.maps.DirectionsService();
+    this.directionsRenderer = new google.maps.DirectionsRenderer();
     this.geolocation.getCurrentPosition().then((resp) => {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
@@ -69,7 +78,10 @@ export class HomePage implements OnInit {
       } 
       this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude); 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions); 
-      this.directionsDisplay = new google.maps.DirectionsRenderer({map: this.map});
+      
+      
+      this.directionsRenderer.setMap(this.map);
+      this.directionsRenderer.setPanel(document.getElementById('directionsPanel'));
       this.map.addListener('tilesloaded', () => {
         //console.log('accuracy',this.map, this.map.center.lat());
         this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
@@ -93,13 +105,29 @@ export class HomePage implements OnInit {
       this.EndMarker.addListener('dragend',()=>{
         this.EndMarker.setPosition(this.EndMarker.getPosition());
       });
-      this.directionsDisplay.setMap(this.map);
+      
       
 
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
+  calculateRoute2() {
+    var request={
+      origin: this.startMarker.getPosition(),
+      destination: this.EndMarker.getPosition(),
+      travelMode: 'DRIVING'
+    }
+    this.directionsService.route(request, function(result, status) {
+      
+      if (status == 'OK') {
+        console.log(result);
+        this.directionsRenderer.setDirections(result);
+      }
+      
+    });
+   
+    }
   getAddressFromCoords(lattitude, longitude) {
     console.log("getAddressFromCoords "+lattitude+" "+longitude);
     let options: NativeGeocoderOptions = {
@@ -181,14 +209,12 @@ export class HomePage implements OnInit {
           if(number==1){ 
             this.startMarker.setTitle(results[0].formatted_address);
             this.startMarker.setPosition(results[0].geometry.location);
-            this.origin.lat=this.startMarker.getPosition().lat();
-            this.origin.lng=this.startMarker.getPosition().lng();
+            
           }
           else{ 
             this.EndMarker.setTitle(results[0].formatted_address);
             this.EndMarker.setPosition(results[0].geometry.location);
-            this.destination.lat=this.EndMarker.getPosition().lat();
-            this.destination.lat=this.EndMarker.getPosition().lng();
+            
           }
         } else {
           window.alert("No results found");
@@ -200,31 +226,12 @@ export class HomePage implements OnInit {
       console.log("Inicio:"+this.startMarker.getPosition().toString()+" Fin:"+this.EndMarker.getPosition().toString());
     });
   }
-  GoTo(){
+  
 
-    //this.getAddressFromCoords()
-    //return window.location.href = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id='+this.placeid;
-  }
- 
-  loadMap2() {
-    //Crear nuevo mapa
-    const mapEle: HTMLElement = document.getElementById('map');
-    // Crear el mapa y renderizarlo
-    this.map = new google.maps.Map(mapEle, {
-      center: {lat: -2.189327, lng: -79.889532},
-      zoom: 30
-    });
-
-    //this.directionsDisplay.setMap(this.map);
-    //google.maps.event.addListenerOnce(this.map, 'idle', () => {
-    //  mapEle.classList.add('show-map');
-    //  this.calculateRoute();
-    //});
-  }
 
   async calculateRoute() {
     
-    this.directionsDisplay.setMap(this.map);
+    
     this.directionsService.route({
       origin: this.startMarker.getPosition(),
       destination: this.EndMarker.getPosition(),
@@ -243,25 +250,11 @@ export class HomePage implements OnInit {
         await this.map.addPolyline({
           points: points,
           color: '#000',
-          width: 2
+          width: 4,
         });
         this.map.moveCamera({target: points});
       
     });
     }
-    calculateRoute2() {
-      
-      var request={
-        origin: this.startMarker.getPosition(),
-        destination: this.EndMarker.getPosition(),
-        travelMode: 'DRIVING'
-      }
-      this.directionsService.route(request, function(result, status) {
-        if (status == 'OK') {
-          this.directionsDisplay.setDirections(result);
-        }
-        
-      });
-     
-      }
+    
 }

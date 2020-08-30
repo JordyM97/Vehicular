@@ -23,6 +23,7 @@
 
   <div class="map-wrapper" style="height: 100%;">      
     <div #map id="map"  style="height: 100%;"></div>
+    <div id="directionsPanel" style="float:right;width:30%;height:100%"></div>
   </div>  
 
   <div>
@@ -36,7 +37,7 @@
     <ion-grid>
       <ion-row class="vehiculo`">
         <ion-segment scrollable value="1">
-          <ion-segment-button value="1" onclick="print(value)">
+          <ion-segment-button value="1">
             <ion-icon name="car-outline"></ion-icon>
             <ion-label> Carro</ion-label>
           </ion-segment-button>
@@ -64,14 +65,14 @@
         <ion-searchbar id="Destino" [(ngModel)]="autocomplete2.input" (ionInput)="UpdateSearchResults2()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         
         <ion-item>
-          <ion-label class="pago ion-text-wrap">Pagar con: </ion-label>
+          <ion-label class=" ion-text-wrap">Pagar con: </ion-label>
           <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
             <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
               {{pago.tipoPago}}
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button (click)="calculateRoute2()" color="success">Buscar Carrera</ion-button>
+        <ion-button (click)="conductorEncontrado()" color="success">Buscar Carrera</ion-button>
       </ion-row>
     </ion-grid>
   </div>

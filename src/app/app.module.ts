@@ -13,9 +13,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {PopoverComponent} from './popover/popover.component'
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,PopoverComponent],
+  entryComponents: [PopoverComponent],
   imports: [BrowserModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
   providers: [
     StatusBar, HttpClient,

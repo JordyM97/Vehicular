@@ -1,0 +1,12 @@
+.mid{
+    border: black 1px solid;
+    border-radius: 12px;
+    width:400px ;
+}
+@media screen and (max-width: 1000px){
+    .mid{
+        border: black 3px solid;
+        border-radius: 12px;
+        
+    }
+}

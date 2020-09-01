@@ -75,6 +75,8 @@ export class HomePage implements OnInit {
     this.autocompleteItems = [];
     this.autocompleteItems2 = [];
     this.pagos = [{id: 1, tipoPago:'Efectivo'},{id:2, tipoPago:'MasterCard XXX92'}]
+    this.servicios = [{id: 1, tipoServicio:'Viaje ahora'},{id:2, tipoServicio:'Reservar viaje'},{id:3, tipoServicio:'Mudanza'}]
+
     this.geocoder = new google.maps.Geocoder();
   }
   async conductorEncontrado(ev: any){
@@ -84,7 +86,7 @@ export class HomePage implements OnInit {
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{
-        info: this.startMarker.getPosition().toString()
+        info: "123,-62"
       }
     }); 
     return await popover.present();
@@ -121,7 +123,7 @@ export class HomePage implements OnInit {
     this.directionsDisplay.setMap(this.map);
   }
 
-  //Elegir punto inicial GG
+  //Elegir punto inicial
   seleccionarInicio(){
     google.maps.event.removeListener(this.listenerFin);
     google.maps.event.removeListener(this.listenerInicio);
@@ -200,6 +202,7 @@ export class HomePage implements OnInit {
   SelectSearchResultInit(item) {     
     this.placeid = item.place_id;
     this.getplaceByIdInit(this.placeid);
+    this.ClearAutocomplete();
     
   }
 
@@ -231,6 +234,7 @@ export class HomePage implements OnInit {
   SelectSearchResultEnd(item) {     
     this.placeid = item.place_id;
     this.getplaceByIdEnd(this.placeid);
+    this.ClearAutocomplete();
     
   }
 

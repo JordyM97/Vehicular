@@ -10,6 +10,7 @@ ion-icon{
 }
 ion-content{
   --color: black;
+  height: 870px;
 }
 .sc-ion-popover-md-h {
   --width: auto;
@@ -38,9 +39,9 @@ ion-segment-button{
   border-radius: 20px;
   text-align: center;
   position: absolute;
-  bottom: 1px;
+  bottom: 20px;
   width: 100%;
-  height: 35%;
+  height:auto;
   background-color: rgba(241, 239, 239, 0.815);
 }
 

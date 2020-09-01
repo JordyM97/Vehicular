@@ -121,7 +121,7 @@ export class HomePage implements OnInit {
     this.directionsDisplay.setMap(this.map);
   }
 
-  //Elegir punto inicial
+  //Elegir punto inicial GG
   seleccionarInicio(){
     google.maps.event.removeListener(this.listenerFin);
     google.maps.event.removeListener(this.listenerInicio);

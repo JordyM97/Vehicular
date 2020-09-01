@@ -61,31 +61,23 @@
 
       </ion-row>
       <ion-row>
-        <ion-searchbar id="Inicio" [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Busca un lugar"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        <ion-searchbar id="Destino" [(ngModel)]="autocomplete2.input" (ionInput)="UpdateSearchResults2()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-      </ion-row>
-
-      <ion-row text-center>
-        <ion-select id="servicio" (ionChange)="servicioSeleccion($event)" interface="action-sheet">
-          <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio" >
-            {{servicio.tipoServicio}}
-          </ion-select-option>
-        </ion-select>
-
-        <ion-select id="pago" (ionChange)="pagoSeleccion($event)" interface="action-sheet">
-          <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
-            {{pago.tipoPago}}
-        </ion-select-option>
-      </ion-select>
-
-      </ion-row>      <!-- <ion-item>
-          <ion-label class="ion-text-wrap">Seleccione el tipo de servicio: </ion-label>
-          <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
-            <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio">
-              {{servicio.tipoServicio}}
-            </ion-select-option>
-          </ion-select>
+        <ion-searchbar [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="Busca un lugar"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+        <ion-list>
+          <ion-item (click)="SelectSearchResultInit(result)" *ngFor="let result of searchResultsInit">
+            {{ result.description }}
+          </ion-item>
+        </ion-list>
+        <ion-searchbar id="Destino" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+          <ion-item (click)="SelectSearchResultEnd(result)" *ngFor="let result of searchResultsEnd">
+            {{ result.description }}
+          </ion-item>
+        
+        <ion-item>
+          <ion-button (click)="seleccionarInicio()">Elegir Inicio</ion-button>
+          <ion-button (click)="seleccionarFin()">Elegir Fin</ion-button>
+          <ion-button (click)="calcularRuta()">Ver ruta</ion-button>
         </ion-item>
+        
         <ion-item>
           <ion-label class=" ion-text-wrap">Pagar con: </ion-label>
           <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">

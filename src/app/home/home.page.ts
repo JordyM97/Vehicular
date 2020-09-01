@@ -1,11 +1,19 @@
 import { Component, OnInit,NgZone } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 
 declare var google;
+
+interface Marker {
+  position: {
+    lat: number,
+    lng: number,
+  };
+}
 
 @Component({
   selector: 'app-home',
@@ -31,13 +39,32 @@ export class HomePage implements OnInit {
   startMarker: any;
   EndMarker: any;
 
+  //Capturar ubicaciones de markers
+  latLngInicial: any;
+  latLngFinal: any;
 
-  directionsService : any;
-  directionsRenderer : any;
+  listenerInicio: any;
+  listenerFin: any;
 
+
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+
+  //Marcadores de inicio y fin
+  puntoInicio;
+  puntoFin;
+
+  
+  googleAutocomplete = new google.maps.places.AutocompleteService();
+  searchInit: string = " ";
+  searchResultsInit = Array<any>();
+  searchEnd: string = " ";
+  searchResultsEnd = Array<any>();
 
   constructor(
-    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
+    private geolocation: Geolocation,    
+    private nativeGeocoder: NativeGeocoder,    
+    public zone: NgZone,
     public popovercontroller: PopoverController
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
@@ -46,8 +73,7 @@ export class HomePage implements OnInit {
     this.autocompleteItems = [];
     this.autocompleteItems2 = [];
     this.pagos = [{id: 1, tipoPago:'Efectivo'},{id:2, tipoPago:'MasterCard XXX92'}]
-   
-    
+    this.geocoder = new google.maps.Geocoder();
   }
   async conductorEncontrado(ev: any){
     const popover= await this.popovercontroller.create({
@@ -66,68 +92,166 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.loadMap()
   }
-  loadMap() {       
-    this.directionsService= new google.maps.DirectionsService();
-    this.directionsRenderer = new google.maps.DirectionsRenderer();
-    this.geolocation.getCurrentPosition().then((resp) => {
-      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      let mapOptions = {
-        center: latLng,
-        zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      } 
-      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude); 
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions); 
-      
-      
-      this.directionsRenderer.setMap(this.map);
-      this.directionsRenderer.setPanel(document.getElementById('directionsPanel'));
-      this.map.addListener('tilesloaded', () => {
-        //console.log('accuracy',this.map, this.map.center.lat());
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-        this.lat = this.map.center.lat()
-        this.long = this.map.center.lng()
-      }); 
-      this.geocoder = new google.maps.Geocoder();
-      this.startMarker= new google.maps.Marker({
-        map: this.map,
-        draggable: true,
-        position: latLng,
-        title:"Inicio"
-      });
-      this.startMarker.addListener('dragend',()=>{
-        this.startMarker.setPosition(this.startMarker.getPosition());
-      });
-      this.EndMarker = new google.maps.Marker({
-        map: this.map,
-        draggable: true,
-      });
-      this.EndMarker.addListener('dragend',()=>{
-        this.EndMarker.setPosition(this.EndMarker.getPosition());
-      });
-      
-      
+  
+  async loadMap() {       
+    const rta = await this.geolocation.getCurrentPosition();
+    const myLatLng = {
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude
+    };
+    //Crear nuevo mapa
+    const mapEle: HTMLElement = document.getElementById('map');
+    // Crear el mapa y renderizarlo
+    this.map = new google.maps.Map(mapEle, {
+      center: myLatLng,
+      zoom: 15
+    });
 
-    }).catch((error) => {
-      console.log('Error getting location', error);
+    //Agregar marcador de ubicación actual
+    this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
+    this.addMarker(this.latLngInicial)
+
+    this.directionsDisplay.setMap(this.map);
+  }
+
+  //Elegir punto inicial
+  seleccionarInicio(){
+    google.maps.event.removeListener(this.listenerFin);
+    google.maps.event.removeListener(this.listenerInicio);
+    this.listenerInicio = google.maps.event.addListener(this.map, 'click', (event) => {
+      //mapEle.classList.add('show-map');
+      this.latLngInicial = event.latLng; //Necesito string para almacenar en bd
+      console.log("Inicio:"+this.latLngInicial);
+      this.addMarker(event.latLng);
     });
   }
-  calculateRoute2() {
-    var request={
-      origin: this.startMarker.getPosition(),
-      destination: this.EndMarker.getPosition(),
-      travelMode: 'DRIVING'
-    }
-    this.directionsService.route(request, function(result, status) {
-      
-      if (status == 'OK') {
-        console.log(result);
-        this.directionsRenderer.setDirections(result);
-      }
-      
+
+  //Elegir punto final
+  seleccionarFin(){
+    google.maps.event.removeListener(this.listenerInicio);
+    google.maps.event.removeListener(this.listenerFin);
+    this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
+      //mapEle.classList.add('show-map');
+      this.latLngFinal = event.latLng; //Necesito string para almacenar en bd
+      console.log("Fin:"+this.latLngFinal);
+      this.addMarkerF(event.latLng);
     });
-   
+  }
+
+  //Agregar Marcador de inicio
+  addMarker(marker: Marker) {
+    if (this.puntoInicio) {
+      this.puntoInicio.setPosition(marker);
+    } else {
+      this.puntoInicio = new google.maps.Marker({
+        position: marker.position,
+        map: this.map
+      });
+      this.puntoInicio.setPosition(marker);
     }
+  }
+
+  //Agregar Marcador de fin
+  addMarkerF(marker: Marker) {
+    if (this.puntoFin) {
+      this.puntoFin.setPosition(marker);
+    } else {
+      this.puntoFin = new google.maps.Marker({
+        position: marker.position,
+        map: this.map
+      });
+      this.puntoFin.setPosition(marker);
+    }
+  }
+
+  //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
+  calcularRuta(){
+    this.puntoFin.setPosition();
+    this.puntoInicio.setPosition();
+    this.directionsService.route({
+      origin: this.latLngInicial,
+      destination: this.latLngFinal,
+      travelMode: google.maps.TravelMode.DRIVING,
+    }, (response, status)  => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.directionsDisplay.setDirections(response);
+      } else {
+        alert('Could not display directions due to: ' + status);
+      }
+    });
+  }
+
+  //Ver resultados de busqueda inicial
+  searchChangedInit(){
+    if(!this.searchInit.trim().length) return;
+    this.googleAutocomplete.getPlacePredictions({ input: this.searchInit}, predictions => {
+      this.searchResultsInit = predictions;
+    });
+  }
+
+  //Con el resultado que elijamos, se agrega el marcador
+  SelectSearchResultInit(item) {     
+    this.placeid = item.place_id;
+    this.getplaceByIdInit(this.placeid);
+    
+  }
+
+  getplaceByIdInit(placeId){
+    this.geocoder.geocode({ placeId: placeId}, (results, status) => {
+      if (status === "OK") {
+          //console.log(results[0].geometry.viewport.Va.i);
+          //console.log(results[0].geometry.viewport.Za.j);
+          this.latLngInicial = {lat: results[0].geometry.viewport.Za.j, lng: results[0].geometry.viewport.Va.i}
+          this.map.setCenter(this.latLngInicial) //Centrar mapa en destino
+          console.log(this.latLngInicial);
+          this.addMarker(this.latLngInicial);
+          
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+  //Ver resultados de busqueda final
+  searchChangedEnd(){
+    if(!this.searchEnd.trim().length) return;
+    this.googleAutocomplete.getPlacePredictions({ input: this.searchEnd}, predictions => {
+      this.searchResultsEnd = predictions;
+    });
+  }
+
+  //Con el resultado que elijamos, se agrega el marcador
+  SelectSearchResultEnd(item) {     
+    this.placeid = item.place_id;
+    this.getplaceByIdEnd(this.placeid);
+    
+  }
+
+  getplaceByIdEnd(placeId){
+    this.geocoder.geocode({ placeId: placeId}, (results, status) => {
+      if (status === "OK") {
+          //console.log(results[0].geometry.viewport.Va.i);
+          //console.log(results[0].geometry.viewport.Za.j);
+          this.latLngFinal = {lat: results[0].geometry.viewport.Za.j, lng: results[0].geometry.viewport.Va.i}
+          this.map.setCenter(this.latLngFinal) //Centrar mapa en destino
+          console.log(this.latLngFinal);
+          this.addMarkerF(this.latLngFinal);
+          
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+  ClearAutocomplete(){
+    this.searchResultsEnd = []
+    this.searchEnd = ''
+    this.searchResultsInit =[]
+    this.searchInit = ''
+  }
+
+
+  /*
   getAddressFromCoords(lattitude, longitude) {
     console.log("getAddressFromCoords "+lattitude+" "+longitude);
     let options: NativeGeocoderOptions = {
@@ -185,45 +309,28 @@ export class HomePage implements OnInit {
       });
     });
   }
-  SelectSearchResult(item, number) {     
+
+  SelectSearchResult(item) {     
     this.placeid = item.place_id;
-    this.getplaceById(this.placeid,this.map,number);
+    this.getplaceById(this.placeid);
     
   }
+  
   ClearAutocomplete(){
     this.autocompleteItems = []
     this.autocomplete.input = ''
     this.autocompleteItems2 =[]
     this.autocomplete2.input = ''
   }
-  getplaceById(placeId, map,number){
-    console.log(number);
-    
+  getplaceById(placeId){
     this.geocoder.geocode({ placeId: placeId}, (results, status) => {
       if (status === "OK") {
-        if (results[0]) {
-          map.setZoom(16);
-          map.setCenter(results[0].geometry.location);
-    
-          this.ClearAutocomplete();
-          if(number==1){ 
-            this.startMarker.setTitle(results[0].formatted_address);
-            this.startMarker.setPosition(results[0].geometry.location);
-            
-          }
-          else{ 
-            this.EndMarker.setTitle(results[0].formatted_address);
-            this.EndMarker.setPosition(results[0].geometry.location);
-            
-          }
-        } else {
-          window.alert("No results found");
-        }
+          console.log(results[0].geometry.location)
       } else {
         window.alert("Geocoder failed due to: " + status);
       }
      
-      console.log("Inicio:"+this.startMarker.getPosition().toString()+" Fin:"+this.EndMarker.getPosition().toString());
+      console.log("Inicio:"+this.startMarker.getPosition()+" Fin:"+this.EndMarker.getPosition());
     });
   }
   
@@ -255,6 +362,5 @@ export class HomePage implements OnInit {
         this.map.moveCamera({target: points});
       
     });
-    }
-    
+    }*/
 }

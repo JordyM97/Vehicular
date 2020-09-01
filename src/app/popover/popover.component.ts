@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController,ToastController } from '@ionic/angular';
+import { PopoverController,ToastController,NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover',
@@ -7,10 +7,12 @@ import { PopoverController,ToastController } from '@ionic/angular';
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements OnInit {
+  startMarker: any;
+  constructor(private navParams: NavParams, private popoverController: PopoverController,public toastController: ToastController) { }
 
-  constructor(private popoverController: PopoverController,public toastController: ToastController) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.startMarker= this.navParams.get('info');
+  }
   async DismissClick() {
     await this.popoverController.dismiss();
     const toast = await this.toastController.create({

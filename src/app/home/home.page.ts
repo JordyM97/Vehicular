@@ -27,7 +27,9 @@ export class HomePage implements OnInit {
   GoogleAutocomplete: any;
   geocoder: any;
   pagos: any[];
+  servicios:any[];
   pagoSeleccionado: any;
+  servicioSeleccionado: any;
   startMarker: any;
   EndMarker: any;
 
@@ -46,7 +48,7 @@ export class HomePage implements OnInit {
     this.autocompleteItems = [];
     this.autocompleteItems2 = [];
     this.pagos = [{id: 1, tipoPago:'Efectivo'},{id:2, tipoPago:'MasterCard XXX92'}]
-   
+    this.servicios = [{id: 1, tipoServicio:'Viajar ahora'},{id:2, tipoServicio:'Mudanza'}]
     
   }
   async conductorEncontrado(ev: any){
@@ -55,13 +57,18 @@ export class HomePage implements OnInit {
       event: ev,
       translucent: true,
       cssClass: 'contact-popover',
-      
+      componentProps:{
+        info: this.startMarker.getPosition().toString()
+      }
     }); 
     return await popover.present();
 
   }
   pagoSeleccion(event){
     this.pagoSeleccionado = event.target.value;
+  }
+  servicioSeleccion(event){
+    this.servicioSeleccionado = event.target.value;
   }
   ngOnInit(){
     this.loadMap()

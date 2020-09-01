@@ -63,7 +63,29 @@
       <ion-row>
         <ion-searchbar id="Inicio" [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Busca un lugar"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         <ion-searchbar id="Destino" [(ngModel)]="autocomplete2.input" (ionInput)="UpdateSearchResults2()" placeholder="Destino place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        
+      </ion-row>
+
+      <ion-row text-center>
+        <ion-select id="servicio" (ionChange)="servicioSeleccion($event)" interface="action-sheet">
+          <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio" >
+            {{servicio.tipoServicio}}
+          </ion-select-option>
+        </ion-select>
+
+        <ion-select id="pago" (ionChange)="pagoSeleccion($event)" interface="action-sheet">
+          <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
+            {{pago.tipoPago}}
+        </ion-select-option>
+      </ion-select>
+
+      </ion-row>      <!-- <ion-item>
+          <ion-label class="ion-text-wrap">Seleccione el tipo de servicio: </ion-label>
+          <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
+            <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio">
+              {{servicio.tipoServicio}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-item>
           <ion-label class=" ion-text-wrap">Pagar con: </ion-label>
           <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
@@ -72,7 +94,10 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button (click)="conductorEncontrado()" color="success">Buscar Carrera</ion-button>
+        -->
+      
+      <ion-row class="full-width">
+        <ion-button  expand="block" (click)="conductorEncontrado()" color="success">Buscar Carrera</ion-button>
       </ion-row>
     </ion-grid>
   </div>

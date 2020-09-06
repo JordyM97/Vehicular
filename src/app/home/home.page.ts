@@ -79,10 +79,9 @@ export class HomePage implements OnInit {
 
     this.geocoder = new google.maps.Geocoder();
   }
-  async conductorEncontrado(ev: any){
+  async conductorEncontrado(){
     const popover= await this.popovercontroller.create({
       component: PopoverComponent,
-      event: ev,
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{

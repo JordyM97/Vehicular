@@ -1,19 +1,6 @@
 
-
-
-  
-
 <ion-content> 
-  <ion-list [hidden]="autocompleteItems.length == 0">
-    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item,1)">
-      {{ item.description }}
-    </ion-item>
-  </ion-list>
-  <ion-list [hidden]="autocompleteItems2.length == 0">
-    <ion-item *ngFor="let item of autocompleteItems2" tappable (click)="SelectSearchResult(item,2)">
-      {{ item.description }}
-    </ion-item>
-  </ion-list>
+  
   <ion-list>
     <ion-item (click)="SelectSearchResultInit(result)" *ngFor="let result of searchResultsInit">
       {{ result.description }}

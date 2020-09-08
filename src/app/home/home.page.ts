@@ -89,8 +89,8 @@ export class HomePage implements OnInit {
       }
     }); 
     return await popover.present();
-
   }
+
   pagoSeleccion(event){
     this.pagoSeleccionado = event.target.value;
   }
@@ -258,6 +258,88 @@ export class HomePage implements OnInit {
     this.searchEnd = ''
     this.searchResultsInit =[]
     this.searchInit = ''
+  }
+
+  ocultarOpcionesInicio() {
+    var opV = document.getElementById("opcionesVehiculo");
+    var opP = document.getElementById("opcionesPago");
+    var opS = document.getElementById("opcionesServicio");
+    var botonOc = document.getElementById("OOI");
+    var botonOcOtro = document.getElementById("OOF");
+    var botonMos = document.getElementById("MOI");
+    var botonUbicacion = document.getElementById("EUMI");
+    var sb = document.getElementById("inicio");
+    opV.style.display ="none";
+    opP.style.display ="none";
+    opS.style.display ="none";
+    botonOc.style.display="none";
+    botonOcOtro.style.display="none";
+    botonMos.style.display="block";
+    sb.style.display ="block";
+    botonUbicacion.style.display="block"
+  }
+
+  mostrarOpcionesInicio() {
+    var opV = document.getElementById("opcionesVehiculo");
+    var opP = document.getElementById("opcionesPago");
+    var opS = document.getElementById("opcionesServicio");
+    var sb1 = document.getElementById("opcionesViaje");
+    var botonOc = document.getElementById("MOI");
+    var botonMos = document.getElementById("OOI");
+    var botonMosOtro = document.getElementById("OOF");
+    var botonUbicacion = document.getElementById("EUMI");
+    var sb = document.getElementById("inicio");
+    opV.style.display ="block";
+    opP.style.display ="block";
+    opS.style.display ="block";
+    botonOc.style.display="none";
+    botonMos.style.display="block";
+    botonMosOtro.style.display="block";
+    sb.style.display ="none";
+    botonUbicacion.style.display="none"
+    google.maps.event.removeListener(this.listenerInicio);
+    google.maps.event.removeListener(this.listenerFin);
+  }
+
+  ocultarOpcionesFin() {
+    var opV = document.getElementById("opcionesVehiculo");
+    var opP = document.getElementById("opcionesPago");
+    var opS = document.getElementById("opcionesServicio");
+    var botonOc = document.getElementById("OOF");
+    var botonOcOtro = document.getElementById("OOI");
+    var botonMos = document.getElementById("MOF");
+    var botonUbicacion = document.getElementById("EUMF");
+    var sb = document.getElementById("destino");
+    opV.style.display ="none";
+    opP.style.display ="none";
+    opS.style.display ="none";
+    botonOc.style.display="none";
+    botonOcOtro.style.display="none";
+    botonMos.style.display="block";
+    sb.style.display ="block";
+    botonUbicacion.style.display="block"
+  }
+
+  mostrarOpcionesFin() {
+    var opV = document.getElementById("opcionesVehiculo");
+    var opP = document.getElementById("opcionesPago");
+    var opS = document.getElementById("opcionesServicio");
+    var sb1 = document.getElementById("opcionesViaje");
+    var botonOc = document.getElementById("MOF");
+    var botonMos = document.getElementById("OOF");
+    var botonMosOtro = document.getElementById("OOI");
+    var botonUbicacion = document.getElementById("EUMF");
+    var sb = document.getElementById("destino");
+    opV.style.display ="block";
+    opP.style.display ="block";
+    opS.style.display ="block";
+    botonOc.style.display="none";
+    botonMos.style.display="block";
+    botonMosOtro.style.display="block";
+    sb.style.display ="none";
+    botonUbicacion.style.display="none";
+    google.maps.event.removeListener(this.listenerInicio);
+    google.maps.event.removeListener(this.listenerFin);
   }
 
 

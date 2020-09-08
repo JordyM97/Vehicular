@@ -8,15 +8,12 @@ import { ServicioPageRoutingModule } from './servicio-routing.module';
 
 import { ServicioPage } from './servicio.page';
 
-
 @NgModule({
-  entryComponents: [
-  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ServicioPageRoutingModule
+    ServicioPageRoutingModule,
   ],
   declarations: [ServicioPage]
 })

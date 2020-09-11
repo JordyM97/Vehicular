@@ -9,7 +9,34 @@
 #inicio, #destino, #EUMI, #EUMF{
   display: none;
 }
-
+.BuscarRide{
+  position: absolute;
+  bottom: 10px;
+  width: 95%;
+  color: white;
+  --background: red;
+}
+.opciones{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.elegirini{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opciones div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opciones ion-label{
+ font-size: 14px;
+}
+.opciones ion-icon{
+  height: 80px;
+ }
 #MOI, #MOF{
   display: none;
 }
@@ -39,8 +66,12 @@ ion-segment-button{
   left: 0;
   bottom: 0;
   width: 50%;
-  color: rgb(255, 0, 0);
+  color: white;
   border-bottom: solid 4px green;
+}
+.segment-button-checked:after ion-icon{
+  fill: red;
+  color: black;
 }
 .menuop{
   border: solid rgba(44, 44, 44, 0.644) 2px ;
@@ -48,10 +79,13 @@ ion-segment-button{
   position: absolute;
   bottom: 20px;
   width: 100%;
-  height:auto;
+  height:40%;
   background-color: rgba(241, 239, 239, 0.815);
 }
-
+.iconmenu{
+  max-height: 40px;
+  max-width: 90px;
+}
 
 #indicators {
   padding: 16px;
@@ -59,6 +93,9 @@ ion-segment-button{
   width: 100%;
   overflow-y: auto;
   display: block;
+}
+ion-label{
+  font-size: 14;
 }
 ion-fab-button{
   --background: red;
@@ -115,5 +152,7 @@ ion-input{
     --icon-color: black;
 
   }
- 
+  ion-grid{
+    height: 100%;
+  }
 }

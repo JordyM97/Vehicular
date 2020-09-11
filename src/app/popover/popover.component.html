@@ -2,13 +2,27 @@
   <ion-text color="secondary">
     <h1>Conductor Encontrado!</h1>
   </ion-text>
-  <ion-text color="primary">
-    <h2>Alexandra Torres</h2>
+  
+  <ion-row>
+    <ion-text color="primary">
+      <h2>Alexandra Torres</h2>
+    </ion-text>
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+    
+  </ion-row>
+  <ion-text>
+    <p>{{startMarker.metodo}}</p>
   </ion-text>
-  <ion-text color="primary">
-    <p>{{startMarker}}</p>
+  <ion-text class="price">
+    <p>${{startMarker.price}}</p>
   </ion-text>
-  <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
-  <ion-button color="primary" (click)="DismissClick()">Cancelar</ion-button>
+  <div class="btns">
+    <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
+    <ion-button color="primary" (click)="DismissClick()">Cancelar</ion-button>
+  </div>
 </div>
 

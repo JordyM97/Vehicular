@@ -20,26 +20,25 @@
 
   <div class="menuop">
     <ion-grid>
-      <ion-row id="opcionesVehiculo" class="opciones">
-        <ion-label>Vehículos disponibles</ion-label>
-        <ion-segment scrollable value="1">
-          <ion-segment-button value="1">
+      <ion-row id="opcionesVehiculo" class="opciones1">
+        <ion-segment class="vehic" scrollable value="1">
+          <ion-segment-button class=iconmenu value="1">
             <ion-icon name="car-outline"></ion-icon>
             <ion-label> Carro</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="2">
+          <ion-segment-button  class=iconmenu value="2">
             <ion-icon name="bicycle-outline"></ion-icon>
             <ion-label> Tricimoto</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="3">
+          <ion-segment-button   class=iconmenu value="3">
             <ion-icon name="car-sport-outline"></ion-icon>
             <ion-label> Carro XL</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="4">
+          <ion-segment-button  class=iconmenu value="4">
             <ion-icon name="car-sport-outline"></ion-icon>
             <ion-label> Carro</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="5">
+          <ion-segment-button  class=iconmenu value="5">
             <ion-icon name="car-sport-outline"></ion-icon>
             <ion-label> Carro</ion-label>
           </ion-segment-button>
@@ -47,32 +46,31 @@
       </ion-row>
 
       <ion-row id="opcionesPago" class="opciones">
-        <ion-label>Formas de pago disponibles</ion-label>
+        <div>
+          <ion-label>Pago</ion-label>
+        </div>
+        
         <ion-segment scrollable value="1">
-          <ion-segment-button value="1">
+          <ion-segment-button  class=iconmenu value="1">
             <ion-icon name="cash-outline"></ion-icon>
-            <ion-label> Efectivo</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="2">
+          <ion-segment-button  class=iconmenu value="2">
             <ion-icon name="card-outline"></ion-icon>
-            <ion-label> Tarejeta de crédito</ion-label>
           </ion-segment-button>
         </ion-segment>
+        <ion-row id="opcionesServicio" class="opciones">        
+          <ion-segment scrollable value="1">
+            <ion-segment-button value="1">
+              <ion-label> Viajar ahora</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="2">
+              <ion-label> Reservar</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-row>
       </ion-row>
 
-      <ion-row id="opcionesServicio" class="opciones">
-        <ion-label>Servicios disponibles</ion-label>
-        <ion-segment scrollable value="1">
-          <ion-segment-button value="1">
-            <ion-icon name="golf-outline"></ion-icon>
-            <ion-label> Viajar ahora</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="2">
-            <ion-icon name="golf-outline"></ion-icon>
-            <ion-label> Reservar</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-row>
+    
       
         <ion-searchbar id="inicio" [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="¿Desde dónde quieres ir?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         <ion-list>
@@ -88,14 +86,14 @@
           </ion-item>
         </ion-list>
         
-        <ion-row>
-          <ion-button id="OOI" (click)="ocultarOpcionesInicio()">Elegir ubicación inicial</ion-button>
-          <ion-button id="EUMI" (click)="seleccionarInicio()">Elegir ubicación en mapa</ion-button>
-          <ion-button id="MOI" (click)="mostrarOpcionesInicio()">Aceptar ubicación inicial</ion-button>
+        <ion-row class="elegirini">
+          <ion-button id="OOI" (click)="ocultarOpcionesInicio()">Elegir Inicio</ion-button>
+          <ion-button id="EUMI" (click)="seleccionarInicio()">Elegir en el mapa</ion-button>
+          <ion-button id="MOI" (click)="mostrarOpcionesInicio()">Volver</ion-button>
 
-          <ion-button id="OOF" (click)="ocultarOpcionesFin()">Elegir ubicación final</ion-button>
-          <ion-button id="EUMF" (click)="seleccionarFin()">Elegir ubicación en mapa</ion-button>
-          <ion-button id="MOF" (click)="mostrarOpcionesFin()">Aceptar ubicación final</ion-button>
+          <ion-button id="OOF" (click)="ocultarOpcionesFin()">Elegir Destino</ion-button>
+          <ion-button id="EUMF" (click)="seleccionarFin()">Elegir en el mapa</ion-button>
+          <ion-button id="MOF" (click)="mostrarOpcionesFin()">Volver</ion-button>
           <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
           <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->
         </ion-row>
@@ -114,9 +112,9 @@
         </ion-row>-->
         
       
-        <ion-row class="full-width">
-          <ion-button  expand="block" (click)="conductorEncontrado()" color="success">Buscar Carrera</ion-button>
-        </ion-row>
+        
+          <ion-button class="BuscarRide" expand="block" (click)="conductorEncontrado()" >Buscar Carrera</ion-button>
+        
       
     </ion-grid>
   </div>

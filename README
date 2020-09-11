@@ -37,3 +37,6 @@ Gustavo Matamoros
 
 
 
+to deploy
+ionic rm platform android
+ionic cordova build android --prod --release

@@ -2,6 +2,22 @@
     border: black 1px solid;
     border-radius: 12px;
     width:400px ;
+    text-align: center;
+    
+}
+ion-row ion-text{
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.price{
+    font-size: 18px;
+    color: red;
+}
+.btns{
+    text-align: center;
 }
 @media screen and (max-width: 1000px){
     .mid{

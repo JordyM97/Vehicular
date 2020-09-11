@@ -17,7 +17,7 @@ export class PopoverComponent implements OnInit {
     await this.popoverController.dismiss();
     const toast = await this.toastController.create({
       message: 'Has cancelado la carrera!',
-      duration: 2000,
+      duration: 2500,
       position: 'top',
       color: 'danger'
       });
@@ -26,7 +26,7 @@ export class PopoverComponent implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'El conductor estara llegando pronto!',
-      duration: 2000,
+      duration: 2500,
       position: 'top',
       color: 'success'
       });

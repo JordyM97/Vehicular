@@ -85,7 +85,11 @@ export class HomePage implements OnInit {
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{
-        info: "123,-62"
+        info: {
+          locatini: this.latLngInicial,
+          locatfin: this.latLngFinal,
+          metodo: this.pagoSeleccionado,
+          price: 4.23 }
       }
     }); 
     return await popover.present();
@@ -208,9 +212,9 @@ export class HomePage implements OnInit {
   getplaceByIdInit(placeId){
     this.geocoder.geocode({ placeId: placeId}, (results, status) => {
       if (status === "OK") {
-          //console.log(results[0].geometry.viewport.Va.i);
+          console.log(results[0]);
           //console.log(results[0].geometry.viewport.Za.j);
-          this.latLngInicial = {lat: results[0].geometry.viewport.Za.j, lng: results[0].geometry.viewport.Va.i}
+          this.latLngInicial = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
           this.map.setCenter(this.latLngInicial) //Centrar mapa en destino
           console.log(this.latLngInicial);
           this.addMarker(this.latLngInicial);
@@ -240,9 +244,8 @@ export class HomePage implements OnInit {
   getplaceByIdEnd(placeId){
     this.geocoder.geocode({ placeId: placeId}, (results, status) => {
       if (status === "OK") {
-          //console.log(results[0].geometry.viewport.Va.i);
-          //console.log(results[0].geometry.viewport.Za.j);
-          this.latLngFinal = {lat: results[0].geometry.viewport.Za.j, lng: results[0].geometry.viewport.Va.i}
+          console.log(results[0]);
+          this.latLngFinal = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
           this.map.setCenter(this.latLngFinal) //Centrar mapa en destino
           console.log(this.latLngFinal);
           this.addMarkerF(this.latLngFinal);

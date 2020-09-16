@@ -6,11 +6,18 @@
   min-width: 150px;
 }
 
-#inicio, #destino, #EUMI, #EUMF{
+#opcionesBuscar{
   display: none;
 }
-.BuscarRide{
+
+#aceptarPuntos{
+  display: none;
   position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.BuscarRide{
   bottom: 10px;
   width: 95%;
   color: white;
@@ -32,7 +39,7 @@
   justify-content: center;
 }
 .opciones ion-label{
- font-size: 14px;
+ font-size: 8px;
 }
 .opciones ion-icon{
   height: 80px;
@@ -57,7 +64,28 @@ ion-content{
 ion-segment-button{
   color: black;
   --indicator-color: transparent;
+  height: 35px;
+  min-height: 35px;
+  --border-radius: 4px;
+  ion-label {
+    margin: 0;
+  }
 }
+ion-label{
+  font-size: 10px;
+  margin-top: 2%;
+}
+
+ion-item{
+  margin-top: 0%;
+  font-size: 12px;
+}
+
+.list-md{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .segment-button-checked{
   color: #ff0404;
 }
@@ -73,13 +101,21 @@ ion-segment-button{
   fill: red;
   color: black;
 }
+ion-checkbox{
+  --checkmark-color: white;
+  --background-checked: #ff0404;
+  --border-color-checked: #ff0404;
+  --border-radius: 10%;
+  --size: 15px;
+}
+
 .menuop{
   border: solid rgba(44, 44, 44, 0.644) 2px ;
   border-radius: 20px;
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   width: 100%;
-  height:40%;
+  height:45%;
   background-color: rgba(241, 239, 239, 0.815);
 }
 .iconmenu{
@@ -96,11 +132,6 @@ ion-segment-button{
 }
 ion-label{
   font-size: 14;
-}
-ion-fab-button{
-  --background: red;
-
-  color:black;
 }
 ion-menu-button{
   color: white;

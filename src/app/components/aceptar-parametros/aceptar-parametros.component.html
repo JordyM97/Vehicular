@@ -1,0 +1,54 @@
+<div class='mid'>
+  <div class="cabecera">
+    Detalles del servicio
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-row><ion-label class="titulo">Ubicacion inicial:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.locatini.lat}}</ion-label></ion-row>
+      </ion-col>
+
+      <ion-col>
+        <ion-row><ion-label class="titulo">Tipo de vehículo:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.vehiculo}}</ion-label></ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.locatfin.lat()}}</ion-label></ion-row>
+      </ion-col>
+
+      <ion-col>
+        <ion-row><ion-label class="titulo">Método de pago:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.pago}}</ion-label></ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.anio}}/{{startMarker.mes}}/{{startMarker.dia}} -- {{startMarker.hora}}:{{startMarker.minuto}}</ion-label></ion-row>
+      </ion-col>
+
+      <ion-col>
+        <ion-row><ion-label class="titulo">Tipo de servicio:</ion-label></ion-row>
+        <ion-row><ion-label>{{startMarker.servicio}}</ion-label></ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-row><ion-label class="titulo">Total a pagar:</ion-label></ion-row>
+        <ion-row><ion-label>${{startMarker.total}}</ion-label></ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="btns">
+    <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
+    <ion-button color="primary" (click)="DismissClick()">Cancelar</ion-button>
+  </div>
+</div>

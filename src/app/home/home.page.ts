@@ -250,6 +250,7 @@ export class HomePage implements OnInit {
     this.addMarker(this.latLngInicial)
 
     this.directionsDisplay.setMap(this.map);
+    this.directionsDisplay.setOptions( { suppressMarkers: true } );
   }
 
   //Elegir punto inicial
@@ -291,7 +292,8 @@ export class HomePage implements OnInit {
     } else {
       this.puntoInicio = new google.maps.Marker({
         position: marker.position,
-        map: this.map
+        map: this.map,
+        icon: 'assets/icon/pin.png'
       });
       this.puntoInicio.setPosition(marker);
     }
@@ -304,7 +306,8 @@ export class HomePage implements OnInit {
     } else {
       this.puntoFin = new google.maps.Marker({
         position: marker.position,
-        map: this.map
+        map: this.map,
+        icon: 'assets/icon/pin.png'
       });
       this.puntoFin.setPosition(marker);
     }

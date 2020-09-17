@@ -81,6 +81,7 @@ export class HomePage implements OnInit {
   searchResultsInit = Array<any>();
   searchEnd: string = " ";
   searchResultsEnd = Array<any>();
+  posicionInicial: any;
 
   constructor(
     private geolocation: Geolocation,    
@@ -160,6 +161,7 @@ export class HomePage implements OnInit {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude
     };
+    this.posicionInicial=myLatLng;
 
     var styledMapType = new google.maps.StyledMapType(
     [
@@ -326,8 +328,9 @@ export class HomePage implements OnInit {
 
   //Ver resultados de busqueda inicial
   searchChangedInit(){
+    console.log(this.posicionInicial);
     if(!this.searchInit.trim().length) return;
-    this.googleAutocomplete.getPlacePredictions({ input: this.searchInit}, predictions => {
+    this.googleAutocomplete.getPlacePredictions({ input: this.searchInit, location: new google.maps.LatLng(this.posicionInicial), radius: 50000}, predictions => {
       this.searchResultsInit = predictions;
     });
   }
@@ -359,7 +362,7 @@ export class HomePage implements OnInit {
   //Ver resultados de busqueda final
   searchChangedEnd(){
     if(!this.searchEnd.trim().length) return;
-    this.googleAutocomplete.getPlacePredictions({ input: this.searchEnd}, predictions => {
+    this.googleAutocomplete.getPlacePredictions({ input: this.searchEnd, location: new google.maps.LatLng(this.posicionInicial), radius: 50000}, predictions => {
       this.searchResultsEnd = predictions;
     });
   }

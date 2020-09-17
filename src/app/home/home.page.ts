@@ -241,7 +241,8 @@ export class HomePage implements OnInit {
         mapTypeIds: ['styled_map']
       }
     });
-
+    this.map.mapTypes.set('styled_map', styledMapType);
+    this.map.setMapTypeId('styled_map');
     //Agregar marcador de ubicación actual
     this.map.mapTypes.set('styled_map', styledMapType);
     this.map.setMapTypeId('styled_map');
@@ -311,8 +312,8 @@ export class HomePage implements OnInit {
 
   //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
   calcularRuta(){
-    this.puntoFin.setPosition();
-    this.puntoInicio.setPosition();
+    //this.puntoFin.setPosition();
+    //this.puntoInicio.setPosition();
     this.directionsService.route({
       origin: this.latLngInicial,
       destination: this.latLngFinal,
@@ -511,7 +512,7 @@ export class HomePage implements OnInit {
     botonOcOtro.style.display="none";
     botonMos.style.display="block";
     sb.style.display ="block";
-    botonUbicacion.style.display="block"
+    botonUbicacion.style.display="block";
   }
 
   mostrarOpcionesFin() {
@@ -534,6 +535,7 @@ export class HomePage implements OnInit {
     botonUbicacion.style.display="none";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
+    this.calcularRuta();
   }
 
 

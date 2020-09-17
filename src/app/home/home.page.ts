@@ -105,7 +105,23 @@ export class HomePage implements OnInit {
     this.loadMap()
   }
   
-  async loadMap() {       
+  async loadMap() {    
+    var styledMapType = new google.maps.StyledMapType(
+      [
+        {
+          "featureType": "poi",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+{ "featureType": "administrative", "elementType": "geometry", "stylers": [ { "visibility": "off" } ] }, { "featureType": "administrative", "elementType": "labels.text", "stylers": [ { "visibility": "off" } ] }, { "featureType": "poi", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "transit", "stylers": [ { "visibility": "off" } ] }
+
+
+      ],
+      {name: 'Styled Map'});   
     const rta = await this.geolocation.getCurrentPosition();
     const myLatLng = {
       lat: rta.coords.latitude,
@@ -116,9 +132,15 @@ export class HomePage implements OnInit {
     // Crear el mapa y renderizarlo
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
-      zoom: 15
+      zoom: 15,
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                'styled_map']
+      },
+      disableDefaultUI: true
     });
-
+    this.map.mapTypes.set('styled_map', styledMapType);
+    this.map.setMapTypeId('styled_map');
     //Agregar marcador de ubicación actual
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
     this.addMarker(this.latLngInicial)
@@ -178,8 +200,8 @@ export class HomePage implements OnInit {
 
   //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
   calcularRuta(){
-    this.puntoFin.setPosition();
-    this.puntoInicio.setPosition();
+    //this.puntoFin.setPosition();
+    //this.puntoInicio.setPosition();
     this.directionsService.route({
       origin: this.latLngInicial,
       destination: this.latLngFinal,
@@ -320,7 +342,7 @@ export class HomePage implements OnInit {
     botonOcOtro.style.display="none";
     botonMos.style.display="block";
     sb.style.display ="block";
-    botonUbicacion.style.display="block"
+    botonUbicacion.style.display="block";
   }
 
   mostrarOpcionesFin() {
@@ -343,6 +365,7 @@ export class HomePage implements OnInit {
     botonUbicacion.style.display="none";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
+    this.calcularRuta();
   }
 
 

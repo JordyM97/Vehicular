@@ -1,47 +1,61 @@
 <ion-app>
-  <ion-menu menuId="main-menu" content-id="main">
-    <ion-header>
-      <ion-toolbar  routerLink="/home">
-        <div id="header">
-          <ion-icon name="car-sport-outline" ></ion-icon>
-          <ion-label color="black" >Vehicular</ion-label>
-      </div>
-      </ion-toolbar>
-    </ion-header>
+  <ion-menu side="start" menuId="first" contentId="main">
 
     <ion-content>
-      <ion-list>
-        <ion-menu-toggle>
-        <ion-item routerLink="/news">
-          <ion-icon slot="start" name="flag"></ion-icon>
-          <ion-label>Noticias</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle>
-        <ion-item routerLink="/servicio">
-          <ion-icon slot="start" name="flag"></ion-icon>
-          <ion-label>Iniciar un Viaje</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle>
-        <ion-item routerLink="/viajes">
-          <ion-icon slot="start" name="flag"></ion-icon>
-          <ion-label>Viajes</ion-label>
-        </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle>
-        <ion-item routerLink="/acerca">  
-          <ion-icon slot="start" name="information-circle"></ion-icon>
-          <ion-label>Acerca</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item routerLink="/login">
-          <ion-icon slot="start" name="log-in"></ion-icon>
-          <ion-label>Salir</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      </ion-list>
+      <div class="menu-bg">
+
+        <div class="menu-header-content">
+          <ion-avatar>
+            <img src="assets/imgs/user.png">
+          </ion-avatar>
+          <label>
+            <h4>Usuario</h4>
+            <p>Editar perfil</p>
+          </label>
+        </div>
+
+        <ion-list lines="none" class="menu-items" color=“transparent”>
+          <ion-menu-toggle>
+            <ion-item color=“transparent”>
+              <ion-icon name="person"></ion-icon>Mi perfil
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle>
+            <ion-item color=“transparent”>
+              <ion-icon name="document-text-outline"></ion-icon>Noticias
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item color=“transparent”>
+              <ion-icon name="newspaper-outline"></ion-icon>Viajes
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item color=“transparent” button (click)="presentAlertInicio()">
+              <ion-icon name="pin-outline"></ion-icon>Viajes
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item color=“transparent” button (click)="presentAlertFin()">
+              <ion-icon name="stop-circle-outline"></ion-icon>Acerca
+            </ion-item>
+          </ion-menu-toggle>
+
+        </ion-list>
+
+        <div class="out-content">
+          <hr>
+          <ion-menu-toggle>
+            <ion-text color=“transparent” (click)="on_logout()">
+              <span class="text"> CERRAR SESIÓN</span>
+            </ion-text>
+          </ion-menu-toggle>
+        </div>
+      </div>
+
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>

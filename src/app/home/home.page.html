@@ -1,3 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/LOGO1.png">
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content> 
   <!--<ion-fab vertical="bottom" horizontal="start" slot="fixed">
@@ -6,95 +24,78 @@
     </ion-fab-button>
   </ion-fab>-->
   <div #map id="map"  style="height: 100%">
-    <ion-searchbar placeholder="ss"></ion-searchbar>
   </div>
 
 
-  <div>
+  <!--<div>
     <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
       <ion-fab-button  menu="main-menu">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-fab-button>
     </ion-fab>
-  </div>
+  </div>-->
 
-  <div class="menuop">
+  <div id="menuOp" class="menuop">
     <ion-grid>
-      <ion-row id="opcionesVehiculo" class="opciones1">
-        <ion-segment class="vehic" scrollable value="1">
-          <ion-segment-button class=iconmenu value="1">
-            <ion-icon name="car-outline"></ion-icon>
-            <ion-label> Carro</ion-label>
-          </ion-segment-button>
-          <ion-segment-button  class=iconmenu value="2">
-            <ion-icon name="bicycle-outline"></ion-icon>
-            <ion-label> Tricimoto</ion-label>
-          </ion-segment-button>
-          <ion-segment-button   class=iconmenu value="3">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <ion-label> Carro XL</ion-label>
-          </ion-segment-button>
-          <ion-segment-button  class=iconmenu value="4">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <ion-label> Carro</ion-label>
-          </ion-segment-button>
-          <ion-segment-button  class=iconmenu value="5">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <ion-label> Carro</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-row>
-
-      <ion-row id="opcionesPago" class="opciones">
-        
-        
+      <ion-row id="vehiculos">
+      <ion-label>Seleccione el tipo de vehículo</ion-label>
         <ion-segment scrollable value="1">
-          <ion-segment-button  class=iconmenu value="1">
-            <ion-label> Efectivo</ion-label>
-          </ion-segment-button>
-          <ion-segment-button  class=iconmenu value="2">
-            <ion-label> Tarjeta</ion-label>
+          <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
+            <ion-label> {{item.tipoCarro}}</ion-label>
+            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
           </ion-segment-button>
         </ion-segment>
-        <ion-row id="opcionesServicio" class="opciones">        
-          <ion-segment scrollable value="1">
-            <ion-segment-button value="1">
-              <ion-label> Viajar ahora</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="2">
-              <ion-label> Reservar</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-row>
       </ion-row>
 
-    
-      
+      <ion-row id="pagos">
+      <ion-label>Seleccione el tipo de pago</ion-label>
+        <ion-segment scrollable value="1">
+          <ion-segment-button (click)="SelectPayment(item)" *ngFor="let item of tipoPago">
+            <ion-label> {{item.tipoPago}}</ion-label>
+            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-row>
+
+      <ion-row id="servicios">
+      <ion-label>Seleccione el tipo de servicio</ion-label>
+        <ion-segment scrollable value="1">
+          <ion-segment-button (click)="SelectService(item)" *ngFor="let item of tipoServicio">
+            <ion-label> {{item.tipoServicio}}</ion-label>
+            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-row>
+ 
+      <div id="opcionesBuscar">
+        <ion-label id="UbIn">Ubicación Incial</ion-label>
         <ion-searchbar id="inicio" [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="¿Desde dónde quieres ir?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        <ion-list>
+        <ion-list id="resultadosInicio">
           <ion-item (click)="SelectSearchResultInit(result)" *ngFor="let result of searchResultsInit">
             {{ result.description }}
           </ion-item>
         </ion-list>
-        
+        <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial en el mapa</ion-button>
+
+        <ion-label id="UbFin">Ubicación Incial</ion-label>
         <ion-searchbar id="destino" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        <ion-list>
+        <ion-list id="resultadosDestino">
           <ion-item (click)="SelectSearchResultEnd(result)" *ngFor="let result of searchResultsEnd">
             {{ result.description }}
           </ion-item>
         </ion-list>
-        
-        <ion-row class="elegirini">
-          <ion-button id="OOI" (click)="ocultarOpcionesInicio()">Elegir Inicio</ion-button>
-          <ion-button id="EUMI" (click)="seleccionarInicio()">Elegir en el mapa</ion-button>
-          <ion-button id="MOI" (click)="mostrarOpcionesInicio()">Volver</ion-button>
+        <ion-button id="EUMF" (click)="seleccionarFin()">Fijar ubicacion final en el mapa</ion-button>
+      </div>
+   
 
-          <ion-button id="OOF" (click)="ocultarOpcionesFin()">Elegir Destino</ion-button>
-          <ion-button id="EUMF" (click)="seleccionarFin()">Elegir en el mapa</ion-button>
-          <ion-button id="MOF" (click)="mostrarOpcionesFin()">Volver</ion-button>
-          <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
-          <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->
-        </ion-row>
+
+      
+      <ion-row class="elegirini">
+        <ion-button id="OOI" (click)="ocultarOpciones()">Elegir direcciones</ion-button>
+        <ion-button id="MOI" (click)="mostrarOpciones()">Volver</ion-button>
+        <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
+        <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->
+      </ion-row>
         
         <!--<ion-row>
           <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
@@ -108,12 +109,8 @@
             </ion-select-option>
           </ion-select>
         </ion-row>-->
-        
-      
-        
-          <ion-button class="BuscarRide" expand="block" (click)="conductorEncontrado()" >Buscar Carrera</ion-button>
-        
-      
+      <ion-button id="aceptar" class="BuscarRide" (click)="aceptarBoton()" >Aceptar</ion-button>
     </ion-grid>
   </div>
+  <ion-button id="aceptarPuntos" (click)="aceptarPuntos()" >Listo</ion-button>
 </ion-content>

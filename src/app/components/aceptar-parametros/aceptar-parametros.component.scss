@@ -1,0 +1,48 @@
+.mid{
+    border: black 1px solid;
+    width: 350px;
+    text-align: center;
+    
+}
+
+.cabecera{
+    height: 50px;
+    background: linear-gradient(-90deg,#20478B ,#2487C9);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+popover-content sc-ion-popover-md{
+    top: 193px; 
+    left: 5px; 
+    transform-origin: left top;
+  }
+
+.titulo{
+    color: #9A999E;
+}
+
+ion-row ion-text{
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.price{
+    font-size: 18px;
+    color: red;
+}
+.btns{
+    text-align: center;
+}
+@media screen and (max-width: 1000px){
+    .mid{
+        border: black 3px solid;
+        border-radius: 12px;
+        
+    }
+}

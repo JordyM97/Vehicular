@@ -23,9 +23,11 @@
       <ion-icon name="information-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>-->
-  <ion-item *ngFor="let item of items | async">
-    {{item | json}}
-  </ion-item>
+  <ul>
+    <li *ngFor="let item of items2 | async">
+      {{ item.name }}
+    </li>
+  </ul>
   <div #map id="map"  style="height: 100%">
   </div>
 

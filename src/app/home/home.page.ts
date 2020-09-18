@@ -7,6 +7,7 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
@@ -26,7 +27,7 @@ interface Marker {
 })
 
 export class HomePage implements OnInit {
-  items:  Observable<any[]>;
+  
   @ViewChild('map',  {static: false}) mapElement: ElementRef;
   public vehiculos = [
     { id: 1, tipoCarro: 'Carro', isChecked: false },
@@ -87,16 +88,21 @@ export class HomePage implements OnInit {
   searchEnd: string = " ";
   searchResultsEnd = Array<any>();
   posicionInicial: any;
-
+  Servicios: Observable<any[]>;
   constructor(
     private geolocation: Geolocation,    
     private nativeGeocoder: NativeGeocoder,    
     public zone: NgZone,
     public popovercontroller: PopoverController,
-    public db: AngularFireDatabase
+    public db: AngularFireDatabase,                       // no se si borrar todavia
+    firestore: AngularFirestore                           // conector a firestore
   ) {
-    this.items = db.list('/Pruebas').valueChanges();
-    this.items.subscribe(value =>{console.log(value)});
+    //GEt colllection from firestore                                                    //FIRESTORE
+    this.Servicios = firestore.collection('Pruebas').valueChanges();
+    console.log(this.Servicios)
+    this.Servicios.subscribe(value =>{console.log(value)});
+
+
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocomplete2 = { input: '' };

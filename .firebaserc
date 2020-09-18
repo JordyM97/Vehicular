@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "vehicular-287023": {
+      "hosting": {
+        "app": [
+          "vehicular-287023"
+        ]
+      }
+    }
+  }
+}

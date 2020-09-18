@@ -2,7 +2,7 @@
  
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <div>
     <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
       <ion-fab-button  menu="main-menu">
@@ -10,5 +10,10 @@
       </ion-fab-button>
     </ion-fab>
   </div>
-  <ion-button (click)="test()"> test</ion-button>
+  
+  
+    <ion-item *ngFor="let item of items | async">
+      {{item | json}}
+    </ion-item>
+  
 </ion-content>

@@ -6,6 +6,9 @@ import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@i
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 declare var google;
 
@@ -21,7 +24,9 @@ interface Marker {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage implements OnInit {
+  items:  Observable<any[]>;
   @ViewChild('map',  {static: false}) mapElement: ElementRef;
   public vehiculos = [
     { id: 1, tipoCarro: 'Carro', isChecked: false },
@@ -87,8 +92,11 @@ export class HomePage implements OnInit {
     private geolocation: Geolocation,    
     private nativeGeocoder: NativeGeocoder,    
     public zone: NgZone,
-    public popovercontroller: PopoverController
+    public popovercontroller: PopoverController,
+    public db: AngularFireDatabase
   ) {
+    this.items = db.list('/Pruebas').valueChanges();
+    this.items.subscribe(value =>{console.log(value)});
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocomplete2 = { input: '' };

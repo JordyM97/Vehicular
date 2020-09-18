@@ -14,10 +14,18 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {PopoverComponent} from './popover/popover.component'
+import { AngularFireModule } from '@angular/fire';
+import { firebaseConfig } from '../environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 @NgModule({
   declarations: [AppComponent,PopoverComponent],
   entryComponents: [PopoverComponent],
-  imports: [BrowserModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
+  imports: [BrowserModule,IonicModule.forRoot(),  
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule, // imports firebase/database, only needed for database features
+    AngularFireAuthModule,
+    AppRoutingModule,HttpClientModule],
   providers: [
     StatusBar, HttpClient,
     SplashScreen,

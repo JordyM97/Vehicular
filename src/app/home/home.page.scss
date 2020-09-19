@@ -39,10 +39,40 @@
   justify-content: center;
 }
 .opciones ion-label{
- font-size: 8px;
+ font-size: 14px;
 }
 .opciones ion-icon{
   height: 80px;
+ }
+ ion-searchbar{
+   border-radius: 12px;
+   background-color: rgb(206, 206, 206);
+   --icon-color: black;
+ }
+ 
+ #UbIn{
+  font-size: 16px;
+  font-weight: bold;
+ }
+ #UbFin{
+  font-size: 16px;
+  font-weight: bold;
+ }
+ #aceptar{
+   width: 99%;
+ }
+ #OOI{
+   width: 99%;
+ }
+ #MOI{
+   width: 98%;
+   --background: red !important;
+ }
+ #EUMI{
+   width: 98%;
+ }
+ #EUMF{
+   width: 97%;
  }
 #MOI, #MOF{
   display: none;
@@ -65,14 +95,14 @@ ion-segment-button{
   color: black;
   --indicator-color: transparent;
   height: 35px;
-  min-height: 35px;
+  min-height: 45px;
   --border-radius: 4px;
   ion-label {
     margin: 0;
   }
 }
 ion-label{
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 2%;
 }
 
@@ -85,9 +115,14 @@ ion-item{
   padding-top: 0px;
   padding-bottom: 0px;
 }
+ion-checkbox{
+  --border-radius: 50% !important;
 
+}
 .segment-button-checked{
   color: #ff0404;
+  //border: solid 2px red;
+
 }
 .segment-button-checked:after{
   position: absolute;
@@ -95,7 +130,7 @@ ion-item{
   bottom: 0;
   width: 50%;
   color: white;
-  border-bottom: solid 4px green;
+  border: solid 4px red;
 }
 .segment-button-checked:after ion-icon{
   fill: red;

@@ -21,7 +21,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 @NgModule({
   declarations: [AppComponent,PopoverComponent],
   entryComponents: [PopoverComponent],
-  imports: [BrowserModule,IonicModule.forRoot(),  
+  imports: [
+  BrowserModule,IonicModule.forRoot({mode: 'ios' }),  
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,

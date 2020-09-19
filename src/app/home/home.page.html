@@ -1,3 +1,4 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar class="toolbar-bg">
     <div class="toolbar-content">
@@ -23,22 +24,14 @@
       <ion-icon name="information-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>-->
-  <ul>
+  <!--<ul>
     <li *ngFor="let item of items2 | async">
       {{ item.name }}
     </li>
-  </ul>
+  </ul>-->
   <div #map id="map"  style="height: 100%">
   </div>
 
-
-  <!--<div>
-    <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
-      <ion-fab-button  menu="main-menu">
-        <ion-menu-button menu="main-menu"></ion-menu-button>
-      </ion-fab-button>
-    </ion-fab>
-  </div>-->
 
   <div id="menuOp" class="menuop">
     <ion-grid>
@@ -47,7 +40,7 @@
         <ion-segment scrollable value="1">
           <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
             <ion-label> {{item.tipoCarro}}</ion-label>
-            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+            <ion-checkbox  class="checkbox-round" mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
           </ion-segment-button>
         </ion-segment>
       </ion-row>
@@ -82,7 +75,7 @@
         </ion-list>
         <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial en el mapa</ion-button>
 
-        <ion-label id="UbFin">Ubicación Incial</ion-label>
+        <ion-label id="UbFin">Ubicación Final</ion-label>
         <ion-searchbar id="destino" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         <ion-list id="resultadosDestino">
           <ion-item (click)="SelectSearchResultEnd(result)" *ngFor="let result of searchResultsEnd">
@@ -117,5 +110,5 @@
       <ion-button id="aceptar" class="BuscarRide" (click)="aceptarBoton()" >Aceptar</ion-button>
     </ion-grid>
   </div>
-  <ion-button id="aceptarPuntos" (click)="aceptarPuntos()" >Listo</ion-button>
+ <ion-button id="aceptarPuntos" (click)="aceptarPuntos()" >Listo</ion-button>
 </ion-content>

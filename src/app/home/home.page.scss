@@ -39,10 +39,49 @@
   justify-content: center;
 }
 .opciones ion-label{
- font-size: 8px;
+ font-size: 14px;
 }
 .opciones ion-icon{
   height: 80px;
+ }
+ ion-searchbar{
+   
+   border-radius: 12px;
+   background-color: rgb(206, 206, 206);
+   --icon-color: black;
+   height: 47px;
+ }
+ 
+ #UbIn{
+  font-size: 16px;
+  font-weight: bold;
+ }
+ #UbFin{
+  font-size: 16px;
+  font-weight: bold;
+ }
+ #aceptar{
+   width: 99%;
+ }
+ #OOI{
+   width: 99%;
+ }
+ #MOI{
+   width: 98%;
+   --background: red !important;
+   position: absolute;
+   bottom: 1px;
+ }
+ #EUMI{
+   width: 98%;
+ }
+ .tipolbl{
+   font-size: 16px;
+   font-weight: bold;
+   text-transform: uppercase;
+ }
+ #EUMF{
+   width: 97%;
  }
 #MOI, #MOF{
   display: none;
@@ -64,15 +103,16 @@ ion-content{
 ion-segment-button{
   color: black;
   --indicator-color: transparent;
-  height: 35px;
-  min-height: 35px;
+  
+  min-height: 50px;
+  min-width: 84px;
   --border-radius: 4px;
   ion-label {
     margin: 0;
   }
 }
 ion-label{
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 2%;
 }
 
@@ -85,9 +125,14 @@ ion-item{
   padding-top: 0px;
   padding-bottom: 0px;
 }
+ion-checkbox{
+  --border-radius: 50% !important;
 
+}
 .segment-button-checked{
   color: #ff0404;
+  //border: solid 2px red;
+
 }
 .segment-button-checked:after{
   position: absolute;
@@ -95,11 +140,14 @@ ion-item{
   bottom: 0;
   width: 50%;
   color: white;
-  border-bottom: solid 4px green;
+  border: solid 4px red;
 }
 .segment-button-checked:after ion-icon{
   fill: red;
   color: black;
+}
+.vehiculoSegment{
+  height: 80px;
 }
 ion-checkbox{
   --checkmark-color: white;
@@ -110,6 +158,7 @@ ion-checkbox{
 }
 
 .menuop{
+  padding: 3px;
   border: solid rgba(44, 44, 44, 0.644) 2px ;
   border-radius: 20px;
   position: absolute;

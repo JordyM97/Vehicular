@@ -272,6 +272,7 @@ export class HomePage implements OnInit {
     this.map.mapTypes.set('styled_map', styledMapType);
     this.map.setMapTypeId('styled_map');
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
+    console.log(this.latLngInicial);
     this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
     this.addMarker(this.latLngInicial)
 
@@ -291,9 +292,9 @@ export class HomePage implements OnInit {
     botonAceptar.style.display="block";
     this.listenerInicio = google.maps.event.addListener(this.map, 'click' , (event) => {
       //mapEle.classList.add('show-map');
-      this.latLngInicial = event.latLng; //Necesito string para almacenar en bd
-      this.geocodeLatLng(this.latLngInicial.lat(),this.latLngInicial.lng(),1);
-      //console.log("Inicio:"+this.latLngInicial);
+      this.latLngInicial = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
+      this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
+      console.log(this.latLngInicial);
       this.addMarker(event.latLng);
     });
   }
@@ -308,9 +309,9 @@ export class HomePage implements OnInit {
     botonAceptar.style.display="block";
     this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
       //mapEle.classList.add('show-map');
-      this.latLngFinal = event.latLng; //Necesito string para almacenar en bd
-      this.geocodeLatLng(this.latLngFinal.lat(),this.latLngFinal.lng(),0);
-      //console.log("Fin:"+this.latLngFinal);
+      this.latLngFinal = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
+      this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
+      console.log(this.latLngFinal);
       this.addMarkerF(event.latLng);
     });
   }

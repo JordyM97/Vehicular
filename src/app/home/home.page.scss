@@ -45,9 +45,11 @@
   height: 80px;
  }
  ion-searchbar{
+   
    border-radius: 12px;
    background-color: rgb(206, 206, 206);
    --icon-color: black;
+   height: 47px;
  }
  
  #UbIn{
@@ -67,9 +69,16 @@
  #MOI{
    width: 98%;
    --background: red !important;
+   position: absolute;
+   bottom: 1px;
  }
  #EUMI{
    width: 98%;
+ }
+ .tipolbl{
+   font-size: 16px;
+   font-weight: bold;
+   text-transform: uppercase;
  }
  #EUMF{
    width: 97%;
@@ -94,8 +103,9 @@ ion-content{
 ion-segment-button{
   color: black;
   --indicator-color: transparent;
-  height: 35px;
-  min-height: 45px;
+  
+  min-height: 50px;
+  min-width: 84px;
   --border-radius: 4px;
   ion-label {
     margin: 0;
@@ -136,6 +146,9 @@ ion-checkbox{
   fill: red;
   color: black;
 }
+.vehiculoSegment{
+  height: 80px;
+}
 ion-checkbox{
   --checkmark-color: white;
   --background-checked: #ff0404;
@@ -145,6 +158,7 @@ ion-checkbox{
 }
 
 .menuop{
+  padding: 3px;
   border: solid rgba(44, 44, 44, 0.644) 2px ;
   border-radius: 20px;
   position: absolute;

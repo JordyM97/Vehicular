@@ -36,9 +36,10 @@
   <div id="menuOp" class="menuop">
     <ion-grid>
       <ion-row id="vehiculos">
-      <ion-label>Seleccione el tipo de vehículo</ion-label>
-        <ion-segment scrollable value="1">
+      <!--<ion-label class="tipolbl">Tipo de vehículo </ion-label>-->
+        <ion-segment class="vehiculoSegment" scrollable value="1">
           <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
+            <ion-icon name="car-sport-outline"></ion-icon>
             <ion-label> {{item.tipoCarro}}</ion-label>
             <ion-checkbox  class="checkbox-round" mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
           </ion-segment-button>
@@ -46,7 +47,7 @@
       </ion-row>
 
       <ion-row id="pagos">
-      <ion-label>Seleccione el tipo de pago</ion-label>
+      <ion-label class="tipolbl" >Tipo de pago </ion-label>
         <ion-segment scrollable value="1">
           <ion-segment-button (click)="SelectPayment(item)" *ngFor="let item of tipoPago">
             <ion-label> {{item.tipoPago}}</ion-label>
@@ -56,7 +57,7 @@
       </ion-row>
 
       <ion-row id="servicios">
-      <ion-label>Seleccione el tipo de servicio</ion-label>
+      <ion-label class="tipolbl" >Tipo de servicio</ion-label>
         <ion-segment scrollable value="1">
           <ion-segment-button (click)="SelectService(item)" *ngFor="let item of tipoServicio">
             <ion-label> {{item.tipoServicio}}</ion-label>

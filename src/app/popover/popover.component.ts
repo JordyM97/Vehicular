@@ -7,11 +7,11 @@ import { PopoverController,ToastController,NavParams } from '@ionic/angular';
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements OnInit {
-  startMarker: any;
+  pedido: any;
   constructor(private navParams: NavParams, private popoverController: PopoverController,public toastController: ToastController) { }
 
   ngOnInit() {
-    this.startMarker= this.navParams.get('info');
+    this.pedido= this.navParams.get('info');
   }
   async DismissClick() {
     await this.popoverController.dismiss();
@@ -23,6 +23,7 @@ export class PopoverComponent implements OnInit {
       });
     toast.present();
   }
+  
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'El conductor estara llegando pronto!',
@@ -30,7 +31,9 @@ export class PopoverComponent implements OnInit {
       position: 'top',
       color: 'success'
       });
+      
     toast.present();
+
     await this.popoverController.dismiss();
     }
 }

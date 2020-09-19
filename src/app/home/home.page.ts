@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
   EndMarker: any;
 
   resultInit: string;
-
+  resultFini: string;
   //Capturar ubicaciones de markers
   latLngInicial: any;
   latLngFinal: any;
@@ -148,8 +148,8 @@ export class HomePage implements OnInit {
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          coordIni: this.latLngInicial,
-          coordFin: this.latLngFinal,
+          coordIni: JSON.stringify(this.latLngInicial),
+          coordFin: JSON.stringify(this.latLngFinal),
           addressIni: this.addressInicial,
           addressFin: this.addressFinal,
           vehiculo: this.vehiculoSeleccionado,
@@ -160,7 +160,10 @@ export class HomePage implements OnInit {
           dia: dia,
           hora: hora,
           minuto: minuto,
-          total: 4.23 
+          total: 4.23,
+          aceptada:false,
+          user: 1,
+          driver: 1
         }
       }
     }); 
@@ -294,7 +297,7 @@ export class HomePage implements OnInit {
       this.addMarker(event.latLng);
     });
   }
-
+  
   //Elegir punto final
   seleccionarFin(){
     google.maps.event.removeListener(this.listenerInicio);
@@ -423,6 +426,7 @@ export class HomePage implements OnInit {
 
   //Con el resultado que elijamos, se agrega el marcador
   SelectSearchResultEnd(item) {     
+    this.resultFini=item.description;
     this.placeid = item.place_id;
     this.getplaceByIdEnd(this.placeid);
     this.ClearAutocomplete();
@@ -447,9 +451,9 @@ export class HomePage implements OnInit {
 
   ClearAutocomplete(){
     this.searchResultsEnd = []
-    this.searchEnd = ''
+   
     this.searchResultsInit =[]
-    this.searchInit = ''
+    
   }
 
   //Seleccionar un tipo de transporte

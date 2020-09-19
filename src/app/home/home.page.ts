@@ -47,7 +47,8 @@ export class HomePage implements OnInit {
     { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
   ];
   map: any;
-  address:string;
+  addressInicial:string;
+  addressFinal:string;
   lat: string;
   long: string; 
   autocomplete: { input: string; };
@@ -66,12 +67,17 @@ export class HomePage implements OnInit {
   startMarker: any;
   EndMarker: any;
 
+  resultInit: string;
+
   //Capturar ubicaciones de markers
   latLngInicial: any;
   latLngFinal: any;
 
+  //Listeners
   listenerInicio: any;
   listenerFin: any;
+  listenerMoverInicio: any;
+  listenerMoverFin: any;
 
 
   directionsService = new google.maps.DirectionsService();
@@ -142,8 +148,10 @@ export class HomePage implements OnInit {
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          locatini: this.latLngInicial,
-          locatfin: this.latLngFinal,
+          coordIni: this.latLngInicial,
+          coordFin: this.latLngFinal,
+          addressIni: this.addressInicial,
+          addressFin: this.addressFinal,
           vehiculo: this.vehiculoSeleccionado,
           pago: this.pagoSeleccionado,
           servicio: this.servicioSeleccionado,
@@ -261,10 +269,13 @@ export class HomePage implements OnInit {
     this.map.mapTypes.set('styled_map', styledMapType);
     this.map.setMapTypeId('styled_map');
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
+    this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
     this.addMarker(this.latLngInicial)
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
+
+    this.listenerDrag();
   }
 
   //Elegir punto inicial
@@ -278,7 +289,8 @@ export class HomePage implements OnInit {
     this.listenerInicio = google.maps.event.addListener(this.map, 'click' , (event) => {
       //mapEle.classList.add('show-map');
       this.latLngInicial = event.latLng; //Necesito string para almacenar en bd
-      console.log("Inicio:"+this.latLngInicial);
+      this.geocodeLatLng(this.latLngInicial.lat(),this.latLngInicial.lng(),1);
+      //console.log("Inicio:"+this.latLngInicial);
       this.addMarker(event.latLng);
     });
   }
@@ -294,7 +306,8 @@ export class HomePage implements OnInit {
     this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
       //mapEle.classList.add('show-map');
       this.latLngFinal = event.latLng; //Necesito string para almacenar en bd
-      console.log("Fin:"+this.latLngFinal);
+      this.geocodeLatLng(this.latLngFinal.lat(),this.latLngFinal.lng(),0);
+      //console.log("Fin:"+this.latLngFinal);
       this.addMarkerF(event.latLng);
     });
   }
@@ -307,7 +320,8 @@ export class HomePage implements OnInit {
       this.puntoInicio = new google.maps.Marker({
         position: marker.position,
         map: this.map,
-        icon: 'assets/icon/pin.png'
+        icon: 'assets/icon/pin.png',
+        //draggable: true
       });
       this.puntoInicio.setPosition(marker);
     }
@@ -321,10 +335,31 @@ export class HomePage implements OnInit {
       this.puntoFin = new google.maps.Marker({
         position: marker.position,
         map: this.map,
-        icon: 'assets/icon/pin.png'
+        icon: 'assets/icon/pin.png',
+        //draggable: true
       });
       this.puntoFin.setPosition(marker);
     }
+  }
+
+  listenerDrag(){
+    this.listenerMoverInicio = google.maps.event.addListener(this.puntoInicio, 'dragend', (evt) => {
+      this.latLngInicial = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
+      console.log(this.latLngInicial);
+      this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
+      /*console.log(evt.latLng.lat().toFixed(6));
+      console.log(evt.latLng.lng().toFixed(6))*/
+
+      //this.map.panTo(evt.latLng);
+    });
+    /*this.listenerMoverFin = google.maps.event.addListener(this.puntoFin, 'dragend', (evt) => {
+      this.latLngFinal = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
+      console.log(this.latLngFinal);
+      this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
+      console.log(evt.latLng.lat().toFixed(6));
+      console.log(evt.latLng.lng().toFixed(6))
+      this.map.panTo(evt.latLng);
+    });*/
   }
 
   //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
@@ -346,7 +381,6 @@ export class HomePage implements OnInit {
 
   //Ver resultados de busqueda inicial
   searchChangedInit(){
-    console.log(this.posicionInicial);
     if(!this.searchInit.trim().length) return;
     this.googleAutocomplete.getPlacePredictions({ input: this.searchInit, location: new google.maps.LatLng(this.posicionInicial), radius: 50000}, predictions => {
       this.searchResultsInit = predictions;
@@ -354,7 +388,8 @@ export class HomePage implements OnInit {
   }
 
   //Con el resultado que elijamos, se agrega el marcador
-  SelectSearchResultInit(item) {     
+  SelectSearchResultInit(item) {
+    this.resultInit = item.description;
     this.placeid = item.place_id;
     this.getplaceByIdInit(this.placeid);
     this.ClearAutocomplete();
@@ -367,7 +402,8 @@ export class HomePage implements OnInit {
           console.log(results[0]);
           //console.log(results[0].geometry.viewport.Za.j);
           this.latLngInicial = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
-          this.map.setCenter(this.latLngInicial) //Centrar mapa en destino
+          this.map.setCenter(this.latLngInicial) //Centrar mapa en inicio
+          this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
           console.log(this.latLngInicial);
           this.addMarker(this.latLngInicial);
           
@@ -399,6 +435,7 @@ export class HomePage implements OnInit {
           console.log(results[0]);
           this.latLngFinal = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
           this.map.setCenter(this.latLngFinal) //Centrar mapa en destino
+          this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
           console.log(this.latLngFinal);
           this.addMarkerF(this.latLngFinal);
           
@@ -511,6 +548,32 @@ export class HomePage implements OnInit {
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
     this.calcularRuta();
+  }
+
+  geocodeLatLng(latitude,longitude,identificador) {
+    const latlng = {
+      lat: parseFloat(latitude),
+      lng: parseFloat(longitude)
+    };
+    this.geocoder.geocode({ location: latlng },
+      (results,status) => {
+        if (status === "OK") {
+          if (results[0]) {
+            if(identificador==1){
+              this.addressInicial = results[0].formatted_address;
+            }else{
+              this.addressFinal = results[0].formatted_address;
+            }
+            console.log(results[0].formatted_address);
+            
+          } else {
+            window.alert("No results found");
+          }
+        } else {
+          window.alert("Geocoder failed due to: " + status);
+        }
+      }
+    );
   }
 
   /*ocultarOpcionesFin() {

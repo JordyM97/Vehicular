@@ -27,7 +27,7 @@ export class AceptarParametrosComponent implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Buscando conductor',
-      duration: 25000,
+      duration: 250,
       position: 'middle',
       color: 'success'
       });

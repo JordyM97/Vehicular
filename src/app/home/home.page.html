@@ -77,11 +77,7 @@
         <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial en el mapa</ion-button>
 
         <ion-label id="UbFin">Ubicación Final</ion-label>
-<<<<<<< HEAD
         <ion-searchbar id="destino" debounce="10" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-=======
-        <ion-searchbar id="destino" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
->>>>>>> f9ff22d17a71197888c637bda65ac05e7e352777
         <ion-list id="resultadosDestino">
           <ion-item (click)="SelectSearchResultEnd(result)" *ngFor="let result of searchResultsEnd">
             {{ result.description }}

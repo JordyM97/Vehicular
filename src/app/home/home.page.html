@@ -35,36 +35,45 @@
 
   <div id="menuOp" class="menuop">
     <ion-grid>
-      <ion-row id="vehiculos">
-      <!--<ion-label class="tipolbl">Tipo de vehículo </ion-label>-->
-        <ion-segment class="vehiculoSegment" scrollable value="1">
-          <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <ion-label> {{item.tipoCarro}}</ion-label>
-            <ion-checkbox  class="checkbox-round" mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-row>
+      <div id="parametrosViaje">
+        <ion-row>
+          <ion-label class="tipolbl">Tipo de vehículo </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-segment class="vehiculoSegment" scrollable value="1">
+            <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
+              <ion-icon name="car-sport-outline"></ion-icon>
+              <ion-label> {{item.tipoCarro}}</ion-label>
+              <ion-checkbox  class="checkbox-round" mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-row>
 
-      <ion-row id="pagos">
-      <ion-label class="tipolbl" >Tipo de pago </ion-label>
-        <ion-segment scrollable value="1">
-          <ion-segment-button (click)="SelectPayment(item)" *ngFor="let item of tipoPago">
-            <ion-label> {{item.tipoPago}}</ion-label>
-            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-row>
+        <ion-row>
+          <ion-label class="tipolbl" >Tipo de pago </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-segment class="paymentSegment" scrollable value="1">
+            <ion-segment-button (click)="SelectPayment(item)" *ngFor="let item of tipoPago">
+              <ion-label> {{item.tipoPago}}</ion-label>
+              <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-row>
 
-      <ion-row id="servicios">
-      <ion-label class="tipolbl" >Tipo de servicio</ion-label>
-        <ion-segment scrollable value="1">
-          <ion-segment-button (click)="SelectService(item)" *ngFor="let item of tipoServicio">
-            <ion-label> {{item.tipoServicio}}</ion-label>
-            <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-row>
+        <ion-row>
+          <ion-label class="tipolbl" >Tipo de servicio</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-segment class="serviceSegment" scrollable value="1">
+            <ion-segment-button (click)="SelectService(item)" *ngFor="let item of tipoServicio">
+              <ion-label> {{item.tipoServicio}}</ion-label>
+              <ion-checkbox mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-row>
+      </div>
+ 
  
       <div id="opcionesBuscar">
         <ion-label id="UbIn">Ubicación Incial</ion-label>
@@ -90,7 +99,7 @@
 
       
       <ion-row class="elegirini">
-        <ion-button id="OOI" (click)="ocultarOpciones()">Elegir direcciones</ion-button>
+        <ion-button id="OOI" (click)="ocultarOpciones()"><img class="pointer" src="assets/icon/pointer_rojo.png">Seleccionar los puntos de partida y de llegada</ion-button>
         <ion-button id="MOI" (click)="mostrarOpciones()">Volver</ion-button>
         <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
         <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->

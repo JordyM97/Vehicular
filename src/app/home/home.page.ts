@@ -284,8 +284,7 @@ export class HomePage implements OnInit {
 
   //Elegir punto inicial
   seleccionarInicio(){
-    google.maps.event.removeListener(this.listenerFin);
-    google.maps.event.removeListener(this.listenerInicio);
+    this.puntoInicio.setOptions({draggable: true});
     var menuOp = document.getElementById("menuOp");
     var botonAceptar = document.getElementById("aceptarPuntos");
     menuOp.style.display="none";
@@ -297,22 +296,28 @@ export class HomePage implements OnInit {
       console.log(this.latLngInicial);
       this.addMarker(event.latLng);
     });
+    this.listenerDrag();
   }
   
   //Elegir punto final
   seleccionarFin(){
-    google.maps.event.removeListener(this.listenerInicio);
-    google.maps.event.removeListener(this.listenerFin);
     var menuOp = document.getElementById("menuOp");
     var botonAceptar = document.getElementById("aceptarPuntos");
     menuOp.style.display="none";
     botonAceptar.style.display="block";
+    if(this.puntoFin){
+      this.puntoFin.setOptions({draggable: true});
+      google.maps.event.removeListener(this.listenerMoverFin);
+      this.listenerDragF();
+    }
     this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
       //mapEle.classList.add('show-map');
       this.latLngFinal = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
       this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
       console.log(this.latLngFinal);
       this.addMarkerF(event.latLng);
+      google.maps.event.removeListener(this.listenerMoverFin);
+      this.listenerDragF();
     });
   }
 
@@ -325,7 +330,7 @@ export class HomePage implements OnInit {
         position: marker.position,
         map: this.map,
         icon: 'assets/icon/pin.png',
-        //draggable: true
+        draggable: true
       });
       this.puntoInicio.setPosition(marker);
     }
@@ -340,7 +345,7 @@ export class HomePage implements OnInit {
         position: marker.position,
         map: this.map,
         icon: 'assets/icon/pin.png',
-        //draggable: true
+        draggable: true
       });
       this.puntoFin.setPosition(marker);
     }
@@ -353,17 +358,19 @@ export class HomePage implements OnInit {
       this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
       /*console.log(evt.latLng.lat().toFixed(6));
       console.log(evt.latLng.lng().toFixed(6))*/
-
       //this.map.panTo(evt.latLng);
     });
-    /*this.listenerMoverFin = google.maps.event.addListener(this.puntoFin, 'dragend', (evt) => {
+  }
+
+  listenerDragF(){
+    this.listenerMoverFin = google.maps.event.addListener(this.puntoFin, 'dragend', (evt) => {
       this.latLngFinal = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
       console.log(this.latLngFinal);
       this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
-      console.log(evt.latLng.lat().toFixed(6));
+      /*console.log(evt.latLng.lat().toFixed(6));
       console.log(evt.latLng.lng().toFixed(6))
-      this.map.panTo(evt.latLng);
-    });*/
+      this.map.panTo(evt.latLng);*/
+    });
   }
 
   //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
@@ -401,6 +408,11 @@ export class HomePage implements OnInit {
   }
 
   getplaceByIdInit(placeId){
+    this.puntoInicio.setOptions({draggable: true});
+    var menuOp = document.getElementById("menuOp");
+    var botonAceptar = document.getElementById("aceptarPuntos");
+    menuOp.style.display="none";
+    botonAceptar.style.display="block";
     this.geocoder.geocode({ placeId: placeId}, (results, status) => {
       if (status === "OK") {
           console.log(results[0]);
@@ -410,6 +422,7 @@ export class HomePage implements OnInit {
           this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
           console.log(this.latLngInicial);
           this.addMarker(this.latLngInicial);
+          this.listenerDrag(); //Listener para el dragg
           
       } else {
         window.alert("Geocoder failed due to: " + status);
@@ -435,6 +448,13 @@ export class HomePage implements OnInit {
   }
 
   getplaceByIdEnd(placeId){
+    if(this.puntoFin){ //En caso que ya exista un punto final
+      this.puntoFin.setOptions({draggable: true});
+    }
+    var menuOp = document.getElementById("menuOp");
+    var botonAceptar = document.getElementById("aceptarPuntos");
+    menuOp.style.display="none";
+    botonAceptar.style.display="block";
     this.geocoder.geocode({ placeId: placeId}, (results, status) => {
       if (status === "OK") {
           console.log(results[0]);
@@ -443,6 +463,7 @@ export class HomePage implements OnInit {
           this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
           console.log(this.latLngFinal);
           this.addMarkerF(this.latLngFinal);
+          this.listenerDragF(); //Listener para el dragg
           
       } else {
         window.alert("Geocoder failed due to: " + status);
@@ -512,46 +533,51 @@ export class HomePage implements OnInit {
     var aceptarPuntos = document.getElementById("aceptarPuntos");
     menuOp.style.display="block";
     aceptarPuntos.style.display="none";
+    google.maps.event.removeListener(this.listenerMoverInicio);
+    google.maps.event.removeListener(this.listenerInicio);
+    google.maps.event.removeListener(this.listenerMoverFin);
+    google.maps.event.removeListener(this.listenerFin);
+    this.puntoInicio.setOptions({draggable: false});
+    if(this.puntoFin){
+      this.puntoFin.setOptions({draggable: false});
+    }
   }
 
   ocultarOpciones() {
-    var vehiculos = document.getElementById("vehiculos");
-    var pagos = document.getElementById("pagos");
-    var servicios = document.getElementById("servicios");
+    var parametros = document.getElementById("parametrosViaje");
     var opconesBuscar = document.getElementById("opcionesBuscar");
     var menuOp = document.getElementById("menuOp");
     var elegirPuntos = document.getElementById("OOI");
     var aceptarPuntos = document.getElementById("MOI");
     var aceptarParametros = document.getElementById("aceptar");
-    vehiculos.style.display="none";
-    pagos.style.display="none";
-    servicios.style.display="none";
+    parametros.style.display="none";
     opconesBuscar.style.display="block";
     elegirPuntos.style.display="none";
     aceptarParametros.style.display="none";
     aceptarPuntos.style.display="block";
     menuOp.style.height="100%";
+    if(this.listenerMoverInicio){
+      google.maps.event.removeListener(this.listenerMoverInicio);
+    }
   }
 
   mostrarOpciones() {
-    var vehiculos = document.getElementById("vehiculos");
-    var pagos = document.getElementById("pagos");
-    var servicios = document.getElementById("servicios");
+    var parametros = document.getElementById("parametrosViaje");
     var opconesBuscar = document.getElementById("opcionesBuscar");
     var menuOp = document.getElementById("menuOp");
     var elegirPuntos = document.getElementById("OOI");
     var aceptarPuntos = document.getElementById("MOI");
     var aceptarParametros = document.getElementById("aceptar");
-    vehiculos.style.display="block";
-    pagos.style.display="block";
-    servicios.style.display="block";
+    parametros.style.display="block";
     opconesBuscar.style.display="none";
     elegirPuntos.style.display="block";
     aceptarParametros.style.display="block";
     aceptarPuntos.style.display="none";
-    menuOp.style.height="45%";
+    menuOp.style.height="50%";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
+    google.maps.event.removeListener(this.listenerMoverInicio);
+    google.maps.event.removeListener(this.listenerMoverFin);
     this.calcularRuta();
   }
 

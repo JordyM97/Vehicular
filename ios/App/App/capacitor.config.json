@@ -1,1 +1,24 @@
-{}
+{
+  "appId": "com.careapp.app",
+  "appName": "CareApp",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000
+
+    }
+  },
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000"
+    }
+  }
+}

@@ -139,11 +139,7 @@ export class HomePage implements OnInit {
     var date = new Date();
     var anio = date.getFullYear(); 
     var mes = String(date.getMonth() + 1).padStart(2, '0');
-<<<<<<< HEAD
     var dia = String(date.getDate()).padStart(2, '0');
-=======
-  var dia = String(date.getDate()).padStart(2, '0');
->>>>>>> 5ec9e451b5119b69c7dfc97f0ef748c73345e989
     var hora = date.getHours();
     var minuto = date.getMinutes();
     const popover= await this.popovercontroller.create({
@@ -305,6 +301,7 @@ export class HomePage implements OnInit {
   
   //Elegir punto final
   seleccionarFin(){
+    this.puntoInicio.setOptions({draggable: false});
     var menuOp = document.getElementById("menuOp");
     var botonAceptar = document.getElementById("aceptarPuntos");
     menuOp.style.display="none";

@@ -31,15 +31,16 @@ export class HomePage implements OnInit {
   @ViewChild('map',  {static: false}) mapElement: ElementRef;
   public vehiculos = [
     { id: 1, tipoCarro: 'Carro', isChecked: false },
-    { id: 2, tipoCarro: 'Confortable', isChecked: false },
-    { id: 3, tipoCarro: 'Tricimoto', isChecked: false },
-    { id: 4, tipoCarro: 'Camioneta', isChecked: false },
-    { id: 5, tipoCarro: 'Premium', isChecked: false }
+    { id: 2, tipoCarro: 'Camioneta', isChecked: false },
+    { id: 3, tipoCarro: 'Plataforma', isChecked: false },
+    { id: 4, tipoCarro: 'Camión', isChecked: false },
+    { id: 5, tipoCarro: 'Furgón', isChecked: false },
+    { id: 6, tipoCarro: 'Remolque', isChecked: false }
   ];
 
   public tipoPago = [
-    { id: 1, tipoPago: 'Efectivo' , isChecked: false },
-    { id: 2, tipoPago: 'Tarjeta de crédito', isChecked: false }
+    { id: 1, tipoPago: 'Tarjeta de Débito' , isChecked: false },
+    { id: 2, tipoPago: 'Tarjeta de Crédito', isChecked: false }
   ];
 
   public tipoServicio = [
@@ -137,11 +138,10 @@ export class HomePage implements OnInit {
   async aceptarParametros(){
     var date = new Date();
     var anio = date.getFullYear(); 
-    var mes = date.getMonth();
-    var dia = date.getDay();
+    var mes = String(date.getMonth() + 1).padStart(2, '0');
+  var dia = String(date.getDate()).padStart(2, '0');
     var hora = date.getHours();
     var minuto = date.getMinutes();
-    console.log(date);
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,

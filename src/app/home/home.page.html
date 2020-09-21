@@ -83,7 +83,7 @@
             {{ result.description }}
           </ion-item>
         </ion-list>
-        <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial en el mapa</ion-button>
+        <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial manualmente</ion-button>
 
         <ion-label id="UbFin">Ubicación Final</ion-label>
         <ion-searchbar id="destino" debounce="10" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
@@ -92,14 +92,14 @@
             {{ result.description }}
           </ion-item>
         </ion-list>
-        <ion-button id="EUMF" (click)="seleccionarFin()">Fijar ubicacion final en el mapa</ion-button>
+        <ion-button id="EUMF" (click)="seleccionarFin()">Fijar ubicacion final manualmente</ion-button>
       </div>
    
 
 
       
       <ion-row class="elegirini">
-        <ion-button id="OOI" (click)="ocultarOpciones()"><img class="pointer" src="assets/icon/pointer_rojo.png">Seleccionar los puntos de partida y de llegada</ion-button>
+        <ion-button id="OOI" (click)="ocultarOpciones()"><img class="pointer" src="assets/icon/pointer_rojo.png">Seleccionar punto de partida y de llegada</ion-button>
         <ion-button id="MOI" (click)="mostrarOpciones()">Volver</ion-button>
         <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
         <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->

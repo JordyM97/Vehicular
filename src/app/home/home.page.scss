@@ -64,13 +64,16 @@
   font-weight: bold;
  }
  #aceptar{
-  width: 99%;
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  bottom: 0px;
  }
  #OOI{
   width: 99%;
-  height: 30px;
+  height: 45px;
   text-align: right;
-  color:#9A999E;
+  color:#3b3b3b;
   --background: #D8D9DD;
  }
 
@@ -88,15 +91,20 @@
  }
  #EUMI{
    width: 98%;
+   --background: #2487C9 !important;
  }
  .tipolbl{
-   font-size: 11px;
+  padding-top: 5px;
+  padding-left: 7px;
+   font-size: 14px;
    width: 50%;
+   --border-color: red;
    font-weight: bold;
    text-transform: uppercase;
  }
  #EUMF{
    width: 97%;
+   --background: #2487C9 !important;
  }
 #MOI, #MOF{
   display: none;
@@ -107,6 +115,9 @@ ion-icon{
 ion-content{
   --color: black;
   height: 870px;
+}
+#parametrosViaje{
+  padding-bottom: 10px;
 }
 .sc-ion-popover-md-h {
   --width: auto;
@@ -141,10 +152,9 @@ ion-grid{
   padding-top: 0%;
   padding-bottom: 0%;
   padding-right: 2%;
-  padding-left: 2%;
+  padding-left: 0%;
 }
 
-ion-segment
 
 .list-md{
   padding-top: 0px;
@@ -190,6 +200,8 @@ ion-checkbox{
 .menuop{
   border: solid rgba(44, 44, 44, 0.644) 2px ;
   border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   position: absolute;
   bottom: 0px;
   width: 100%;

@@ -137,8 +137,8 @@ export class HomePage implements OnInit {
   async aceptarParametros(){
     var date = new Date();
     var anio = date.getFullYear(); 
-    var mes = date.getMonth();
-    var dia = date.getDay();
+    var mes = String(date.getMonth() + 1).padStart(2, '0');
+    var dia = String(date.getDate()).padStart(2, '0');
     var hora = date.getHours();
     var minuto = date.getMinutes();
     console.log(date);

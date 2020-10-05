@@ -106,7 +106,6 @@ export class HomePage implements OnInit {
   ) {
     //GEt colllection from firestore                                                    //FIRESTORE
     this.Servicios = firestore.collection('Pruebas').valueChanges();
-    console.log(this.Servicios)
     this.Servicios.subscribe(value =>{console.log(value)});
 
 

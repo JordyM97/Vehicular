@@ -13,30 +13,26 @@
         </div>
 
         <ion-list lines="none" class="menu-items" color=“transparent”>
-          <ion-menu-toggle>
+          <ion-menu-toggle routerLink="/perfil">
             <ion-item color=“transparent”>
               <ion-icon name="person"></ion-icon>Mi perfil
             </ion-item>
           </ion-menu-toggle>
           
-          <ion-menu-toggle>
+          <ion-menu-toggle routerLink="news">
             <ion-item color=“transparent”>
               <ion-icon name="document-text-outline"></ion-icon>Noticias
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle>
-            <ion-item color=“transparent”>
-              <ion-icon name="newspaper-outline"></ion-icon>Viajes
-            </ion-item>
-          </ion-menu-toggle>
 
-          <ion-menu-toggle>
-            <ion-item color=“transparent” button (click)="presentAlertInicio()">
+
+          <ion-menu-toggle routerLink="/viajes">
+            <ion-item color="transparent">
               <ion-icon name="pin-outline"></ion-icon>Viajes
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle>
+          <ion-menu-toggle routerLink="/acerca">
             <ion-item color=“transparent” button (click)="presentAlertFin()">
               <ion-icon name="stop-circle-outline"></ion-icon>Acerca
             </ion-item>
@@ -46,7 +42,7 @@
 
         <div class="out-content">
           <hr>
-          <ion-menu-toggle>
+          <ion-menu-toggle routerLink="/login">
             <ion-text color=“transparent” (click)="on_logout()">
               <span class="text"> CERRAR SESIÓN</span>
             </ion-text>

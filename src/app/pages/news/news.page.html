@@ -3,17 +3,45 @@
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
-      <ion-fab-button  menu="main-menu">
-        <ion-menu-button menu="main-menu"></ion-menu-button>
-      </ion-fab-button>
-    </ion-fab>
-  </div>
+  <ion-toolbar >
+    <ion-buttons slot="start" >
+      <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline">
+      <ion-title>Noticias</ion-title>
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+ 
   
   
-    <ion-item *ngFor="let item of items | async">
+   <!--<ion-item *ngFor="let item of items | async">
       {{item | json}}
     </ion-item>
-  
+    -->
+    <div id="Noticias">
+      <!--<div class="Noticia" *ngFor="let noti of Noticias">
+      <h1>{{noti}}</h1>-->
+      <div id="card">
+        <ion-card>
+          <img src="" alt="No Picture">
+          <ion-card-header>
+            <ion-card-title>Descuento Proxima Carrera</ion-card-title>
+            <ion-card-subtitle> Valido hasta 08/11/2020</ion-card-subtitle>
+           
+          </ion-card-header>
+          <ion-card-content>Obten un descuento del 30% en tu proxima carrera!</ion-card-content>
+        </ion-card>
+      </div>
+      <div id="card">
+        <ion-card>
+          <img src="" alt="No Picture">
+          <ion-card-header>
+            <ion-card-title>Chequear este link para lo async</ion-card-title>
+            <ion-card-subtitle> Valido hasta 08/11/2020</ion-card-subtitle>
+           
+          </ion-card-header>
+          <ion-card-content>https://ionicframework.com/docs/api/refresher</ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    
 </ion-content>

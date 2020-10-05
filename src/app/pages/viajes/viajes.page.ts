@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-viajes',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./viajes.page.scss'],
 })
 export class ViajesPage implements OnInit {
-
+  Viajes: Observable<any[]>;
   constructor() { }
 
   ngOnInit() {

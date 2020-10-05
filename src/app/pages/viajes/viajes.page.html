@@ -3,11 +3,40 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-fab vertical="top" horizontal="start" slot="fixed" menu="main-menu">
-      <ion-fab-button  menu="main-menu">
-        <ion-menu-button menu="main-menu"></ion-menu-button>
-      </ion-fab-button>
-    </ion-fab>
+  
+  <ion-toolbar >
+    <ion-buttons slot="start" >
+      <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline">
+      </ion-back-button>
+      </ion-buttons>
+      <ion-title> Mis Viajes</ion-title>
+  </ion-toolbar>
+  <div id="Viajes">
+    <!--<div class="Noticia" *ngFor="let noti of Noticias">
+    <h1>{{noti}}</h1>-->
+    <div id="card">
+      <ion-card>
+        <img src="" alt="No Picture">
+        <ion-card-header>
+          
+          <ion-row>
+            <ion-card-title> 08/11/2020 2:30PM</ion-card-title>
+            <ion-card-title> $4,30</ion-card-title>
+          </ion-row>
+          <ion-card-subtitle>Jordy Medina </ion-card-subtitle>
+        </ion-card-header>
+        <ion-row>
+
+          <ion-col>
+            <ion-text>San Marino</ion-text>
+          </ion-col>
+        <ion-col>
+            <ion-text>Mall del SOl</ion-text>
+          </ion-col>
+        </ion-row>
+        
+      </ion-card>
+    </div>
   </div>
+ 
 </ion-content>

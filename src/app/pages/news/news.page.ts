@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { NavController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-news',
@@ -11,15 +12,21 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./news.page.scss'],
 })
 export class NewsPage implements OnInit {
-  items:  Observable<any[]>;
-  constructor(private http: HttpClient,public db: AngularFireDatabase,
-    public navCtrl: NavController) { 
-      this.items = db.list('/Pruebas').valueChanges();
-      this.items.subscribe(value =>{console.log(value)});
-    }
-
+  Noticias: Observable<any[]>;
+  Noti: Array<JSON>;
+  firestore:any
+  constructor(private http: HttpClient,firestore: AngularFirestore ) { 
+    this.firestore=firestore;
+    
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   ngOnInit() {
+    this.Noticias= this.firestore.collection('Noticias').valueChanges();
+
+    this.Noticias.subscribe(value =>{
+      this.Noti.push(value[0])
+      console.log(value[0]);});
     
   }
+
 
 }

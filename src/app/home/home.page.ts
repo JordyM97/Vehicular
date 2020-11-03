@@ -4,12 +4,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../popover/popover.component';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { PopoverComponent } from '../components/popover/popover.component';
 
 declare var google;
 
@@ -30,22 +29,16 @@ export class HomePage implements OnInit {
   
   @ViewChild('map',  {static: false}) mapElement: ElementRef;
   public vehiculos = [
-    { id: 1, tipoCarro: 'Carro', isChecked: false },
-    { id: 2, tipoCarro: 'Camioneta', isChecked: false },
-    { id: 3, tipoCarro: 'Plataforma', isChecked: false },
-    { id: 4, tipoCarro: 'Camión', isChecked: false },
-    { id: 5, tipoCarro: 'Furgón', isChecked: false },
-    { id: 6, tipoCarro: 'Remolque', isChecked: false }
+    { id: 1, tipoCarro: 'Carro', isChecked: false },    { id: 2, tipoCarro: 'Camioneta', isChecked: false },    { id: 3, tipoCarro: 'Plataforma', isChecked: false },
+    { id: 4, tipoCarro: 'Camión', isChecked: false },    { id: 5, tipoCarro: 'Furgón', isChecked: false },    { id: 6, tipoCarro: 'Remolque', isChecked: false }
   ];
 
   public tipoPago = [
-    { id: 1, tipoPago: 'Tarjeta de Débito' , isChecked: false },
-    { id: 2, tipoPago: 'Tarjeta de Crédito', isChecked: false }
+    { id: 1, tipoPago: 'Tarjeta de Débito' , isChecked: false },    { id: 2, tipoPago: 'Tarjeta de Crédito', isChecked: false }
   ];
 
   public tipoServicio = [
-    { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },
-    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
+    { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
   ];
   map: any;
   addressInicial:string;
@@ -97,10 +90,7 @@ export class HomePage implements OnInit {
   posicionInicial: any;
   Servicios: Observable<any[]>;
   constructor(
-    private geolocation: Geolocation,    
-    private nativeGeocoder: NativeGeocoder,    
-    public zone: NgZone,
-    public popovercontroller: PopoverController,
+    private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
     firestore: AngularFirestore                           // conector a firestore
   ) {
@@ -114,14 +104,12 @@ export class HomePage implements OnInit {
     this.autocomplete2 = { input: '' };
     this.autocompleteItems = [];
     this.autocompleteItems2 = [];
-
     this.geocoder = new google.maps.Geocoder();
   }
-  async conductorEncontrado(){
+  async PopOverConductorEncontrado(){
     const popover= await this.popovercontroller.create({
       component: PopoverComponent,
-      translucent: true,
-      cssClass: 'contact-popover',
+      translucent: true,      cssClass: 'contact-popover',
       componentProps:{
         info: {
           locatini: this.latLngInicial,
@@ -197,8 +185,7 @@ export class HomePage implements OnInit {
               "visibility": "off"
             }
           ]
-        },
-        {
+        },{
           "featureType": "administrative.land_parcel",
           "elementType": "labels.text",
           "stylers": [
@@ -367,16 +354,12 @@ export class HomePage implements OnInit {
       this.latLngFinal = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
       console.log(this.latLngFinal);
       this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
-      /*console.log(evt.latLng.lat().toFixed(6));
-      console.log(evt.latLng.lng().toFixed(6))
-      this.map.panTo(evt.latLng);*/
+     
     });
   }
 
   //Permite trazar la ruta una vez que haya elegido los puntos iniciales y finales
   calcularRuta(){
-    //this.puntoFin.setPosition();
-    //this.puntoInicio.setPosition();
     this.directionsService.route({
       origin: this.latLngInicial,
       destination: this.latLngFinal,

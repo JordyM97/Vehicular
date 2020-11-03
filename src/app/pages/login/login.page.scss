@@ -1,32 +1,40 @@
-page-home{
-    background-color: red;
-}
-.center{
-    margin-left: 10%;
-    margin-right: 10%;
-    border : solid black 1px;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-    
-}
-ion-list{
-    background-color: white;
-    padding-left: 12px;
-    padding-right: 12px;;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-}   
-ion-content{
-    text-align: center;
-    --ion-background-color: white;
-   
-    
+.icon{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
 }
 ion-item{
-   
+    --background: white;
     border-radius: 12px;
-    border-top: solid white;
-    border-left: solid white;
-    border-bottom: solid white;
-    border-right: solid white;
+    margin-left: 10px;
+    margin-right: 10px;;
+}
+.boton{
+    --background: #e6242f;  
+    width: 100%;
+    height: 8%;
+    bottom: 0;
+    left: 0;
+    display: block;
+    position: absolute;
+}
+
+.content-items{
+    width: 100%;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25%; 
+    ion-item{
+        --highlight-color-valid: #e6242f; 
+       
+    }     
+    
+}
+
+.content-link{
+    text-align: center;
+    color: #e6242f;
+    text-decoration: none;    
 }

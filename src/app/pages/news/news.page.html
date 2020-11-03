@@ -6,9 +6,10 @@
   <ion-toolbar >
     <ion-buttons slot="start" >
       <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline">
-      <ion-title>Noticias</ion-title>
+      
       </ion-back-button>
     </ion-buttons>
+    <ion-title>Noticias</ion-title>
   </ion-toolbar>
  
   
@@ -18,18 +19,18 @@
     </ion-item>
     -->
     <div id="Noticias">
-      <!--<div class="Noticia" *ngFor="let noti of Noticias">
-      <h1>{{noti}}</h1>-->
+      <div class="Noticia" *ngFor="let noti of Noti">
       <div id="card">
         <ion-card>
-          <img src="" alt="No Picture">
+          <img src="{{noti.img}}" height=300px alt="No Picture">
           <ion-card-header>
-            <ion-card-title>Descuento Proxima Carrera</ion-card-title>
+            <ion-card-title>{{noti.Titulo}}</ion-card-title>
             <ion-card-subtitle> Valido hasta 08/11/2020</ion-card-subtitle>
            
           </ion-card-header>
-          <ion-card-content>Obten un descuento del 30% en tu proxima carrera!</ion-card-content>
+          <ion-card-content>{{noti.Cuerpo}}</ion-card-content>
         </ion-card>
+      </div>
       </div>
       <div id="card">
         <ion-card>

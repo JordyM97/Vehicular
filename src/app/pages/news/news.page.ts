@@ -17,6 +17,7 @@ export class NewsPage implements OnInit {
   firestore:any
   constructor(private http: HttpClient,firestore: AngularFirestore ) { 
     this.firestore=firestore;
+    this.Noti=Array<JSON>();
     
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   ngOnInit() {
@@ -24,7 +25,9 @@ export class NewsPage implements OnInit {
 
     this.Noticias.subscribe(value =>{
       this.Noti.push(value[0])
-      console.log(value[0]);});
+      console.log(value);
+      
+    });
     
   }
 

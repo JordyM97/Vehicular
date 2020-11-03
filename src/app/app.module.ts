@@ -13,11 +13,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-import {PopoverComponent} from './popover/popover.component'
 import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PopoverComponent } from './components/popover/popover.component';
 @NgModule({
   declarations: [AppComponent,PopoverComponent],
   entryComponents: [PopoverComponent],

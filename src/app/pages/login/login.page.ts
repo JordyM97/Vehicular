@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,16 +17,25 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    public toastController: ToastController) { }
+    public toastController: ToastController,public authService: AuthService) { }
 
   ngOnInit() {
   }
   on_submit_login(){
-    console.log("Intento login", this.contrasenia, this.correo_electronico);
-    this.router.navigate(['/home'])
-
-   
-    //this.presentToastFeedback()
+    let credentials= {
+      username: this.correo_electronico,
+      password: this.contrasenia
+    };
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        this.router.navigate(['/home'])
+      }
+      else{
+        this.presentToastFeedback()
+      }
+    })
     }     
 
 

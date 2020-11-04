@@ -6,7 +6,7 @@ import { PublicGuard } from './guards/public.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard, PublicGuard]
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -23,15 +23,15 @@ const routes: Routes = [
   },
   {
     path: 'acerca',
-    loadChildren: () => import('./pages/acerca/acerca.module').then( m => m.AcercaPageModule), canActivate: [AuthGuard, PublicGuard]
+    loadChildren: () => import('./pages/acerca/acerca.module').then( m => m.AcercaPageModule), canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),canActivate: [AuthGuard, PublicGuard]
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),canActivate: [ PublicGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule), canActivate: [AuthGuard, PublicGuard]
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule), canActivate: [PublicGuard]
   },
   {
     path: 'perfil',

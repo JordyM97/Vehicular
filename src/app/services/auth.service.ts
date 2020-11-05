@@ -10,6 +10,7 @@ export class AuthService {
   constructor(public http: HttpClient) { }
   logout(){
     this.token="";
+
   }
   login(credentials){
     console.log(credentials);
@@ -35,5 +36,7 @@ export class AuthService {
           });  });
  
   }
- 
+
+  getuserinfo(){}
+    
 }

@@ -42,13 +42,23 @@ export class LoginPage implements OnInit {
   
   async presentToastFeedback() {
     const toast = await this.toastController.create({
-      message: 'Usuario/contraseña incorrectos o estan vacios',
+      message: 'Usuario o  contraseña incorrectos',
       position: 'top',
-      duration: 2000
+      duration: 2000,
+      color: 'danger'
     });
     toast.present();
   }
 
+  async presentGreeting(){
+    const toast = await this.toastController.create({
+      message: 'Login exitoso!',
+      position: 'top',
+      duration: 2000,
+      color: 'success'
+    });
+    toast.present();
+  }
 
   iconPassword(){
     this.showPassword=!this.showPassword;

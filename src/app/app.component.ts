@@ -20,9 +20,11 @@ export class AppComponent {
     public authService: AuthService
   ) {
     this.initializeApp();
+    console.log(this.router.url)
   }
   on_logout(){
     this.authService.logout();
+    this.router.navigateByUrl("login");
     
   }
   initializeApp() {

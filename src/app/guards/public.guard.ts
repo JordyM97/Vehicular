@@ -19,7 +19,7 @@ export class PublicGuard implements CanActivate {
       if(this.authService.token==null){
         return true;
       }else{
-        return false;
+        return true;//faLSE
       }
   }
   

@@ -6,10 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   public token: any;
+  public nombre: any;
+  public apellido: any;
+  public correo: any;
 
   constructor(public http: HttpClient) { }
   logout(){
     this.token="";
+
 
   }
   getlogininfo(){
@@ -31,6 +35,10 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.token = data.token;
+            this.nombre = data.first_name;
+            this.apellido = data.last_name;
+            this.correo = data.email;
+            console.log(data);
             resolve("ok");
             }, (err) => {
             console.log(err);
@@ -41,6 +49,15 @@ export class AuthService {
  
   }
 
-  getuserinfo(){}
-    
+  getNombre(){
+    return this.nombre;
+  }
+
+  getApellido(){
+    return this.apellido;
+  }
+
+  getCorreo(){
+    return this.correo;
+  }
 }

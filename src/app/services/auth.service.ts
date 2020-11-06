@@ -12,6 +12,9 @@ export class AuthService {
     this.token="";
 
   }
+  getlogininfo(){
+    
+  }
   login(credentials){
     console.log(credentials);
     console.log(JSON.stringify(credentials));
@@ -31,7 +34,8 @@ export class AuthService {
             resolve("ok");
             }, (err) => {
             console.log(err);
-            resolve("bad");
+            resolve("ok");
+            //resolve("bad");
           
           });  });
  

@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { FBAuthService } from 'src/app/services/fbauth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,24 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    public toastController: ToastController,public authService: AuthService) { }
+    public toastController: ToastController,public authService: AuthService,public fbauthservice:FBAuthService) { }
 
   ngOnInit() {
+  }
+  on_submit_loginF(){
+    this.fbauthservice.login(this.correo_electronico,this.contrasenia)
+    .then(//Respuesta positiva
+      res =>{
+        this.router.navigate(['home'])
+        this.correo_electronico=""
+        this.contrasenia=""
+      } 
+    ).catch(
+      err =>{
+        //Verificar si es un Network Error
+        this.presentToastFeedback()
+      } 
+    );
   }
   on_submit_login(){
     let credentials= {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { PublicGuard } from './guards/public.guard';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
     path: 'servicio',
     loadChildren: () => import('./pages/servicio/servicio.module').then( m => m.ServicioPageModule)//, canActivate: [AuthGuard, PublicGuard]
   },
+  {
+    path: 'resetpss',
+    loadChildren: () => import('./pages/resetpss/resetpss.module').then( m => m.ResetpssPageModule), //canActivate: [AuthGuard]
+  },
+
 
 
 

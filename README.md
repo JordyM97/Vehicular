@@ -8,11 +8,15 @@ AIzaSyBe_BjkNrd70aYC9Vs5O4fEiulwPDvQf2M
 -  instalar version LTS de NodeJS 
 -     npm install -g ionic cordova
 
+- para revisar version instalada de todo usar el comando
+        Ionic info
+
+-       npm audit fix            chequea el estado del proyecto y dependencias
+-       npm audit fix -force       instala dependencias faltantes del proyecto 
+
 -  de ahi correr el programa con:  
         ionic serve
 
-- para revisar version instalada de todo usar el comando
-        Ionic info
 
 -ionic cordova plugin add cordova-plugin-nativegeocoder
 npm install @ionic-native/native-geocoder
@@ -20,6 +24,19 @@ ionic cordova plugin add cordova-plugin-geolocation
 npm install @ionic-native/geolocation
 ionic cordova plugin add cordova-plugin-advanced-http
 npm install @ionic-native/http
+
+
+-----BUILD APP---------
+--ANDROID---
+
+ionic build
+npx cap copy
+npx cap sync android
+npx cap open android      <--- para abrir el android studio
+
+
+---IOS----
+
 
 ------REQUISITOS-----
 ===

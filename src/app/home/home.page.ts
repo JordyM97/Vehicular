@@ -10,6 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 
+
 declare var google;
 
 interface Marker {
@@ -164,7 +165,8 @@ export class HomePage implements OnInit {
     this.servicioSeleccionado = event.target.value;
   }
   ngOnInit(){
-    this.loadMap()
+    this.loadMap();
+    
   }
   
   async loadMap() {  

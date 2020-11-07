@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { HTTP } from '@ionic-native/http/ngx';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from '../environments/environment';

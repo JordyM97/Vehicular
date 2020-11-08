@@ -15,6 +15,7 @@ export class PerfilPage implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
+    //Obtenidos los datos del usuario luego de loguear
     this.nombre = this.authService.getNombre();
     this.apellido = this.authService.getApellido();
     this.correo = this.authService.getCorreo();

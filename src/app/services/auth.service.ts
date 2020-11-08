@@ -26,12 +26,16 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         var headers = new HttpHeaders();
        
+<<<<<<< HEAD
         headers.append('Access-Control-Allow-Origin' , '*');
+=======
+       //headers.append('Access-Control-Allow-Origin' , '*');
+>>>>>>> ecac07762c78cf1f02e534dad55e7c03dff890f3
        //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
        //headers.append('Accept','application/json');
        //headers.append('content-type','application/json');
  
-        this.http.post('http://127.0.0.1:8000/api/rest-auth/', credentials, {headers: headers})
+        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.token = data.token;

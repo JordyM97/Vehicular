@@ -26,10 +26,10 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         var headers = new HttpHeaders();
        
-       headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Origin' , '*');
        //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-       headers.append('Accept','application/json');
-       headers.append('content-type','application/json');
+       //headers.append('Accept','application/json');
+       //headers.append('content-type','application/json');
  
         this.http.post('http://127.0.0.1:8000/api/rest-auth/', credentials, {headers: headers})
           .subscribe(res => {

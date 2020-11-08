@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        this.router.navigate(['/home'])
+        this.router.navigate(['home'])
       }
       else{
         this.presentToastFeedback()

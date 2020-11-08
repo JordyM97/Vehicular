@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import {
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
+import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 
 const { PushNotifications } = Plugins;
 
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit{
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public authService: AuthService,private firestore: AngularFirestore,private alertCtrl: AlertController
+    public authService: AuthService,private firestore: AngularFirestore,private alertCtrl: AlertController,public popovercontroller:PopoverController
   ) {
     this.tokensCollection=firestore.collection('tokens');
     this.tokens= this.tokensCollection.valueChanges();
@@ -77,14 +78,16 @@ export class AppComponent implements OnInit{
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
         console.log(notification);
-        alert(JSON.stringify(notification));
+        //alert(JSON.stringify(notification));
+        this.presentarNotificacion(notification);
         //this.presentAlert(notification);
       }
     );
      // Method called when tapping on a notification
      PushNotifications.addListener('pushNotificationActionPerformed',
      (notification: PushNotificationActionPerformed) => {
-       alert('Push action performed: ' + JSON.stringify(notification));
+       //alert('Push action performed: ' + JSON.stringify(notification));
+       this.router.navigateByUrl("Home")
      }
    );
   }
@@ -110,5 +113,22 @@ export class AppComponent implements OnInit{
       buttons: ['Ok']
     });
     (await alert).present;
+  }
+  async presentarNotificacion(any:any) {
+    let title=any.title;
+    
+    let body=any.body;
+
+    const popover = await this.popovercontroller.create({
+      component: ShowNotifComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+         title:title,
+         body:body,
+      },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
   }
 }

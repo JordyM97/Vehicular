@@ -28,10 +28,10 @@ export class AuthService {
        
        //headers.append('Access-Control-Allow-Origin' , '*');
        //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-       //headers.append('Accept','application/json');
+       headers.append('Accept','application/json');
        headers.append('content-type','application/json');
  
-        this.http.post('http://127.0.0.1:8000/api/rest-auth/', credentials, {headers: headers})
+        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.token = data.token;
@@ -42,8 +42,8 @@ export class AuthService {
             resolve("ok");
             }, (err) => {
             console.log(err);
-            resolve("ok");
-            //resolve("bad");
+            //resolve("ok");
+            resolve("bad");
           
           });  });
  

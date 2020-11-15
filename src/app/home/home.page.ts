@@ -3,12 +3,13 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
-import { PopoverController } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
+import { Router } from '@angular/router';
 
 
 declare var google;
@@ -94,7 +95,13 @@ export class HomePage implements OnInit {
     private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
     firestore: AngularFirestore,                           // conector a firestore
+    public platform: Platform,
+    public router: Router
   ) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.router.navigateByUrl('Home')
+    });
+   
     //GEt colllection from firestore                                                    //FIRESTORE
     this.Servicios = firestore.collection('Pruebas').valueChanges();
     this.Servicios.subscribe(value =>{console.log(value)});
@@ -559,7 +566,7 @@ export class HomePage implements OnInit {
     elegirPuntos.style.display="block";
     aceptarParametros.style.display="block";
     aceptarPuntos.style.display="none";
-    menuOp.style.height="50%";
+    menuOp.style.height="60%";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
     google.maps.event.removeListener(this.listenerMoverInicio);

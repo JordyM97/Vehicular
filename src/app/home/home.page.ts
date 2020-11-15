@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
   constructor(
     private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
-    firestore: AngularFirestore                           // conector a firestore
+    firestore: AngularFirestore,                           // conector a firestore
   ) {
     //GEt colllection from firestore                                                    //FIRESTORE
     this.Servicios = firestore.collection('Pruebas').valueChanges();
@@ -156,6 +156,7 @@ export class HomePage implements OnInit {
       }
     }); 
     return await popover.present();
+    
   }
 
   pagoSeleccion(event){

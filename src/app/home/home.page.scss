@@ -10,6 +10,9 @@
 
 #opcionesBuscar{
   display: none;
+  padding: 10px 10px 10px 10px;
+  margin-bottom:10px ;
+
 }
 
 #aceptarPuntos{
@@ -100,7 +103,8 @@
  }
  #EUMI{
    width: 98%;
-   --background: #2487C9 !important;
+   --background: red !important;
+   //--background: #2487C9 !important;
  }
  .tipolbl{
   padding-top: 5px;
@@ -113,7 +117,7 @@
  }
  #EUMF{
    width: 97%;
-   --background: #2487C9 !important;
+   --background: red !important;
  }
 #MOI, #MOF{
   display: none;
@@ -140,11 +144,11 @@ ion-segment-button{
   --indicator-color: transparent;
   background-color: white;
   
-  min-height: 50px;
+  min-height: 45x;
   min-width: 84px;
   //--border-radius: 4px;
   ion-label {
-    margin: 20%;
+    margin: 0%;
   }
 }
 ion-label{
@@ -208,7 +212,7 @@ ion-checkbox{
 
 .menuop{
   border: solid rgba(44, 44, 44, 0.644) 2px ;
-  border-radius: 20px;
+  border-radius: 12px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   position: absolute;

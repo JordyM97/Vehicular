@@ -76,7 +76,7 @@
  
  
       <div id="opcionesBuscar">
-        <ion-label id="UbIn">Escriba su ubicación incial a continuacion</ion-label>
+        <ion-label id="UbIn">Escriba su <b>ubicación incial</b> a continuacion</ion-label>
         <ion-searchbar id="inicio" debounce="10" [(value)]="resultInit" [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="¿Desde dónde quieres ir?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         <ion-label id="UbInManual">O fije su <b>ubicacion inicial</b> manualmente </ion-label>
         <ion-list id="resultadosInicio">
@@ -86,7 +86,7 @@
         </ion-list>
         <ion-button id="EUMI" (click)="seleccionarInicio()">Fijar ubicacion inicial manualmente</ion-button>
 
-        <ion-label id="UbFin">Escriba su ubicacion final a continuacion</ion-label>
+        <ion-label id="UbFin">Escriba su <b>ubicacion final</b> a continuacion</ion-label>
         <ion-searchbar id="destino" debounce="10" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
         <ion-label id="UbFinManual">O fije su <b>ubicacion final</b> manualmente </ion-label>
         <ion-list id="resultadosDestino">

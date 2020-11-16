@@ -63,6 +63,7 @@ export class AppComponent implements OnInit{
         this.as={
           token : this.a
         }
+        this.authService.deviceToken=this.as;
         //alert('Push registration success, token: ' + token.value);
         //console.log(token)
         this.postDataAPI(this.as);

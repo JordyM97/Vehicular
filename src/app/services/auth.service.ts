@@ -9,14 +9,17 @@ export class AuthService {
   public nombre: any;
   public apellido: any;
   public correo: any;
+  public deviceToken:any;
 
   constructor(public http: HttpClient) { }
   logout(){
     this.token="";
-
-
   }
-  getlogininfo(){
+  sendDeviceToken(){
+    console.log(this.token);
+    console.log(this.deviceToken.token);
+
+ 
     
   }
   login(credentials){

@@ -26,7 +26,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         let headers = new HttpHeaders();
        
-        headers = headers.set('Access-Control-Allow-Origin' , '*');
+      //headers = headers.set('Access-Control-Allow-Origin' , '*');
        //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
        //headers.append('Accept','application/json');
        //headers.append('content-type','application/json');

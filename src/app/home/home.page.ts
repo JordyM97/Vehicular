@@ -94,7 +94,9 @@ export class HomePage implements OnInit {
   constructor(
     private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
-    firestore: AngularFirestore,public platform: Platform,public router:Router                          // conector a firestore
+    firestore: AngularFirestore,                           // conector a firestore
+    public platform: Platform,
+    public router: Router
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -161,6 +163,7 @@ export class HomePage implements OnInit {
       }
     }); 
     return await popover.present();
+    
   }
 
   pagoSeleccion(event){

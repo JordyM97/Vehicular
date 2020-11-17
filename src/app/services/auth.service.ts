@@ -47,16 +47,12 @@ export class AuthService {
     
     return new Promise((resolve, reject) => {
         let headers = new HttpHeaders();
-<<<<<<< HEAD
-   
-=======
        
       //headers = headers.set('Access-Control-Allow-Origin' , '*');
        //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
        //headers.append('Accept','application/json');
        //headers.append('content-type','application/json');
  
->>>>>>> 4834ea040b34e574ce6b66d5a36ad724085f7d93
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));

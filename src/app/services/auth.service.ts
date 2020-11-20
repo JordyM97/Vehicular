@@ -6,17 +6,39 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   public token: any;
+  public id:any;
   public nombre: any;
   public apellido: any;
   public correo: any;
+  public deviceToken:any;
 
   constructor(public http: HttpClient) { }
   logout(){
     this.token="";
-
-
   }
-  getlogininfo(){
+  sendDeviceToken(){
+    console.log(this.token);
+    console.log(this.deviceToken);
+    let req={
+      user: this.id,
+      registration_id: this.deviceToken,
+      type: "android"
+    }
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    
+      this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          console.log(data);
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
     
   }
   login(credentials){
@@ -34,6 +56,7 @@ export class AuthService {
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
+            this.id=data.id;
             this.token = data.token;
             this.nombre = data.first_name;
             this.apellido = data.last_name;

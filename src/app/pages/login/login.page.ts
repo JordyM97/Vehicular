@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
+        this.authService.sendDeviceToken();
         this.router.navigate(['home'])
       }
       else{

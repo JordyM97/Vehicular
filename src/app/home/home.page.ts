@@ -194,18 +194,9 @@ export class HomePage implements OnInit {
     var styledMapType = new google.maps.StyledMapType(
     [
         {
-          "featureType": "administrative",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },{
-          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text",
-          "stylers": [
-            {
+          "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {
+              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text",          "stylers": [            {
               "visibility": "on"
             }
           ]

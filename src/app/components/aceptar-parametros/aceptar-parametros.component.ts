@@ -42,6 +42,7 @@ export class AceptarParametrosComponent implements OnInit {
       });
     toast.present();
     this.authService.setNotification(JSON.stringify(this.startMarker));
+    this.authService.getInformation();
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker)
     console.log(JSON.stringify(this.startMarker))

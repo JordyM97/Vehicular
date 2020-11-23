@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularDelegate } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,32 @@ export class AuthService {
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
+        resolve("ok");
+        }, (err) => {
+        console.log(err);
+        //resolve("ok");
+        resolve("bad");
+      });  });
+  }
+
+  getInformation(){
+    return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders();
+    
+    //headers.append('Access-Control-Allow-Origin' , '*');
+    //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //headers.append('Accept','application/json');
+    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    console.log(this.token);
+    console.log(headers);
+
+    this.http.get('https://axela.pythonanywhere.com/api/service/', {headers: headers}) //http://127.0.0.1:8000
+      .subscribe(res => {
+        let data = JSON.parse(JSON.stringify(res));
+        console.log(data);
+        data.forEach(element => {
+          console.log(element.startidLocation) //Recorrer los elementos del array y extraer la info
+        });
         resolve("ok");
         }, (err) => {
         console.log(err);

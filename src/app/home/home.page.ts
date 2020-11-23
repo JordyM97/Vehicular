@@ -10,6 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 declare var google;
@@ -96,7 +97,8 @@ export class HomePage implements OnInit {
     public db: AngularFireDatabase,                       // no se si borrar todavia
     firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,
-    public router: Router
+    public router: Router,
+    public authService: AuthService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -271,6 +273,7 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
+    this.authService.getInformation();
 
     this.listenerDrag();
   }

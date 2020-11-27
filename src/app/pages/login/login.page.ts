@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FBAuthService } from 'src/app/services/fbauth.service';
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,11 +16,21 @@ export class LoginPage implements OnInit {
   showPassword=false;
   passwordIcon='eye';
 
-  constructor(
+  constructor(private fb: Facebook,
     private router: Router,
     public toastController: ToastController,public authService: AuthService,public fbauthservice:FBAuthService) { }
 
   ngOnInit() {
+  }
+
+  onLog(){
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+  .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+  .catch(e => console.log('Error logging into Facebook', e));
+
+
+this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+
   }
   on_submit_loginF(){
     this.fbauthservice.login(this.correo_electronico,this.contrasenia)

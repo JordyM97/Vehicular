@@ -56,6 +56,7 @@ this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
+        this.authService.sendDeviceToken();
         this.router.navigate(['home'])
       }
       else{

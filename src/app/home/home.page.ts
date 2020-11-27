@@ -3,12 +3,14 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
-import { PopoverController } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 declare var google;
@@ -93,8 +95,15 @@ export class HomePage implements OnInit {
   constructor(
     private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
-    firestore: AngularFirestore                           // conector a firestore
+    firestore: AngularFirestore,                           // conector a firestore
+    public platform: Platform,
+    public router: Router,
+    public authService: AuthService
   ) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.router.navigateByUrl('Home')
+    });
+   
     //GEt colllection from firestore                                                    //FIRESTORE
     this.Servicios = firestore.collection('Pruebas').valueChanges();
     this.Servicios.subscribe(value =>{console.log(value)});
@@ -128,34 +137,41 @@ export class HomePage implements OnInit {
     var anio = date.getFullYear(); 
     var mes = String(date.getMonth() + 1).padStart(2, '0');
     var dia = String(date.getDate()).padStart(2, '0');
-    var hora = date.getHours();
-    var minuto = date.getMinutes();
+    var hora = String(date.getHours());
+    var minuto =String(date.getMinutes());
+    var segundo = String(date.getSeconds());
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          coordIni: JSON.stringify(this.latLngInicial),
-          coordFin: JSON.stringify(this.latLngFinal),
-          addressIni: this.addressInicial,
-          addressFin: this.addressFinal,
+          ClientService: null,
+          DriverService: null,
+          startidLocation: JSON.stringify(this.latLngInicial),
+          endidLocation: JSON.stringify(this.latLngFinal),
+          startAddress: this.addressInicial,
+          endAddress: this.addressFinal,
+          idPaymentService: this.pagoSeleccionado,
+          idTypeService: this.servicioSeleccionado,
+          driverScore: 5,
+          clientScore: 5,
+          startDate: date,
+          endDate: date,
+          isReservationService: false,
+          stateService: null,
           vehiculo: this.vehiculoSeleccionado,
-          pago: this.pagoSeleccionado,
-          servicio: this.servicioSeleccionado,
+          total: 4.23,
           anio: anio,
           mes: mes,
           dia: dia,
           hora: hora,
-          minuto: minuto,
-          total: 4.23,
-          aceptada:false,
-          user: 1,
-          driver: 1
+          minuto: minuto
         }
       }
     }); 
     return await popover.present();
+    
   }
 
   pagoSeleccion(event){
@@ -180,18 +196,9 @@ export class HomePage implements OnInit {
     var styledMapType = new google.maps.StyledMapType(
     [
         {
-          "featureType": "administrative",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },{
-          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text",
-          "stylers": [
-            {
+          "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {
+              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text",          "stylers": [            {
               "visibility": "on"
             }
           ]
@@ -266,6 +273,7 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
+    this.authService.getInformation();
 
     this.listenerDrag();
   }
@@ -558,7 +566,7 @@ export class HomePage implements OnInit {
     elegirPuntos.style.display="block";
     aceptarParametros.style.display="block";
     aceptarPuntos.style.display="none";
-    menuOp.style.height="50%";
+    menuOp.style.height="60%";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
     google.maps.event.removeListener(this.listenerMoverInicio);

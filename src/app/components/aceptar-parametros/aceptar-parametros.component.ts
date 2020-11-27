@@ -3,6 +3,7 @@ import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { PopoverController,ToastController,NavParams } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -13,7 +14,7 @@ export class AceptarParametrosComponent implements OnInit {
   startMarker: any;
   serviciosCollection: AngularFirestoreCollection<any>;
   servicios: Observable<any[]>
-  constructor(private navParams: NavParams, private popoverController: PopoverController,public toastController: ToastController,private firestore: AngularFirestore ) {
+  constructor(private navParams: NavParams, private popoverController: PopoverController,public toastController: ToastController,private firestore: AngularFirestore, public authService: AuthService ) {
     this.serviciosCollection=firestore.collection('Servicio');
     this.servicios= this.serviciosCollection.valueChanges();
    }
@@ -40,13 +41,15 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
+    this.authService.setNotification(JSON.stringify(this.startMarker));
+    this.authService.getInformation();
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker)
     console.log(JSON.stringify(this.startMarker))
     await this.popoverController.dismiss();
     }
     
-postDataAPI(any: any){
-  this.serviciosCollection.add(any);
-}
+  postDataAPI(any: any){
+    this.serviciosCollection.add(any);
+  }
 }

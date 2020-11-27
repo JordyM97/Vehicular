@@ -55,7 +55,7 @@ export class FBAuthService {
    * @param correo_recuperacion (del proveedor) destino donde se enviara el mensaje
    */
   reset_password(correo_recuperacion: string) {
-    if (correo_recuperacion==null|| correo_recuperacion == "") {
+    if (correo_recuperacion == "") {
       this.presentToastFeedback('Debe ingresar un correo electronico.')
       //alert("Debe ingresar un correo electronico.")
     } else {

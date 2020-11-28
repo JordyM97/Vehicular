@@ -3,8 +3,12 @@ import { ToastController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { FBAuthService } from 'src/app/services/fbauth.service';
+import { Platform } from '@ionic/angular';
+
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,15 +19,20 @@ export class LoginPage implements OnInit {
   contrasenia: string
   showPassword=false;
   passwordIcon='eye';
+  code='';
 
-  constructor(private fb: Facebook,
+  constructor(
     private router: Router,
-    public toastController: ToastController,public authService: AuthService,public fbauthservice:FBAuthService) { }
+    private platform: Platform,
+    private fb: Facebook,
+    public toastController: ToastController,public authService: AuthService, 
+    ) { }
 
   ngOnInit() {
+    console.log("golasa",this.code);
   }
-
-  onLog(){
+  
+  onLog() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
   .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
   .catch(e => console.log('Error logging into Facebook', e));
@@ -31,22 +40,9 @@ export class LoginPage implements OnInit {
 
 this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
 
-  }
-  on_submit_loginF(){
-    this.fbauthservice.login(this.correo_electronico,this.contrasenia)
-    .then(//Respuesta positiva
-      res =>{
-        this.router.navigate(['home'])
-        this.correo_electronico=""
-        this.contrasenia=""
-      } 
-    ).catch(
-      err =>{
-        //Verificar si es un Network Error
-        this.presentToastFeedback()
-      } 
-    );
-  }
+}
+
+
   on_submit_login(){
     let credentials= {
       username: this.correo_electronico,

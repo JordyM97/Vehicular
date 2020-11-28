@@ -71,7 +71,33 @@ export class AuthService {
           });  });
  
   }
-
+  loginFB(credentials){
+    
+    return new Promise((resolve, reject) => {
+        let headers = new HttpHeaders();
+       
+      //headers = headers.set('Access-Control-Allow-Origin' , '*');
+       //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+       //headers.append('Accept','application/json');
+       //headers.append('content-type','application/json');
+ 
+        this.http.post('https://axela.pythonanywhere.com/api/login/social/token/', credentials, {headers: headers}) //http://127.0.0.1:8000
+          .subscribe(res => {
+            let data = JSON.parse(JSON.stringify(res));
+            this.id=data.id;
+            this.token = data.token;
+            this.nombre = data.first_name;
+            this.apellido = data.last_name;
+            this.correo = data.email;
+            console.log(data);
+            resolve("ok");
+            }, (err) => {
+            console.log(err);
+            //resolve("ok");
+            resolve("bad");
+          });  });
+ 
+  }
   setNotification(notificacion){
     console.log(notificacion);
     return new Promise((resolve, reject) => {

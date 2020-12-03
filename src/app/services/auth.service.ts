@@ -124,6 +124,25 @@ export class AuthService {
       });  });
   }
 
+  signUp(credentials){
+    return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders();
+    //headers.append('Accept','application/json');
+    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    console.log(this.token);
+    console.log(headers);
+
+    this.http.post('https://axela.pythonanywhere.com/api/user/create/',credentials, {headers: headers}) //http://127.0.0.1:8000
+      .subscribe(res => {
+        let data = JSON.parse(JSON.stringify(res));
+        console.log(data);
+        resolve("ok");
+        }, (err) => {
+        console.log(err);
+        //resolve("ok");
+        resolve("bad");
+      });  });
+  }
   getNombre(){
     return this.nombre;
   }

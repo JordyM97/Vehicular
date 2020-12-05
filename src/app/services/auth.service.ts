@@ -12,8 +12,11 @@ export class AuthService {
   public apellido: any;
   public correo: any;
   public deviceToken:any;
+  public historial : Array<any>;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) { 
+    this.historial = []
+  }
   logout(){
     this.token="";
   }
@@ -122,7 +125,7 @@ export class AuthService {
       });  });
   }
 
-  getInformation(){
+  Historial(){
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
     
@@ -136,9 +139,9 @@ export class AuthService {
     this.http.get('https://axela.pythonanywhere.com/api/service/', {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
-        console.log(data);
         data.forEach(element => {
-          console.log(element.startidLocation) //Recorrer los elementos del array y extraer la info
+          //console.log(element) //Recorrer los elementos del array y extraer la info
+          this.historial.push(element);
         });
         resolve("ok");
         }, (err) => {
@@ -146,6 +149,9 @@ export class AuthService {
         //resolve("ok");
         resolve("bad");
       });  });
+  }
+  getHistorial(){
+    return this.historial;
   }
 
   getNombre(){

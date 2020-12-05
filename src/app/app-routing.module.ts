@@ -46,6 +46,15 @@ const routes: Routes = [
     path: 'resetpss',
     loadChildren: () => import('./pages/resetpss/resetpss.module').then( m => m.ResetpssPageModule), //canActivate: [AuthGuard]
   },
+  {
+    path: 'tarjeta',
+    loadChildren: () => import('./pages/tarjeta/tarjeta.module').then( m => m.TarjetaPageModule)
+  },  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+  },
+
+
 
 
 

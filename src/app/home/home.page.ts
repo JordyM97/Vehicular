@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 
 declare var google;
+declare var paymentez;
 
 interface Marker {
   position: {
@@ -93,7 +94,10 @@ export class HomePage implements OnInit {
   posicionInicial: any;
   Servicios: Observable<any[]>;
   constructor(
-    private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder, 
+    public zone: NgZone, 
+    public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
     firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,
@@ -182,7 +186,6 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
-    
   }
   
   async loadMap() {  
@@ -273,7 +276,7 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
-    this.authService.getInformation();
+    this.authService.Historial();
 
     this.listenerDrag();
   }

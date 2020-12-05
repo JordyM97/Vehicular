@@ -10,7 +10,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 
 
 declare var google;
@@ -45,7 +44,7 @@ export class HomePage implements OnInit {
   ];
   map: any;
   addressInicial:string;
-  addressFinal:string;
+  addressFinal:string;git 
   lat: string;
   long: string; 
   autocomplete: { input: string; };
@@ -97,8 +96,7 @@ export class HomePage implements OnInit {
     public db: AngularFireDatabase,                       // no se si borrar todavia
     firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,
-    public router: Router,
-    public authService: AuthService
+    public router: Router
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -137,36 +135,30 @@ export class HomePage implements OnInit {
     var anio = date.getFullYear(); 
     var mes = String(date.getMonth() + 1).padStart(2, '0');
     var dia = String(date.getDate()).padStart(2, '0');
-    var hora = String(date.getHours());
-    var minuto =String(date.getMinutes());
-    var segundo = String(date.getSeconds());
+    var hora = date.getHours();
+    var minuto = date.getMinutes();
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          ClientService: null,
-          DriverService: null,
-          startidLocation: JSON.stringify(this.latLngInicial),
-          endidLocation: JSON.stringify(this.latLngFinal),
-          startAddress: this.addressInicial,
-          endAddress: this.addressFinal,
-          idPaymentService: this.pagoSeleccionado,
-          idTypeService: this.servicioSeleccionado,
-          driverScore: 5,
-          clientScore: 5,
-          startDate: date,
-          endDate: date,
-          isReservationService: false,
-          stateService: null,
+          coordIni: JSON.stringify(this.latLngInicial),
+          coordFin: JSON.stringify(this.latLngFinal),
+          addressIni: this.addressInicial,
+          addressFin: this.addressFinal,
           vehiculo: this.vehiculoSeleccionado,
-          total: 4.23,
+          pago: this.pagoSeleccionado,
+          servicio: this.servicioSeleccionado,
           anio: anio,
           mes: mes,
           dia: dia,
           hora: hora,
-          minuto: minuto
+          minuto: minuto,
+          total: 4.23,
+          aceptada:false,
+          user: 1,
+          driver: 1
         }
       }
     }); 
@@ -273,7 +265,6 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
-    this.authService.getInformation();
 
     this.listenerDrag();
   }

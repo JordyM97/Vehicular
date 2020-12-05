@@ -14,6 +14,7 @@ export class FBAuthService {
   login(correo_electronico: string, contrasenia: string) {
     return new Promise(
       (resolve, reject) => {
+        
         this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
           .then(res => {
             console.log(res)

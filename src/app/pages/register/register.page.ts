@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
 
   on_submit_register(){
     let credentials= {
-      username: this.email,
+      username: this.username,
       password: this.password,
       first_name: this.firstname,
       last_name: this.lastname,

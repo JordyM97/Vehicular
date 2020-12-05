@@ -3,9 +3,9 @@ import { ToastController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { FBAuthService } from 'src/app/services/fbauth.service';
 import { Platform } from '@ionic/angular';
 
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 
 
@@ -24,23 +24,13 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private platform: Platform,
-    private fb: Facebook,
-    public toastController: ToastController,public authService: AuthService, 
+    public toastController: ToastController,public authService: AuthService,public fbauthservice:FBAuthService
     ) { }
 
   ngOnInit() {
     console.log("golasa",this.code);
   }
   
-  onLog() {
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-  .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-  .catch(e => console.log('Error logging into Facebook', e));
-
-
-this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
-
-}
 
 
   on_submit_login(){
@@ -52,7 +42,7 @@ this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
+        //this.authService.sendDeviceToken();
         this.router.navigate(['home'])
       }
       else{
@@ -60,7 +50,21 @@ this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
       }
     })
     }     
-
+    on_submit_loginF(){
+      this.fbauthservice.login(this.correo_electronico,this.contrasenia)
+      .then(//Respuesta positiva
+        res =>{
+          this.router.navigate(['home'])
+          this.correo_electronico=""
+          this.contrasenia=""
+        } 
+      ).catch(
+        err =>{
+          //Verificar si es un Network Error
+          this.presentToastFeedback()
+        } 
+      );
+    }
 
   
   async presentToastFeedback() {

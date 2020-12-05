@@ -19,10 +19,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
-
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
@@ -36,9 +33,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     StatusBar, HttpClient,
     SplashScreen,
     Geolocation,    
-    Facebook,
     NativeGeocoder,
-    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

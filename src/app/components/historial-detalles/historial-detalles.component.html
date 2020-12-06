@@ -1,3 +1,49 @@
-<p>
-  historial-detalles works!
-</p>
+
+<ion-content>
+  <div class='mid'>
+    <div class="cabecera">
+      Detalles del viaje
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Ubicacion Inicial:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.direccionInicio}}</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col> 
+          <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.direccionFin}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.anio}}/{{historialViaje.mes}}/{{historialViaje.dia}} -- {{historialViaje.hora}}:{{historialViaje.minuto}}</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col>
+          <ion-row><ion-label class="titulo">Tipo de servicio:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.servicio}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Total:</ion-label></ion-row>
+          <ion-row><ion-label>$4.23</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col>
+          <ion-row><ion-label class="titulo">Estado Servicio:</ion-label></ion-row>
+          <ion-row><ion-label>Finalizado</ion-label></ion-row> <!--Cambiar cuando se tengan los estados del servicio-->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="btns">
+      <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
+    </div>
+  </div>
+</ion-content>

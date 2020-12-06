@@ -18,10 +18,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
-import { HistorialPipe } from './pages/historial.pipe';
-import { TarjetaPipe } from './pages/tarjeta.pipe';
 @NgModule({
-  declarations: [AppComponent,PopoverComponent,ShowNotifComponent, HistorialPipe, TarjetaPipe],
+  declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
   imports: [
   BrowserModule,IonicModule.forRoot({mode: 'ios' }),  

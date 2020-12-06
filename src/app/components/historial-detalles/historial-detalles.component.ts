@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController,ToastController,NavParams } from '@ionic/angular';
+
+declare var google;
 
 @Component({
   selector: 'app-historial-detalles',
@@ -6,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./historial-detalles.component.scss'],
 })
 export class HistorialDetallesComponent implements OnInit {
+  
+  historialViaje: any;
 
-  constructor() { }
+  constructor(
+    private navParams: NavParams,
+    private popoverController: PopoverController,
+    public toastController: ToastController,
+  ) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.historialViaje = this.navParams.get('detalles');
+    console.log(google);
+  }
+  async presentToast() {
+    await this.popoverController.dismiss();
+  }
 }

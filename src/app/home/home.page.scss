@@ -1,0 +1,293 @@
+#pagos{
+  display: block;
+  width: auto;
+  min-width: 150px;
+}
+#servicios{
+  display: block;
+  min-width: 150px;
+}
+
+#opcionesBuscar{
+  display: none;
+  padding: 10px 10px 10px 10px;
+  margin-bottom:10px ;
+
+}
+
+#aceptarPuntos{
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.BuscarRide{
+  bottom: 10px;
+  width: 95%;
+  color: white;
+  --background: red;
+  height: 35px;
+}
+.opciones{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.elegirini{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opciones div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opciones ion-label{
+ font-size: 14px;
+}
+.opciones ion-icon{
+  height: 70px;
+  font-size: 15px;
+ }
+ ion-searchbar{
+   border-radius: 12px;
+   background-color: rgb(206, 206, 206);
+   --icon-color: black;
+   height: 47px;
+ }
+ 
+ #UbInManual{
+  font-size: 16px;
+  
+ }
+ #UbFinManual{
+  font-size: 16px;
+  
+ }
+ #UbIn{
+  
+  font-size: 16px;
+  
+ }
+ #UbFin{
+  font-size: 16px;
+  
+ }
+ #aceptar{
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  bottom: 0px;
+ }
+ #OOI{
+  width: 99%;
+  height: 45px;
+  text-align: right;
+  color:#3b3b3b;
+  --background: #D8D9DD;
+ }
+
+ .pointer{
+  height: 20px;
+  width: 20px;
+  padding-right: 6px;
+ }
+
+ #MOI{
+   width: 98%;
+   --background: red !important;
+   position: absolute;
+   bottom: 1px;
+ }
+ #EUMI{
+   width: 98%;
+   --background: red !important;
+   //--background: #2487C9 !important;
+ }
+ .tipolbl{
+  padding-top: 5px;
+  padding-left: 7px;
+   font-size: 14px;
+   width: 50%;
+   --border-color: red;
+   font-weight: bold;
+   text-transform: uppercase;
+ }
+ #EUMF{
+   width: 97%;
+   --background: red !important;
+ }
+#MOI, #MOF{
+  display: none;
+}
+ion-icon{
+  color:black
+}
+ion-content{
+  --color: black;
+  height: 870px;
+}
+#parametrosViaje{
+  padding-bottom: 10px;
+}
+.sc-ion-popover-md-h {
+  --width: auto;
+  --max-height: 90%;
+  --box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
+}
+
+ion-segment-button{
+  color: black;
+  --indicator-color: transparent;
+  background-color: white;
+  
+  min-height: 45x;
+  min-width: 84px;
+  //--border-radius: 4px;
+  ion-label {
+    margin: 0%;
+  }
+}
+ion-label{
+  font-size: 14px;
+  margin-top: 1%;
+}
+
+ion-item{
+  margin-top: 0%;
+  font-size: 12px;
+}
+
+ion-grid{
+  padding-top: 0%;
+  padding-bottom: 0%;
+  padding-right: 2%;
+  padding-left: 0%;
+}
+
+
+.list-md{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+ion-checkbox{
+  --border-radius: 50% !important;
+
+}
+.segment-button-checked{
+  color: #ff0404;
+  //border: solid 2px red;
+
+}
+.segment-button-checked:after{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  border: solid 4px red;
+}
+.segment-button-checked:after ion-icon{
+  fill: red;
+  color: black;
+}
+.vehiculoSegment{
+  height: 65px;
+  width: 100%;
+}
+.paymentSegment, .serviceSegment{
+  height: 45px;
+  width: 100%;
+}
+ion-checkbox{
+  --checkmark-color: white;
+  --background-checked: #ff0404;
+  --border-color-checked: #ff0404;
+  --border-radius: 10%;
+  --size: 15px;
+}
+
+.menuop{
+  border: solid rgba(44, 44, 44, 0.644) 2px ;
+  border-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height:60%;
+  background-color: white;
+  //background-color: rgba(241, 239, 239, 0.815);
+}
+.iconmenu{
+  max-height: 40px;
+  max-width: 90px;
+}
+
+#indicators {
+  padding: 16px;
+  height: 40%;
+  width: 100%;
+  overflow-y: auto;
+  display: block;
+}
+ion-label{
+  font-size: 14;
+}
+ion-menu-button{
+  color: white;
+}
+ion-item{
+  background-color: rgb(190, 190, 190);
+  width: 100%;
+  background:transparent;
+}
+ion-input{
+  width: 100%;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+#map_canvas {
+  width: 90%;
+  height: 80%;
+  border: 1px solid red;
+}
+ 
+ 
+#address {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+ 
+#map {
+  width: 100%;
+  height: 100px;
+}
+ 
+.map-wrapper {
+  position: relative;
+ 
+  #map_center {
+    position: absolute;
+    z-index: 99;
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    margin-left: -21px;
+    margin-top: -41px;
+  }
+  
+  .md ion-searchbar{
+    --color: black !important;
+    --icon-color: black;
+
+  }
+  ion-grid{
+    height: 100%;
+  }
+}

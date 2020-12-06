@@ -1,0 +1,8 @@
+{
+  "name": "Vehicular",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

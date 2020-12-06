@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/LOGO1.png">
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <ion-row class="fotoPerfil"> 
+      <ion-avatar class="imgPerfil">
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+    </ion-row>
+
+    <ion-row class="estrellas">
+      <ion-label class="calificacion">4.76</ion-label>
+      <img class="estrella" src="assets/imgs/estrella.png">
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Nombre:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{this.nombre}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Apellido:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{this.apellido}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Fecha de nacimiento:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Correo electrónico:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{this.correo}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Número celular:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Fecha de registro:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+  </ion-grid>
+</ion-content>

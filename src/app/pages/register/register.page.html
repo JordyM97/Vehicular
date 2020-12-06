@@ -1,0 +1,56 @@
+
+
+  <ion-img class="icon" src="assets/imgs/LOGO2.png">  </ion-img>
+  <div class="content-items">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        
+          <ion-item >
+            <ion-label position="floating"> Nombres</ion-label>
+            <ion-input type="text" [(ngModel)]="firstname" name="firstname"></ion-input>
+          </ion-item>
+        
+      </ion-col>
+      <ion-col>
+        <ion-item >
+          <ion-label position="floating"> Apellidos</ion-label>
+          <ion-input type="text" [(ngModel)]="lastname" name="lastname"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item >
+        <ion-label position="floating"> Nombre de Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item >
+        <ion-label position="floating"> Correo electrónico</ion-label>
+        <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [type]="showPassword ? 'text':'password'" [(ngModel)]="password" name="password"></ion-input>
+        <ion-icon slot="end" [name]="passwordIcon" (click)="iconPassword()"></ion-icon>
+      </ion-item>
+    </ion-row>
+
+
+    </ion-grid>
+
+  
+
+  <div class="ion-text-center ion-margin-top">
+      
+    <a class="content-link" routerLink="/login">
+      <small >Ya tienes una cuenta? Inicia Sesion</small>`    </a>
+  </div>
+</div>
+
+  
+  <ion-button expand="full" (click)="on_submit_register()" class="boton">
+    REGISTRARSE 
+  </ion-button>
+

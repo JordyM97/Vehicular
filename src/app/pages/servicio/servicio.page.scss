@@ -1,0 +1,24 @@
+.top{
+    text-align: center;
+}
+#centerbtn{
+    display: flex;
+    align-items: center;
+    
+}
+#center{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+
+}
+ion-content{
+    width: 100%;
+    height: 100%;
+}
+ion-fab-button{
+    --background: red;
+  
+    color:black;
+  }

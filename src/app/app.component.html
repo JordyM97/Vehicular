@@ -1,0 +1,65 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-content>
+      <div class="menu-bg">
+        <div class="menu-header-content">
+          <ion-avatar>
+            <img src="assets/imgs/user.png">
+          </ion-avatar>
+          <label>
+            <h4>Usuario</h4>
+          </label>
+        </div>
+
+        <ion-list lines="none" class="menu-items" color=“transparent”>
+          <ion-menu-toggle routerLink="/home">
+            <ion-item color=“transparent”>
+              <ion-icon name="car-outline"></ion-icon>Menú principal
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle routerLink="/perfil">
+            <ion-item color=“transparent”>
+              <ion-icon name="person"></ion-icon>Mi perfil
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle routerLink="news">
+            <ion-item color=“transparent”>
+              <ion-icon name="document-text-outline"></ion-icon>Noticias
+            </ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle routerLink="/viajes">
+            <ion-item color="transparent">
+              <ion-icon name="pin-outline"></ion-icon>Viajes
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle routerLink="/historial">
+            <ion-item color=“transparent”>
+              <ion-icon name="folder-open-outline"></ion-icon>Historial
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle routerLink="/acerca">
+            <ion-item color=“transparent” button (click)="presentAlertFin()">
+              <ion-icon name="stop-circle-outline"></ion-icon>Acerca
+            </ion-item>
+          </ion-menu-toggle>
+
+        </ion-list>
+
+        <div class="out-content">
+          <hr>
+          <ion-menu-toggle routerLink="/login">
+            <ion-text color=“transparent” (click)="on_logout()">
+              <span class="text"> CERRAR SESIÓN</span>
+            </ion-text>
+          </ion-menu-toggle>
+        </div>
+      </div>
+
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

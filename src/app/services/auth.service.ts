@@ -44,6 +44,7 @@ export class AuthService {
           resolve("bad");
         });  });
     
+          //resolve("ok");
   }
   login(credentials){
     console.log(credentials);

@@ -18,6 +18,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
@@ -26,7 +28,9 @@ import { ShowNotifComponent } from './components/show-notif/show-notif.component
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,
-    AppRoutingModule,HttpClientModule],
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule],
   providers: [
     StatusBar, HttpClient,
     SplashScreen,

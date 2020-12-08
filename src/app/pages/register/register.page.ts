@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
+        //this.authService.sendDeviceToken();
         this.router.navigate(['home'])
       }
       else{
@@ -60,5 +60,13 @@ export class RegisterPage implements OnInit {
       });
       toast.present();
     }
-  
+    iconPassword(){
+      this.showPassword=!this.showPassword;
+      if(this.passwordIcon=='eye'){
+        this.passwordIcon='eye-off';
+      }
+      else{
+        this.passwordIcon='eye';
+      }
+    }
 }

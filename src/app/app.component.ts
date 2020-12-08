@@ -33,7 +33,10 @@ export class AppComponent implements OnInit{
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public authService: AuthService,private firestore: AngularFirestore,private alertCtrl: AlertController,public popovercontroller:PopoverController
+    public authService: AuthService,
+    private firestore: AngularFirestore,
+    private alertCtrl: AlertController,
+    public popovercontroller:PopoverController
   ) {
     this.tokensCollection=firestore.collection('tokens');
     this.tokens= this.tokensCollection.valueChanges();

@@ -37,6 +37,9 @@ export class AuthService {
       this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
+          data.forEach(element => {
+            console.log(element) //Recorrer los elementos del array y extraer la info
+          });
           console.log(data);
           resolve("ok");
           }, (err) => {
@@ -69,7 +72,7 @@ export class AuthService {
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
-    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    headers = headers.set('Authorization', 'token '+String(this.token));
 
     this.http.post('https://axela.pythonanywhere.com/api/notification/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
@@ -176,7 +179,7 @@ export class AuthService {
     this.http.post('https://axela.pythonanywhere.com/api/service/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
-        console.log(data);
+        //console.log(data);
         resolve("ok");
         }, (err) => {
         console.log(err);

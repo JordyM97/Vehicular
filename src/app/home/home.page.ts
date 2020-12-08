@@ -147,8 +147,8 @@ export class HomePage implements OnInit {
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          ClientService: null,
-          DriverService: null,
+          ClientService: 1,
+          DriverService: 2,
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,
@@ -159,8 +159,8 @@ export class HomePage implements OnInit {
           clientScore: 5,
           startDate: date,
           endDate: date,
-          isReservationService: false,
-          stateService: null,
+          isReservationService: 0,
+          stateService: 0,
           vehiculo: this.vehiculoSeleccionado,
           total: 4.23,
           anio: anio,

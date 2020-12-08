@@ -16,8 +16,11 @@ export class RegisterPage implements OnInit {
   username:string
   showPassword=false;
   passwordIcon='eye';
-  constructor(private router: Router,
-    public toastController: ToastController,public authService: AuthService) { }
+
+  constructor(
+    private router: Router,
+    public toastController: ToastController,
+    public authService: AuthService) { }
 
   ngOnInit() {
   }

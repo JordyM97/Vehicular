@@ -18,7 +18,9 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    public toastController: ToastController,public authService: AuthService,public fbauthservice:FBAuthService) { }
+    public toastController: ToastController,
+    public authService: AuthService,
+    public fbauthservice:FBAuthService) { }
 
   ngOnInit() {
   }

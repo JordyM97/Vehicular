@@ -98,6 +98,7 @@ export class AppComponent implements OnInit{
   on_logout(){
     this.authService.logout();
     this.router.navigateByUrl("login");
+    localStorage.clear();
     
   }
   initializeApp() {

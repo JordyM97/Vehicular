@@ -3,7 +3,7 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult , NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
-import { Platform, PopoverController } from '@ionic/angular';
+import { NumericValueAccessor, Platform, PopoverController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -93,6 +93,7 @@ export class HomePage implements OnInit {
   searchResultsEnd = Array<any>();
   posicionInicial: any;
   Servicios: Observable<any[]>;
+  distanciaInicioFin: any;
   constructor(
     private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
@@ -141,6 +142,10 @@ export class HomePage implements OnInit {
     var hora = String(date.getHours());
     var minuto =String(date.getMinutes());
     var segundo = String(date.getSeconds());
+    this.distanciaInicioFin = this.distanciaInicioFin.replace(",",".")
+    var distancia = parseFloat(this.distanciaInicioFin);
+    console.log(distancia);
+    var precio = (distancia * 0.4) + 1.25;
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,
@@ -162,7 +167,7 @@ export class HomePage implements OnInit {
           isReservationService: 0,
           stateService: 0,
           vehiculo: this.vehiculoSeleccionado,
-          total: 4.23,
+          total: precio,
           anio: anio,
           mes: mes,
           dia: dia,
@@ -379,6 +384,8 @@ export class HomePage implements OnInit {
     }, (response, status)  => {
       if (status === google.maps.DirectionsStatus.OK) {
         this.directionsDisplay.setDirections(response);
+        this.distanciaInicioFin = response.routes[0].legs[0].distance.text.split(" ")[0];
+        console.log(this.distanciaInicioFin)
       } else {
         alert('Could not display directions due to: ' + status);
       }
@@ -614,6 +621,10 @@ export class HomePage implements OnInit {
     else{
       resultado.style.display="none";
     }
+  }
+
+  precioCarrera(){
+
   }
 
  

@@ -23,6 +23,10 @@ export class LoginPage implements OnInit {
     public fbauthservice:FBAuthService) { }
 
   ngOnInit() {
+    //localStorage.clear();
+    if(localStorage.length>0){
+      this.loguinAutomatico();
+    }
   }
   on_submit_loginF(){
     this.fbauthservice.login(this.correo_electronico,this.contrasenia)
@@ -44,6 +48,9 @@ export class LoginPage implements OnInit {
       username: this.correo_electronico,
       password: this.contrasenia
     };
+    localStorage.setItem("correo",credentials.username);
+    localStorage.setItem("password",credentials.password);
+
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
       //console.log(this.authService.token);
@@ -55,7 +62,25 @@ export class LoginPage implements OnInit {
         this.presentToastFeedback()
       }
     })
-    }     
+  }   
+  loguinAutomatico(){
+    let credentials= {
+      username: localStorage.getItem("correo"),
+      password: localStorage.getItem("password")
+    };
+
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        this.authService.sendDeviceToken();
+        this.router.navigate(['home'])
+      }
+      else{
+        this.presentToastFeedback()
+      }
+    })
+    }  
 
 
   

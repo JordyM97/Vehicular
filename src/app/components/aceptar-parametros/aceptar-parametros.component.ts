@@ -17,7 +17,7 @@ export class AceptarParametrosComponent implements OnInit {
   startMarker: any;
   serviciosCollection: AngularFirestoreCollection<any>;
   servicios: Observable<any[]>;
-  uploadForm: FormGroup;
+  uploadForm: FormGroup; 
 
   constructor(private navParams: NavParams, 
     private popoverController: PopoverController,

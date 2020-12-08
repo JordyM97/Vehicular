@@ -22,7 +22,7 @@ import { ShowNotifComponent } from './components/show-notif/show-notif.component
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
   imports: [
-  BrowserModule,IonicModule.forRoot({mode: 'ios' }),  
+  BrowserModule,IonicModule.forRoot({mode: 'ios', swipeBackEnabled:false  }),  
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,

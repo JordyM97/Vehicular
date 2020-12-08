@@ -25,9 +25,10 @@ export class AuthService {
     console.log(this.deviceToken);
     let req={
       user: this.id,
-      registration_id: this.deviceToken,
+      registration_id: this.deviceToken.token,
       type: "android"
     }
+    console.log(req)
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       

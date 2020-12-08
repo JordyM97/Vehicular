@@ -14,9 +14,13 @@ export class RegisterPage implements OnInit {
   firstname:string
   lastname:string
   username:string
+  showPassword=false;
+  passwordIcon='eye';
 
-  constructor(private router: Router,
-    public toastController: ToastController,public authService: AuthService) { }
+  constructor(
+    private router: Router,
+    public toastController: ToastController,
+    public authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -59,6 +63,16 @@ export class RegisterPage implements OnInit {
         color: 'success'
       });
       toast.present();
+    }
+
+    iconPassword(){
+      this.showPassword=!this.showPassword;
+      if(this.passwordIcon=='eye'){
+        this.passwordIcon='eye-off';
+      }
+      else{
+        this.passwordIcon='eye';
+      }
     }
   
 }

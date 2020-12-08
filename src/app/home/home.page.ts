@@ -75,6 +75,7 @@ export class HomePage implements OnInit {
   listenerFin: any;
   listenerMoverInicio: any;
   listenerMoverFin: any;
+  showList=false;
 
 
   directionsService = new google.maps.DirectionsService();
@@ -386,6 +387,7 @@ export class HomePage implements OnInit {
 
   //Ver resultados de busqueda inicial
   searchChangedInit(){
+    this.mostrarListaResultados(true,"resultadosInicio");
     if(!this.searchInit.trim().length) return;
     this.googleAutocomplete.getPlacePredictions({ input: this.searchInit, location: new google.maps.LatLng(this.posicionInicial), radius: 50000}, predictions => {
       this.searchResultsInit = predictions;
@@ -396,8 +398,8 @@ export class HomePage implements OnInit {
   SelectSearchResultInit(item) {
     this.resultInit = item.description;
     this.placeid = item.place_id;
-    this.getplaceByIdInit(this.placeid);
     this.ClearAutocomplete();
+    this.getplaceByIdInit(this.placeid);
     
   }
 
@@ -426,6 +428,7 @@ export class HomePage implements OnInit {
 
   //Ver resultados de busqueda final
   searchChangedEnd(){
+    this.mostrarListaResultados(true,"resultadosDestino");
     if(!this.searchEnd.trim().length) return;
     this.googleAutocomplete.getPlacePredictions({ input: this.searchEnd, location: new google.maps.LatLng(this.posicionInicial), radius: 50000}, predictions => {
       this.searchResultsEnd = predictions;
@@ -535,6 +538,8 @@ export class HomePage implements OnInit {
     if(this.puntoFin){
       this.puntoFin.setOptions({draggable: false});
     }
+    this.mostrarListaResultados(false,"resultadosInicio");
+    this.mostrarListaResultados(false,"resultadosDestino");
   }
 
   ocultarOpciones() {
@@ -599,6 +604,16 @@ export class HomePage implements OnInit {
         }
       }
     );
+  }
+
+  mostrarListaResultados(estado,listaResultados){
+    var resultado = document.getElementById(listaResultados);
+    if(estado){
+      resultado.style.display="block";
+    }
+    else{
+      resultado.style.display="none";
+    }
   }
 
  

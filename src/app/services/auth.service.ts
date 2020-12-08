@@ -64,7 +64,7 @@ export class AuthService {
         resolve("bad");
       });  });
   }
-  sendNotification(notificacion){
+  sendNotification(notificacion){ 
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
@@ -160,7 +160,7 @@ export class AuthService {
           });  });
  
   }
-  setNotification(notificacion){
+  setNotification(notificacion){ /*Cambiar nombre*/
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();

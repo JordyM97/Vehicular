@@ -14,7 +14,8 @@ export class RegisterPage implements OnInit {
   firstname:string
   lastname:string
   username:string
-
+  showPassword=false;
+  passwordIcon='eye';
   constructor(private router: Router,
     public toastController: ToastController,public authService: AuthService) { }
 
@@ -34,7 +35,7 @@ export class RegisterPage implements OnInit {
       //console.log(this.authService.token);
       if(result=="ok"){
         //this.authService.sendDeviceToken();
-        this.router.navigate(['home'])
+        this.router.navigate(['login'])
       }
       else{
         this.presentToastFeedback()

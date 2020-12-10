@@ -10,7 +10,10 @@ import { NavParams, PopoverController } from '@ionic/angular';
 export class ShowNotifComponent implements OnInit {
   title;
   body;
-  constructor(private popover:PopoverController,private navParams: NavParams,private router: Router) {
+  constructor(
+    private popover:PopoverController,
+    private navParams: NavParams,
+    private router: Router) {
     this.title=this.navParams.get("title");
     this.body=this.navParams.get("body");
    }

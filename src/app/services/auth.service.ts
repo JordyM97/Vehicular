@@ -14,7 +14,9 @@ export class AuthService {
   public deviceToken:any;
   public historial : Array<any>;
 
-  constructor(public http: HttpClient) { 
+  constructor(
+    public http: HttpClient
+    ) { 
     this.historial = []
   }
   logout(){

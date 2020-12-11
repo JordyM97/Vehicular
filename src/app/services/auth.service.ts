@@ -100,8 +100,7 @@ export class AuthService {
   getUserInfo(id){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('Access-Control-Allow-Origin' , '*').set('content-type','application/json').set('Authorization', 'token '+String(this.token))
-      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT').set('Access-Control-Allow-Headers', 'Origin');
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
       console.log(this.token);
       console.log(headers);
   
@@ -109,9 +108,6 @@ export class AuthService {
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data);
-          data.forEach(element => {
-            console.log(element.startidLocation) //Recorrer los elementos del array y extraer la info
-          });
           resolve("ok");
           }, (err) => {
           console.log(err);
@@ -239,6 +235,10 @@ export class AuthService {
 
   getCorreo(){
     return this.correo;
+  }
+
+  getId(){
+    return this.id;
   }
   postDataAPI(any: any){
     this.serviciosCollection.add(any);

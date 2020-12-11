@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup  } from '@angular/forms';
 export class AceptarParametrosComponent implements OnInit {
 
   startMarker: any;
+  notificacionTransporter: any;
   serviciosCollection: AngularFirestoreCollection<any>;
   servicios: Observable<any[]>;
   uploadForm: FormGroup; 
@@ -59,9 +60,19 @@ export class AceptarParametrosComponent implements OnInit {
       });
     toast.present();
     this.authService.setNotification(JSON.stringify(this.startMarker));
+
+    this.notificacionTransporter = {
+      inicio: this.startMarker.startidLocation,
+      fin: this.startMarker.endidLocation,
+      hora: this.startMarker.hora+":"+this.startMarker.minuto,
+      fecha: this.startMarker.anio+"/"+this.startMarker.mes+"/"+this.startMarker.dia,
+      metodoPago: this.startMarker.idPaymentService,
+      valor: this.startMarker.total,
+      cliente: this.authService.getNombre()+" "+this.authService.getApellido()
+    }
    
     //this.authService.sendNotification(JSON.stringify(this.startMarker));
-    this.enviarNotificacion(this.startMarker);
+    this.enviarNotificacion(this.notificacionTransporter);
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker)
     //console.log(JSON.stringify(this.startMarker))
@@ -70,6 +81,7 @@ export class AceptarParametrosComponent implements OnInit {
 
     }
     enviarNotificacion(data){
+      console.log(data)
       this.uploadForm.get('user').setValue(0);
       this.uploadForm.get('body').setValue("Peticion de viaje");
       this.uploadForm.get('title').setValue("Enviado desde celular");

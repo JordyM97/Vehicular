@@ -121,7 +121,6 @@ export class AppComponent implements OnInit{
   }
   async presentarNotificacion(any:any) {
     let title=any.title;
-    
     let body=any.body;
 
     const popover = await this.popovercontroller.create({

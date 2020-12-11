@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FBAuthService } from 'src/app/services/fbauth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     public toastController: ToastController,
     public authService: AuthService,
-    public fbauthservice:FBAuthService) { }
+    public fbauthservice:FBAuthService) { 
+   }
 
   ngOnInit() {
     //localStorage.clear();
@@ -43,6 +45,7 @@ export class LoginPage implements OnInit {
       } 
     );
   }
+  
   on_submit_login(){
     let credentials= {
       username: this.correo_electronico,
@@ -53,9 +56,10 @@ export class LoginPage implements OnInit {
 
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
-      //console.log(this.authService.token);
+      console.log(this.authService.token);
       if(result=="ok"){
         this.authService.sendDeviceToken();
+        
         this.router.navigate(['home'])
       }
       else{
@@ -73,7 +77,7 @@ export class LoginPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        //this.authService.sendDeviceToken();
+        this.authService.sendDeviceToken();
         this.router.navigate(['home'])
       }
       else{

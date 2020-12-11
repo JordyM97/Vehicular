@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularDelegate } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,14 @@ export class AuthService {
   public correo: any;
   public deviceToken:any;
   public historial : Array<any>;
-
+  servicios: Observable<any[]>;
+  serviciosCollection: AngularFirestoreCollection<any>;
   constructor(
-    public http: HttpClient
+    public http: HttpClient,private firestore: AngularFirestore
     ) { 
-    this.historial = []
+    this.historial = [];
+    this.serviciosCollection=firestore.collection('token');
+    this.servicios= this.serviciosCollection.valueChanges();
   }
   logout(){
     this.token="";
@@ -30,7 +35,12 @@ export class AuthService {
       registration_id: this.deviceToken.token,
       type: "android"
     }
+    let tok={
+      token:this.deviceToken.token,
+      app: "careapp"
+    }
     console.log(req)
+    this.postDataAPI(tok)
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       
@@ -229,5 +239,8 @@ export class AuthService {
 
   getCorreo(){
     return this.correo;
+  }
+  postDataAPI(any: any){
+    this.serviciosCollection.add(any);
   }
 }

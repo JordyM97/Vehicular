@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
   tokens: Observable<any[]>
   a: any;
   as:any;
+  username="invitado"
   constructor(
     private router: Router,
     private platform: Platform,

@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FBAuthService } from 'src/app/services/fbauth.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     public toastController: ToastController,
     public authService: AuthService,
-    public fbauthservice:FBAuthService) { 
+    public fbauthservice:FBAuthService,private appcom:AppComponent) { 
    }
 
   ngOnInit() {
@@ -58,7 +59,11 @@ export class LoginPage implements OnInit {
       console.log(result)
       console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        
         
         this.router.navigate(['home'])
       }

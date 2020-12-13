@@ -82,10 +82,14 @@ export class LoginPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        
+        
         this.router.navigate(['home'])
-      }
-      else{
+      }else{
         this.presentToastFeedback()
       }
     })

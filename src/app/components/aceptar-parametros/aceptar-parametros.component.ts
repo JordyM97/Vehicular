@@ -59,7 +59,7 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
-    this.authService.setNotification(JSON.stringify(this.startMarker));
+    this.authService.sendService(JSON.stringify(this.startMarker));
 
     this.notificacionTransporter = {
       inicio: this.startMarker.startidLocation,

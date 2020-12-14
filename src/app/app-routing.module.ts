@@ -50,6 +50,11 @@ const routes: Routes = [
     path: 'historial',
     loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'historial-detalle/:datos',
+    loadChildren: () => import('./pages/historial-detalle/historial-detalle.module').then( m => m.HistorialDetallePageModule)
+  },
+
 
 
 

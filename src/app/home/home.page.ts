@@ -95,9 +95,12 @@ export class HomePage implements OnInit {
   Servicios: Observable<any[]>;
   distanciaInicioFin: any;
   constructor(
-    private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
+    public zone: NgZone,
+    public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
-    firestore: AngularFirestore,                           // conector a firestore
+    public firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,
     public router: Router,
     public authService: AuthService

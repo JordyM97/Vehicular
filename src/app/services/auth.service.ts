@@ -196,7 +196,7 @@ export class AuthService {
           });  });
  
   }
-  setNotification(notificacion){ /*Cambiar nombre*/
+  sendService(notificacion){ /*Cambiar nombre*/
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();

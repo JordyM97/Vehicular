@@ -128,7 +128,7 @@ export class AuthService {
       console.log(this.token);
       console.log(headers);
   
-      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id), {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data);

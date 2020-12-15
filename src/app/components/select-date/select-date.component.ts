@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-select-date',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-date.component.scss'],
 })
 export class SelectDateComponent implements OnInit {
-
-  constructor() { }
+  w; h;
+  constructor(private platform:Platform) {
+    this.h=this.platform.height;
+    this.w=this.platform.width;
+   }
 
   ngOnInit() {}
 

@@ -19,7 +19,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SelectDateComponent } from '../components/select-date/select-date.component';
 
 
 declare var google;
@@ -44,66 +45,42 @@ export class HomePage implements OnInit {
     { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
   ];
   map: any;
-  addressInicial:string;
-  addressFinal:string;
-  lat: string;
-  long: string; 
+  addressInicial:string;  addressFinal:string;
+//  lat: string;  long: string; 
   autocomplete: { input: string; };
   autocomplete2: { input: string;};
-  autocompleteItems: any[];
-  autocompleteItems2: any[];
-  location: any;
-  placeid: any;
-  GoogleAutocomplete: any;
-  geocoder: any;
-  pagos: any[];
-  servicios:any[];
-  vehiculoSeleccionado: any;
-  pagoSeleccionado: any;
-  servicioSeleccionado: any;
-  startMarker: any;
-  EndMarker: any;
-
-  resultInit: string;
-  resultFini: string;
+  autocompleteItems: any[];  autocompleteItems2: any[];
+  placeid: any;  GoogleAutocomplete: any;  geocoder: any;
+  pagos: any[];  servicios:any[];
+  vehiculoSeleccionado: any;  pagoSeleccionado: any;  servicioSeleccionado: any;
+  startMarker: any;  EndMarker: any;
+  resultInit: string;  resultFini: string;
   //Capturar ubicaciones de markers
-  latLngInicial: any;
-  latLngFinal: any;
+  latLngInicial: any;  latLngFinal: any;
 
   //Listeners
-  listenerInicio: any;
-  listenerFin: any;
-  listenerMoverInicio: any;
-  listenerMoverFin: any;
+  listenerInicio: any;  listenerFin: any;
+  listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
 
-
-  directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer();
 
   //Marcadores de inicio y fin
-  puntoInicio;
-  puntoFin;
+  puntoInicio;  puntoFin;
 
   
   googleAutocomplete = new google.maps.places.AutocompleteService();
-  searchInit: string = " ";
-  searchResultsInit = Array<any>();
-  searchEnd: string = " ";
-  searchResultsEnd = Array<any>();
+  searchInit: string = " "; searchEnd: string = " ";
+  searchResultsInit = Array<any>();  searchResultsEnd = Array<any>();
   posicionInicial: any;
   Servicios: Observable<any[]>;
   distanciaInicioFin: any;
   constructor(
-    private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,
-    public zone: NgZone,
+    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
     public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
     public firestore: AngularFirestore,                           // conector a firestore
-    public platform: Platform,
-    public router: Router,
-    public authService: AuthService
+    public platform: Platform,    public router: Router,    public authService: AuthService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -113,13 +90,11 @@ export class HomePage implements OnInit {
     this.Servicios = firestore.collection('Pruebas').valueChanges();
     this.Servicios.subscribe(value =>{console.log(value)});
 
-
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
-    this.autocomplete = { input: '' };
-    this.autocomplete2 = { input: '' };
-    this.autocompleteItems = [];
-    this.autocompleteItems2 = [];
+    this.autocomplete = { input: '' };    this.autocomplete2 = { input: '' };
+    this.autocompleteItems = [];    this.autocompleteItems2 = [];
     this.geocoder = new google.maps.Geocoder();
+    this.authService.getUserInfo(24);
   }
   async PopOverConductorEncontrado(){
     const popover= await this.popovercontroller.create({
@@ -364,9 +339,6 @@ export class HomePage implements OnInit {
       this.latLngInicial = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
       console.log(this.latLngInicial);
       this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
-      /*console.log(evt.latLng.lat().toFixed(6));
-      console.log(evt.latLng.lng().toFixed(6))*/
-      //this.map.panTo(evt.latLng);
     });
   }
 
@@ -479,17 +451,11 @@ export class HomePage implements OnInit {
     });
   }
 
-  ClearAutocomplete(){
-    this.searchResultsEnd = []
-   
-    this.searchResultsInit =[]
-    
-  }
+  ClearAutocomplete(){    this.searchResultsEnd = [] ;   this.searchResultsInit =[]      }
 
   //Seleccionar un tipo de transporte
   SelectTransport(item){
-    if(item.isChecked==true){
-      item.isChecked=true;
+    if(item.isChecked==true){      item.isChecked=true;    
     }else{
       this.vehiculos.forEach(function (vehiculos) {
         vehiculos.isChecked=false;
@@ -504,6 +470,7 @@ export class HomePage implements OnInit {
   SelectService(item){
     if(item.isChecked==true){
       item.isChecked=true;
+      
     }else{
       this.tipoServicio.forEach(function (tipoServicio) {
         tipoServicio.isChecked=false;
@@ -511,9 +478,24 @@ export class HomePage implements OnInit {
       item.isChecked=true;
       this.servicioSeleccionado=item.tipoServicio;
       console.log(this.servicioSeleccionado);
+      if(item.id==2){
+        console.log("fecha");
+        this.selectDate();
+      }
     }
   }
-
+  async selectDate(){
+    const popover= await this.popovercontroller.create({
+      component: SelectDateComponent,
+      translucent: true,
+      cssClass: 'contact-popover',
+      componentProps:{
+        info: {
+        }
+      }
+    }); 
+    return await popover.present();
+  }
   //Seleccionar un de pago
   SelectPayment(item){
     if(item.isChecked==true){

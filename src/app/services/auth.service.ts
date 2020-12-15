@@ -27,6 +27,29 @@ export class AuthService {
   logout(){
     this.token="";
   }
+
+
+  
+  
+  registerclient(){
+    let r={
+      userClient: this.id
+    }
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json')//.set('Authorization', 'token '+String(this.token));
+    
+      this.http.post('https://axela.pythonanywhere.com/api/client/', r, {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          console.log(data);
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          resolve("bad");
+        });  });
+    
+  }
   sendDeviceToken(){
     console.log(this.token);
     console.log(this.deviceToken);
@@ -74,6 +97,7 @@ export class AuthService {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
         resolve("ok");
+        
         }, (err) => {
         console.log(err);
         //resolve("ok");

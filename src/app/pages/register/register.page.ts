@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
       //console.log(this.authService.token);
       if(result=="ok"){
         //this.authService.sendDeviceToken();
+        this.authService.registerclient();
         this.router.navigate(['login'])
       }
       else{

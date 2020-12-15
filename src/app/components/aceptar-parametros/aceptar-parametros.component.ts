@@ -20,7 +20,8 @@ export class AceptarParametrosComponent implements OnInit {
   servicios: Observable<any[]>;
   uploadForm: FormGroup; 
 
-  constructor(private navParams: NavParams, 
+  constructor(
+    private navParams: NavParams, 
     private popoverController: PopoverController,
     public toastController: ToastController,
     private firestore: AngularFirestore, 
@@ -68,16 +69,15 @@ export class AceptarParametrosComponent implements OnInit {
       fecha: this.startMarker.anio+"/"+this.startMarker.mes+"/"+this.startMarker.dia,
       metodoPago: this.startMarker.idPaymentService,
       valor: this.startMarker.total,
-      cliente: this.authService.getNombre()+" "+this.authService.getApellido()
+      cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
+      //idCliente: null /*Necesito ID de la tabla cliente*/
     }
    
-    //this.authService.sendNotification(JSON.stringify(this.startMarker));
     this.enviarNotificacion(this.notificacionTransporter);
     console.log("Enviando Info al API");
-    this.postDataAPI(this.startMarker)
-    //console.log(JSON.stringify(this.startMarker))
+    this.postDataAPI(this.startMarker);
     await this.popoverController.dismiss();
-    this.PopOverConductorEncontrado();
+    //this.PopOverConductorEncontrado();
 
     }
     enviarNotificacion(data){

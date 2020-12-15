@@ -148,7 +148,7 @@ export class HomePage implements OnInit {
     this.distanciaInicioFin = this.distanciaInicioFin.replace(",",".")
     var distancia = parseFloat(this.distanciaInicioFin);
     console.log(distancia);
-    var precio = (distancia * 0.4) + 1.25;
+    var precio = ((distancia * 0.4) + 1.25).toFixed(2);
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,
@@ -156,7 +156,7 @@ export class HomePage implements OnInit {
       componentProps:{
         info: {
           ClientService: 1,
-          DriverService: 2,
+          DriverService: 26,
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,
@@ -191,6 +191,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
+    this.authService.getUserInfo(26);
     
   }
   

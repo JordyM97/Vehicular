@@ -97,14 +97,14 @@ export class AuthService {
         resolve("bad");
       });  });
   }
-  getUserInfo(id){
+  getUserInfo(id: any){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
       console.log(this.token);
       console.log(headers);
   
-      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id), {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data);
@@ -172,7 +172,7 @@ export class AuthService {
           });  });
  
   }
-  sendService(notificacion){ /*Cambiar nombre*/
+  sendService(notificacion){
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
@@ -187,7 +187,7 @@ export class AuthService {
     this.http.post('https://axela.pythonanywhere.com/api/service/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
-        //console.log(data);
+        console.log(data);
         resolve("ok");
         }, (err) => {
         console.log(err);
@@ -220,6 +220,28 @@ export class AuthService {
         //resolve("ok");
         resolve("bad");
       });  });
+  }
+
+  /*Faltan pruebas*/
+  deleteDeviceToken(idUser: any){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'token '+String(this.token));
+  
+      this.http.delete('https://axela.pythonanywhere.com/api/device/'+String(idUser)+'/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          data.forEach(element => {
+            //console.log(element) //Recorrer los elementos del array y extraer la info
+            this.historial.push(element);
+          });
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+
   }
   getHistorial(){
     return this.historial;

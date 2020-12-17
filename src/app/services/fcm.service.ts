@@ -110,44 +110,32 @@ export class FcmService {
         this.presentPopoverDetalle(notification);
       }
     );
-/*
+
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
-        //alert('Push action performed: ' + JSON.stringify(notification));
-        
-        if (notification.notification.data) {
-          console.log('ActionPerformed, notification: '+ JSON.stringify(notification.notification))
-          console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification.data))
-          let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
-          if(isCompleteRouter){
-            console.log('LLEGO A LA TABS')
-          //   let origin=JSON.parse(notification.notification.data.inicio);
-          //   console.log('Inicio> ',typeof(origin))//object
-          //   console.log('Inicio> ',typeof(origin.lat))
-          //   let destiny=JSON.parse(notification.notification.data.fin);
-          //   console.log('Fin> ',typeof(destiny.lng))
-  
-          // let notObjeto = {
-          //   'title':notification.notification.title,
-          //   'inicio':origin,
-          //   'fin':destiny,
-          //   'hora':notification.notification.data.hora,
-          //   'metodoPago':notification.notification.data.metodoPago,
-          //   'valor':notification.notification.data.valor,
-          // }
-  
-         
-          // this.shareData.notificacion=notification;
-          // this.shareData.detalleServicio=notification;
-          // this.presentPopoverDetalle(notification);
-          }
-          
+        let notObjeto = {
+          'title':notification.notification.body,
+          'nombre:':notification.notification.data.nombreConductor,
+          'apellido':notification.notification.data.apellidoConductor,
+          'calificacion':notification.notification.data.calificacionConductor,
+          'telefono':notification.notification.data.telefonoConductor,
+          'vehiculo':notification.notification.data.vehiculoConductor,
+          'modelo':notification.notification.data.modeloVehiculo,
+          'placa':notification.notification.data.placaVehiculo
         }
-        else{
 
-        }
+        this.shareData.nombreNot$.emit(JSON.stringify(notification));
+
+        this.shareData.notObj$.emit(notObjeto);
+
+        this.shareData.notificacion = notification;
+        this.shareData.detallesDriver=notification;
+        //this.presentAlertConfirm(notification);
+
+
+        this.presentPopoverDetalle(notification);
       }
-    );*/
+    );
 
   }
 

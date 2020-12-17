@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { LoadingService } from 'src/app/services/loading.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -71,7 +72,7 @@ export class AceptarParametrosComponent implements OnInit {
       metodoPago: this.startMarker.idPaymentService,
       valor: this.startMarker.total,
       cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
-      //idCliente: null /*Necesito ID de la tabla cliente*/
+      idCliente: this.authService.getId() /*Necesito ID de la tabla cliente*/
     }
    
     this.enviarNotificacion(this.notificacionTransporter);

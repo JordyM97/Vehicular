@@ -29,7 +29,7 @@ export class DetalleServicioPage implements OnInit {
 
   nombreNot: string ="";
   nombreNotSubs: Subscription;
-
+ 
 
   notObj: object={};
   notObjSub: Subscription;

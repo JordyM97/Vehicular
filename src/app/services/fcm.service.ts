@@ -19,6 +19,7 @@ import { ShareDataService } from './share-data.service';
 import { NotificationDriverComponent } from '../components/notification-driver/notification-driver.component';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
+import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -90,9 +91,11 @@ export class FcmService {
           'apellido':notification.data.apellidoConductor,
           'calificacion':notification.data.calificacionConductor,
           'telefono':notification.data.telefonoConductor,
-          'vehiculo':notification.data.vehiculoConductor,
           'modelo':notification.data.modeloVehiculo,
-          'placa':notification.data.placaVehiculo
+          'placa':notification.data.placaVehiculo,
+          'color':notification.data.colorVehiculo,
+          'inicioCoords':notification.data.inicioCoords,
+          'finCoords':notification.data.finCoords
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));

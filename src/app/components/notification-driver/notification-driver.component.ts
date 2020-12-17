@@ -22,13 +22,13 @@ export class NotificationDriverComponent implements OnInit {
   ngOnInit() {
     this.title = this.navParams.get("title");
     this.body = this.navParams.get("body");
-    this.apellido = this.navParams.get("apellido");
+    //this.apellido = this.navParams.get("apellido");
   }
 
   async btnAceptar(){
     console.log('Confirm Okay');
     await this.popover.dismiss();
-    //this.router.navigate(['/detalle']); /*Cambiar*/
+    this.router.navigate(['/detalle-servicio']); /*Cambiar*/
   }
 
 }

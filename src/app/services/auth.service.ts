@@ -138,7 +138,6 @@ export class AuthService {
           //resolve("ok");
           resolve("bad");
         });  });
-
   }
   login(credentials){
     console.log(credentials);
@@ -220,39 +219,14 @@ export class AuthService {
       });  });
   }
 
-  Historial(){
-    return new Promise((resolve, reject) => {
-    let headers = new HttpHeaders();
-    
-    //headers.append('Access-Control-Allow-Origin' , '*');
-    //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    //headers.append('Accept','application/json');
-    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
-    console.log(this.token);
-    console.log(headers);
-
-    this.http.get('https://axela.pythonanywhere.com/api/service/', {headers: headers}) //http://127.0.0.1:8000
-      .subscribe(res => {
-        let data = JSON.parse(JSON.stringify(res));
-        data.forEach(element => {
-          //console.log(element) //Recorrer los elementos del array y extraer la info
-          this.historial.push(element);
-        });
-        resolve("ok");
-        }, (err) => {
-        console.log(err);
-        //resolve("ok");
-        resolve("bad");
-      });  });
-  }
-
-  /*Faltan pruebas*/
-  deleteDeviceToken(idUser: any){
+  getRecordService(){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', 'token '+String(this.token));
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+      console.log(this.token);
+      console.log(headers);
   
-      this.http.delete('https://axela.pythonanywhere.com/api/device/'+String(idUser)+'/', {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/recordService/'+String(this.id)+'/1/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           data.forEach(element => {
@@ -265,7 +239,6 @@ export class AuthService {
           //resolve("ok");
           resolve("bad");
         });  });
-
   }
   getHistorial(){
     return this.historial;

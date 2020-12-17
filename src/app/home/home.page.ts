@@ -130,7 +130,7 @@ export class HomePage implements OnInit {
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          ClientService: 1,
+          ClientService: this.authService.getId(),
           DriverService: 26,
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
@@ -258,7 +258,7 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
-    this.authService.Historial();
+    this.authService.getRecordService();
     
 
     this.listenerDrag();

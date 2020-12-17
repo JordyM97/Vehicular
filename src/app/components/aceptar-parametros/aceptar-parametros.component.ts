@@ -1,11 +1,12 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { PopoverController,ToastController,NavParams } from '@ionic/angular';
+import { PopoverController,ToastController,NavParams} from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { FormBuilder, FormGroup  } from '@angular/forms';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -26,7 +27,7 @@ export class AceptarParametrosComponent implements OnInit {
     public toastController: ToastController,
     private firestore: AngularFirestore, 
     public authService: AuthService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,private loadingservice:LoadingService) {
     this.serviciosCollection=firestore.collection('Servicio');
     this.servicios= this.serviciosCollection.valueChanges();
    }
@@ -49,7 +50,7 @@ export class AceptarParametrosComponent implements OnInit {
       position: 'top',
       color: 'danger'
       });
-    toast.present();
+    await toast.present();
   }
 
   async presentToast() {
@@ -93,7 +94,10 @@ export class AceptarParametrosComponent implements OnInit {
       formData.append("title", this.uploadForm.get('title').value);
       formData.append("data", this.uploadForm.get('data').value);
       this.authService.sendNotification(formData);
+      //this.loadingservice.showLoader();
     }
+
+    
     async PopOverConductorEncontrado(){
       const popover= await this.popoverController.create({
         component: PopoverComponent,

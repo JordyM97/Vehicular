@@ -7,7 +7,6 @@
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 3000
-
     }
   },
   "cordova": {
@@ -20,5 +19,8 @@
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000"
     }
+  },
+  "server": {
+    "url": "http://192.168.56.1:8100"
   }
 }

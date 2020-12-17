@@ -130,7 +130,7 @@ export class FcmService {
         //this.presentAlertConfirm(notification);
 
 
-        this.presentPopoverDetalle(notification);
+        this.presentPopoverDetalle(notification.notification);
       }
     );
 

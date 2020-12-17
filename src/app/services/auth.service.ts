@@ -212,6 +212,7 @@ export class AuthService {
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
+        console.log("pk="+data.pk);
         resolve("ok");
         }, (err) => {
         console.log(err);

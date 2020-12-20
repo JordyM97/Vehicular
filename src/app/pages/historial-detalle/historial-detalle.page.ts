@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HistorialPage } from 'src/app/pages/historial/historial.page'
 import { ActivatedRoute, Router } from '@angular/router'
 
 declare var google;

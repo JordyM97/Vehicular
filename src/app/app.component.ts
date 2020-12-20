@@ -1,23 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AlertController, Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import {
-  Plugins,
-  PushNotification,
-  PushNotificationToken,
-  PushNotificationActionPerformed,
-} from '@capacitor/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
-import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 import { FcmService } from './services/fcm.service';
-
-const { PushNotifications } = Plugins;
 
 @Component({
   selector: 'app-root',

@@ -18,6 +18,13 @@
 </ion-header>
 
 <ion-content>
+
+  <!--<div>
+    <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
+    (click)="rate(num)" [ngStyle]="{'color':getColor(num)}">
+    </ion-icon>
+  </div>-->
+
   <ion-grid>
 
     <ion-row class="fotoPerfil"> 
@@ -27,7 +34,7 @@
     </ion-row>
 
     <ion-row class="estrellas">
-      <ion-label class="calificacion">4.76</ion-label>
+      <ion-label class="calificacion">{{calificacionStr}}</ion-label>
       <img class="estrella" src="assets/imgs/estrella.png">
     </ion-row>
 
@@ -35,14 +42,14 @@
       <ion-row><ion-label class="titulo">Nombre:</ion-label></ion-row>
     </ion-row>
     <ion-row>
-      <ion-row><ion-label class="respuesta">{{this.nombre}}</ion-label></ion-row>
+      <ion-row><ion-label class="respuesta">{{nombre}}</ion-label></ion-row>
     </ion-row>
 
     <ion-row>
       <ion-row><ion-label class="titulo">Apellido:</ion-label></ion-row>
     </ion-row>
     <ion-row>
-      <ion-row><ion-label class="respuesta">{{this.apellido}}</ion-label></ion-row>
+      <ion-row><ion-label class="respuesta">{{apellido}}</ion-label></ion-row>
     </ion-row>
 
     <ion-row>
@@ -56,7 +63,7 @@
       <ion-row><ion-label class="titulo">Correo electrónico:</ion-label></ion-row>
     </ion-row>
     <ion-row>
-      <ion-row><ion-label class="respuesta">{{this.correo}}</ion-label></ion-row>
+      <ion-row><ion-label class="respuesta">{{correo}}</ion-label></ion-row>
     </ion-row>
 
     <ion-row>

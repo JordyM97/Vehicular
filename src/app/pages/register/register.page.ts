@@ -14,16 +14,20 @@ export class RegisterPage implements OnInit {
   firstname:string
   lastname:string
   username:string
+  showPassword=false;
+  passwordIcon='eye';
 
-  constructor(private router: Router,
-    public toastController: ToastController,public authService: AuthService) { }
+  constructor(
+    private router: Router,
+    public toastController: ToastController,
+    public authService: AuthService) { }
 
   ngOnInit() {
   }
 
   on_submit_register(){
     let credentials= {
-      username: this.email,
+      username: this.username,
       password: this.password,
       first_name: this.firstname,
       last_name: this.lastname,
@@ -33,8 +37,9 @@ export class RegisterPage implements OnInit {
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
-        this.router.navigate(['home'])
+        //this.authService.sendDeviceToken();
+        this.authService.registerclient();
+        this.router.navigate(['login'])
       }
       else{
         this.presentToastFeedback()
@@ -60,5 +65,13 @@ export class RegisterPage implements OnInit {
       });
       toast.present();
     }
-  
+    iconPassword(){
+      this.showPassword=!this.showPassword;
+      if(this.passwordIcon=='eye'){
+        this.passwordIcon='eye-off';
+      }
+      else{
+        this.passwordIcon='eye';
+      }
+    }
 }

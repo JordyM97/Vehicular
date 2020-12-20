@@ -18,27 +18,23 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
-
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-
-
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
   imports: [
-  BrowserModule,IonicModule.forRoot({mode: 'ios' }),  
+  BrowserModule,IonicModule.forRoot({mode: 'ios', swipeBackEnabled:false  }),  
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,
-    AppRoutingModule,HttpClientModule],
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule],
   providers: [
     StatusBar, HttpClient,
     SplashScreen,
     Geolocation,    
-    Facebook,
     NativeGeocoder,
-    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

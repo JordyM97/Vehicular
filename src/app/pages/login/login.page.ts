@@ -3,10 +3,8 @@ import { ToastController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { Platform } from '@ionic/angular';
-
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-
+import { FBAuthService } from 'src/app/services/fbauth.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -19,47 +17,83 @@ export class LoginPage implements OnInit {
   contrasenia: string
   showPassword=false;
   passwordIcon='eye';
-  code='';
 
   constructor(
     private router: Router,
-    private platform: Platform,
-    private fb: Facebook,
-    public toastController: ToastController,public authService: AuthService, 
-    ) { }
+    public toastController: ToastController,
+    public authService: AuthService,
+    public fbauthservice:FBAuthService,private appcom:AppComponent) { 
+   }
 
   ngOnInit() {
-    console.log("golasa",this.code);
+    //localStorage.clear();
+    if(localStorage.length>0){
+      this.loguinAutomatico();
+    }
+  }
+  on_submit_loginF(){
+    this.fbauthservice.login(this.correo_electronico,this.contrasenia)
+    .then(//Respuesta positiva
+      res =>{
+        this.router.navigate(['home'])
+        this.correo_electronico=""
+        this.contrasenia=""
+      } 
+    ).catch(
+      err =>{
+        //Verificar si es un Network Error
+        this.presentToastFeedback()
+      } 
+    );
   }
   
-  onLog() {
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-  .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-  .catch(e => console.log('Error logging into Facebook', e));
-
-
-this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
-
-}
-
-
   on_submit_login(){
     let credentials= {
       username: this.correo_electronico,
       password: this.contrasenia
     };
+    localStorage.setItem("correo",credentials.username);
+    localStorage.setItem("password",credentials.password);
+
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
-      //console.log(this.authService.token);
+      console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        
+        
         this.router.navigate(['home'])
       }
       else{
         this.presentToastFeedback()
       }
     })
-    }     
+  }   
+  loguinAutomatico(){
+    let credentials= {
+      username: localStorage.getItem("correo"),
+      password: localStorage.getItem("password")
+    };
+
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        
+        
+        this.router.navigate(['home'])
+      }else{
+        this.presentToastFeedback()
+      }
+    })
+    }  
 
 
   

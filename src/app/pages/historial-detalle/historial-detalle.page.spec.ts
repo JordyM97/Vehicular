@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { HistorialComponent } from './historial.component';
+import { HistorialDetallePage } from './historial-detalle.page';
 
-describe('HistorialComponent', () => {
-  let component: HistorialComponent;
-  let fixture: ComponentFixture<HistorialComponent>;
+describe('HistorialDetallePage', () => {
+  let component: HistorialDetallePage;
+  let fixture: ComponentFixture<HistorialDetallePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistorialComponent ],
+      declarations: [ HistorialDetallePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HistorialComponent);
+    fixture = TestBed.createComponent(HistorialDetallePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

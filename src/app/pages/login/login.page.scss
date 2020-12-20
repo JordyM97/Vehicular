@@ -19,7 +19,9 @@ ion-item{
     display: block;
     position: absolute;
 }
-
+ion-icon{
+    padding-top: 5%;
+}
 .content-items{
     width: 100%;
     position: fixed;
@@ -32,9 +34,7 @@ ion-item{
     }     
     
 }
-.passico{
-    padding-top: 10%;
-}
+
 .content-link{
     text-align: center;
     color: #e6242f;

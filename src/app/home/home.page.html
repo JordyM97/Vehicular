@@ -1,4 +1,3 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar class="toolbar-bg">
     <div class="toolbar-content">
@@ -19,18 +18,7 @@
 </ion-header>
 
 <ion-content> 
-  <!--<ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button (click)="ShowCords()" ion-fab color="tertiary">
-      <ion-icon name="information-circle-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>-->
-  <!--<ul>
-    <li *ngFor="let item of items2 | async">
-      {{ item.name }}
-    </li>
-  </ul>-->
-  <div #map id="map"  style="height: 100%">
-  </div>
+  <div #map id="map"  style="height: 100%"></div>
 
 
   <div id="menuOp" class="menuop">
@@ -77,23 +65,23 @@
  
       <div id="opcionesBuscar">
         <ion-label id="UbIn">Escriba su <b>ubicación incial</b> a continuacion</ion-label>
-        <ion-searchbar searchIcon="flag-outline" id="inicio" debounce="10" [(value)]="resultInit" [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="¿Desde dónde quieres ir?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        <ion-label id="UbInManual">O fije su <b>ubicación inicial</b> manualmente </ion-label>
+        <ion-searchbar search-icon="undefined" id="inicio" debounce="10" [(value)]="resultInit" [(ngModel)]="searchInit" (ionChange)="searchChangedInit()" placeholder="¿Desde dónde quieres ir?"  (ionClear)="ClearAutocomplete()"><ion-img src="assets/icon/pointer_rojo.png"></ion-img></ion-searchbar>
         <ion-list id="resultadosInicio">
           <ion-item (click)="SelectSearchResultInit(result)" *ngFor="let result of searchResultsInit">
             {{ result.description }}
           </ion-item>
         </ion-list>
+        <ion-label id="UbInManual">O fije su <b>ubicación inicial</b> manualmente </ion-label>
         <ion-button  id="EUMI" (click)="seleccionarInicio()">FIJAR UBICACION INICIAL MANUALMENTE</ion-button>
 
         <ion-label id="UbFin">Escriba su <b>ubicación final</b> a continuacion</ion-label>
-        <ion-searchbar searchIcon="flag" id="destino" debounce="10" [(value)]="resultFini" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-        <ion-label id="UbFinManual">O fije su <b>ubicación final</b> manualmente </ion-label>
+        <ion-searchbar search-icon="undefined" id="destino" debounce="10" [(value)]="resultFini" [(ngModel)]="searchEnd" (ionChange)="searchChangedEnd()" placeholder="¿A dónde quieres llegar?"  (ionClear)="ClearAutocomplete()"><ion-img src="assets/icon/pointer_azul.png"></ion-img></ion-searchbar>
         <ion-list id="resultadosDestino">
           <ion-item (click)="SelectSearchResultEnd(result)" *ngFor="let result of searchResultsEnd">
             {{ result.description }}
           </ion-item>
         </ion-list>
+        <ion-label id="UbFinManual">O fije su <b>ubicación final</b> manualmente </ion-label>
         <ion-button id="EUMF" (click)="seleccionarFin()">FIJAR UBICACION FINAL MANUALMENTE</ion-button>
       </div>
    
@@ -106,18 +94,7 @@
         <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
         <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->
       </ion-row>
-        <!--<ion-row>
-          <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
-            <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
-              {{pago.tipoPago}}
-            </ion-select-option>
-          </ion-select>
-          <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
-            <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio">
-              {{servicio.tipoServicio}}
-            </ion-select-option>
-          </ion-select>
-        </ion-row>-->
+
       <ion-button id="aceptar" class="BuscarRide" (click)="aceptarBoton()" >CONFIRMAR SERVICIO</ion-button>
     </ion-grid>
   </div>

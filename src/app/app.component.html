@@ -7,7 +7,7 @@
             <img src="assets/imgs/user.png">
           </ion-avatar>
           <label>
-            <h4>Usuario</h4>
+            <h4>{{username}}</h4>
           </label>
         </div>
 
@@ -31,12 +31,17 @@
           </ion-menu-toggle>
 
 
-          <ion-menu-toggle routerLink="/viajes">
+         <!-- <ion-menu-toggle routerLink="/viajes">
             <ion-item color="transparent">
               <ion-icon name="pin-outline"></ion-icon>Viajes
             </ion-item>
           </ion-menu-toggle>
-
+          -->
+          <ion-menu-toggle routerLink="/historial/">
+            <ion-item color=“transparent”>
+              <ion-icon name="folder-open-outline"></ion-icon>Historial
+            </ion-item>
+          </ion-menu-toggle>
           <ion-menu-toggle routerLink="/acerca">
             <ion-item color=“transparent” button (click)="presentAlertFin()">
               <ion-icon name="stop-circle-outline"></ion-icon>Acerca

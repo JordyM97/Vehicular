@@ -20,11 +20,11 @@
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "@capacitor-community/date-picker": "^0.2.3",
     "@capacitor/android": "^2.4.2",
     "@capacitor/core": "2.4.1",
     "@capacitor/ios": "^2.4.2",
     "@ionic-native/core": "^5.29.0",
-    "@ionic-native/facebook": "^5.29.0",
     "@ionic-native/geolocation": "^5.29.0",
     "@ionic-native/http": "^5.29.0",
     "@ionic-native/native-geocoder": "^5.29.0",
@@ -55,7 +55,6 @@
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
@@ -94,11 +93,7 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-facebook4": {
-        "APP_ID": "1034969293634110",
-        "APP_NAME": "Transporter"
-      }
+      "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
       "android"

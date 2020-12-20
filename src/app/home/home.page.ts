@@ -178,88 +178,39 @@ export class HomePage implements OnInit {
     };
     this.posicionInicial=myLatLng;
 
-    var styledMapType = new google.maps.StyledMapType(
-    [
-        {
-          "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {
-              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
+    var styledMapType = new google.maps.StyledMapType(    [
+        {  "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
           "elementType": "labels.text",          "stylers": [            {
               "visibility": "on"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.neighborhood",
-          "stylers": [
-            {
+            }]        },        {         "featureType": "administrative.neighborhood",
+          "stylers": [{    "visibility": "off"        }     ]    },    { "featureType": "poi",  "stylers": [  {
               "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "transit",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "labels.text",
-          "stylers": [
-            {
-              "visibility": "on"
-            }
-          ]
-        }
-    ],
-    {name: 'Styled Map'});
+            }          ]       },    {   "featureType": "road",   "elementType": "labels.icon",   "stylers": [  {        "visibility": "off"
+            }          ]        },        {          "featureType": "transit",          "stylers": [            {              "visibility": "off"
+            }]        },    {  "featureType": "transit.line",    "elementType": "labels.text",      "stylers": [   {   "visibility": "on"           }          ]}
+    ],{name: 'Styled Map'});
     //Crear nuevo mapa
     const mapEle: HTMLElement = document.getElementById('map');
     // Crear el mapa y renderizarlo
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 15,
-      zoomControl:false,
-      mapTypeControl:false,
-      streetViewControl:false,
-      fullscreenControl:false,
+      zoomControl:false,      mapTypeControl:false,      streetViewControl:false,      fullscreenControl:false,
       mapTypeControlOptions: {
         mapTypeIds: ['styled_map']
       }
     });
-    this.map.mapTypes.set('styled_map', styledMapType);
-    this.map.setMapTypeId('styled_map');
+    this.map.mapTypes.set('styled_map', styledMapType);    this.map.setMapTypeId('styled_map');
     //Agregar marcador de ubicación actual
     this.map.mapTypes.set('styled_map', styledMapType);
     this.map.setMapTypeId('styled_map');
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
-    console.log(this.latLngInicial);
     this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
     this.addMarker(this.latLngInicial)
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
     this.authService.getRecordService();
-    
 
     this.listenerDrag();
   }
@@ -269,10 +220,8 @@ export class HomePage implements OnInit {
     this.puntoInicio.setOptions({draggable: true});
     var menuOp = document.getElementById("menuOp");
     var botonAceptar = document.getElementById("aceptarPuntos");
-    menuOp.style.display="none";
-    botonAceptar.style.display="block";
+    menuOp.style.display="none";    botonAceptar.style.display="block";
     this.listenerInicio = google.maps.event.addListener(this.map, 'click' , (event) => {
-      //mapEle.classList.add('show-map');
       this.latLngInicial = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
       this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
       console.log(this.latLngInicial);
@@ -294,7 +243,6 @@ export class HomePage implements OnInit {
       this.listenerDragF();
     }
     this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
-      //mapEle.classList.add('show-map');
       this.latLngFinal = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
       this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
       console.log(this.latLngFinal);

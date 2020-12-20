@@ -1,0 +1,38 @@
+.titulo{
+    font-size: 24px;
+    
+}
+
+ion-input{
+    background: gainsboro;
+    border-radius: 12%;
+    
+}
+
+#texto{
+    height: 100px;
+}
+
+ion-row{
+    margin-left: 10px;
+    margin-top: 10%;
+}
+
+#btnEnviar{
+    display: grid;  
+}
+
+ion-select{
+    width: 100%;
+    background-color: gainsboro;
+}
+
+ion-item{
+    width: 100%;
+}
+
+ion-textarea{
+    max-height: 150px;
+    max-width: 100%;
+    background-color: gainsboro;
+}

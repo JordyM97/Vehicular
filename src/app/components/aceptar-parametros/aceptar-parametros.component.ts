@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { FormBuilder, FormGroup  } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -30,7 +30,7 @@ export class AceptarParametrosComponent implements OnInit {
     private formBuilder: FormBuilder) {
     this.serviciosCollection=firestore.collection('Servicio');
     this.servicios= this.serviciosCollection.valueChanges();
-   }
+   } 
 
   ngOnInit() {
     this.startMarker= this.navParams.get('info');
@@ -42,6 +42,7 @@ export class AceptarParametrosComponent implements OnInit {
       data: ['']
     });
   }
+  
   async DismissClick() {
     await this.popoverController.dismiss();
     const toast = await this.toastController.create({

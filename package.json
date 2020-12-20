@@ -34,6 +34,7 @@
     "angularfire2": "^5.4.2",
     "cordova-android": "9.0.0",
     "firebase": "^7.24.0",
+    "ionic5-star-rating": "https://github.com/JeongJun-Lee/ionic5-star-rating/tarball/master",
     "node-forge": "^0.10.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.14.1",

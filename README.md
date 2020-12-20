@@ -24,6 +24,8 @@ ionic cordova plugin add cordova-plugin-geolocation
 npm install @ionic-native/geolocation
 ionic cordova plugin add cordova-plugin-advanced-http
 npm install @ionic-native/http
+ <Para calificaciones>
+
 
 
 -----BUILD APP---------

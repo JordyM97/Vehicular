@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -18,7 +18,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { StarRatingModule } from 'ionic5-star-rating';
+
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
   entryComponents: [PopoverComponent,ShowNotifComponent],
@@ -29,7 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    FormsModule,
+    StarRatingModule,
+  ],
   providers: [
     StatusBar, HttpClient,
     SplashScreen,
@@ -37,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NativeGeocoder,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

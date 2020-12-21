@@ -139,7 +139,7 @@ export class HomePage implements OnInit {
           idPaymentService: this.pagoSeleccionado,
           idTypeService: this.servicioSeleccionado,
           driverScore: 5,
-          clientScore: 5,
+          clientScore: 4,
           startDate: date,
           endDate: date,
           isReservationService: 0,
@@ -166,6 +166,10 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
+<<<<<<< HEAD
+=======
+    this.authService.getUserInfo(this.authService.getId());
+>>>>>>> b4d4422cb6daeb439218e91e2c44df23e70fac16
     
   }
   
@@ -555,10 +559,4 @@ export class HomePage implements OnInit {
       resultado.style.display="none";
     }
   }
-
-  precioCarrera(){
-
-  }
-
- 
 }

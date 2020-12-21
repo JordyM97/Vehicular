@@ -19,7 +19,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { StarRatingModule } from 'ionic5-star-rating';
 
 @NgModule({
   declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
@@ -33,7 +32,6 @@ import { StarRatingModule } from 'ionic5-star-rating';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    StarRatingModule,
   ],
   providers: [
     StatusBar, HttpClient,

@@ -166,7 +166,6 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
-    this.authService.getUserInfo(this.authService.getId());
     
   }
   

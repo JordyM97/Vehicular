@@ -1,14 +1,18 @@
-.titulo{
-    font-size: 24px;
-    
+
+.tipo {
+    width: 70%;
+    padding-left: 20%;
+}
+ion-item{
+    --background: white;
+    width: 95%;
 }
 
-ion-input{
-    background: gainsboro;
-    border-radius: 12%;
-    
-}
 
+.btne{
+    width: 98%;
+    height: 40px;
+}
 #texto{
     height: 100px;
 }
@@ -19,20 +23,21 @@ ion-row{
 }
 
 #btnEnviar{
-    display: grid;  
+    width: 98%;;  
 }
-
-ion-select{
-    width: 100%;
-    background-color: gainsboro;
-}
-
-ion-item{
-    width: 100%;
+.textarea-wrapper.sc-ion-textarea-ios {
+    min-width: inherit;
+    max-width: inherit;
+    min-height: inherit;
+    max-height: inherit;
+    border: 1px black solid;
+    border-radius: 12px;
+    padding: 5px;
 }
 
 ion-textarea{
-    max-height: 150px;
+    min-height: 200px;
+    max-height: 200px;
     max-width: 100%;
-    background-color: gainsboro;
+   
 }

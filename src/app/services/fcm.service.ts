@@ -147,7 +147,7 @@ export class FcmService {
 
     const popover = await this.popoverController.create({
       component: NotificationDriverComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'servicioasignado',
       componentProps:{
          title: title,
          body: body,

@@ -1,6 +1,5 @@
 
 # GRUPO VEHICULAR
-AIzaSyBe_BjkNrd70aYC9Vs5O4fEiulwPDvQf2M
 
 -----INSTALAR ------------
 ===

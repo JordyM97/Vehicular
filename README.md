@@ -1,6 +1,5 @@
 
 # GRUPO VEHICULAR
-AIzaSyBe_BjkNrd70aYC9Vs5O4fEiulwPDvQf2M
 
 -----INSTALAR ------------
 ===
@@ -63,3 +62,4 @@ System:
 -Jordy Medina
 -Leonardo Gomez
 -Gustavo Matamoros
+-Axel Auza

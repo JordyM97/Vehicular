@@ -15,4 +15,5 @@ export class SelectDateComponent implements OnInit {
 
   ngOnInit() {}
     //CalificarServicio
+    //DetallesProveedor
 }

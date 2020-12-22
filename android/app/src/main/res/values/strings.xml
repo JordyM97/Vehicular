@@ -4,4 +4,6 @@
     <string name="title_activity_main">CareApp</string>
     <string name="package_name">com.careapp.app</string>
     <string name="custom_url_scheme">com.careapp.app</string>
+    <string name="server_client_id">627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com</string>
+
 </resources>

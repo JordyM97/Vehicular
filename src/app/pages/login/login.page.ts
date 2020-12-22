@@ -6,6 +6,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FBAuthService } from 'src/app/services/fbauth.service';
 import { AppComponent } from 'src/app/app.component';
 
+import "@codetrix-studio/capacitor-google-auth";
+import { Plugins } from '@capacitor/core';
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -31,6 +36,22 @@ export class LoginPage implements OnInit {
       this.loguinAutomatico();
     }
   }
+
+  async loginGoogle(){
+    Plugins.GoogleAuth.signIn().then((googleUser) => {
+      console.log("mira");
+      console.log(googleUser);
+      console.log("accesstoken");
+      console.log(googleUser.authentication.accessToken);
+      console.log("code:");
+      console.log(googleUser.serverAuthCode);
+
+    }).catch((error)=>{
+      console.log('User interrupted the login process', error);
+    });
+  }
+
+
   on_submit_loginF(){
     this.fbauthservice.login(this.correo_electronico,this.contrasenia)
     .then(//Respuesta positiva

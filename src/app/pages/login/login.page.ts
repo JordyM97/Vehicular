@@ -61,6 +61,7 @@ export class LoginPage implements OnInit {
       if(result=="ok"){
         if(this.authService.deviceToken!= null){
           this.authService.sendDeviceToken();
+          
         }
         this.appcom.username=this.authService.nombre;
         

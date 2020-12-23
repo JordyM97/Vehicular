@@ -84,7 +84,7 @@ export class FcmService {
     /*En share data se almacena la data para la nueva ventana */
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
-
+      console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
         let notObjeto = {
           'title':notification.body,
           'nombre:':notification.data.nombreConductor,
@@ -113,6 +113,8 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
+        console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
+        this.router.navigateByUrl("/acerca");
         let notObjeto = {
           'title':notification.notification.body,
           'nombre:':notification.notification.data.nombreConductor,
@@ -124,12 +126,12 @@ export class FcmService {
           'placa':notification.notification.data.placaVehiculo
         }
 
-        this.shareData.nombreNot$.emit(JSON.stringify(notification));
+        this.shareData.nombreNot$.emit(JSON.stringify(notification.notification));
 
         this.shareData.notObj$.emit(notObjeto);
 
-        this.shareData.notificacion = notification;
-        this.shareData.detallesDriver=notification;
+        this.shareData.notificacion = notification.notification;
+        this.shareData.detallesDriver=notification.notification;
         //this.presentAlertConfirm(notification);
 
 

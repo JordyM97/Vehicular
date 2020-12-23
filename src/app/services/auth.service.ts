@@ -25,7 +25,6 @@ export class AuthService {
     this.servicios= this.serviciosCollection.valueChanges();
   }
   logout(){
-    this.token="";  this.id=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken=""; this.historial=null;
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
@@ -37,13 +36,13 @@ export class AuthService {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data);
           resolve("ok");
-          
+          this.token="";  this.id=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken=""; this.historial=null;
           }, (err) => {
           console.log(err);
           //resolve("ok");
           resolve("bad");
         });  });
-
+        
   }
 
 

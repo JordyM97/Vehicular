@@ -9,6 +9,11 @@ import { AppComponent } from 'src/app/app.component';
 import "@codetrix-studio/capacitor-google-auth";
 import { Plugins } from '@capacitor/core';
 
+import { registerWebPlugin } from '@capacitor/core';
+import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
+
+registerWebPlugin(FacebookLogin);
+
 
 
 
@@ -51,6 +56,20 @@ export class LoginPage implements OnInit {
     });
   }
 
+  async loginFacebook(){
+    const FACEBOOK_PERMISSIONS = ['email'];
+    const result = await  <FacebookLoginResponse> Plugins.FacebookLogin.login({permissions:FACEBOOK_PERMISSIONS});
+    console.log("respuesta");
+    console.log(result);
+    if (result.accessToken) {
+      // Login successful.
+      console.log("Facebook access token is");
+      console.log(result.accessToken.token);
+    } else {
+      // Cancelled by user.
+      console.log("Facebook error");
+    }
+  }
 
   on_submit_loginF(){
     this.fbauthservice.login(this.correo_electronico,this.contrasenia)

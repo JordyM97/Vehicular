@@ -40,3 +40,6 @@ Axel Auza
 to deploy
 ionic rm platform android
 ionic cordova build android --prod --release
+
+.\keytool.exe -exportcert -alias AndroidDebugKey -keystore C:\Users\axela\.android\debug.keystore | C:\"Program Files"\Git\usr\bin\openssl.exe sha1 -binary | C:\"Program Files"\Git\usr\bin\openssl.exe base64
+https://medium.com/@anmol.sinha1993/configure-angular-ionic-apps-with-open-ssl-certificate-to-run-them-securely-over-https-locally-4b2cd3ba3fc9

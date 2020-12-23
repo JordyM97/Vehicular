@@ -5,5 +5,7 @@
     <string name="package_name">com.careapp.app</string>
     <string name="custom_url_scheme">com.careapp.app</string>
     <string name="server_client_id">627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1034969293634110</string>
+    <string name="fb_login_protocol_scheme">1034969293634110</string>
 
 </resources>

@@ -115,10 +115,14 @@
       --color: white;
     }
     
-
+ion-content{
+  --background: #ffffff;
+}
   
 }
-
+.TermsModal{
+  --width:90%;
+}
 
   .toolbar-bg{
     --background: linear-gradient(#20478c ,#2485c9);

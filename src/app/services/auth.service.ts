@@ -1,48 +1,34 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularDelegate } from '@ionic/angular';
+import { AngularDelegate, ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { TerminosComponent } from '../pages/terminos/terminos.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public token: any;
-  public id:any;
-  public nombre: any;
-  public apellido: any;
-  public correo: any;
-  public deviceToken:any;
-  public historial : Array<any>;
-  servicios: Observable<any[]>;
-  serviciosCollection: AngularFirestoreCollection<any>;
+  public token: any;  public id:any;  public nombre: any;  public apellido: any;  public correo: any;
+  public deviceToken:any;  public historial : Array<any>;  servicios: Observable<any[]>;  serviciosCollection: AngularFirestoreCollection<any>;
   constructor(
-    public http: HttpClient,private firestore: AngularFirestore
+    public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
     ) { 
     this.historial = [];
-    this.serviciosCollection=firestore.collection('token');
-    this.servicios= this.serviciosCollection.valueChanges();
   }
   logout(){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
-      console.log(this.token);
-      console.log(headers);
-  
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));  
       this.http.delete('https://axela.pythonanywhere.com/api/devices/delete/'+String(this.id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
-          console.log(data);
           resolve("ok");
           this.token="";  this.id=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken=""; this.historial=null;
           }, (err) => {
           console.log(err);
-          //resolve("ok");
           resolve("bad");
-        });  });
-        
+        });  });      
   }
 
 
@@ -79,7 +65,6 @@ export class AuthService {
       token:this.deviceToken.token,
       app: "careapp"
     }
-    console.log(req)
     this.postDataAPI(tok)
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
@@ -104,17 +89,12 @@ export class AuthService {
   signUp(credentials){
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
-    //headers.append('Accept','application/json');
     headers = headers.set('content-type','application/json')//.set('Authorization', 'token '+String(this.token));
-    console.log(this.token);
-    console.log(headers);
-
     this.http.post('https://axela.pythonanywhere.com/api/user/create/',credentials, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
         resolve("ok");
-        
         }, (err) => {
         console.log(err);
         //resolve("ok");
@@ -126,15 +106,13 @@ export class AuthService {
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'token '+String(this.token));
-
-    this.http.post('https://axela.pythonanywhere.com/api/notification/', notificacion, {headers: headers}) //http://127.0.0.1:8000
+    this.http.post('https://axela.pythonanywhere.com/api/notification/', notificacion, {headers: headers})
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
         resolve("ok");
         }, (err) => {
         console.log(err);
-        //resolve("ok");
         resolve("bad");
       });  });
   }
@@ -144,15 +122,13 @@ export class AuthService {
       headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
       console.log(this.token);
       console.log(headers);
-  
-      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) 
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data);
           resolve("ok");
           }, (err) => {
           console.log(err);
-          //resolve("ok");
           resolve("bad");
         });  });
   }
@@ -161,26 +137,16 @@ export class AuthService {
     console.log(JSON.stringify(credentials));
     
     return new Promise((resolve, reject) => {
-        let headers = new HttpHeaders();
-       
-      //headers = headers.set('Access-Control-Allow-Origin' , '*');
-       //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-       //headers.append('Accept','application/json');
-       //headers.append('content-type','application/json');
- 
-        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
+        let headers = new HttpHeaders(); 
+        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
-            this.id=data.id;
-            this.token = data.token;
-            this.nombre = data.first_name;
-            this.apellido = data.last_name;
-            this.correo = data.email;
+            this.id=data.id;            this.token = data.token;            this.nombre = data.first_name;
+            this.apellido = data.last_name;          this.correo = data.email;
             console.log(data);
             resolve("ok");
             }, (err) => {
             console.log(err);
-            //resolve("ok");
             resolve("bad");
           });  });
  
@@ -189,25 +155,16 @@ export class AuthService {
     
     return new Promise((resolve, reject) => {
         let headers = new HttpHeaders();
-       
-      //headers = headers.set('Access-Control-Allow-Origin' , '*');
-       //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-       //headers.append('Accept','application/json');
-       //headers.append('content-type','application/json');
- 
+     
         this.http.post('https://axela.pythonanywhere.com/api/login/social/token/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
-            this.id=data.id;
-            this.token = data.token;
-            this.nombre = data.first_name;
-            this.apellido = data.last_name;
-            this.correo = data.email;
+            this.id=data.id;            this.token = data.token;            this.nombre = data.first_name;
+            this.apellido = data.last_name;            this.correo = data.email;
             console.log(data);
             resolve("ok");
             }, (err) => {
             console.log(err);
-            //resolve("ok");
             resolve("bad");
           });  });
  
@@ -216,10 +173,6 @@ export class AuthService {
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
-    
-    //headers.append('Access-Control-Allow-Origin' , '*');
-    //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    //headers.append('Accept','application/json');
     headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
     console.log(this.token);
     console.log(headers);
@@ -257,6 +210,23 @@ export class AuthService {
           //resolve("ok");
           resolve("bad");
         });  });
+  }
+  getPoliticas(){
+    console.log("POLITICAS:")
+      this.presentModal();
+    
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: TerminosComponent,
+      cssClass: 'TermsModal',
+      componentProps: {
+        
+      },
+      swipeToClose: true,
+    });
+    return await modal.present();
   }
   getHistorial(){
     return this.historial;

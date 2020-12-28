@@ -57,7 +57,8 @@ const routes: Routes = [
   {
     path: 'detalle-servicio',
     loadChildren: () => import('./pages/detalle-servicio/detalle-servicio.module').then( m => m.DetalleServicioPageModule)
-  },  {
+  },
+  {
     path: 'comentarios-sugerencias',
     loadChildren: () => import('./pages/comentarios-sugerencias/comentarios-sugerencias.module').then( m => m.ComentariosSugerenciasPageModule)
   },

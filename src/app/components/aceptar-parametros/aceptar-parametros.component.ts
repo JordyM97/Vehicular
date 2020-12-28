@@ -47,7 +47,7 @@ export class AceptarParametrosComponent implements OnInit {
     await this.popoverController.dismiss();
     const toast = await this.toastController.create({
       message: '¿Vas cambiar algo?',
-      duration: 2500,
+      duration: 3000,
       position: 'top',
       color: 'danger'
       });
@@ -57,7 +57,7 @@ export class AceptarParametrosComponent implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Buscando conductor',
-      duration: 250,
+      duration: 3000,
       position: 'top',
       color: 'success'
       });

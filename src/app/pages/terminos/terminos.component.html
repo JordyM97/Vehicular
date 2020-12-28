@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    Terminos y condiciones
+  </ion-toolbar>
+  
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-text>
+        {{politicas}}
+      </ion-text>
+    </ion-row>
+    <ion-row>
+      <ion-button (click)='btnSi()'>
+        Acepto
+      </ion-button>
+      <ion-button (click)='btnSi()'>
+        No Acepto
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+  
+
+</ion-content>

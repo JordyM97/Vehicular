@@ -2,8 +2,7 @@ import { Component, OnInit,NgZone } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-
-import { NumericValueAccessor, Platform, PopoverController } from '@ionic/angular';
+import { Platform, PopoverController, ToastController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -44,9 +43,10 @@ export class HomePage implements OnInit {
   public tipoServicio = [
     { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
   ];
+  public hours = [ { hora: '00', ischecked: false}]
   map: any;
   addressInicial:string;  addressFinal:string;
-//  lat: string;  long: string; 
+
   autocomplete: { input: string; };
   autocomplete2: { input: string;};
   autocompleteItems: any[];  autocompleteItems2: any[];
@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
   vehiculoSeleccionado: any;  pagoSeleccionado: any;  servicioSeleccionado: any;
   startMarker: any;  EndMarker: any;
   resultInit: string;  resultFini: string;
-  //Capturar ubicaciones de markers
+
   latLngInicial: any;  latLngFinal: any;
 
   //Listeners
@@ -75,12 +75,11 @@ export class HomePage implements OnInit {
   posicionInicial: any;
   Servicios: Observable<any[]>;
   distanciaInicioFin: any;
-  constructor(
-    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
+  constructor(    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
     public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
     public firestore: AngularFirestore,                           // conector a firestore
-    public platform: Platform,    public router: Router,    public authService: AuthService
+    public platform: Platform,    public router: Router,    public authService: AuthService,private toastController: ToastController
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -95,7 +94,10 @@ export class HomePage implements OnInit {
     this.autocompleteItems = [];    this.autocompleteItems2 = [];
     this.geocoder = new google.maps.Geocoder();
     this.authService.getUserInfo(24);
+    var date = new Date();
+    console.log(date);
   }
+  //sera eliminado...
   async PopOverConductorEncontrado(){
     const popover= await this.popovercontroller.create({
       component: PopoverComponent,
@@ -111,9 +113,20 @@ export class HomePage implements OnInit {
     }); 
     return await popover.present();
   }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Hay campos vacios!',
+      duration: 2500,
+      position: 'top',
+      color: 'danger'
+      });
+      
+    toast.present();
+    }
 
   async aceptarParametros(){
     var date = new Date();
+    console.log(date);
     var anio = date.getFullYear(); 
     var mes = String(date.getMonth() + 1).padStart(2, '0');
     var dia = String(date.getDate()).padStart(2, '0');
@@ -459,7 +472,7 @@ export class HomePage implements OnInit {
 
   aceptarBoton(){
     if(this.vehiculoSeleccionado==null || this.servicioSeleccionado==null || this.servicioSeleccionado==null || this.latLngInicial==null ||this.latLngFinal==null){
-      console.log("Por favor elija todas las opciones");
+      this.presentToast();
     }else{
       this.aceptarParametros();
     }

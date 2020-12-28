@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
 
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
-      //console.log(this.authService.token);
+      console.log(this.authService.token);
       if(result=="ok"){
         if(this.authService.deviceToken!= null){
           this.authService.sendDeviceToken();

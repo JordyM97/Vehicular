@@ -1,7 +1,13 @@
-<ion-content >
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline">       </ion-back-button>
+    Terminos y condiciones
+  </ion-toolbar>
   
-  <ion-img class="icon" src="assets/imgs/LOGO2.png">
-  </ion-img>
+</ion-header>
+<ion-content >
+
+  <ion-img class="icon" src="assets/imgs/LOGO2.png">  </ion-img>
 
   
   <form class="content-items" (submit)="send_reset_password()">
@@ -16,7 +22,7 @@
         RECUPERAR CONTRASEÑA
       </ion-button>
  
-
+      
   </form>
   
 </ion-content>

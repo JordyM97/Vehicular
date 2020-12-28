@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
     };
     localStorage.setItem("correo",credentials.username);
     localStorage.setItem("password",credentials.password);
-
+    localStorage.setItem("firstTime","1");
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
       console.log(this.authService.token);

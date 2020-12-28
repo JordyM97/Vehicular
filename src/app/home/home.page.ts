@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SelectDateComponent } from '../components/select-date/select-date.component';
 
-
 declare var google;
 
 interface Marker {
@@ -22,11 +21,7 @@ interface Marker {
   };
 }
 
-@Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-})
+@Component({  selector: 'app-home',  templateUrl: 'home.page.html',  styleUrls: ['home.page.scss'],})
 
 export class HomePage implements OnInit {
   
@@ -55,17 +50,11 @@ export class HomePage implements OnInit {
   vehiculoSeleccionado: any;  pagoSeleccionado: any;  servicioSeleccionado: any;
   startMarker: any;  EndMarker: any;
   resultInit: string;  resultFini: string;
-
   latLngInicial: any;  latLngFinal: any;
-
-  //Listeners
   listenerInicio: any;  listenerFin: any;
   listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
-
   directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer();
-
-  //Marcadores de inicio y fin
   puntoInicio;  puntoFin;
 
   
@@ -73,21 +62,18 @@ export class HomePage implements OnInit {
   searchInit: string = " "; searchEnd: string = " ";
   searchResultsInit = Array<any>();  searchResultsEnd = Array<any>();
   posicionInicial: any;
-  Servicios: Observable<any[]>;
+  //Servicios: Observable<any[]>;
   distanciaInicioFin: any;
-  constructor(    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
-    public popovercontroller: PopoverController,
-    public db: AngularFireDatabase,                       // no se si borrar todavia
+
+  constructor(
+    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
+    public popovercontroller: PopoverController,    public db: AngularFireDatabase,                       // no se si borrar todavia
     public firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,    public router: Router,    public authService: AuthService,private toastController: ToastController
   ) {
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      this.router.navigateByUrl('Home')
-    });
-   
-    //GEt colllection from firestore                                                    //FIRESTORE
-    this.Servicios = firestore.collection('Pruebas').valueChanges();
-    this.Servicios.subscribe(value =>{console.log(value)});
+      
+    //GEt colllection from firestore                                            
+    //this.Servicios = firestore.collection('Pruebas').valueChanges();    //this.Servicios.subscribe(value =>{console.log(value)});
 
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };    this.autocomplete2 = { input: '' };
@@ -97,33 +83,23 @@ export class HomePage implements OnInit {
     var date = new Date();
     console.log(date);
   }
-  //sera eliminado...
-  async PopOverConductorEncontrado(){
-    const popover= await this.popovercontroller.create({
-      component: PopoverComponent,
-      translucent: true,      cssClass: 'contact-popover',
-      componentProps:{
-        info: {
-          locatini: this.latLngInicial,
-          locatfin: this.latLngFinal,
-          metodo: this.pagoSeleccionado,
-          price: 4.23 
-        }
-      }
-    }); 
-    return await popover.present();
+  ngOnInit(){
+    this.loadMap();
+    this.showTerms();
+    
   }
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Hay campos vacios!',
-      duration: 2500,
+      duration: 1700,
       position: 'top',
       color: 'danger'
-      });
-      
+      }); 
     toast.present();
-    }
-
+  }
+  showTerms(){
+    if(localStorage.getItem("firstTime")=="1") this.authService.getPoliticas()
+  }
   async aceptarParametros(){
     var date = new Date();
     console.log(date);
@@ -132,15 +108,13 @@ export class HomePage implements OnInit {
     var dia = String(date.getDate()).padStart(2, '0');
     var hora = String(date.getHours());
     var minuto =String(date.getMinutes());
-    var segundo = String(date.getSeconds());
     this.distanciaInicioFin = this.distanciaInicioFin.replace(",",".")
     var distancia = parseFloat(this.distanciaInicioFin);
     console.log(distancia);
     var precio = ((distancia * 0.4) + 1.25).toFixed(2);
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
-      translucent: true,
-      cssClass: 'contact-popover',
+      translucent: true,      cssClass: 'contact-popover',
       componentProps:{
         info: {
           ClientService: this.authService.getId(),
@@ -171,16 +145,9 @@ export class HomePage implements OnInit {
     
   }
 
-  pagoSeleccion(event){
-    this.pagoSeleccionado = event.target.value;
-  }
-  servicioSeleccion(event){
-    this.servicioSeleccionado = event.target.value;
-  }
-  ngOnInit(){
-    this.loadMap();
-    
-  }
+  pagoSeleccion(event){    this.pagoSeleccionado = event.target.value;  }
+  servicioSeleccion(event){    this.servicioSeleccionado = event.target.value;  }
+ 
   
   async loadMap() {  
     const rta = await this.geolocation.getCurrentPosition();
@@ -190,20 +157,14 @@ export class HomePage implements OnInit {
     };
     this.posicionInicial=myLatLng;
 
-    var styledMapType = new google.maps.StyledMapType(    [
-        {  "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text",          "stylers": [            {
-              "visibility": "on"
-            }]        },        {         "featureType": "administrative.neighborhood",
-          "stylers": [{    "visibility": "off"        }     ]    },    { "featureType": "poi",  "stylers": [  {
-              "visibility": "off"
-            }          ]       },    {   "featureType": "road",   "elementType": "labels.icon",   "stylers": [  {        "visibility": "off"
-            }          ]        },        {          "featureType": "transit",          "stylers": [            {              "visibility": "off"
-            }]        },    {  "featureType": "transit.line",    "elementType": "labels.text",      "stylers": [   {   "visibility": "on"           }          ]}
+    var styledMapType = new google.maps.StyledMapType(    [      {  "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
+      "elementType": "labels.text",          "stylers": [            {
+      "visibility": "on"           }]        },        {         "featureType": "administrative.neighborhood",         "stylers": [{    "visibility": "off"        }     ]    },    { "featureType": "poi",  "stylers": [  {              "visibility": "off"            }          ]       },    {   "featureType": "road",   "elementType": "labels.icon",   "stylers": [  {        "visibility": "off"
+      }          ]        },        {          "featureType": "transit",          "stylers": [            {              "visibility": "off"            }]        },    {  "featureType": "transit.line",    "elementType": "labels.text",      "stylers": [   {   "visibility": "on"           }          ]}
     ],{name: 'Styled Map'});
-    //Crear nuevo mapa
+    
     const mapEle: HTMLElement = document.getElementById('map');
-    // Crear el mapa y renderizarlo
+    
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 15,
@@ -213,9 +174,6 @@ export class HomePage implements OnInit {
       }
     });
     this.map.mapTypes.set('styled_map', styledMapType);    this.map.setMapTypeId('styled_map');
-    //Agregar marcador de ubicación actual
-    this.map.mapTypes.set('styled_map', styledMapType);
-    this.map.setMapTypeId('styled_map');
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
     this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
     this.addMarker(this.latLngInicial)
@@ -223,7 +181,6 @@ export class HomePage implements OnInit {
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
     this.authService.getRecordService();
-
     this.listenerDrag();
   }
 
@@ -272,7 +229,8 @@ export class HomePage implements OnInit {
       this.puntoInicio = new google.maps.Marker({
         position: marker.position,
         map: this.map,
-        icon: 'assets/icon/pin.png',
+        //icon: 'assets/icon/pin.png',
+        icon: 'assets/icon/pointer_a.png',
         draggable: true
       });
       this.puntoInicio.setPosition(marker);
@@ -287,7 +245,7 @@ export class HomePage implements OnInit {
       this.puntoFin = new google.maps.Marker({
         position: marker.position,
         map: this.map,
-        icon: 'assets/icon/pin.png',
+        icon: 'assets/icon/pointer_r.png',
         draggable: true
       });
       this.puntoFin.setPosition(marker);

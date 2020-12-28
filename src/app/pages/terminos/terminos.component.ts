@@ -16,5 +16,6 @@ export class TerminosComponent implements OnInit {
   }
   btnSi(){
     this.modalctrl.dismiss()
+    localStorage.setItem("firstTime","0");
   }
 }

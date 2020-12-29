@@ -12,6 +12,7 @@ export class HistorialPage implements OnInit {
   historialViajes: Array<any>;
   historialFinal: Array<any>;
   detallesViaje: Array<any>;
+  estadoViaje: any;
 
   constructor(
     private authService: AuthService,
@@ -23,7 +24,7 @@ export class HistorialPage implements OnInit {
   ngOnInit() {
     this.historialViajes = this.authService.getHistorial();
     console.log(this.historialViajes);
-    this.historialViajes.forEach(element => {
+    this.historialViajes.slice().reverse().forEach(element => {
       if (element.startidLocation!=null) {
         this.historialFinal.push(element);
       }
@@ -37,5 +38,14 @@ export class HistorialPage implements OnInit {
 
   public getDetallesViaje(){
     return this.detallesViaje;
+  }
+
+  getColor(estado) {
+    switch (estado) {
+      case 1:
+        return 'red';
+      case 0:
+        return 'green';
+    }
   }
 }

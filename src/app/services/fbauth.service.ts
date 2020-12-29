@@ -10,7 +10,10 @@ export class FBAuthService {
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
-    public toastController: ToastController) { }
+    public toastController: ToastController
+  ) { }
+
+
   login(correo_electronico: string, contrasenia: string) {
     return new Promise(
       (resolve, reject) => {

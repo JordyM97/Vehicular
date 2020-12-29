@@ -25,8 +25,11 @@
         <ion-button fill="outline" slot="end" (click)="botonDetalles(viaje)">Detalles</ion-button>
 
         <ion-card-content>
-          <b>Inicio: </b>{{viaje.startAddress}} <br>
-          <b>Fin: </b>{{viaje.endAddress}} 
+          <ion-grid>
+            <ion-row> <b>Inicio: </b>{{viaje.startAddress}} </ion-row>
+            <ion-row> <b>Fin: </b>{{viaje.endAddress}}  </ion-row>
+            <ion-row> <b>Estado: </b> <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}"> {{viaje.stateService === 1 ? 'Finalizado' : 'En curso'}}</ion-label>  </ion-row>
+          </ion-grid>
         </ion-card-content>
       </ion-item>
     </ion-card>

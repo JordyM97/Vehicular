@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularDelegate, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { TerminosComponent } from '../pages/terminos/terminos.component';
 
@@ -16,6 +16,8 @@ export class AuthService {
     ) { 
     this.historial = [];
   }
+
+  
   logout(){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();

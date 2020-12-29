@@ -1,20 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <h2>Seleccione el dia y la hora</h2>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content>
   <ion-grid>
     <ion-row>
-      <h2>Seleccione el dia y la hora</h2>
+      
     </ion-row>
     <ion-row>
       <ion-item>
         <ion-label position="floating">Selecciones el dia</ion-label>
         <ion-datetime displayFormat="	YYYY-MM-DDTHH:mm" min="2020-12-14" max="2022-12-12"></ion-datetime>
       </ion-item>
-    </ion-row>
-    <ion-row>
       <ion-item>
-        <ion-label>Seleccione </ion-label>
-        <ion-datetime displayFormat="HH:mm" ></ion-datetime>
-      </ion-item>    
+        <ion-label position="floating">Seleccione la hora </ion-label>
+        <ion-select>
+          <ion-select-option *ngFor="let hour of hours" value="hour">{{hour}}</ion-select-option>
+        </ion-select>
+      </ion-item> 
+
+    </ion-row>
+
+    <ion-row>
+        <ion-button expand="full">OK</ion-button>
     </ion-row>
   
 </ion-grid>
+<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab-button color="light">
+    <ion-icon name="share"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button color="primary">
+      <ion-icon name="logo-vimeo"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="end">
+    <ion-fab-button color="dark">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="bottom">
+    <ion-fab-button color="secondary">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="start">
+    <ion-fab-button color="light">
+      <ion-icon name="logo-google"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
 </ion-content>

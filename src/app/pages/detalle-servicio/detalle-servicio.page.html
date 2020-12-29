@@ -36,14 +36,22 @@
   </div>
 
   <!-- fab que contiene los botones para chat y llamada -->
-  <ion-fab vertical="center" horizontal="end" slot="fixed" color="tertiary">
-    <ion-fab-button id="chatbubble" (click)="chatWithClient()">
-      <ion-icon name="chatbubble-outline"></ion-icon>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon name="share"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary" (click)="chatWithClient()">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
     
-    <ion-fab-button id="callbubble" (click)="callByCellphone()">
-      <ion-icon name="call-outline"></ion-icon>
-    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light" (click)="callByCellphone()">
+        <ion-icon name="call-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
+  
 
 </ion-content>

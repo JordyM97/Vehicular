@@ -44,7 +44,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
     
       this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
@@ -84,7 +84,7 @@ export class AuthService {
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'token '+String(this.token));
+    headers = headers.set('Authorization', String(this.token));
 
     this.http.post('https://axela.pythonanywhere.com/api/notification/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
@@ -100,7 +100,7 @@ export class AuthService {
   getUserInfo(id){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
       console.log(this.token);
       console.log(headers);
   
@@ -132,7 +132,7 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;
-            this.token = data.token;
+            this.token = "token "+data.token;
             this.nombre = data.first_name;
             this.apellido = data.last_name;
             this.correo = data.email;
@@ -144,6 +144,36 @@ export class AuthService {
             resolve("bad");
           });  });
  
+  }
+  loginSocial(credentials){
+    console.log(credentials);
+    console.log(JSON.stringify(credentials));
+    
+    return new Promise((resolve, reject) => {
+        let headers = new HttpHeaders(); 
+        this.http.post('https://axela.pythonanywhere.com/auth/convert-token', credentials, {headers: headers}) //http://127.0.0.1:8000
+          .subscribe(res => {
+            let data = JSON.parse(JSON.stringify(res));
+            this.token = "Bearer "+data.access_token;
+            if (credentials.userId!="")
+              this.loadUserData(credentials.userId,credentials.token);
+            console.log(data);
+            resolve("ok");
+            }, (err) => {
+            console.log(err);
+            //resolve("ok");
+            resolve("bad");
+          });  });
+ 
+  }
+  loadUserData(userId,token) {
+      this.http.get("https://graph.facebook.com/"+userId+"?fields=id,name,email&access_token="+token).subscribe((res:any) => {
+      console.log(res);
+      this.nombre = res.name;
+      this.correo = res.email;
+      }, (err) => {
+      console.log(err);
+    });
   }
   loginFB(credentials){
     
@@ -159,7 +189,7 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;
-            this.token = data.token;
+            this.token = "token "+data.token;
             this.nombre = data.first_name;
             this.apellido = data.last_name;
             this.correo = data.email;
@@ -180,7 +210,7 @@ export class AuthService {
     //headers.append('Access-Control-Allow-Origin' , '*');
     //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
     //headers.append('Accept','application/json');
-    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
     console.log(this.token);
     console.log(headers);
 
@@ -203,7 +233,7 @@ export class AuthService {
     //headers.append('Access-Control-Allow-Origin' , '*');
     //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
     //headers.append('Accept','application/json');
-    headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
     console.log(this.token);
     console.log(headers);
 

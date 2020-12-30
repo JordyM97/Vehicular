@@ -50,6 +50,31 @@ export class LoginPage implements OnInit {
       console.log(googleUser.authentication.accessToken);
       console.log("code:");
       console.log(googleUser.serverAuthCode);
+      this.authService.nombre = googleUser.givenName;
+      this.authService.apellido = googleUser.familyName;
+      this.authService.correo = googleUser.email;
+      let credentials= {
+        backend: "google-oauth2",
+        grant_type: "convert_token",
+        token: googleUser.authentication.accessToken,
+        client_id: "MF6zy7Co7t23Ugabfu3F4wzKqtUx3FtouCTD7dIx",
+        client_secret: "3UeXlqs4of9izf8csbCQTgAFX49Hh1WCmX6QC83PXEJw3qpDJyc0vrvxh2oz6MkftRLEg5Cuqc6avG5okQ4mE7FWCvYYiEjbwSb4b5qNIfZUWxg4WnodDTdsYRfQTXCn"
+      };
+      this.authService.loginSocial(credentials).then( (result)=>{
+        console.log(result)
+        if(result=="ok"){
+          if(this.authService.deviceToken!= null){
+            this.authService.sendDeviceToken();
+          }
+          this.appcom.username=this.authService.nombre;
+          
+          
+          this.router.navigate(['home'])
+        }
+        else{
+          this.presentToastFeedback()
+        }
+      })
 
     }).catch((error)=>{
       console.log('User interrupted the login process', error);
@@ -57,14 +82,42 @@ export class LoginPage implements OnInit {
   }
 
   async loginFacebook(){
-    const FACEBOOK_PERMISSIONS = ['email'];
-    const result = await  <FacebookLoginResponse> Plugins.FacebookLogin.login({permissions:FACEBOOK_PERMISSIONS});
+    const FACEBOOK_PERMISSIONS = ['email','public_profile'];
+    let result = await  <FacebookLoginResponse> Plugins.FacebookLogin.login({permissions:FACEBOOK_PERMISSIONS});
+    result = await Plugins.FacebookLogin.getCurrentAccessToken();
     console.log("respuesta");
-    console.log(result);
+    
     if (result.accessToken) {
+      console.log(result);
       // Login successful.
       console.log("Facebook access token is");
       console.log(result.accessToken.token);
+      console.log(result.accessToken.userId);
+      result.accessToken.userId;
+
+      let credentials= {
+        backend: "facebook",
+        grant_type: "convert_token",
+        token: result.accessToken.token,
+        client_id: "MF6zy7Co7t23Ugabfu3F4wzKqtUx3FtouCTD7dIx",
+        client_secret: "3UeXlqs4of9izf8csbCQTgAFX49Hh1WCmX6QC83PXEJw3qpDJyc0vrvxh2oz6MkftRLEg5Cuqc6avG5okQ4mE7FWCvYYiEjbwSb4b5qNIfZUWxg4WnodDTdsYRfQTXCn",
+        userId: result.accessToken.userId
+      };
+      this.authService.loginSocial(credentials).then( (result)=>{
+        console.log(result)
+        if(result=="ok"){
+          if(this.authService.deviceToken!= null){
+            this.authService.sendDeviceToken();
+          }
+          this.appcom.username=this.authService.nombre;
+          
+          
+          this.router.navigate(['home'])
+        }
+        else{
+          this.presentToastFeedback()
+        }
+      })
     } else {
       // Cancelled by user.
       console.log("Facebook error");

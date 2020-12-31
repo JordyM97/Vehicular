@@ -15,6 +15,7 @@ export class AuthService {
   public correo: any;
   public deviceToken:any;
   public historial : Array<any>;
+  public tokenGoogle : any;
   servicios: Observable<any[]>;
   serviciosCollection: AngularFirestoreCollection<any>;
   constructor(
@@ -145,6 +146,22 @@ export class AuthService {
           });  });
  
   }
+  getTokenGoogle(credentials){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders(); 
+      this.http.post('https://oauth2.googleapis.com/token', credentials, {headers: headers}) 
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          this.tokenGoogle = data.access_token;
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+  }
+
+
   loginSocial(credentials){
     console.log(credentials);
     console.log(JSON.stringify(credentials));

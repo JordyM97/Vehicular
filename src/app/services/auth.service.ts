@@ -67,7 +67,6 @@ export class AuthService {
       token:this.deviceToken.token,
       app: "careapp"
     }
-    this.postDataAPI(tok)
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       

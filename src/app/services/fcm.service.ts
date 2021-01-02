@@ -85,6 +85,7 @@ export class FcmService {
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
       console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
+        
         let notObjeto = {
           'title':notification.body,
           'nombre:':notification.data.nombreConductor,

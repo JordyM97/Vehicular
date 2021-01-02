@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {AngularFirestore } from '@angular/fire/firestore'
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -13,7 +14,7 @@ export class FBAuthService {
     public toastController: ToastController
   ) { }
 
-
+  
   login(correo_electronico: string, contrasenia: string) {
     return new Promise(
       (resolve, reject) => {

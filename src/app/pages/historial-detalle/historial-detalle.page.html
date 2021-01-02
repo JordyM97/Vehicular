@@ -1,5 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/LOGO1.png">
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
+
+   <div #map id="mapaHistorial"></div>
+   
   <div class='mid'>
     <div class="cabecera">
       Detalles del viaje
@@ -9,24 +30,24 @@
       <ion-row>
         <ion-col>
           <ion-row><ion-label class="titulo">Ubicacion Inicial:</ion-label></ion-row>
-          <ion-row><ion-label>{{historialViaje.direccionInicio}}</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.startAddress}}</ion-label></ion-row>
         </ion-col>
 
         <ion-col> 
           <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
-          <ion-row><ion-label>{{historialViaje.direccionFin}}</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.endAddress}}</ion-label></ion-row>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
           <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
-          <ion-row><ion-label>{{historialViaje.anio}}/{{historialViaje.mes}}/{{historialViaje.dia}} -- {{historialViaje.hora}}:{{historialViaje.minuto}}</ion-label></ion-row>
+          <ion-row><ion-label>{{anio}}/{{mes}}/{{dia}} -- {{hora}}:{{minuto}}</ion-label></ion-row>
         </ion-col>
 
         <ion-col>
           <ion-row><ion-label class="titulo">Tipo de servicio:</ion-label></ion-row>
-          <ion-row><ion-label>{{historialViaje.servicio}}</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.idTypeService}}</ion-label></ion-row>
         </ion-col>
       </ion-row>
 
@@ -43,7 +64,7 @@
       </ion-row>
     </ion-grid>
     <div class="btns">
-      <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
+      <ion-button id="botonAceptar" (click)="botonAceptar()">Aceptar</ion-button>
     </div>
   </div>
 </ion-content>

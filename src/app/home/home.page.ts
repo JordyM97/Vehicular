@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SelectDateComponent } from '../components/select-date/select-date.component';
 
 
 declare var google;
@@ -44,63 +45,42 @@ export class HomePage implements OnInit {
     { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
   ];
   map: any;
-  addressInicial:string;
-  addressFinal:string;
-  lat: string;
-  long: string; 
+  addressInicial:string;  addressFinal:string;
+//  lat: string;  long: string; 
   autocomplete: { input: string; };
   autocomplete2: { input: string;};
-  autocompleteItems: any[];
-  autocompleteItems2: any[];
-  location: any;
-  placeid: any;
-  GoogleAutocomplete: any;
-  geocoder: any;
-  pagos: any[];
-  servicios:any[];
-  vehiculoSeleccionado: any;
-  pagoSeleccionado: any;
-  servicioSeleccionado: any;
-  startMarker: any;
-  EndMarker: any;
-
-  resultInit: string;
-  resultFini: string;
+  autocompleteItems: any[];  autocompleteItems2: any[];
+  placeid: any;  GoogleAutocomplete: any;  geocoder: any;
+  pagos: any[];  servicios:any[];
+  vehiculoSeleccionado: any;  pagoSeleccionado: any;  servicioSeleccionado: any;
+  startMarker: any;  EndMarker: any;
+  resultInit: string;  resultFini: string;
   //Capturar ubicaciones de markers
-  latLngInicial: any;
-  latLngFinal: any;
+  latLngInicial: any;  latLngFinal: any;
 
   //Listeners
-  listenerInicio: any;
-  listenerFin: any;
-  listenerMoverInicio: any;
-  listenerMoverFin: any;
+  listenerInicio: any;  listenerFin: any;
+  listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
 
-
-  directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer();
 
   //Marcadores de inicio y fin
-  puntoInicio;
-  puntoFin;
+  puntoInicio;  puntoFin;
 
   
   googleAutocomplete = new google.maps.places.AutocompleteService();
-  searchInit: string = " ";
-  searchResultsInit = Array<any>();
-  searchEnd: string = " ";
-  searchResultsEnd = Array<any>();
+  searchInit: string = " "; searchEnd: string = " ";
+  searchResultsInit = Array<any>();  searchResultsEnd = Array<any>();
   posicionInicial: any;
   Servicios: Observable<any[]>;
   distanciaInicioFin: any;
   constructor(
-    private geolocation: Geolocation,private nativeGeocoder: NativeGeocoder, public zone: NgZone, public popovercontroller: PopoverController,
+    private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
+    public popovercontroller: PopoverController,
     public db: AngularFireDatabase,                       // no se si borrar todavia
-    firestore: AngularFirestore,                           // conector a firestore
-    public platform: Platform,
-    public router: Router,
-    public authService: AuthService
+    public firestore: AngularFirestore,                           // conector a firestore
+    public platform: Platform,    public router: Router,    public authService: AuthService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -110,13 +90,11 @@ export class HomePage implements OnInit {
     this.Servicios = firestore.collection('Pruebas').valueChanges();
     this.Servicios.subscribe(value =>{console.log(value)});
 
-
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
-    this.autocomplete = { input: '' };
-    this.autocomplete2 = { input: '' };
-    this.autocompleteItems = [];
-    this.autocompleteItems2 = [];
+    this.autocomplete = { input: '' };    this.autocomplete2 = { input: '' };
+    this.autocompleteItems = [];    this.autocompleteItems2 = [];
     this.geocoder = new google.maps.Geocoder();
+    this.authService.getUserInfo(24);
   }
   async PopOverConductorEncontrado(){
     const popover= await this.popovercontroller.create({
@@ -145,15 +123,15 @@ export class HomePage implements OnInit {
     this.distanciaInicioFin = this.distanciaInicioFin.replace(",",".")
     var distancia = parseFloat(this.distanciaInicioFin);
     console.log(distancia);
-    var precio = (distancia * 0.4) + 1.25;
+    var precio = ((distancia * 0.4) + 1.25).toFixed(2);
     const popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,
       cssClass: 'contact-popover',
       componentProps:{
         info: {
-          ClientService: 1,
-          DriverService: 2,
+          ClientService: this.authService.getId(),
+          DriverService: 26,
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,
@@ -161,7 +139,7 @@ export class HomePage implements OnInit {
           idPaymentService: this.pagoSeleccionado,
           idTypeService: this.servicioSeleccionado,
           driverScore: 5,
-          clientScore: 5,
+          clientScore: 4,
           startDate: date,
           endDate: date,
           isReservationService: 0,
@@ -188,6 +166,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
+    this.authService.getUserInfo(this.authService.getId());
     
   }
   
@@ -199,88 +178,39 @@ export class HomePage implements OnInit {
     };
     this.posicionInicial=myLatLng;
 
-    var styledMapType = new google.maps.StyledMapType(
-    [
-        {
-          "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {
-              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
+    var styledMapType = new google.maps.StyledMapType(    [
+        {  "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",
           "elementType": "labels.text",          "stylers": [            {
               "visibility": "on"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.neighborhood",
-          "stylers": [
-            {
+            }]        },        {         "featureType": "administrative.neighborhood",
+          "stylers": [{    "visibility": "off"        }     ]    },    { "featureType": "poi",  "stylers": [  {
               "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "transit",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "labels.text",
-          "stylers": [
-            {
-              "visibility": "on"
-            }
-          ]
-        }
-    ],
-    {name: 'Styled Map'});
+            }          ]       },    {   "featureType": "road",   "elementType": "labels.icon",   "stylers": [  {        "visibility": "off"
+            }          ]        },        {          "featureType": "transit",          "stylers": [            {              "visibility": "off"
+            }]        },    {  "featureType": "transit.line",    "elementType": "labels.text",      "stylers": [   {   "visibility": "on"           }          ]}
+    ],{name: 'Styled Map'});
     //Crear nuevo mapa
     const mapEle: HTMLElement = document.getElementById('map');
     // Crear el mapa y renderizarlo
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 15,
-      zoomControl:false,
-      mapTypeControl:false,
-      streetViewControl:false,
-      fullscreenControl:false,
+      zoomControl:false,      mapTypeControl:false,      streetViewControl:false,      fullscreenControl:false,
       mapTypeControlOptions: {
         mapTypeIds: ['styled_map']
       }
     });
-    this.map.mapTypes.set('styled_map', styledMapType);
-    this.map.setMapTypeId('styled_map');
+    this.map.mapTypes.set('styled_map', styledMapType);    this.map.setMapTypeId('styled_map');
     //Agregar marcador de ubicación actual
     this.map.mapTypes.set('styled_map', styledMapType);
     this.map.setMapTypeId('styled_map');
     this.latLngInicial = {lat: rta.coords.latitude, lng: rta.coords.longitude}
-    console.log(this.latLngInicial);
     this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
     this.addMarker(this.latLngInicial)
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
-    this.authService.Historial();
-    
+    this.authService.getRecordService();
 
     this.listenerDrag();
   }
@@ -290,10 +220,8 @@ export class HomePage implements OnInit {
     this.puntoInicio.setOptions({draggable: true});
     var menuOp = document.getElementById("menuOp");
     var botonAceptar = document.getElementById("aceptarPuntos");
-    menuOp.style.display="none";
-    botonAceptar.style.display="block";
+    menuOp.style.display="none";    botonAceptar.style.display="block";
     this.listenerInicio = google.maps.event.addListener(this.map, 'click' , (event) => {
-      //mapEle.classList.add('show-map');
       this.latLngInicial = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
       this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
       console.log(this.latLngInicial);
@@ -315,7 +243,6 @@ export class HomePage implements OnInit {
       this.listenerDragF();
     }
     this.listenerFin = google.maps.event.addListener(this.map, 'click', (event) => {
-      //mapEle.classList.add('show-map');
       this.latLngFinal = {lat: event.latLng.lat(), lng: event.latLng.lng()}; //Necesito string para almacenar en bd
       this.geocodeLatLng(this.latLngFinal.lat,this.latLngFinal.lng,0);
       console.log(this.latLngFinal);
@@ -360,9 +287,6 @@ export class HomePage implements OnInit {
       this.latLngInicial = {lat: evt.latLng.lat(), lng: evt.latLng.lng()}
       console.log(this.latLngInicial);
       this.geocodeLatLng(this.latLngInicial.lat,this.latLngInicial.lng,1);
-      /*console.log(evt.latLng.lat().toFixed(6));
-      console.log(evt.latLng.lng().toFixed(6))*/
-      //this.map.panTo(evt.latLng);
     });
   }
 
@@ -475,17 +399,11 @@ export class HomePage implements OnInit {
     });
   }
 
-  ClearAutocomplete(){
-    this.searchResultsEnd = []
-   
-    this.searchResultsInit =[]
-    
-  }
+  ClearAutocomplete(){    this.searchResultsEnd = [] ;   this.searchResultsInit =[]      }
 
   //Seleccionar un tipo de transporte
   SelectTransport(item){
-    if(item.isChecked==true){
-      item.isChecked=true;
+    if(item.isChecked==true){      item.isChecked=true;    
     }else{
       this.vehiculos.forEach(function (vehiculos) {
         vehiculos.isChecked=false;
@@ -500,6 +418,7 @@ export class HomePage implements OnInit {
   SelectService(item){
     if(item.isChecked==true){
       item.isChecked=true;
+      
     }else{
       this.tipoServicio.forEach(function (tipoServicio) {
         tipoServicio.isChecked=false;
@@ -507,9 +426,24 @@ export class HomePage implements OnInit {
       item.isChecked=true;
       this.servicioSeleccionado=item.tipoServicio;
       console.log(this.servicioSeleccionado);
+      if(item.id==2){
+        console.log("fecha");
+        this.selectDate();
+      }
     }
   }
-
+  async selectDate(){
+    const popover= await this.popovercontroller.create({
+      component: SelectDateComponent,
+      translucent: true,
+      cssClass: 'contact-popover',
+      componentProps:{
+        info: {
+        }
+      }
+    }); 
+    return await popover.present();
+  }
   //Seleccionar un de pago
   SelectPayment(item){
     if(item.isChecked==true){
@@ -622,10 +556,4 @@ export class HomePage implements OnInit {
       resultado.style.display="none";
     }
   }
-
-  precioCarrera(){
-
-  }
-
- 
 }

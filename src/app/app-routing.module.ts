@@ -50,6 +50,20 @@ const routes: Routes = [
     path: 'historial',
     loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'historial-detalle/:datos',
+    loadChildren: () => import('./pages/historial-detalle/historial-detalle.module').then( m => m.HistorialDetallePageModule)
+  },
+  {
+    path: 'detalle-servicio',
+    loadChildren: () => import('./pages/detalle-servicio/detalle-servicio.module').then( m => m.DetalleServicioPageModule)
+  },  {
+    path: 'comentarios-sugerencias',
+    loadChildren: () => import('./pages/comentarios-sugerencias/comentarios-sugerencias.module').then( m => m.ComentariosSugerenciasPageModule)
+  },
+
+
+
 
 
 

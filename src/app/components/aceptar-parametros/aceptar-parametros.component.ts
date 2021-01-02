@@ -1,11 +1,12 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { PopoverController,ToastController,NavParams } from '@ionic/angular';
+import { PopoverController,ToastController,NavParams} from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { FormBuilder, FormGroup  } from '@angular/forms';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -20,15 +21,16 @@ export class AceptarParametrosComponent implements OnInit {
   servicios: Observable<any[]>;
   uploadForm: FormGroup; 
 
-  constructor(private navParams: NavParams, 
+  constructor(
+    private navParams: NavParams, 
     private popoverController: PopoverController,
     public toastController: ToastController,
     private firestore: AngularFirestore, 
     public authService: AuthService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,private loadingservice:LoadingService) {
     this.serviciosCollection=firestore.collection('Servicio');
     this.servicios= this.serviciosCollection.valueChanges();
-   }
+   } 
 
   ngOnInit() {
     this.startMarker= this.navParams.get('info');
@@ -40,6 +42,7 @@ export class AceptarParametrosComponent implements OnInit {
       data: ['']
     });
   }
+  
   async DismissClick() {
     await this.popoverController.dismiss();
     const toast = await this.toastController.create({
@@ -48,7 +51,7 @@ export class AceptarParametrosComponent implements OnInit {
       position: 'top',
       color: 'danger'
       });
-    toast.present();
+    await toast.present();
   }
 
   async presentToast() {
@@ -59,7 +62,7 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
-    this.authService.setNotification(JSON.stringify(this.startMarker));
+    this.authService.sendService(JSON.stringify(this.startMarker));
 
     this.notificacionTransporter = {
       inicio: this.startMarker.startidLocation,
@@ -68,16 +71,15 @@ export class AceptarParametrosComponent implements OnInit {
       fecha: this.startMarker.anio+"/"+this.startMarker.mes+"/"+this.startMarker.dia,
       metodoPago: this.startMarker.idPaymentService,
       valor: this.startMarker.total,
-      cliente: this.authService.getNombre()+" "+this.authService.getApellido()
+      cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
+      idCliente: this.authService.getId() /*Necesito ID de la tabla cliente*/
     }
    
-    //this.authService.sendNotification(JSON.stringify(this.startMarker));
     this.enviarNotificacion(this.notificacionTransporter);
     console.log("Enviando Info al API");
-    this.postDataAPI(this.startMarker)
-    //console.log(JSON.stringify(this.startMarker))
+    this.postDataAPI(this.startMarker);
     await this.popoverController.dismiss();
-    this.PopOverConductorEncontrado();
+    //this.PopOverConductorEncontrado();
 
     }
     enviarNotificacion(data){
@@ -93,7 +95,10 @@ export class AceptarParametrosComponent implements OnInit {
       formData.append("title", this.uploadForm.get('title').value);
       formData.append("data", this.uploadForm.get('data').value);
       this.authService.sendNotification(formData);
+      //this.loadingservice.showLoader();
     }
+
+    
     async PopOverConductorEncontrado(){
       const popover= await this.popoverController.create({
         component: PopoverComponent,

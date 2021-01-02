@@ -24,6 +24,11 @@ ionic cordova plugin add cordova-plugin-geolocation
 npm install @ionic-native/geolocation
 ionic cordova plugin add cordova-plugin-advanced-http
 npm install @ionic-native/http
+npm i --save @codetrix-studio/capacitor-google-auth
+npm i @capacitor-community/facebook-login
+
+ <Para calificaciones>
+
 
 
 -----BUILD APP---------

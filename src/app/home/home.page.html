@@ -18,8 +18,7 @@
 </ion-header>
 
 <ion-content> 
-  <div #map id="map"  style="height: 100%">
-  </div>
+  <div #map id="map"  style="height: 100%"></div>
 
 
   <div id="menuOp" class="menuop">
@@ -95,18 +94,7 @@
         <!--<ion-button id="OPI" (click)="seleccionarFin()">Elegir Fin</ion-button>
         <ion-button id="OPI" (click)="calcularRuta()">Ver ruta</ion-button>-->
       </ion-row>
-        <!--<ion-row>
-          <ion-select (ionChange)="pagoSeleccion($event)" interface="action-sheet">
-            <ion-select-option *ngFor="let pago of pagos" [value]="pago.tipoPago">
-              {{pago.tipoPago}}
-            </ion-select-option>
-          </ion-select>
-          <ion-select (ionChange)="servicioSeleccion($event)" interface="action-sheet">
-            <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.tipoServicio">
-              {{servicio.tipoServicio}}
-            </ion-select-option>
-          </ion-select>
-        </ion-row>-->
+
       <ion-button id="aceptar" class="BuscarRide" (click)="aceptarBoton()" >CONFIRMAR SERVICIO</ion-button>
     </ion-grid>
   </div>

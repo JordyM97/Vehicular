@@ -5,7 +5,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Platform, PopoverController, ToastController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
@@ -65,6 +65,9 @@ export class HomePage implements OnInit {
   //Servicios: Observable<any[]>;
   distanciaInicioFin: any;
 
+  now= new Date().getUTCSeconds();
+  locationCollection: AngularFirestoreCollection<any>;
+  location: Observable<any[]>
   constructor(
     private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
     public popovercontroller: PopoverController,    public db: AngularFireDatabase,                       // no se si borrar todavia
@@ -74,14 +77,26 @@ export class HomePage implements OnInit {
       
     //GEt colllection from firestore                                            
     //this.Servicios = firestore.collection('Pruebas').valueChanges();    //this.Servicios.subscribe(value =>{console.log(value)});
+    
 
+    this.locationCollection=firestore.collection('posicion');//.collection('hist')doc('1')
+    
+    this.location= this.locationCollection.valueChanges();
+    this.location.subscribe(value =>{
+      console.log(value[0].createdAt.seconds)
+      var date = new Date(0);
+      date.setUTCSeconds(value[0].createdAt.seconds)
+      console.log(date)
+      console.log(JSON.parse(value[0].location))
+    });
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };    this.autocomplete2 = { input: '' };
     this.autocompleteItems = [];    this.autocompleteItems2 = [];
     this.geocoder = new google.maps.Geocoder();
     this.authService.getUserInfo(24);
-    var date = new Date();
-    console.log(date);
+    
+    
+    //console.log(date);
   }
   ngOnInit(){
     this.loadMap();
@@ -155,6 +170,7 @@ export class HomePage implements OnInit {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude
     };
+    
     this.posicionInicial=myLatLng;
 
     var styledMapType = new google.maps.StyledMapType(    [      {  "featureType": "administrative",          "elementType": "geometry",          "stylers": [            {              "visibility": "off"            }          ]        },{          "featureType": "administrative.land_parcel",

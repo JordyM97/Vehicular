@@ -1,4 +1,6 @@
-
+ion-content{
+    --background:white;
+}
 .tipo {
     width: 70%;
     padding-left: 20%;
@@ -7,8 +9,12 @@ ion-item{
     --background: white;
     width: 95%;
     --inner-border-width: 0px 0px 0px 0px;
-}
 
+}
+.photo{
+    padding-left: 40%;
+    font-size: 24px;
+    height: 90%;}
 
 .btne{
     width: 98%;

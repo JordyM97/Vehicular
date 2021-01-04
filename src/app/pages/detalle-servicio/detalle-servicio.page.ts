@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 declare var google;
 
@@ -13,7 +14,8 @@ declare var google;
   styleUrls: ['./detalle-servicio.page.scss'],
 })
 export class DetalleServicioPage implements OnInit {
-
+  locationCollection: AngularFirestoreCollection<any>;
+  location: Observable<any[]>
   mapa=null;
   marker=null;
   watch:any;
@@ -39,9 +41,16 @@ export class DetalleServicioPage implements OnInit {
     public alertController: AlertController,
     public shareData: ShareDataService,
     private router: Router,
+    private firestore: AngularFirestore,
     public popoverController: PopoverController,
     //private callNumber: CallNumber,
-  ) { }
+  ) {
+    this.locationCollection=firestore.collection('posicion').doc('1').collection('hist');
+    this.location= this.locationCollection.valueChanges();
+    this.location.subscribe(value =>{
+      console.log(value[0])
+    });
+  }
 
   ngOnInit() {
   }

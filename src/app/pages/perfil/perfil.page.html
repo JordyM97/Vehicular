@@ -20,20 +20,33 @@
     (click)="rate(num)" [ngStyle]="{'color':getColor(num)}">
     </ion-icon>
   </div>-->
-
+ 
   <ion-grid>
-
-    <ion-row class="fotoPerfil"> 
-      <ion-avatar class="imgPerfil">
-        <img src="assets/icon/avatar.png">
-      </ion-avatar>
-    </ion-row>
+    <ion-col>
+    
+     <ion-row>
+      <img [src]=img>
+     </ion-row>
+        
+      
+    
 
     <ion-row class="estrellas">
       <ion-label class="calificacion">{{calificacionStr}}</ion-label>
       <img class="estrella" src="assets/imgs/estrella.png">
     </ion-row>
+    <ion-row>
+      <ion-col>
 
+      </ion-col>   
+      <ion-col>
+        <ion-button (click)="uploadImg()">Subir una foto</ion-button> 
+      </ion-col>  
+      <ion-col>
+        
+      </ion-col> 
+    </ion-row>
+    
     <ion-row>
       <ion-row><ion-label class="titulo">Nombre:</ion-label></ion-row>
     </ion-row>
@@ -75,5 +88,6 @@
     <ion-row>
       <ion-row><ion-label class="respuesta"></ion-label></ion-row>
     </ion-row>
+  </ion-col>
   </ion-grid>
 </ion-content>

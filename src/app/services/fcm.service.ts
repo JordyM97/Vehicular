@@ -77,7 +77,7 @@ export class FcmService {
 
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        console.error('Error on registration: ' + JSON.stringify(error));
+        alert('Error on registration: ' + JSON.stringify(error));
       }
     );
 

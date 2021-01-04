@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-//import { AngularFireStorage } from '@angular/fire/storage';
-import { ActionSheetController, Platform, ToastController } from '@ionic/angular';
+import { MediaServiceService } from 'src/app/services/media-service.service';
+
 
 @Component({
   selector: 'app-comentarios-sugerencias',
@@ -9,18 +8,25 @@ import { ActionSheetController, Platform, ToastController } from '@ionic/angular
   styleUrls: ['./comentarios-sugerencias.page.scss'],
 })
 export class ComentariosSugerenciasPage implements OnInit {
-  files = [];
-  uploadProgress = 0;
-  constructor(
-  // private storage: AngularFireStorage,
-  ) { }
-  uploadFile(event: any) {
-    const file = event.target.files[0];
-    const filePath = 'name-your-file-path-here';
-   // const ref = this.storage.ref(filePath);
-   // const task = ref.put(file);
-  }
-  ngOnInit() {
+  uploadProgress: any;
+  pictureview:string;
+  constructor(private Mediaservice:MediaServiceService) {}
+ 
+
+
+  
+  async takePicture(){
+    await this.Mediaservice.takePicture();
+    await this.Mediaservice.upload();
+    this.pictureview=this.Mediaservice.pictureview
   }
 
+  ngOnInit() {
+    this.uploadProgress=this.Mediaservice.uploadProgress
+    this.pictureview=this.Mediaservice.pictureview
+
+  }
+  
+
+  
 }

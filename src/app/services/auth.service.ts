@@ -9,7 +9,7 @@ import { TerminosComponent } from '../pages/terminos/terminos.component';
   providedIn: 'root'
 })
 export class AuthService {
-  public token: any;  public id:any;  public nombre: any;  public apellido: any;  public correo: any;
+  public token: any;  public id:any;  public nombre: any;  public apellido: any;  public correo: any; public img:string
   public deviceToken:any;  public historial : Array<any>;  servicios: Observable<any[]>;  serviciosCollection: AngularFirestoreCollection<any>;
   constructor(
     public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
@@ -143,7 +143,7 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;            this.token = data.token;            this.nombre = data.first_name;
-            this.apellido = data.last_name;          this.correo = data.email;
+            this.apellido = data.last_name;          this.correo = data.email; this.img=""
             console.log(data);
             resolve("ok");
             }, (err) => {
@@ -244,7 +244,9 @@ export class AuthService {
   getCorreo(){
     return this.correo;
   }
-
+  getImg(){
+    return this.img;
+  }
   getId(){
     return this.id;
   }

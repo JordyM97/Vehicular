@@ -17,9 +17,10 @@ const { PushNotifications } = Plugins;
 //Compartir la data a traves de un service
 import { ShareDataService } from './share-data.service';
 import { NotificationDriverComponent } from '../components/notification-driver/notification-driver.component';
-import { PopoverController } from '@ionic/angular';
+import { AngularDelegate, PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
+import { CalificarDriverComponent } from '../components/calificar-driver/calificar-driver.component';
 
 @Injectable({
   providedIn: 'root'
@@ -107,8 +108,11 @@ export class FcmService {
         this.shareData.detallesDriver=notification;
         //this.presentAlertConfirm(notification);
 
-
-        this.presentPopoverDetalle(notification);
+        if(parseInt(notification.data.tipoNotificacion)==0){
+          this.presentPopoverDetalle(notification);
+        } else if(parseInt(notification.data.tipoNotificacion)==1){
+          this.presentPopoverCalificacion();
+        }
       }
     );
 
@@ -136,7 +140,11 @@ export class FcmService {
         //this.presentAlertConfirm(notification);
 
 
-        this.presentPopoverDetalle(notification.notification);
+        if(parseInt(notification.notification.data.tipoNotificacion)==0){
+          this.presentPopoverDetalle(notification);
+        } else if(parseInt(notification.notification.data.tipoNotificacion)==1){
+          this.presentPopoverCalificacion();
+        }
       }
     );
 
@@ -157,6 +165,19 @@ export class FcmService {
          apellido: apellido
          //idCliente: idCliente
       },
+      mode:"md",
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+
+  async presentPopoverCalificacion() {
+    //let idCliente = notification.data.idCliente;
+    const popover = await this.popoverController.create({
+      component: CalificarDriverComponent,
+      cssClass: 'servicioasignado',
+      componentProps:{},
       mode:"md",
       translucent: true
     });

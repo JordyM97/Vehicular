@@ -86,7 +86,7 @@ export class AceptarParametrosComponent implements OnInit {
       console.log(data)
       this.uploadForm.get('user').setValue(0);
       this.uploadForm.get('body').setValue("Peticion de viaje");
-      this.uploadForm.get('title').setValue("Enviado desde celular");
+      this.uploadForm.get('title').setValue("Detalle del servicio");
       this.uploadForm.get('data').setValue(JSON.stringify(data));
 
       var formData: any = new FormData();

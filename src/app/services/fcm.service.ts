@@ -21,6 +21,7 @@ import { AngularDelegate, PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
 import { CalificarDriverComponent } from '../components/calificar-driver/calificar-driver.component';
+import { ResourceLoader } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +76,7 @@ export class FcmService {
         
       }
     );
-
+      
     PushNotifications.addListener('registrationError',
       (error: any) => {
         alert('Error on registration: ' + JSON.stringify(error));

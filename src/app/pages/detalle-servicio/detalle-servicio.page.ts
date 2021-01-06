@@ -18,6 +18,8 @@ export class DetalleServicioPage implements OnInit {
   location: Observable<any[]>
   mapa=null;
   marker=null;
+  markerD=null;
+  
   watch:any;
   origen: any;
   destino: any;
@@ -45,11 +47,7 @@ export class DetalleServicioPage implements OnInit {
     public popoverController: PopoverController,
     //private callNumber: CallNumber,
   ) {
-    this.locationCollection=firestore.collection('posicion').doc('1').collection('hist');
-    this.location= this.locationCollection.valueChanges();
-    this.location.subscribe(value =>{
-      console.log(value[0])
-    });
+    
   }
 
   ngOnInit() {
@@ -58,6 +56,7 @@ export class DetalleServicioPage implements OnInit {
   ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
+    this.watchDriverPosition();
   }
 
   async loadMap() {
@@ -78,7 +77,30 @@ export class DetalleServicioPage implements OnInit {
     await google.maps.event.addListenerOnce(this.mapa, 'idle', () => {
       mapEle.classList.add('show-map');
       this.calculateRoute(this.shareData.notificacion.data.inicioCoords,this.shareData.notificacion.data.finCoords);
-    });    
+    }); 
+    this.locationCollection=this.firestore.collection(`/posicion`);//.collection('hist')doc('1')
+
+    this.location= this.locationCollection.valueChanges();
+    this.location.subscribe(value =>{
+      value.forEach(user=>{
+        if(user.id='1'){
+          const mark={
+            lat:Number(user.location.lat),
+            lng: Number(user.location.lng+0.3)
+          }
+          this.markerD = new google.maps.Marker({
+            map: this.mapa ,
+            icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+             new google.maps.Size(22, 22),
+             new google.maps.Point(0, 18),
+             new google.maps.Point(11, 11)),
+             position: mark  
+           });
+          //console.log(user.location.lat)
+          //console.log(user.location.lng)
+        }
+      })
+    });   
   }
 
   private calculateRoute(ini:any,fin:any){  
@@ -121,6 +143,9 @@ export class DetalleServicioPage implements OnInit {
         console.log("ERROR WATCH POSITION");
       }
     })
+  }
+  watchDriverPosition(){
+
   }
 
 }

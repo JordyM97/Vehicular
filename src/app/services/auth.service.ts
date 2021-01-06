@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { TerminosComponent } from '../pages/terminos/terminos.component';
+import { FcmService } from './fcm.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,24 @@ export class AuthService {
     ) { 
     this.historial = [];
   }
-
+  login(credentials){
+    console.log(credentials);
+    console.log(JSON.stringify(credentials));
+    return new Promise((resolve, reject) => {
+        let headers = new HttpHeaders(); 
+        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
+          .subscribe(res => {
+            let data = JSON.parse(JSON.stringify(res));
+            this.id=data.id;            this.token = data.token;            this.nombre = data.first_name;
+            this.apellido = data.last_name;          this.correo = data.email; this.img=""
+            console.log(data);
+            resolve("ok");
+            }, (err) => {
+            console.log(err);
+            resolve("bad");
+          });  });
+ 
+  }
   
   logout(){
     return new Promise((resolve, reject) => {
@@ -26,14 +44,43 @@ export class AuthService {
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           resolve("ok");
-          this.token="";  this.id=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken=""; this.historial=null;
+          this.nombre="Invitado"; this.id="";this.historial=null;//this.token=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken="";
           }, (err) => {
           console.log(err);
           resolve("bad");
         });  });      
   }
 
-
+  sendDeviceToken(){
+    console.log(this.token);
+    console.log(this.deviceToken);
+    let req={
+      user: this.id,
+      registration_id: this.deviceToken.token,
+      type: "android"
+    }
+    console.log(req)
+    
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    
+      this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          data.forEach(element => {
+            console.log(element) //Recorrer los elementos del array y extraer la info
+          });
+          console.log(data);
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+    
+  }
   
   
   registerclient(){
@@ -55,38 +102,7 @@ export class AuthService {
         });  });
     
   }
-  sendDeviceToken(){
-    console.log(this.token);
-    console.log(this.deviceToken);
-    let req={
-      user: this.id,
-      registration_id: this.deviceToken.token,
-      type: "android"
-    }
-    let tok={
-      token:this.deviceToken.token,
-      app: "careapp"
-    }
-    return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders();
-      
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
-    
-      this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
-        .subscribe(res => {
-          let data = JSON.parse(JSON.stringify(res));
-          data.forEach(element => {
-            console.log(element) //Recorrer los elementos del array y extraer la info
-          });
-          console.log(data);
-          resolve("ok");
-          }, (err) => {
-          console.log(err);
-          //resolve("ok");
-          resolve("bad");
-        });  });
-    
-  }
+  
   signUp(credentials){
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
@@ -133,25 +149,7 @@ export class AuthService {
           resolve("bad");
         });  });
   }
-  login(credentials){
-    console.log(credentials);
-    console.log(JSON.stringify(credentials));
-    
-    return new Promise((resolve, reject) => {
-        let headers = new HttpHeaders(); 
-        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
-          .subscribe(res => {
-            let data = JSON.parse(JSON.stringify(res));
-            this.id=data.id;            this.token = data.token;            this.nombre = data.first_name;
-            this.apellido = data.last_name;          this.correo = data.email; this.img=""
-            console.log(data);
-            resolve("ok");
-            }, (err) => {
-            console.log(err);
-            resolve("bad");
-          });  });
- 
-  }
+  
   loginFB(credentials){
     
     return new Promise((resolve, reject) => {

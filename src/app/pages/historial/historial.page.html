@@ -18,8 +18,21 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list id="historialResultados">
+  
+    <ion-list id="historialResultados">
+      <ion-card *ngIf="historialViajes.length==0">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col>No hay viajes!</ion-col>            
+              <ion-col></ion-col>
+            </ion-row>
+          </ion-grid>
+        
+      </ion-card-content>
+      </ion-card>
+      
     <ion-card>
       <ion-item *ngFor="let viaje of historialFinal">
         <ion-button fill="outline" slot="end" (click)="botonDetalles(viaje)">Detalles</ion-button>

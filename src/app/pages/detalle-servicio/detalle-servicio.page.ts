@@ -4,7 +4,7 @@ import { AlertController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 declare var google;
 
@@ -16,6 +16,8 @@ declare var google;
 export class DetalleServicioPage implements OnInit {
   locationCollection: AngularFirestoreCollection<any>;
   location: Observable<any[]>
+  Position: AngularFirestoreDocument<any>;
+  PositionD: Observable<any>;
   mapa=null;
   marker=null;
   markerD=null;
@@ -56,7 +58,7 @@ export class DetalleServicioPage implements OnInit {
   ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
-    this.watchDriverPosition();
+    this.watchDriverPos(31);
   }
 
   async loadMap() {
@@ -144,8 +146,23 @@ export class DetalleServicioPage implements OnInit {
       }
     })
   }
-  watchDriverPosition(){
-
+  watchDriverPos(id: any){
+    this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
+    
+    this.PositionD.subscribe(val=>{ 
+      console.log(val.location)
+      const myLatLng = {
+        lat: JSON.parse(val.location).lat,
+        lng: JSON.parse(val.location).lng
+      };
+      this.markerD=  new google.maps.Marker({
+        map: this.mapa ,
+        icon: new google.maps.MarkerImage('assets/icon/pointer_proveed.png',
+         null,null,null,
+         new google.maps.Size(34, 45)),  
+         position: myLatLng  
+       });
+      })
   }
 
 }

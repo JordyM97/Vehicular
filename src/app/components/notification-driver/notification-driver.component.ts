@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavParams, PopoverController } from '@ionic/angular';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-notification-driver',
@@ -16,12 +17,13 @@ export class NotificationDriverComponent implements OnInit {
   constructor(
     private router: Router,
     private navParams: NavParams,
-    private popover:PopoverController
+    private popover:PopoverController,private loadingservice:LoadingService
   ) { }
 
   ngOnInit() {
     this.title = this.navParams.get("title");
     this.body = this.navParams.get("body");
+    this.loadingservice.hideLoader();
     //this.apellido = this.navParams.get("apellido");
   }
 

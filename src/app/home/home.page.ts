@@ -5,7 +5,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { IonIcon, Platform, PopoverController, ToastController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { observable, Observable } from 'rxjs';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { Router } from '@angular/router';
@@ -65,6 +65,8 @@ export class HomePage implements OnInit {
   distanciaInicioFin: any;
   inter:any;
   now= new Date().getUTCSeconds();
+  Position: AngularFirestoreDocument<any>;
+  PositionD: Observable<any>;
   locationCollection: AngularFirestoreCollection<any>;
   location: Observable<any[]>
   constructor(
@@ -77,7 +79,6 @@ export class HomePage implements OnInit {
     //GEt colllection from firestore                                            
     //this.Servicios = firestore.collection('Pruebas').valueChanges();    //this.Servicios.subscribe(value =>{console.log(value)});
     this.locationCollection=firestore.collection(`/posicion`);//.collection('hist')doc('1')
-
     this.location= this.locationCollection.valueChanges();
     
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
@@ -92,7 +93,25 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.loadMap();
     this.showTerms();
-    //this.watchDriver();
+    this.watchDriverPos(31);
+  }
+  watchDriverPos(id: any){
+    this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
+    
+    this.PositionD.subscribe(val=>{ 
+      console.log(val.location)
+      const myLatLng = {
+        lat: JSON.parse(val.location).lat,
+        lng: JSON.parse(val.location).lng
+      };
+      this.markerD=  new google.maps.Marker({
+        map: this.map ,
+        icon: new google.maps.MarkerImage('assets/icon/pointer_proveed.png',
+         null,null,null,
+         new google.maps.Size(34, 45)),  
+         position: myLatLng  
+       });
+      })
   }
   watchDriver(){
     
@@ -107,7 +126,7 @@ export class HomePage implements OnInit {
         //console.log(mark)
         this.markerD=new google.maps.Marker({
           map: this.map ,
-          icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+          icon: new google.maps.MarkerImage('assets/icon/pointer_a.png',
            new google.maps.Size(22, 22),
            new google.maps.Point(0, 18),
            new google.maps.Point(11, 11)),

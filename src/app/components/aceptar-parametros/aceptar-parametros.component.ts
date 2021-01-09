@@ -79,6 +79,7 @@ export class AceptarParametrosComponent implements OnInit {
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker);
     await this.popoverController.dismiss();
+    this.loadingservice.showLoader();
     //this.PopOverConductorEncontrado();
 
     }

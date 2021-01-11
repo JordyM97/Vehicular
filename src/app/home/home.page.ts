@@ -75,7 +75,9 @@ export class HomePage implements OnInit {
     public firestore: AngularFirestore,                           // conector a firestore
     public platform: Platform,    public router: Router,    public authService: AuthService,private toastController: ToastController
   ) {
-    
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.router.navigateByUrl('Home')
+    });
     //GEt colllection from firestore                                            
     //this.Servicios = firestore.collection('Pruebas').valueChanges();    //this.Servicios.subscribe(value =>{console.log(value)});
     this.locationCollection=firestore.collection(`/posicion`);//.collection('hist')doc('1')
@@ -93,7 +95,7 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.loadMap();
     this.showTerms();
-    this.watchDriverPos(31);
+    //this.watchDriverPos(31);
   }
   watchDriverPos(id: any){
     this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
@@ -113,29 +115,7 @@ export class HomePage implements OnInit {
        });
       })
   }
-  watchDriver(){
-    
-    this.location.subscribe(value =>{
-      value.forEach(user=>{
-        if(user.id='31'){
 
-          var mark={
-            lat: JSON.parse(user.location).lat,
-            lng: JSON.parse(user.location).lng
-          }
-        //console.log(mark)
-        this.markerD=new google.maps.Marker({
-          map: this.map ,
-          icon: new google.maps.MarkerImage('assets/icon/pointer_a.png',
-           new google.maps.Size(22, 22),
-           new google.maps.Point(0, 18),
-           new google.maps.Point(11, 11)),
-           position: mark
-        });
-        }
-      })
-    });
-  }
   async loadMap() {  
     const rta = await this.geolocation.getCurrentPosition();
     const myLatLng = {
@@ -148,16 +128,12 @@ export class HomePage implements OnInit {
       a.subscribe(data=>{
         if(this.marker!=null)            this.marker.setMap(null);
         if ("coords" in data){
-            let lat=data.coords.latitude;
-            let lng=data.coords.longitude;
+            let lat=data.coords.latitude;            let lng=data.coords.longitude;
             let latLng=new google.maps.LatLng(lat,lng);
             this.marker = new google.maps.Marker({
-             map: this.map ,
-             icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-              new google.maps.Size(22, 22),
-              new google.maps.Point(0, 18),
-              new google.maps.Point(11, 11)),
-              position: latLng      
+             map: this.map ,             icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+              new google.maps.Size(22, 22),              new google.maps.Point(0, 18),              new google.maps.Point(11, 11)),
+             position: latLng      
             });
           }
           else {

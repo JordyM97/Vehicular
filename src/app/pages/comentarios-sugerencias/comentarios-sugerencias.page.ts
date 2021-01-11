@@ -18,12 +18,9 @@ export class ComentariosSugerenciasPage implements OnInit {
   async takePicture(){
     await this.Mediaservice.takePicture();
     await this.Mediaservice.upload();
-    this.pictureview=this.Mediaservice.pictureview
   }
 
   ngOnInit() {
-    this.uploadProgress=this.Mediaservice.uploadProgress
-    this.pictureview=this.Mediaservice.pictureview
 
   }
   

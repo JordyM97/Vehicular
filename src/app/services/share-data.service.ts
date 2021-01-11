@@ -23,6 +23,6 @@ export class ShareDataService {
   //Es un observable
   notObj$=new EventEmitter<object>();
 
-
+  idConductor: any
   constructor() { }
 }

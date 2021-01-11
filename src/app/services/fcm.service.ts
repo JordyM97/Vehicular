@@ -88,8 +88,8 @@ export class FcmService {
     /*En share data se almacena la data para la nueva ventana */
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
+      if(parseInt(notification.data.tipoNotificacion)==0){
       console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
-        
         let notObjeto = {
           'title':notification.body,
           'nombre:':notification.data.nombreConductor,
@@ -111,11 +111,9 @@ export class FcmService {
         this.shareData.notificacion = notification;
         this.shareData.detallesDriver=notification;
         //this.presentAlertConfirm(notification);
-
-        if(parseInt(notification.data.tipoNotificacion)==0){
-          this.loadingservice.hideLoader();
-          this.router.navigate(['/detalle-servicio']);
-          //this.presentPopoverDetalle(notification);
+        this.loadingservice.hideLoader();
+        this.router.navigate(['/detalle-servicio']);
+        //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.data.tipoNotificacion)==1){
           this.presentPopoverCalificacion();
         }
@@ -124,6 +122,7 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
+        if(parseInt(notification.notification.data.tipoNotificacion)==0){
         console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
         this.router.navigateByUrl("/acerca");
         let notObjeto = {
@@ -149,12 +148,9 @@ export class FcmService {
         this.shareData.detallesDriver=notification.notification;
         this.shareData.idConductor=notification.notification.data.idConductor;
         //this.presentAlertConfirm(notification);
-
-
-        if(parseInt(notification.notification.data.tipoNotificacion)==0){
-          this.loadingservice.hideLoader();
-          this.router.navigate(['/detalle-servicio']);
-          //this.presentPopoverDetalle(notification);
+        this.loadingservice.hideLoader();
+        this.router.navigate(['/detalle-servicio']);
+        //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.notification.data.tipoNotificacion)==1){
           this.presentPopoverCalificacion();
         }

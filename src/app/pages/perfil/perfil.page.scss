@@ -1,42 +1,40 @@
-ion-fab-button{
+ion-fab-button {
     --background: red;
-  
-    color:black;
-  }
-
-.estrella{
-  height: 35px;
-  width: 35px;
+    color: black;
 }
 
-ion-grid{
-  //background: linear-gradient(-90deg,#20478B ,#2487C9);
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  //color: white;
-  margin-top: 10%;
+.estrella {
+    height: 35px;
+    width: 35px;
 }
 
-
-.estrellas{
-  justify-content: center;
-  margin-bottom: 10%;
+ion-grid {
+    //background: linear-gradient(-90deg,#20478B ,#2487C9);
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    //color: white;
+    margin-top: 10%;
 }
 
-.calificacion{
-  justify-content: center;
-  font-size: 32px;
+.estrellas {
+    justify-content: center;
+    margin-bottom: 10%;
 }
 
-.titulo{
-  font-size: 16px;
-  margin-left: 25px;
-  color: grey;
+.calificacion {
+    justify-content: center;
+    font-size: 32px;
 }
 
-.respuesta{
-  font-size: 24px;
-  margin-bottom: 15px;
-  margin-left: 25px;
+.titulo {
+    font-size: 16px;
+    margin-left: 25px;
+    color: grey;
+}
+
+.respuesta {
+    font-size: 24px;
+    margin-bottom: 15px;
+    margin-left: 25px;
 }

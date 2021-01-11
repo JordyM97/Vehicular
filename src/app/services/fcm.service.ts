@@ -179,8 +179,8 @@ export class FcmService {
          //idCliente: idCliente
       },
       mode:"md",
-      
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }
@@ -193,7 +193,8 @@ export class FcmService {
       cssClass: 'servicioasignado',
       componentProps:{},
       mode:"md",
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }

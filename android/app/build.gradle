@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 android {
+    signingConfigs {
+        config {
+            storeFile file('D:\\GIT\\CareAPP\\masterkey.jks')
+            storePassword '123456'
+            keyAlias 'masterkey'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.careapp.app"
@@ -9,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {

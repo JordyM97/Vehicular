@@ -63,13 +63,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/comentarios-sugerencias/comentarios-sugerencias.module').then( m => m.ComentariosSugerenciasPageModule)
   },
 
-
-
-
-
-
-
-
 ];
 
 @NgModule({

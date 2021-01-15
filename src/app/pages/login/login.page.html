@@ -34,18 +34,20 @@
         <small>¿No tienes una cuenta? Registrate</small>
       </a>
     </div>
-    <ion-button expand="full" (click)="loginGoogle()" >
-      GOOGLE
-    </ion-button>
-    <ion-button expand="full" (click)="loginFacebook()" >
-      FACEBOOK
-    </ion-button>
   </div>
+  <ion-grid>
 <ion-row>
-  <ion-icon name="logo-facebook"></ion-icon>
-  <ion-icon name="logo-google"></ion-icon>
+    <ion-button (click)="loginFacebook()">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+    
+  
+    <ion-button (click)="loginGoogle()">
+      <ion-icon name="logo-google"></ion-icon>
+    </ion-button>
+  
 </ion-row>
-
+</ion-grid>
   <ion-button expand="full" (click)="on_submit_login()" class="boton">
     INICIAR SESIÓN
   </ion-button>

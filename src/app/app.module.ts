@@ -19,10 +19,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CalificarDriverComponent } from './components/calificar-driver/calificar-driver.component';
 
 @NgModule({
-  declarations: [AppComponent,PopoverComponent,ShowNotifComponent],
-  entryComponents: [PopoverComponent,ShowNotifComponent],
+  declarations: [AppComponent,PopoverComponent,CalificarDriverComponent,ShowNotifComponent],
+  entryComponents: [PopoverComponent, CalificarDriverComponent,ShowNotifComponent],
   imports: [
   BrowserModule,IonicModule.forRoot({mode: 'ios', swipeBackEnabled:false  }),  
     AngularFireModule.initializeApp(firebaseConfig),

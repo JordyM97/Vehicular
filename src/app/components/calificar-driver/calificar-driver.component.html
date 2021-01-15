@@ -13,6 +13,7 @@
   
     <ion-row><strong>Ha llegado al final de la ruta</strong></ion-row>
     <ion-row><strong>Conductor:</strong>{{shareData.detallesDriver.data.nombreConductor}} {{shareData.detallesDriver.data.apellidoConductor}}</ion-row>
+    
     <ion-row><strong id="score">Calificación:</strong><ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"(click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon></ion-row>
     <ion-row>
       <ion-item>

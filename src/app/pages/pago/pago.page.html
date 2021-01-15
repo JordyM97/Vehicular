@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+    <ion-toolbar class="toolbar-bg">
+        <div class="toolbar-content">
+            <ion-button fill="clear" slot="start">
+                <ion-menu-button color="light" slot="start"></ion-menu-button>
+            </ion-button>
+            <img class="center-img" src="assets/imgs/logf.png">
+            <!--"assets/imgs/LOGO1.png-->
+        </div>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <ion-label position="floating">Numero de la Tarjeta</ion-label>
+        <ion-input [(ngModel)]="cardNumber"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Nombre de Titular</ion-label>
+        <ion-input [(ngModel)]="holderName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Mes Expiracion</ion-label>
+        <ion-input [(ngModel)]="expiryMonth"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Ano expiracion</ion-label>
+        <ion-input [(ngModel)]="expiryYear"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">CVC</ion-label>
+        <ion-input [(ngModel)]="cvc"></ion-input>
+    </ion-item>
+    <ion-button (click)="saveCard()">Guardar Tarjeta</ion-button>
+    <ion-button (click)="payCard()">Pagar</ion-button>
+    <br />
+    <div id="messages"></div>
+    <ion-list>
+        <ion-card>
+            <ion-item *ngFor="let card of cards">
+                <ion-button fill="outline" slot="end" (click)="pay(card)">Pagar</ion-button>
+                <ion-button fill="outline" slot="end" (click)="delete(card)">Eliminar</ion-button>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row> <b>Numero de Tarjeta</b>xxx xxxx xxxx {{card.bin}} </ion-row>
+                        <ion-row> <b>Nombre de la Tarjeta</b>{{card.holder_name}} </ion-row>
+                        <ion-row> <b>Estado: </b></ion-row>
+                        <!--ion-row>
+                            <ion-label [ngStyle]="{'color':getColor(card.status)}"> {{card.status === 'valid' ? 'Valida' : 'En revision'}}</ion-label>
+                        </ion-row-->
+                    </ion-grid>
+                </ion-card-content>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+</ion-content>

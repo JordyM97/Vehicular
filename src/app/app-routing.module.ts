@@ -62,6 +62,11 @@ const routes: Routes = [
     path: 'comentarios-sugerencias',
     loadChildren: () => import('./pages/comentarios-sugerencias/comentarios-sugerencias.module').then( m => m.ComentariosSugerenciasPageModule)
   },
+  {
+    path: 'pago',
+    loadChildren: () => import('./pages/pago/pago.module').then( m => m.PagoPageModule)
+  },
+  
 
 ];
 

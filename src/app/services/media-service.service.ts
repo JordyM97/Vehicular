@@ -11,6 +11,7 @@ export class MediaServiceService {
   picture: any
   storageRef: any
   status: any
+  profilephoto:any
   constructor(
     private toastCtrl:ToastController
   ) { this.storageRef= firebase.storage().ref()}
@@ -24,8 +25,10 @@ export class MediaServiceService {
       });
       //this.pictureview= profilePicture.webPath
       this.picture = profilePicture.base64String;
+
     } catch (error) {
-      console.error(error);
+      
+      console.error("Take pic"+JSON.stringify(error));
     }
   }
   uploadProfile(id:any){
@@ -78,7 +81,16 @@ export class MediaServiceService {
     }); 
     if(this.status=0) this.showToast("No se ha subido nada")
   }
-
+  async getProfilePhoto(id: any){
+    var task=this.storageRef.child(`profile/${id}/profile.jpg`);
+    console.log(task)
+    await task.getDownloadURL().then((downloadURL)=>{
+      this.profilephoto=downloadURL;
+      console.log(this.profilephoto)
+      
+    })
+  }
+  
   async showToast(msg:any){
     const toast = await this.toastCtrl.create({
       duration: 2000,

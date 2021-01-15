@@ -22,6 +22,7 @@ import { AuthService } from './auth.service';
 import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
 import { CalificarDriverComponent } from '../components/calificar-driver/calificar-driver.component';
 import { ResourceLoader } from '@angular/compiler';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class FcmService {
     private router: Router,
     private shareData: ShareDataService,
     private popoverController: PopoverController,
-    private authService:AuthService
+    private authService:AuthService,
+    private loadingservice: LoadingService
   ) {
 
   }
@@ -86,8 +88,8 @@ export class FcmService {
     /*En share data se almacena la data para la nueva ventana */
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
+      if(parseInt(notification.data.tipoNotificacion)==0){
       console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
-        
         let notObjeto = {
           'title':notification.body,
           'nombre:':notification.data.nombreConductor,
@@ -98,19 +100,20 @@ export class FcmService {
           'placa':notification.data.placaVehiculo,
           'color':notification.data.colorVehiculo,
           'inicioCoords':notification.data.inicioCoords,
-          'finCoords':notification.data.finCoords
+          'finCoords':notification.data.finCoords,
+          'idConductor':notification.data.idConductor
         }
-
+        localStorage.setItem('idConductor',notification.data.idConductor);
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
-
+        console.log(notObjeto)
         this.shareData.notObj$.emit(notObjeto);
 
         this.shareData.notificacion = notification;
         this.shareData.detallesDriver=notification;
         //this.presentAlertConfirm(notification);
-
-        if(parseInt(notification.data.tipoNotificacion)==0){
-          this.presentPopoverDetalle(notification);
+        this.loadingservice.hideLoader();
+        this.router.navigate(['/detalle-servicio']);
+        //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.data.tipoNotificacion)==1){
           this.presentPopoverCalificacion();
         }
@@ -119,6 +122,7 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
+        if(parseInt(notification.notification.data.tipoNotificacion)==0){
         console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification))
         this.router.navigateByUrl("/acerca");
         let notObjeto = {
@@ -129,20 +133,24 @@ export class FcmService {
           'telefono':notification.notification.data.telefonoConductor,
           'vehiculo':notification.notification.data.vehiculoConductor,
           'modelo':notification.notification.data.modeloVehiculo,
-          'placa':notification.notification.data.placaVehiculo
+          'placa':notification.notification.data.placaVehiculo,
+          'color':notification.notification.data.colorVehiculo,
+          'inicioCoords':notification.notification.data.inicioCoords,
+          'finCoords':notification.notification.data.finCoords,
+          'idConductor':notification.notification.data.idConductor
         }
-
+        localStorage.setItem('idConductor',notification.notification.data.idConductor);
         this.shareData.nombreNot$.emit(JSON.stringify(notification.notification));
 
         this.shareData.notObj$.emit(notObjeto);
 
         this.shareData.notificacion = notification.notification;
         this.shareData.detallesDriver=notification.notification;
+        this.shareData.idConductor=notification.notification.data.idConductor;
         //this.presentAlertConfirm(notification);
-
-
-        if(parseInt(notification.notification.data.tipoNotificacion)==0){
-          this.presentPopoverDetalle(notification);
+        this.loadingservice.hideLoader();
+        this.router.navigate(['/detalle-servicio']);
+        //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.notification.data.tipoNotificacion)==1){
           this.presentPopoverCalificacion();
         }
@@ -167,7 +175,8 @@ export class FcmService {
          //idCliente: idCliente
       },
       mode:"md",
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }
@@ -180,7 +189,8 @@ export class FcmService {
       cssClass: 'servicioasignado',
       componentProps:{},
       mode:"md",
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }

@@ -11,15 +11,15 @@
       <ion-col></ion-col>  
     </ion-row>
   
-  <ion-row><ion-item><strong>Ha llegado al final de la ruta</strong></ion-item></ion-row>
-  <ion-row><ion-item><strong>Conductor:</strong>{{shareData.detallesDriver.data.nombreConductor}} {{shareData.detallesDriver.data.apellidoConductor}}</ion-item></ion-row>
-  <ion-row><ion-item><strong id="score">Calificación:</strong><ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"(click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon></ion-item></ion-row>
-  <ion-row>
-    <ion-item>
-      <ion-label position="stacked"><strong>Comentario</strong></ion-label>
-      <ion-input placeholder="Ingrese un comentario (opcional)"></ion-input>
-    </ion-item>
-  </ion-row>
+    <ion-row><strong>Ha llegado al final de la ruta</strong></ion-row>
+    <ion-row><strong>Conductor:</strong>{{shareData.detallesDriver.data.nombreConductor}} {{shareData.detallesDriver.data.apellidoConductor}}</ion-row>
+    <ion-row><strong id="score">Calificación:</strong><ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"(click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon></ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="stacked"><strong>Comentario</strong></ion-label>
+        <ion-input placeholder="Ingrese un comentario (opcional)"></ion-input>
+      </ion-item>
+    </ion-row>
     
 
   <ion-button fill="clear" class="btn" expand="full" (click)="finalizarServicio()">Finalizar Servicio</ion-button>

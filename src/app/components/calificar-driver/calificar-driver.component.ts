@@ -35,8 +35,8 @@ export class CalificarDriverComponent implements OnInit {
 
   async finalizarServicio(){
     console.log('CARRERA FINALIZADA');
-    await this.popover.dismiss();
     if(this.rating!= null){
+      await this.popover.dismiss();
       this.router.navigate(['/home']); 
     }
     else{

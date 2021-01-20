@@ -26,6 +26,10 @@ export class TransactionService {
           (res) => {
             let data = JSON.parse(JSON.stringify(res));
             console.log(data);
+            console.log("https://axela.pythonanywhere.com/api/transaction?user=" +
+            this.user +
+            "&token=" +
+            this.token);
             resolve("ok");
           },
           (err) => {

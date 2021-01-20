@@ -53,10 +53,10 @@ export class PagoPage implements OnInit {
 
   pay(card) {
     let credentials = {
-      amount: Number.parseFloat("99.00").toFixed(2),
+      amount: "99.00",
       description: "DESCRIPCION",
       dev_reference: "REFERENCIA",
-      vat: Number.parseFloat("0.00").toFixed(2),
+      vat: "0.00",
     };
     this.transaction.token = card.token;
 

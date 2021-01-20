@@ -220,7 +220,7 @@ export class HomePage implements OnInit {
       componentProps:{
         info: {
           ClientService: this.authService.getId(),
-          DriverService: 26,
+          DriverService: 31,
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,

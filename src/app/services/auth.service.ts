@@ -232,7 +232,7 @@ export class AuthService {
           });  });
  
   }
-  sendService(notificacion){
+  sendService(notificacion){ //Aqui se envia toda la notificacion
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();

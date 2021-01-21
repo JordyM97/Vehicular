@@ -75,7 +75,7 @@ export class AceptarParametrosComponent implements OnInit {
       idCliente: this.authService.getId() /*Necesito ID de la tabla cliente*/
     }
    
-    this.enviarNotificacion(this.notificacionTransporter);
+    //this.enviarNotificacion(this.notificacionTransporter); //No es necesaria
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker);
     await this.popoverController.dismiss();

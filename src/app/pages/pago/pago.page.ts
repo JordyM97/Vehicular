@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ToastController } from "@ionic/angular";
 import { TransactionService } from "../../services/transaction.service";
 
@@ -17,7 +18,8 @@ export class PagoPage implements OnInit {
 
   constructor(
     public transaction: TransactionService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -68,6 +70,9 @@ export class PagoPage implements OnInit {
         this.presentToastFeedback("Error");
       }
     });
+  }
+  back(){
+    this.router.navigateByUrl('/detalle-servicio');
   }
   delete(card) {
     let credentials = {

@@ -14,7 +14,6 @@ import {
   FacebookLogin,
   FacebookLoginResponse,
 } from "@capacitor-community/facebook-login";
-import { async } from "@angular/core/testing";
 
 registerWebPlugin(FacebookLogin);
 
@@ -168,8 +167,8 @@ export class LoginPage implements OnInit {
     localStorage.setItem("password",credentials.password);
     localStorage.setItem("firstTime","1");
     this.authService.login(credentials).then( (result)=>{
-      console.log(result)
-      console.log(this.authService.token);
+      //console.log(result)
+      //console.log(this.authService.token);
       if(result=="ok"){
         if(this.authService.deviceToken!= null){
           this.authService.sendDeviceToken();
@@ -193,7 +192,7 @@ export class LoginPage implements OnInit {
 
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
-      console.log(this.authService.token);
+      //console.log(this.authService.token);
 
       if(result=="ok"){
         if(this.authService.deviceToken!= null){

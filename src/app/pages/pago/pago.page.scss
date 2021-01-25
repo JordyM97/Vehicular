@@ -1,0 +1,64 @@
+.cardm{
+  box-shadow: 0.6rem 0.7rem 1rem rgba(50, 135, 171, 0.54), -1px 3px 6px 0px #0d45f75e, 8px 10px 12px #5255;
+    -webkit-backdrop-filter: blur(0.8rem);
+    backdrop-filter: blur(0.8rem);
+    padding:  1rem 0rem 0rem 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(43deg, #011898, #0da5e5a3);
+}
+.addcard{
+    box-shadow: 0.6rem 0.7rem 1rem rgba(50, 135, 171, 0.54), -1px 3px 6px 0px #0d45f75e, 8px 10px 12px #5255;
+    -webkit-backdrop-filter: blur(0.8rem);
+    backdrop-filter: blur(0.8rem);
+    border-radius: 1rem;
+    background: linear-gradient(43deg, #1c1c1d, #3a3c3da3);
+}
+ion-list{
+    --background: transparent
+}
+.icon{
+    font-size: 36px;
+    color: #f4c639cf;
+}
+.numero{
+    font-size: 14px;
+    color:white
+}
+.numerotext{
+    font-size: 21px;
+    text-transform: uppercase;
+    color: rgb(0 0 0 / 54%);
+    text-shadow: -1.5px -1.5px 0px #ffffff;
+}
+.nombre{
+    font-size: 14px;
+}
+.buttons{
+    --background: transparent;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 12px;
+}
+ion-item{
+    --background: transparent;
+    border-bottom: none;
+    --border-color: transparent;
+    color:white;
+}
+ion-input{
+    color:white
+}
+.nombretext{
+    font-size: 16px;
+    color:white;
+    text-transform: uppercase;
+
+}
+h2 {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 24px;
+    /* text-decoration: overline; */
+    font-weight: bold;
+    /* text-shadow: 3px 2px #a99d9d; */
+}

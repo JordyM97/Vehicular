@@ -26,8 +26,8 @@ export class AuthService {
     this.historial = [];
   }
   login(credentials){
-    console.log(credentials);
-    console.log(JSON.stringify(credentials));
+   //console.log(credentials);
+   // console.log(JSON.stringify(credentials));
     return new Promise((resolve, reject) => {
         let headers = new HttpHeaders(); 
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
@@ -39,10 +39,10 @@ export class AuthService {
             this.apellido = data.last_name;        
             this.correo = data.email; 
             this.img=""
-            console.log(data);
+           // console.log(data);
             resolve("ok");
             }, (err) => {
-            console.log(err);
+            //console.log(err);
             resolve("bad");
           });  });
  
@@ -51,27 +51,27 @@ export class AuthService {
   logout(){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));  
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));  
       this.http.delete('https://axela.pythonanywhere.com/api/devices/delete/'+String(this.id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           resolve("ok");
           this.nombre="Invitado"; this.id="";this.historial=null;//this.token=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken="";
           }, (err) => {
-          console.log(err);
+         // console.log(err);
           resolve("bad");
         });  });      
   }
 
   sendDeviceToken(){
-    console.log(this.token);
-    console.log(this.deviceToken);
+    //console.log(this.token);
+    //console.log(this.deviceToken);
     let req={
       user: this.id,
       registration_id: this.deviceToken.token,
       type: "android"
     }
-    console.log(req)
+    //console.log(req)
     
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
@@ -81,10 +81,8 @@ export class AuthService {
       this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
-          data.forEach(element => {
-            console.log(element) //Recorrer los elementos del array y extraer la info
-          });
-          console.log(data);
+          
+          //console.log(data);
           resolve("ok");
           }, (err) => {
           console.log(err);
@@ -131,7 +129,7 @@ export class AuthService {
       });  });
   }
   sendNotification(notificacion){ 
-    console.log(notificacion);
+    ///console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', String(this.token));
@@ -150,8 +148,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
-      console.log(this.token);
-      console.log(headers);
+     // console.log(this.token);
+      //console.log(headers);
   
       this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {

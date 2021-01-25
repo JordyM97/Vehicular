@@ -2,12 +2,11 @@ import { Component, OnInit,NgZone } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { IonIcon, Platform, PopoverController, ToastController } from '@ionic/angular';
+import { Platform, PopoverController, ToastController } from '@ionic/angular';
 import { AceptarParametrosComponent } from '../components/aceptar-parametros/aceptar-parametros.component';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { observable, Observable } from 'rxjs';
-import { PopoverComponent } from '../components/popover/popover.component';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SelectDateComponent } from '../components/select-date/select-date.component';
@@ -94,7 +93,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
-    this.showTerms();
+    //this.showTerms();
     //this.watchDriverPos(31);
   }
   watchDriverPos(id: any){
@@ -220,7 +219,7 @@ export class HomePage implements OnInit {
       componentProps:{
         info: {
           ClientService: this.authService.getId(),
-          DriverService: 31,
+          DriverService: '31',
           startidLocation: JSON.stringify(this.latLngInicial),
           endidLocation: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,

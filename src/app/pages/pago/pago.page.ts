@@ -17,7 +17,7 @@ export class PagoPage implements OnInit {
 
   constructor(
     public transaction: TransactionService,
-    public toastController: ToastController
+    public toastController: ToastController,
   ) {}
 
   ngOnInit() {

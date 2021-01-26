@@ -52,6 +52,8 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  
-
+  <div class="botones">
+    <ion-button expand="full" id="confirmar" (click)="pagar()">REALIZAR PAGO</ion-button>
+    <ion-button expand="full" id="finalizar" (click)="cancelar()" disabled>CANCELAR CARRERA</ion-button>
+  </div>
 </ion-content>

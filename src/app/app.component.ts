@@ -27,14 +27,13 @@ export class AppComponent implements OnInit{
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public authService: AuthService,
-    private firestore: AngularFirestore,
-    private alertCtrl: AlertController,
+   // private firestore: AngularFirestore,
     public popovercontroller:PopoverController,
-    private fcmService: FcmService,private modalCtrl:ModalController,
+    private fcmService: FcmService
   ) {
-    this.tokensCollection=firestore.collection('tokens');
-    this.tokens= this.tokensCollection.valueChanges();
-    this.tokens.subscribe(value =>{console.log(value)});
+    //this.tokensCollection=firestore.collection('tokens');
+    //this.tokens= this.tokensCollection.valueChanges();
+    //this.tokens.subscribe(value =>{console.log(value)});
     this.initializeApp();
   }
 

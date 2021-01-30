@@ -14,6 +14,8 @@ export class RegisterPage implements OnInit {
   firstname:string
   lastname:string
   username:string
+  celular:string
+  cedula:string
   showPassword=false;
   passwordIcon='eye';
 
@@ -27,19 +29,24 @@ export class RegisterPage implements OnInit {
 
   on_submit_register(){
     let credentials= {
-      username: this.username,
+      username: "null",
       password: this.password,
       first_name: this.firstname,
       last_name: this.lastname,
-      email: this.email
+      email: this.email,
+      celular : this.celular,
+      cedula: this.cedula
+
     };
     this.authService.signUp(credentials).then( (result)=>{
       console.log(result)
       //console.log(this.authService.token);
       if(result=="ok"){
         //this.authService.sendDeviceToken();
+        
         this.authService.registerclient();
-        this.router.navigate(['login'])
+        this.authService.getPoliticas()
+        this.router.navigateByUrl('login')
       }
       else{
         this.presentToastFeedback()

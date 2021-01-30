@@ -275,8 +275,8 @@ export class AuthService {
   }
   getPoliticas(){
     console.log("POLITICAS:")
-      this.presentModal();
-    
+      var a =this.presentModal();
+      
   }
 
   async presentModal() {

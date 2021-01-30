@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastController } from "@ionic/angular";
 import { TransactionService } from "../../services/transaction.service";
+import { FormGroup  } from '@angular/forms';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-pago",
@@ -15,32 +17,35 @@ export class PagoPage implements OnInit {
   expiryMonth: number;
   expiryYear: number;
   cvc: string;
+  uploadForm: FormGroup;
 
   constructor(
     public transaction: TransactionService,
     public toastController: ToastController,
-    private router:Router
+    private router:Router,
+    public authService: AuthService,
   ) {}
 
   ngOnInit() {
-    this.transaction.user = "12345";
+    this.transaction.user = this.authService.id;
+    this.transaction.tokenHeader=this.authService.token;
     this.transaction.loadCards();
     this.cards = this.transaction.getCards();
     //console.log("cards");
     console.log(this.cards);
+    console.log(this.authService.id)
   }
 
   saveCard() {
-    let credentials = {
-      userId: "12345",
-      email: "asa@gmail.com",
-      cardNumber: this.cardNumber,
-      holderName: this.holderName,
-      expiryMonth: Number(this.expiryMonth),
-      expiryYear: Number(this.expiryYear),
-      cvc: this.cvc,
-    };
-    this.transaction.saveCard(credentials).then((result) => {
+    var formData: any = new FormData();
+    formData.append("userId", ""+this.authService.id);
+    formData.append("email", ""+this.authService.correo);
+    formData.append("cardNumber", ""+ this.cardNumber);
+    formData.append("holderName", ""+ this.holderName);
+    formData.append("expiryMonth", ""+ this.expiryMonth);
+    formData.append("expiryYear", ""+ this.expiryYear);
+    formData.append("cvc", ""+ this.cvc);
+    this.transaction.saveCard(formData).then((result) => {
       console.log(result);
       if (result == "ok") {
         this.transaction.cards = [];
@@ -54,15 +59,14 @@ export class PagoPage implements OnInit {
   }
 
   pay(card) {
-    let credentials = {
-      amount: "99.00",
-      description: "DESCRIPCION",
-      dev_reference: "REFERENCIA",
-      vat: "0.00",
-    };
     this.transaction.token = card.token;
+    var formData: any = new FormData();
+    formData.append("amount", "99.00");
+    formData.append("description", "descripcion");
+    formData.append("dev_reference", "REF");
+    formData.append("vat", "0.00");
 
-    this.transaction.payCard(credentials).then((result) => {
+    this.transaction.payCard(formData).then((result) => {
       console.log(result);
       if (result == "ok") {
         this.presentToastFeedback("Pago exitoso");

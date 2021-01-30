@@ -20,10 +20,11 @@ import { PopoverComponent } from './components/popover/popover.component';
 import { ShowNotifComponent } from './components/show-notif/show-notif.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CalificarDriverComponent } from './components/calificar-driver/calificar-driver.component';
+import { AceptarParametrosComponent } from './components/aceptar-parametros/aceptar-parametros.component';
 
 @NgModule({
-  declarations: [AppComponent,PopoverComponent,CalificarDriverComponent,ShowNotifComponent],
-  entryComponents: [PopoverComponent, CalificarDriverComponent,ShowNotifComponent],
+  declarations: [AppComponent,PopoverComponent,CalificarDriverComponent,ShowNotifComponent,AceptarParametrosComponent],
+  entryComponents: [PopoverComponent, CalificarDriverComponent,ShowNotifComponent,AceptarParametrosComponent],
   imports: [
   BrowserModule,IonicModule.forRoot({mode: 'ios', swipeBackEnabled:false  }),  
     AngularFireModule.initializeApp(firebaseConfig),

@@ -8,26 +8,27 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      
-    </ion-row>
-    <ion-row>
       <ion-item>
         <ion-label position="floating">Selecciones el dia</ion-label>
-        <ion-datetime displayFormat="	YYYY-MM-DDTHH:mm" min="2020-12-14" max="2022-12-12"></ion-datetime>
+        <ion-datetime placeholder="Fecha del viaje"
+                      display-format="YYYY MM DD"
+                      max="2022"
+                      [ngModel]="fechaViaje.toISOString()" 
+                      (ionChange)="cambioFecha($event)"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Seleccione la hora </ion-label>
-        <ion-select>
-          <ion-select-option *ngFor="let hour of hours" value="hour">{{hour}}</ion-select-option>
-        </ion-select>
+        <ion-datetime placeholder="Hora del viaje"
+                      display-format="HH mm"
+                      [ngModel]="fechaViaje.toISOString()" 
+                      (ionChange)="cambioHora($event)"></ion-datetime>
       </ion-item> 
-
     </ion-row>
 
     <ion-row>
-        <ion-button expand="full">OK</ion-button>
+        <ion-button expand="full" (click)="btnOk()">OK</ion-button>
     </ion-row>
-  
-</ion-grid>
+    
+  </ion-grid>
 
 </ion-content>

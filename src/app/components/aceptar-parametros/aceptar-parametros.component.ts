@@ -1,5 +1,4 @@
-import { getLocaleDateFormat } from '@angular/common';
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { PopoverController,ToastController,NavParams} from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -7,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from '../popover/popover.component';
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { LoadingService } from 'src/app/services/loading.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-aceptar-parametros',
@@ -20,6 +20,7 @@ export class AceptarParametrosComponent implements OnInit {
   serviciosCollection: AngularFirestoreCollection<any>;
   servicios: Observable<any[]>;
   uploadForm: FormGroup; 
+  esReserva = false;
 
   constructor(
     private navParams: NavParams, 
@@ -35,6 +36,10 @@ export class AceptarParametrosComponent implements OnInit {
   ngOnInit() {
     this.startMarker= this.navParams.get('info');
     console.log(this.startMarker);
+    if(this.startMarker.isReservationService==1){
+      this.esReserva=true;
+    }
+    console.log(this.startMarker.isReservationService);
     this.uploadForm = this.formBuilder.group({
       user: [''],
       body: [''],
@@ -79,7 +84,9 @@ export class AceptarParametrosComponent implements OnInit {
     console.log("Enviando Info al API");
     this.postDataAPI(this.startMarker);
     await this.popoverController.dismiss();
-    this.loadingservice.showLoader();
+    if(this.startMarker.isReservationService==0){ //Para controlar que si es reserva, no se quede esperando
+      this.loadingservice.showLoader();
+    }
     //this.PopOverConductorEncontrado();
 
     }

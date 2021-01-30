@@ -68,6 +68,7 @@ export class HomePage implements OnInit {
   PositionD: Observable<any>;
   locationCollection: AngularFirestoreCollection<any>;
   location: Observable<any[]>
+  fechaReserva: Date;
   constructor(
     private geolocation: Geolocation,    private nativeGeocoder: NativeGeocoder,    public zone: NgZone,
     public popovercontroller: PopoverController,    public db: AngularFireDatabase,                       // no se si borrar todavia
@@ -202,7 +203,14 @@ export class HomePage implements OnInit {
   }
 
   async aceptarParametros(){
+    const servicioElegido =  this.tipoServicio.find(element => element.isChecked == true)
+    console.log(servicioElegido)
     var date = new Date();
+    var isReservation = 0;
+    if(servicioElegido.id == 2){
+      date = this.fechaReserva;
+      isReservation = 1;
+    }
     //console.log(date);
     var anio = date.getFullYear(); 
     var mes = String(date.getMonth() + 1).padStart(2, '0');
@@ -230,7 +238,7 @@ export class HomePage implements OnInit {
           clientScore: 4,
           startDate: date,
           endDate: date,
-          isReservationService: 0,
+          isReservationService: isReservation,
           stateService: 0,
           vehiculo: this.vehiculoSeleccionado,
           total: precio,
@@ -478,9 +486,13 @@ export class HomePage implements OnInit {
       componentProps:{
         info: {
         }
-      }
+      },
+      backdropDismiss: false
     }); 
-    return await popover.present();
+    await popover.present();
+    const fechaReservaPO = await popover.onDidDismiss()
+    this.fechaReserva = fechaReservaPO.data.fechaViaje
+    console.log(this.fechaReserva)
   }
   //Seleccionar un de pago
   SelectPayment(item){
@@ -497,7 +509,7 @@ export class HomePage implements OnInit {
   }
 
   aceptarBoton(){
-    if(this.vehiculoSeleccionado==null || this.servicioSeleccionado==null || this.servicioSeleccionado==null || this.latLngInicial==null ||this.latLngFinal==null){
+    if(this.vehiculoSeleccionado==null || this.servicioSeleccionado==null || this.pagoSeleccionado==null || this.latLngInicial==null ||this.latLngFinal==null){
       this.presentToast();
     }else{
       this.aceptarParametros();

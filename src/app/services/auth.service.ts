@@ -99,7 +99,7 @@ export class AuthService {
     }
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json')//.set('Authorization', 'token '+String(this.token));
+      headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
     
       this.http.post('https://axela.pythonanywhere.com/api/client/', r, {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
@@ -121,6 +121,7 @@ export class AuthService {
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
+        this.id= data.id;
         resolve("ok");
         }, (err) => {
         console.log(err);

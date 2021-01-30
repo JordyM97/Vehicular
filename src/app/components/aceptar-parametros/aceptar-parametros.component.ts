@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AceptarParametrosComponent implements OnInit {
 
-  startMarker: any;
+  servicio: any;
   notificacionTransporter: any;
   serviciosCollection: AngularFirestoreCollection<any>;
   servicios: Observable<any[]>;
@@ -34,12 +34,12 @@ export class AceptarParametrosComponent implements OnInit {
    } 
 
   ngOnInit() {
-    this.startMarker= this.navParams.get('info');
-    console.log(this.startMarker);
-    if(this.startMarker.isReservationService==1){
+    this.servicio= this.navParams.get('info');
+    console.log(this.servicio);
+    if(this.servicio.isReservationService==1){
       this.esReserva=true;
     }
-    console.log(this.startMarker.isReservationService);
+    console.log(this.servicio.isReservationService);
     this.uploadForm = this.formBuilder.group({
       user: [''],
       body: [''],
@@ -67,24 +67,24 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
-    this.authService.sendService(JSON.stringify(this.startMarker));
+    this.authService.sendService(JSON.stringify(this.servicio));
 
     this.notificacionTransporter = {
-      inicio: this.startMarker.startidLocation,
-      fin: this.startMarker.endidLocation,
-      hora: this.startMarker.hora+":"+this.startMarker.minuto,
-      fecha: this.startMarker.anio+"/"+this.startMarker.mes+"/"+this.startMarker.dia,
-      metodoPago: this.startMarker.idPaymentService,
-      valor: this.startMarker.total,
+      inicio: this.servicio.startidLocation,
+      fin: this.servicio.endidLocation,
+      hora: this.servicio.hora+":"+this.servicio.minuto,
+      fecha: this.servicio.anio+"/"+this.servicio.mes+"/"+this.servicio.dia,
+      metodoPago: this.servicio.idPaymentService,
+      valor: this.servicio.total,
       cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
       idCliente: this.authService.getId() /*Necesito ID de la tabla cliente*/
     }
    
     //this.enviarNotificacion(this.notificacionTransporter); //No es necesaria
     console.log("Enviando Info al API");
-    this.postDataAPI(this.startMarker);
+    this.postDataAPI(this.servicio);
     await this.popoverController.dismiss();
-    if(this.startMarker.isReservationService==0){ //Para controlar que si es reserva, no se quede esperando
+    if(this.servicio.isReservationService==0){ //Para controlar que si es reserva, no se quede esperando
       this.loadingservice.showLoader();
     }
     //this.PopOverConductorEncontrado();

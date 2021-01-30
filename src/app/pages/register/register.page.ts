@@ -38,6 +38,8 @@ export class RegisterPage implements OnInit {
       cedula: this.cedula
 
     };
+    this.authService.getPoliticas();
+    
     this.authService.signUp(credentials).then( (result)=>{
       console.log(result)
       //console.log(this.authService.token);
@@ -45,7 +47,7 @@ export class RegisterPage implements OnInit {
         //this.authService.sendDeviceToken();
         
         this.authService.registerclient();
-        this.authService.getPoliticas()
+        
         this.router.navigateByUrl('login')
       }
       else{

@@ -34,6 +34,7 @@ export class PerfilPage implements OnInit {
     }
     async uploadImg(){
       await this.Mediaservice.takePicture();
+      await this.Mediaservice.uploadProfile(this.authService.id);
     }
     getRateUser(){
       this.authService.getHistorial().forEach(element => {

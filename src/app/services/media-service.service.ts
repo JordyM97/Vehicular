@@ -33,7 +33,7 @@ export class MediaServiceService {
   }
   uploadProfile(id:any){
     var metadata = {      contentType: 'image/jpeg'    };
-    var task=this.storageRef.child(`profile/${id}/profile.jpg`).putString(this.picture, 'base64');
+    var task=this.storageRef.child(`profile/${id}/profile.jpg`).putString(this.picture, 'base64',metadata);
     
     task.on('state_changed', function(snap){
       this.uploadProgress = (snap.bytesTransferred / snap.totalBytes) * 100;

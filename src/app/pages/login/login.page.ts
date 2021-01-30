@@ -32,12 +32,13 @@ export class LoginPage implements OnInit {
     private router: Router,
     public toastController: ToastController,
     public authService: AuthService,
-    public fbauthservice:FBAuthService,private appcom:AppComponent) { 
-   }
-  
+    public fbauthservice: FBAuthService,
+    private appcom: AppComponent
+  ) {}
+
   ngOnInit() {
     //localStorage.clear();
-    if(localStorage.length>0){
+    if (localStorage.length > 0) {
       this.loguinAutomatico();
     }
   }
@@ -64,16 +65,15 @@ export class LoginPage implements OnInit {
         };
         this.authService.getTokenGoogle(credentialss).then((result) => {
           if (result == "ok") {
-            accessToken = this.authService.tokenGoogle;            
+            accessToken = this.authService.tokenGoogle;
             let credentials = {
               backend: "google-oauth2",
               grant_type: "convert_token",
               token: accessToken,
-              client_id: "MF6zy7Co7t23Ugabfu3F4wzKqtUx3FtouCTD7dIx",
+              client_id: "mKGX5NzHe1hKuubfPqmRSA70pr09SHUFf0dSACqi",
               client_secret:
-                "3UeXlqs4of9izf8csbCQTgAFX49Hh1WCmX6QC83PXEJw3qpDJyc0vrvxh2oz6MkftRLEg5Cuqc6avG5okQ4mE7FWCvYYiEjbwSb4b5qNIfZUWxg4WnodDTdsYRfQTXCn",
+                "SU5HyABmq7SIhEcXcaO338C2b9Ye1wZxz5LuLQeq1P9o2QgQZtSkHJpfgcKLBm2l5O3lLQ1f1w0AHURVNR5FR47RQvg1hfBQPjZZhWvUhVxIyLM7AyWwPGPFrXR96hnJ",
             };
-
             this.authService.loginSocial(credentials).then((result) => {
               console.log(result);
               if (result == "ok") {
@@ -81,7 +81,12 @@ export class LoginPage implements OnInit {
                   this.authService.sendDeviceToken();
                 }
                 this.appcom.username = this.authService.nombre;
-
+                this.authService.getTokenDjango(credentials).then((result) => {
+                  console.log(result);
+                  if (result != "ok") {
+                    this.presentToastFeedback();
+                  }
+                });
                 this.router.navigate(["home"]);
               } else {
                 this.presentToastFeedback();
@@ -118,9 +123,9 @@ export class LoginPage implements OnInit {
         backend: "facebook",
         grant_type: "convert_token",
         token: result.accessToken.token,
-        client_id: "MF6zy7Co7t23Ugabfu3F4wzKqtUx3FtouCTD7dIx",
+        client_id: "mKGX5NzHe1hKuubfPqmRSA70pr09SHUFf0dSACqi",
         client_secret:
-          "3UeXlqs4of9izf8csbCQTgAFX49Hh1WCmX6QC83PXEJw3qpDJyc0vrvxh2oz6MkftRLEg5Cuqc6avG5okQ4mE7FWCvYYiEjbwSb4b5qNIfZUWxg4WnodDTdsYRfQTXCn",
+          "SU5HyABmq7SIhEcXcaO338C2b9Ye1wZxz5LuLQeq1P9o2QgQZtSkHJpfgcKLBm2l5O3lLQ1f1w0AHURVNR5FR47RQvg1hfBQPjZZhWvUhVxIyLM7AyWwPGPFrXR96hnJ",
         userId: result.accessToken.userId,
       };
       this.authService.loginSocial(credentials).then((result) => {
@@ -130,6 +135,12 @@ export class LoginPage implements OnInit {
             this.authService.sendDeviceToken();
           }
           this.appcom.username = this.authService.nombre;
+          this.authService.getTokenDjango(credentials).then((result) => {
+            console.log(result);
+            if (result != "ok") {
+              this.presentToastFeedback();
+            }
+          });
 
           this.router.navigate(["home"]);
         } else {
@@ -158,52 +169,49 @@ export class LoginPage implements OnInit {
         this.presentToastFeedback();
       });
   }
-  on_submit_login(){
-    let credentials= {
+  on_submit_login() {
+    let credentials = {
       username: this.correo_electronico,
-      password: this.contrasenia
+      password: this.contrasenia,
     };
-    localStorage.setItem("correo",credentials.username);
-    localStorage.setItem("password",credentials.password);
-    localStorage.setItem("firstTime","1");
-    this.authService.login(credentials).then( (result)=>{
+    localStorage.setItem("correo", credentials.username);
+    localStorage.setItem("password", credentials.password);
+    localStorage.setItem("firstTime", "1");
+    this.authService.login(credentials).then((result) => {
       //console.log(result)
       //console.log(this.authService.token);
-      if(result=="ok"){
-        if(this.authService.deviceToken!= null){
+      if (result == "ok") {
+        if (this.authService.deviceToken != null) {
           this.authService.sendDeviceToken();
         }
-        this.appcom.username=this.authService.nombre;
-        
-        
-        this.router.navigate(['home'])
-      }
-      else{
-        this.presentToastFeedback()
+        this.appcom.username = this.authService.nombre;
+
+        this.router.navigate(["home"]);
+      } else {
+        this.presentToastFeedback();
       }
     });
-  }   
-  
-  loguinAutomatico(){
-    let credentials= {
+  }
+
+  loguinAutomatico() {
+    let credentials = {
       username: localStorage.getItem("correo"),
-      password: localStorage.getItem("password")
+      password: localStorage.getItem("password"),
     };
 
-    this.authService.login(credentials).then( (result)=>{
-      console.log(result)
+    this.authService.login(credentials).then((result) => {
+      console.log(result);
       //console.log(this.authService.token);
 
-      if(result=="ok"){
-        if(this.authService.deviceToken!= null){
+      if (result == "ok") {
+        if (this.authService.deviceToken != null) {
           this.authService.sendDeviceToken();
         }
-        this.appcom.username=this.authService.nombre;
-        
-        
-        this.router.navigate(['home'])
-      }else{
-        this.presentToastFeedback()
+        this.appcom.username = this.authService.nombre;
+
+        this.router.navigate(["home"]);
+      } else {
+        this.presentToastFeedback();
       }
     });
   }
@@ -218,23 +226,22 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  async presentGreeting(){
+  async presentGreeting() {
     const toast = await this.toastController.create({
-      message: 'Login exitoso!',
-      position: 'top',
+      message: "Login exitoso!",
+      position: "top",
       duration: 2000,
-      color: 'success'
+      color: "success",
     });
     toast.present();
   }
 
-  iconPassword(){
-    this.showPassword=!this.showPassword;
-    if(this.passwordIcon=='eye'){
-      this.passwordIcon='eye-off';
-    }
-  else{
-      this.passwordIcon='eye';
+  iconPassword() {
+    this.showPassword = !this.showPassword;
+    if (this.passwordIcon == "eye") {
+      this.passwordIcon = "eye-off";
+    } else {
+      this.passwordIcon = "eye";
     }
   }
 }

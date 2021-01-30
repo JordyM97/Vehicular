@@ -8,6 +8,7 @@ export class TransactionService {
   public user: any;
   public token: string;
   public cards: Array<any>;
+  public tokenHeader: string;
 
   constructor(public http: HttpClient) {
     this.cards=[]
@@ -18,6 +19,7 @@ export class TransactionService {
     console.log(JSON.stringify(credentials));
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.tokenHeader));
       this.http
         .post("https://axela.pythonanywhere.com/api/card", credentials, {
           headers: headers,
@@ -44,6 +46,7 @@ export class TransactionService {
     console.log(JSON.stringify(credentials));
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.tokenHeader));
       this.http
         .post(
           "https://axela.pythonanywhere.com/api/transaction?user=" +
@@ -70,6 +73,8 @@ export class TransactionService {
     console.log(credentials);
     console.log(JSON.stringify(credentials));
     return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.tokenHeader));
       this.http
         .delete(
           "https://axela.pythonanywhere.com/api/card?user=" +
@@ -94,7 +99,7 @@ export class TransactionService {
   loadCards() {
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.tokenHeader));
       this.http
         .get("https://axela.pythonanywhere.com/api/card?user=" + this.user, {
           headers: headers,

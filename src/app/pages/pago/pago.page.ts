@@ -28,6 +28,7 @@ export class PagoPage implements OnInit {
 
   ngOnInit() {
     this.transaction.user = this.authService.id;
+    this.transaction.tokenHeader=this.authService.token;
     this.transaction.loadCards();
     this.cards = this.transaction.getCards();
     //console.log("cards");
@@ -58,12 +59,6 @@ export class PagoPage implements OnInit {
   }
 
   pay(card) {
-    let credentials = {
-      amount: "99.00",
-      description: "DESCRIPCION",
-      dev_reference: "REFERENCIA",
-      vat: "0.00",
-    };
     this.transaction.token = card.token;
     var formData: any = new FormData();
     formData.append("amount", "99.00");

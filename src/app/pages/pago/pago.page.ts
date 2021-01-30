@@ -22,11 +22,8 @@ export class PagoPage implements OnInit {
   constructor(
     public transaction: TransactionService,
     public toastController: ToastController,
-<<<<<<< HEAD
-=======
     private router:Router,
     public authService: AuthService,
->>>>>>> 77be63bcd4b9909680433a18f6840b3e3a876207
   ) {}
 
   ngOnInit() {

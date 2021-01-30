@@ -5,6 +5,9 @@
 
   <ion-grid>
     <ion-row>
+        <ion-label class="titulo" *ngIf="esReserva">Este viaje no es para hoy</ion-label>
+    </ion-row>
+    <ion-row>
       <ion-col>
         <ion-row><ion-label class="titulo">Ubicacion inicial:</ion-label></ion-row>
         <ion-row><ion-label>{{startMarker.startAddress}}</ion-label></ion-row>

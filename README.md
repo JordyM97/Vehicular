@@ -1,7 +1,38 @@
 
 # GRUPO VEHICULAR
 
+-----DETALLES ------------
+- Ionic Capacitor
+
 -----INSTALAR ------------
+
+- Descargar el repositorio
+- Instalar Nodejs
+- Ejecutar npm install 
+- Seguir tutorial para instalar certificado en windows
+- Correr usando Ionic serve --ssl 
+
+-----BUILD APP ------------
+- ionic build
+- npx cap copy
+- npx cap sync android
+- npx cap open android 
+- Ejecutar desde el emulador o generar apk
+
+
+-----CORRECCION DE ERRORES AL INSTALAR ------------
+- npm audit fix            chequea el estado del proyecto y dependencias
+- npm audit fix -force       instala dependencias faltantes del proyecto 
+
+
+
+-----INTEGRANTES ------------
+
+- Jordy Medina
+- Leonardo Gomez
+- Gustavo Matamoros
+- Axel Auza
+
 ===
 - https://ionicframework.com/docs/v3/intro/installation/
 -  instalar version LTS de NodeJS 
@@ -9,12 +40,6 @@
 
 - para revisar version instalada de todo usar el comando
         Ionic info
-
--       npm audit fix            chequea el estado del proyecto y dependencias
--       npm audit fix -force       instala dependencias faltantes del proyecto 
-
--  de ahi correr el programa con:  
-        ionic serve
 
 
 -ionic cordova plugin add cordova-plugin-nativegeocoder
@@ -26,19 +51,6 @@ npm install @ionic-native/http
 npm i --save @codetrix-studio/capacitor-google-auth
 npm i @capacitor-community/facebook-login
 
-
-cambios para commit de tarjeta
-
------BUILD APP---------
---ANDROID---
-
-ionic build
-npx cap copy
-npx cap sync android
-npx cap open android      <--- para abrir el android studio
-
-
----IOS----
 
 
 ------REQUISITOS-----
@@ -62,8 +74,3 @@ System:
  -  NodeJS : v12.18.3 
  - npm    : 6.14.6
  - OS     : Windows 10
-
--Jordy Medina
--Leonardo Gomez
--Gustavo Matamoros
--Axel Auza

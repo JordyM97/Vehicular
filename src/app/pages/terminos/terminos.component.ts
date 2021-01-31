@@ -27,11 +27,11 @@ export class TerminosComponent implements OnInit {
   }
   btnSi(){
     this.modalctrl.dismiss()
-    localStorage.setItem("firstTime","0");
+    localStorage.setItem("flag","0");
   }
   btnNo(){
     this.modalctrl.dismiss()
-    localStorage.setItem("firstTime","1");
+    localStorage.setItem("flag","1");
     this.router.navigateByUrl('Login')
   }
 }

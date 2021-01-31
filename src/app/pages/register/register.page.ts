@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -22,12 +22,13 @@ export class RegisterPage implements OnInit {
   constructor(
     private router: Router,
     public toastController: ToastController,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    public alertController:AlertController) { }
 
   ngOnInit() {
   }
 
-  on_submit_register(){
+  async on_submit_register(){
     let credentials= {
       username: "null",
       password: this.password,
@@ -39,21 +40,28 @@ export class RegisterPage implements OnInit {
 
     };
     this.authService.getPoliticas();
-    
-    this.authService.signUp(credentials).then( (result)=>{
-      console.log(result)
+
+
+    if(localStorage.getItem("flag")=="1"){
+      this.router.navigateByUrl('Register');
+    }
+    else{
+
+      this.authService.signUp(credentials).then( (result)=>{
+        console.log(result)
       //console.log(this.authService.token);
-      if(result=="ok"){
+        if(result=="ok"){
         //this.authService.sendDeviceToken();
         
-        this.authService.registerclient();
+          this.authService.registerclient();
         
-        this.router.navigateByUrl('login')
-      }
-      else{
-        this.presentToastFeedback()
-      }
-    })
+          this.router.navigateByUrl('login')
+        }
+        else{
+          this.presentToastFeedback()
+        }
+      })
+    }
     } 
     async presentToastFeedback() {
       const toast = await this.toastController.create({
@@ -83,4 +91,30 @@ export class RegisterPage implements OnInit {
         this.passwordIcon='eye';
       }
     }
+
+    async presentAlertConfirm() {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Confirm!',
+        message: 'Message <strong>text</strong>!!!',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Okay',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
+
 }

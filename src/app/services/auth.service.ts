@@ -12,6 +12,7 @@ import { FcmService } from './fcm.service';
 export class AuthService {
   public token: any;  
   public id:any;  
+  public idClient:any;
   public nombre: any;  
   public apellido: any;  
   public correo: any; 
@@ -41,6 +42,7 @@ export class AuthService {
             this.img=""
            // console.log(data);
             resolve("ok");
+            this.getClient()
             }, (err) => {
             //console.log(err);
             resolve("bad");
@@ -291,6 +293,24 @@ export class AuthService {
           resolve("bad");
         });  });
   }
+  getClient(){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
+        
+      this.http.get('https://axela.pythonanywhere.com/api/getpk/'+String(this.id)+'/1/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          console.log(data)
+          this.idClient=data.id;
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+  }
+
   getPoliticas(){
     console.log("POLITICAS:")
       var a =this.presentModal();

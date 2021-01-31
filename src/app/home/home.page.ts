@@ -226,8 +226,9 @@ export class HomePage implements OnInit {
       translucent: true,      cssClass: 'contact-popover',
       componentProps:{
         info: {
-          idClientService: this.authService.getId(),
-          idDriverService: '31',
+          
+          idDriverService: 1,
+          idClientService: 2,
           coordStart: JSON.stringify(this.latLngInicial),
           coordEnd: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,

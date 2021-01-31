@@ -67,6 +67,8 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
+    //this.servicio.idClientService=this.authService.idClient
+
     this.authService.sendService(JSON.stringify(this.servicio));
 
     this.notificacionTransporter = {
@@ -82,7 +84,7 @@ export class AceptarParametrosComponent implements OnInit {
    
     //this.enviarNotificacion(this.notificacionTransporter); //No es necesaria
     console.log("Enviando Info al API");
-    this.postDataAPI(this.servicio);
+    //this.postDataAPI(this.servicio);
     await this.popoverController.dismiss();
     if(this.servicio.isReservationService==0){ //Para controlar que si es reserva, no se quede esperando
       this.loadingservice.showLoader();

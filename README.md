@@ -27,7 +27,7 @@ npm i --save @codetrix-studio/capacitor-google-auth
 npm i @capacitor-community/facebook-login
 
 
-
+cambios para commit de google
 
 -----BUILD APP---------
 --ANDROID---

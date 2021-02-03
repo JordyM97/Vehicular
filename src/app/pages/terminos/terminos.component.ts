@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class TerminosComponent implements OnInit {
   public politicas: any
   public politi:any
-  constructor(private modalctrl:ModalController) { }
+  constructor(private modalctrl:ModalController,private router:Router) { }
 
   ngOnInit(
   ) {
@@ -26,6 +27,11 @@ export class TerminosComponent implements OnInit {
   }
   btnSi(){
     this.modalctrl.dismiss()
-    localStorage.setItem("firstTime","0");
+    localStorage.setItem("flag","0");
+  }
+  btnNo(){
+    this.modalctrl.dismiss()
+    localStorage.setItem("flag","1");
+    this.router.navigateByUrl('Login')
   }
 }

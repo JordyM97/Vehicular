@@ -37,7 +37,8 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    //localStorage.clear();
+    //localStorage.clear();\
+    localStorage.setItem('flag','1');
     if (localStorage.length > 0) {
       this.loguinAutomatico();
     }
@@ -176,7 +177,7 @@ export class LoginPage implements OnInit {
     };
     localStorage.setItem("correo", credentials.username);
     localStorage.setItem("password", credentials.password);
-    localStorage.setItem("firstTime", "1");
+    localStorage.setItem("flag", "1");
     this.authService.login(credentials).then((result) => {
       //console.log(result)
       //console.log(this.authService.token);

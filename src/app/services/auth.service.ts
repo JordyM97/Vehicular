@@ -188,7 +188,7 @@ export class AuthService {
         this.http.post('https://axela.pythonanywhere.com/auth/convert-token', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
-            this.token = "Token "+data.access_token;
+            this.token = "Bearer "+data.access_token;
             if (credentials.userId!="")
               this.loadUserData(credentials.userId,credentials.token);
             //console.log(data);
@@ -203,7 +203,7 @@ export class AuthService {
   getTokenDjango(credentials){    
     return new Promise((resolve, reject) => {
         let headers = new HttpHeaders(); 
-        this.http.get('https://axela.pythonanywhere.com/api/socialauth/?token='+this.token.split("Token ")[1], {headers: headers}) //http://127.0.0.1:8000
+        this.http.get('https://axela.pythonanywhere.com/api/socialauth/?token='+this.token.split("Bearer ")[1], {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;

@@ -87,7 +87,7 @@ export class HomePage implements OnInit {
     this.autocomplete = { input: '' };    this.autocomplete2 = { input: '' };
     this.autocompleteItems = [];    this.autocompleteItems2 = [];
     this.geocoder = new google.maps.Geocoder();
-    this.authService.getUserInfo(24);
+    this.authService.getUserInfo(this.authService.id);
     
     
     //console.log(date);

@@ -12,6 +12,7 @@ import { FcmService } from './fcm.service';
 export class AuthService {
   public token: any;  
   public id:any;  
+  public uid:any;  
   public idClient:any;
   public nombre: any;  
   public apellido: any;  
@@ -25,6 +26,7 @@ export class AuthService {
     public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
     ) { 
     this.historial = [];
+    this.uid="G8i5HhWk1OQx9JwLmilYSAlJyHC2";
   }
   login(credentials){
    //console.log(credentials);
@@ -34,7 +36,8 @@ export class AuthService {
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
-            this.id=data.id;            
+            this.id=data.id;          
+            this.uid=data.uid;  
             this.token = "token "+data.token;            
             this.nombre = data.first_name;
             this.apellido = data.last_name;        
@@ -210,6 +213,7 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;
+            this.uid=data.uid;
             this.token="Token "+data.token;
             console.log(data);
             resolve("ok");
@@ -238,7 +242,8 @@ export class AuthService {
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;            
-            this.token = "token "+data.token;            
+            this.token = "token "+data.token;    
+            this.uid =data.uid;
             this.nombre = data.first_name;
             this.apellido = data.last_name;            
             this.correo = data.email;

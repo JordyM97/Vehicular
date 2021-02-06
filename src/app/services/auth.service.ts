@@ -26,7 +26,7 @@ export class AuthService {
     public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
     ) { 
     this.historial = [];
-    this.uid="G8i5HhWk1OQx9JwLmilYSAlJyHC2";
+    //this.uid="G8i5HhWk1OQx9JwLmilYSAlJyHC2";
   }
   login(credentials){
    //console.log(credentials);

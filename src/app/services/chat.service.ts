@@ -47,8 +47,8 @@ export class ChatService {
               let uids =data.id.split('-');
               let uidProv= uids[0];
               let uidOther= uids[1];
-              let uidCurrent = "G8i5HhWk1OQx9JwLmilYSAlJyHC2";
-              console.log("G8i5HhWk1OQx9JwLmilYSAlJyHC2");
+              let uidCurrent = this.authService.uid;
+              console.log(this.authService.uid);
               return (uidCurrent===uidProv || uidCurrent==uidOther)
               
           });
@@ -56,7 +56,15 @@ export class ChatService {
       )
     )
   }
-
+  addChatRoom(chatRoom:string){
+    return this.afs.collection(`/chatRoomsTest/`).doc(chatRoom).set(
+      {
+        id : chatRoom,
+        dateStart: firebase.firestore.FieldValue.serverTimestamp(),
+        descripcion: "servicio"
+      }
+    );
+  }
   getMessages(chatRoom:string){
     console.log('cg> ',chatRoom)
     this.messagesCollection = this.afs.collection<any>(`/chatRoomsTest/${chatRoom}/messages`,(ref)=>ref.orderBy('createdAt'));
@@ -83,7 +91,7 @@ export class ChatService {
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(
       {
         msg,
-        from: "G8i5HhWk1OQx9JwLmilYSAlJyHC2",
+        from: this.authService.uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }
     );

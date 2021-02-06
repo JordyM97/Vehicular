@@ -227,8 +227,9 @@ export class HomePage implements OnInit {
       componentProps:{
         info: {
           
-          idDriverService: 1,
-          idClientService: 2,
+          //idDriverService: null,
+          idClientService: 1,
+          uid:this.authService.uid,
           coordStart: JSON.stringify(this.latLngInicial),
           coordEnd: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,

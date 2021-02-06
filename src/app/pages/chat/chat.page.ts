@@ -40,5 +40,8 @@ export class ChatPage implements OnInit {
     )
 
   }
+  //createRoom(){
+  //  this.chatService.addChatRoom("neww-G8i5HhWk1OQx9JwLmilYSAlJyHC2");
+  //}
 
 }

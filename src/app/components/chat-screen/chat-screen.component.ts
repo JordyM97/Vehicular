@@ -28,8 +28,8 @@ export class ChatScreenComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    console.log(this.chat.id)
+    this.chat=this.nav_params.get('chat');
+    console.log(this.chat.id);
     this.chatService.getMessages(this.chat.id).subscribe(
       (messages: any[]) => {
         console.error('LosMessages > ',messages)
@@ -51,7 +51,7 @@ export class ChatScreenComponent implements OnInit {
         console.error('Los New Messages > ',this.messages)
       }
     );
-    this.chat=this.nav_params.get('chat');
+    
     
   }
   

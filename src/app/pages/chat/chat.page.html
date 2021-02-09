@@ -21,9 +21,10 @@
         <!-- <ion-img [src]="chat.img"></ion-img> -->
       </ion-avatar>
       <ion-label>
-        <h2>{{chat.id}}</h2>
+        <h2>{{chat.driver}}</h2>
         <h3></h3>
         <p>{{chat.descripcion}}</p>
+        <p>{{chat.dateStart?.toMillis() | date:'short'}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

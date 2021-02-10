@@ -30,8 +30,9 @@
 
 - Jordy Medina
 - Leonardo Gomez
-- Gustavo Matamoros
 - Axel Auza
+- Gustavo Matamoros
+
 
 ===
 - https://ionicframework.com/docs/v3/intro/installation/

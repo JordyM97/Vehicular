@@ -14,9 +14,9 @@
 
 -----BUILD APP ------------
 - ionic build
-- npx cap copy
-- npx cap sync android
-- npx cap open android 
+- ionic cap copy
+- ionic  cap sync android
+- ionic cap open android 
 - Ejecutar desde el emulador o generar apk
 
 

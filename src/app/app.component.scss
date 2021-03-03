@@ -5,7 +5,7 @@
 
 .menu-bg {
     height: 100%;
-    background: linear-gradient(#20478c, #2485c9)
+    background:#282F69
 }
 
 .menu-header-content {
@@ -15,8 +15,7 @@
     top: 30px;
     left: 20px;
     display: flex;
-    color: rgb(39, 35, 35);
-    ;
+    background-color: white;
     align-items: center;
     ion-avatar {
         width: 70px;
@@ -35,6 +34,7 @@
 
 .menu-items {
     margin: 0px;
+    
     ion-icon {
         margin-right: 20px;
         color: rgb(255, 255, 255);
@@ -43,6 +43,7 @@
         padding-left: 15px;
         padding-top: 5%;
         margin-bottom: 10px;
+        --background-activated: red;
     }
 }
 

@@ -2,12 +2,20 @@ ion-fab-button {
     --background: red;
     color: black;
 }
-
+ion-content{
+    --background:  #282F69;
+}
 .estrella {
     height: 35px;
     width: 35px;
 }
-
+ion-avatar{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40%;
+    width: 30%;
+}
 ion-grid {
     //background: linear-gradient(-90deg,#20478B ,#2487C9);
     justify-content: center;

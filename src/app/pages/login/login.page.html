@@ -1,8 +1,17 @@
+
 <ion-content>
-  <ion-img class="icon" src="assets/imgs/logf.png"></ion-img>
+  <div class="top">
+    <p>BIENVENIDOS!</p>
+    <ion-img class="icon" src="assets/imgs/logi.png">  </ion-img>
+  </div>
+  <div class="head">
+    <p>BIENVENIDOS!</p>
+    <ion-img class="icon" src="assets/imgs/efletes-02.png"></ion-img>
+  </div>
+  
   <div class="content-items">
     <ion-item>
-      <ion-label position="floating"> Correo electrónico</ion-label>
+      
       <ion-input
         type="text"
         [(ngModel)]="correo_electronico"
@@ -11,16 +20,13 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <!--<ion-label position="floating"> Correo electrónico</ion-label>  -->
       <ion-input
         [type]="showPassword ? 'text':'password'"
         [(ngModel)]="contrasenia"
         name="contrasenia"
       ></ion-input>
-      <ion-icon
-        slot="end"
-        [name]="passwordIcon"
-        (click)="iconPassword()"
+      <ion-icon        slot="end"        [name]="passwordIcon"        (click)="iconPassword()"
       ></ion-icon>
     </ion-item>
 
@@ -48,7 +54,7 @@
   
 </ion-row>
 </ion-grid>
-  <ion-button expand="full" (click)="on_submit_login()" class="boton">
+  <ion-button (click)="on_submit_login()" class="boton">
     INICIAR SESIÓN
   </ion-button>
 </ion-content>

@@ -52,7 +52,9 @@ export class HomePage implements OnInit {
   listenerInicio: any;  listenerFin: any;
   listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
-  directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {
+      strokeColor: "black"
+    }});
   puntoInicio;  puntoFin;
 
   
@@ -131,7 +133,7 @@ export class HomePage implements OnInit {
             let lat=data.coords.latitude;            let lng=data.coords.longitude;
             let latLng=new google.maps.LatLng(lat,lng);
             this.marker = new google.maps.Marker({
-             map: this.map ,             icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+             map: this.map ,             icon: new google.maps.MarkerImage('assets/icon/fin.png',
               new google.maps.Size(22, 22),              new google.maps.Point(0, 18),              new google.maps.Point(11, 11)),
              position: latLng      
             });
@@ -305,11 +307,15 @@ export class HomePage implements OnInit {
     if (this.puntoInicio) {
       this.puntoInicio.setPosition(marker);
     } else {
+      var icon={
+        url: "assets/icon/Inicio.png", // url
+        scaledSize: new google.maps.Size(50, 50), // scaled size
+      }
       this.puntoInicio = new google.maps.Marker({
         position: marker.position,
         map: this.map,
         //icon: 'assets/icon/pin.png',
-        icon: 'assets/icon/pointer_a.png',
+        icon: icon,
         draggable: true
       });
       this.puntoInicio.setPosition(marker);
@@ -321,10 +327,14 @@ export class HomePage implements OnInit {
     if (this.puntoFin) {
       this.puntoFin.setPosition(marker);
     } else {
+      var icon={
+        url: "assets/icon/fin.png", // url
+        scaledSize: new google.maps.Size(50, 50), // scaled size
+      }
       this.puntoFin = new google.maps.Marker({
         position: marker.position,
         map: this.map,
-        icon: 'assets/icon/pointer_r.png',
+        icon: icon,
         draggable: true
       });
       this.puntoFin.setPosition(marker);
@@ -570,7 +580,7 @@ export class HomePage implements OnInit {
     elegirPuntos.style.display="block";
     aceptarParametros.style.display="block";
     aceptarPuntos.style.display="none";
-    menuOp.style.height="60%";
+    menuOp.style.height="50%";
     google.maps.event.removeListener(this.listenerInicio);
     google.maps.event.removeListener(this.listenerFin);
     google.maps.event.removeListener(this.listenerMoverInicio);

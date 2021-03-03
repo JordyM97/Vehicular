@@ -52,7 +52,7 @@
 .servicioasignado {
     #header-card {
         text-align: center;
-        background: linear-gradient(-90deg, #20478B, #2487C9);
+        background: #282F69;
         color: white;
         font-size: 10px;
     }
@@ -127,13 +127,13 @@
 }
 
 .center-img {
-    //display: block;
-    margin-left: 5%;
+    
+    margin-left: 10%;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 10vw;
 }
 
 .my-custom-class {
@@ -206,5 +206,5 @@
 
 .btn {
     align-content: center;
-    color: #2487C9;
+    color: #282F69;
 }

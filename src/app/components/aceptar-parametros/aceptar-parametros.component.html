@@ -14,27 +14,29 @@
       </ion-col>
 
       <ion-col>
+        <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
+        <ion-row><ion-label>{{servicio.endAddress}}</ion-label></ion-row>
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-row><ion-label class="titulo">Tipo de vehículo:</ion-label></ion-row>
         <ion-row><ion-label>{{servicio.vehiculo}}</ion-label></ion-row>
       </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
-        <ion-row><ion-label>{{servicio.endAddress}}</ion-label></ion-row>
-      </ion-col>
-
-      <ion-col>
-        <ion-row><ion-label class="titulo">Método de pago:</ion-label></ion-row>
-        <ion-row><ion-label>{{servicio.idTypePayment}}</ion-label></ion-row>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
       <ion-col>
         <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
         <ion-row><ion-label>{{servicio.anio}}/{{servicio.mes}}/{{servicio.dia}} -- {{servicio.hora}}:{{servicio.minuto}}</ion-label></ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-row><ion-label class="titulo">Método de pago:</ion-label></ion-row>
+        <ion-row><ion-label>{{servicio.idTypePayment}}</ion-label></ion-row>
+        
       </ion-col>
 
       <ion-col>
@@ -45,13 +47,13 @@
 
     <ion-row>
       <ion-col>
-        <ion-row><ion-label class="titulo">Total a pagar:</ion-label></ion-row>
-        <ion-row><ion-label>${{servicio.amountPayment}}</ion-label></ion-row>
+        <ion-row><ion-label >Total a pagar:</ion-label></ion-row>
+        <ion-row><ion-label class="precio">${{servicio.amountPayment}}</ion-label></ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
   <div class="btns">
-    <ion-button color="primary" (click)="presentToast()">Aceptar</ion-button>
-    <ion-button color="primary" (click)="DismissClick()">Cancelar</ion-button>
+    <ion-button color="secondary" (click)="presentToast()">Aceptar</ion-button>
+    <ion-button color="secondary" (click)="DismissClick()">Cancelar</ion-button>
   </div>
 </div>

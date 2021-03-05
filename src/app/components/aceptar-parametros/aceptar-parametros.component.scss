@@ -1,6 +1,6 @@
 .mid {
     //border: black 1px solid;
-    width: 99vw;
+    width: 97vw;
     //width: 370px;
     text-align: center;
     background-color: white;
@@ -8,12 +8,13 @@
 
 .cabecera {
     height: 50px;
-    background: linear-gradient(-90deg, #20478B, #2487C9);
+    background:  #282F69 ;
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
     color: white;
+    text-transform: uppercase;
 }
 
 popover-content sc-ion-popover-md {
@@ -23,9 +24,16 @@ popover-content sc-ion-popover-md {
 }
 
 .titulo {
-    color: #9A999E;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
 }
-
+.precio{
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+}
 ion-row {
     display: flex;
     align-items: center;
@@ -43,7 +51,7 @@ ion-row {
 
 @media screen and (max-width: 1000px) {
     .mid {
-        border: black 3px solid;
-        border-radius: 12px;
+        //border: black 3px solid;
+        //border-radius: 12px;
     }
 }

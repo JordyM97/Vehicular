@@ -1,27 +1,28 @@
 
 <ion-content>
   <div class="head">
-    <p>BIENVENIDOS!</p>
+    
     <ion-img class="icon" src="assets/imgs/efletex-blanco.png"></ion-img>
+    <p>Registro</p>
   </div>
   
   <div class="content-items">
   <ion-grid>
     <ion-row>
-      <ion-col>
+      
         
           <ion-item >
             <ion-label position="floating"> Nombres</ion-label>
             <ion-input type="text" [(ngModel)]="firstname" name="firstname"></ion-input>
           </ion-item>
         
-      </ion-col>
-      <ion-col>
+    </ion-row>    
+    <ion-row>
         <ion-item >
           <ion-label position="floating"> Apellidos</ion-label>
           <ion-input type="text" [(ngModel)]="lastname" name="lastname"></ion-input>
         </ion-item>
-      </ion-col>
+      
     </ion-row>
     <ion-row>
       <ion-item >
@@ -53,16 +54,16 @@
 
   
 
-  <div class="ion-text-center ion-margin-top">
-      
-    <a class="content-link" routerLink="/login">
-      <small >Ya tienes una cuenta? Inicia Sesion</small>`    </a>
-  </div>
+  
 </div>
 
   
   <ion-button expand="full" (click)="on_submit_register()" class="boton">
     REGISTRARSE 
   </ion-button>
-
+  <div class="ion-text-center ion-margin-top">
+      
+    <a class="content-link" routerLink="/login">
+      <small >Ya tienes una cuenta? Inicia Sesion</small>`    </a>
+  </div>
 </ion-content>

@@ -5,18 +5,19 @@ ion-item{
     --background: white;
     width: 80%;
     border: 1px solid black;
-    border-radius: 12px;
+    //border-radius: 12px;
+    height: 13vw;
     margin: 0px auto 0px auto;
 }
 ion-icon{
-    padding-top: 5%;
+    padding-top: 0%;
 }
 .head{
-    height: 20%;
+    height: 19%;
     background-color: #282F69;
     color: white;
     text-align: center;
-    padding: 10% 0% 10px 0px;
+    padding: 10% 0% 0px 0px;
     p {
         font-size: 18px;
         margin-top:10px ;
@@ -25,4 +26,16 @@ ion-icon{
 }
 ion-row{
     margin: 5px 0px 10px 0px;
+}
+.terms{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.check{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+.content-items{
+    background-color: white;
 }

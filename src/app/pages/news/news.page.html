@@ -3,14 +3,19 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-toolbar style="--background: #282F69;">
-    <ion-buttons slot="start" >
-      <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline">
-      
-      </ion-back-button>
+  <ion-toolbar class="toolbar-bg">
+    <ion-buttons slot="start">
+        <ion-menu-button class="ion-margin" fill="clear" color="light" auto-hide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Noticias</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="primary">
+        <ion-button color="light" class="ion-margin">
+            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>
+   
+  
  
   
   

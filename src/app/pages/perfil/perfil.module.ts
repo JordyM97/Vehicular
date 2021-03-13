@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
+import { PagoPage } from '../pago/pago.page';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { PerfilPage } from './perfil.page';
     IonicModule,
     PerfilPageRoutingModule
   ],
-  declarations: [PerfilPage]
+  declarations: [PerfilPage,PagoPage]
 })
 export class PerfilPageModule {}

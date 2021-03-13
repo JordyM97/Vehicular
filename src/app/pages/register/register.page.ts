@@ -116,5 +116,7 @@ export class RegisterPage implements OnInit {
   
       await alert.present();
     }
-
+    getPoliticas(){
+      this.authService.getPoliticas();
+    }
 }

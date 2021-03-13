@@ -25,52 +25,52 @@
                 <ion-label class="calificacion">{{calificacionStr}}</ion-label>
                 <img class="estrella" src="assets/imgs/estrella.png">
             </ion-row>
-            <ion-row>
+            <!--<ion-row>
                 <ion-col>
                   <div class="ion-text-center">
                     <ion-button color="danger" class="ion-no-margin ion-margin-bottom" (click)="uploadImg()">Subir una foto</ion-button>
                   </div>
                 </ion-col>
-            </ion-row>
+            </ion-row>-->
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta ion-no-margin">{{nombre}}</h4>
+                        <p class="respuesta ion-no-margin">{{nombre}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta ion-no-margin">{{apellido}}</h4>
+                        <p class="respuesta ion-no-margin">{{apellido}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta ion-no-margin">Fecha de nacimiento:{{fecha_nacimiento}}</h4>
+                        <p class="respuesta ion-no-margin">Fecha de nacimiento:{{fecha_nacimiento}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta2 ion-no-margin">{{correo}}</h4>
+                        <p class="respuesta2 ion-no-margin">{{correo}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta2 ion-no-margin">{{celular}}</h4>
+                        <p class="respuesta2 ion-no-margin">{{celular}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <h4 class="respuesta2 ion-no-margin">Registro {{registro}}</h4>
+                        <p class="respuesta2 ion-no-margin">Registro {{registro}}</p>
                     </div>
                 </ion-col>
             </ion-row>
@@ -82,5 +82,7 @@
                 </ion-col>
             </ion-row>
         </ion-col>
+        
     </ion-grid>
+    <app-pago></app-pago>
 </ion-content>

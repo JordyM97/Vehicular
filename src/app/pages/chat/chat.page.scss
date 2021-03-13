@@ -3,7 +3,7 @@ ion-item{
     background-color: white;
     background: white;
     border-radius: 12px;
-    border: 1px solid black;
+   // border: 1px solid black;
     padding-top: 3px;
     margin: 4px;
     p{
@@ -28,4 +28,8 @@ ion-avatar{
 .label{
     background: #282F69;
     width:20px;
+}
+.s{
+    width: 05px;
+    background-color: red;
 }

@@ -71,7 +71,12 @@
     //  --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
     // }
 }
-
+.contact-popover{
+    .popover-content{
+        left: 3%;
+        width: 94%;
+    }
+}
 
 
 .sc-ion-popover-md-h {

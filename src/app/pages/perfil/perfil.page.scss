@@ -22,7 +22,8 @@ ion-grid {
     align-content: center;
     flex-direction: column;
     //color: white;
-    margin-top: 10%;
+    margin-top: 0%;
+    height: 45%;
 }
 
 .estrellas {
@@ -36,20 +37,20 @@ ion-grid {
 }
 
 .titulo {
-    font-size: 16px;
+    font-size: 12px;
     margin-left: 25px;
     color: grey;
 }
 
 .respuesta {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     justify-content: center;
     color: white;
     font-weight: normal;
 }
 
 .respuesta2 {
-    font-size: 1.5rem;
+    font-size: 12px;
     justify-content: center;
     color: white;
     font-weight: normal;

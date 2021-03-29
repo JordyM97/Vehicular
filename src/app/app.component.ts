@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { FcmService } from './services/fcm.service';
 import { TerminosComponent } from './pages/terminos/terminos.component';
+import { CalificarDriverComponent } from './components/calificar-driver/calificar-driver.component';
 
 @Component({
   selector: 'app-root',
@@ -56,5 +57,17 @@ export class AppComponent implements OnInit{
   }
   getPoliticas(){
     this.authService.getPoliticas();
+  }
+  async presentPopoverCalificacion() {
+    //let idCliente = notification.data.idCliente;
+    const popover = await this.popovercontroller.create({
+      component: CalificarDriverComponent,
+      cssClass: 'servicioasignado',
+      componentProps:{},
+      mode:"md",
+      translucent: true,
+      backdropDismiss: false
+    });
+    return await popover.present();
   }
 }

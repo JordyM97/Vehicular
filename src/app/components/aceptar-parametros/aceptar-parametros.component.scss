@@ -24,7 +24,12 @@ popover-content sc-ion-popover-md {
 }
 
 .titulo {
-    color: black;
+    color: rgba(5, 5, 5, 0.877);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.titulo2 {
+    color: red;
     text-transform: uppercase;
     font-weight: bold;
 }

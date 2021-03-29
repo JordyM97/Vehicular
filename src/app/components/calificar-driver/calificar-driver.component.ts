@@ -6,9 +6,9 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 
 enum COLORS {
   GREY = "#E0E0E0",
-  GREEN = "#76FF03",
-  YELLOW = "#FFCA28",
-  RED= "#DD2C00"
+  GREEN = "#BD1818",
+  YELLOW = "#BD1818",
+  RED= "#BD1818"     //#DD2C00
 }
 
 @Component({
@@ -58,7 +58,7 @@ export class CalificarDriverComponent implements OnInit {
     switch (this.rating){
       case 1:
       case 2:
-        return COLORS.RED;
+        return COLORS.RED;  
       case 3:
         return COLORS.YELLOW;
       case 4:

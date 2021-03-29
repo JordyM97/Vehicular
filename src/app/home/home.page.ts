@@ -180,6 +180,7 @@ export class HomePage implements OnInit {
             location: location ,
             id: id,
             from: this.authService.nombre,
+            type: 'client',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           })
       }else{

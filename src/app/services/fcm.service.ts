@@ -101,9 +101,10 @@ export class FcmService {
           'color':notification.data.colorVehiculo,
           'inicioCoords':notification.data.inicioCoords,
           'finCoords':notification.data.finCoords,
-          'idConductor':notification.data.idConductor
+          'idConductor':notification.data.idConductor,
+          'iddriver':notification.data.iddriver
         }
-        localStorage.setItem('idConductor',notification.data.idConductor);
+        localStorage.setItem('idConductor',notification.data.iddriver);
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
         console.log(notObjeto)
         this.shareData.notObj$.emit(notObjeto);
@@ -115,7 +116,9 @@ export class FcmService {
         this.router.navigate(['/detalle-servicio']);
         //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.data.tipoNotificacion)==1){
+          console.log(notification.data)
           this.presentPopoverCalificacion();
+
         }
       }
     );
@@ -152,6 +155,7 @@ export class FcmService {
         this.router.navigate(['/detalle-servicio']);
         //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.notification.data.tipoNotificacion)==1){
+          
           this.presentPopoverCalificacion();
         }
       }

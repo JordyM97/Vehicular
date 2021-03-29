@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar class="toolbar-bg">
-    <h2>Seleccione el dia y la hora</h2>
+    <h2>RESERVAR VIAJE</h2>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row class="ion-justify-content-center">
       <ion-item>
         <ion-label position="floating">Selecciones el dia</ion-label>
-        <ion-datetime placeholder="Fecha del viaje"
+        <ion-datetime placeholder="YYYY/MM/DD"
                       display-format="YYYY MM DD"
                       max="2022"
                       [ngModel]="fechaViaje.toISOString()" 
@@ -18,14 +18,14 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Seleccione la hora </ion-label>
-        <ion-datetime placeholder="Hora del viaje"
+        <ion-datetime placeholder="00:00"
                       display-format="HH mm"
                       [ngModel]="fechaViaje.toISOString()" 
                       (ionChange)="cambioHora($event)"></ion-datetime>
       </ion-item> 
     </ion-row>
 
-    <ion-row>
+    <ion-row class="ion-justify-content-center">
         <ion-button (click)="btnOk()">OK</ion-button>
     </ion-row>
     

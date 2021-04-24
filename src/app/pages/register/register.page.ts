@@ -18,6 +18,7 @@ export class RegisterPage implements OnInit {
   cedula:string
   showPassword=false;
   passwordIcon='eye';
+  terminos:boolean;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class RegisterPage implements OnInit {
     public alertController:AlertController) { }
 
   ngOnInit() {
+    this.terminos=false;
   }
 
   async on_submit_register(){
@@ -36,44 +38,38 @@ export class RegisterPage implements OnInit {
       last_name: this.lastname,
       email: this.email,
       celular : this.celular,
-      cedula: this.cedula
-
+      cedula: this.cedula,
+      image: "http"
     };
-    this.authService.getPoliticas();
 
-
-    if(localStorage.getItem("flag")=="1"){
-      this.router.navigateByUrl('Register');
-    }
-    else{
-
+    if(this.terminos){
       this.authService.signUp(credentials).then( (result)=>{
         console.log(result)
-      //console.log(this.authService.token);
-        if(result=="ok"){
-        //this.authService.sendDeviceToken();
-        
-          this.authService.registerclient();
-        
-          this.router.navigateByUrl('login')
+        if(result=="ok"){       
+          this.authService.registerclient();          
+          this.router.navigateByUrl('/login')
         }
-        else{
-          this.presentToastFeedback()
-        }
-      })
+        else{          this.presentToastFeedback("Algo ha salido mal")        }
+      }) 
+    }else if(this.password==null || this.firstname== null || this.lastname == null || this.email == null || this.cedula== null || this.celular== null){
+      this.presentToastFeedback("Hay campos vacios");
+    }else{
+      this.presentToastFeedback("No has aceptado los terminos y condiciones");
     }
-    } 
-    async presentToastFeedback() {
+  } 
+  aceptarTerminos(){
+    console.log(this.terminos);
+  }
+
+  async presentToastFeedback(msg:string) {
       const toast = await this.toastController.create({
-        message: 'Datos incorrectos',
-        position: 'top',
-        duration: 2000,
-        color: 'danger'
+        message: msg,
+        position: 'top',        duration: 2000,        color: 'danger'
       });
       toast.present();
     }
   
-    async presentGreeting(){
+  async presentGreeting(){
       const toast = await this.toastController.create({
         message: 'Login exitoso!',
         position: 'top',
@@ -82,7 +78,7 @@ export class RegisterPage implements OnInit {
       });
       toast.present();
     }
-    iconPassword(){
+  iconPassword(){
       this.showPassword=!this.showPassword;
       if(this.passwordIcon=='eye'){
         this.passwordIcon='eye-off';
@@ -92,7 +88,7 @@ export class RegisterPage implements OnInit {
       }
     }
 
-    async presentAlertConfirm() {
+  async presentAlertConfirm() {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Confirm!',

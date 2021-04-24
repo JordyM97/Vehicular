@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     //localStorage.clear();\
-    localStorage.setItem('flag','1');
+    localStorage.setItem('aceptoterminos','0');
     if (localStorage.length > 0) {
       this.loguinAutomatico();
     }
@@ -177,7 +177,6 @@ export class LoginPage implements OnInit {
     };
     localStorage.setItem("correo", credentials.username);
     localStorage.setItem("password", credentials.password);
-    localStorage.setItem("flag", "1");
     this.authService.login(credentials).then((result) => {
       //console.log(result)
       //console.log(this.authService.token);
@@ -200,10 +199,11 @@ export class LoginPage implements OnInit {
       password: localStorage.getItem("password"),
     };
 
+    localStorage.setItem("correo", credentials.username);
+    localStorage.setItem("password", credentials.password);
     this.authService.login(credentials).then((result) => {
-      console.log(result);
+      //console.log(result)
       //console.log(this.authService.token);
-
       if (result == "ok") {
         if (this.authService.deviceToken != null) {
           this.authService.sendDeviceToken();

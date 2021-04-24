@@ -9,6 +9,7 @@ import { MediaServiceService } from 'src/app/services/media-service.service';
 })
 export class PerfilPage implements OnInit {
   public nombre: any;
+  public user: any;
   public apellido: any;
   public correo: any;
   private idCliente: any;
@@ -24,11 +25,12 @@ export class PerfilPage implements OnInit {
 
   ngOnInit() {
     //Obtenidos los datos del usuario luego de loguear
-    this.askProfilePic();
+    //this.askProfilePic();
     //this.img=''//this.Mediaservice.profilephoto;
     this.nombre = this.authService.getNombre();
     this.apellido = this.authService.getApellido();
     this.correo = this.authService.getCorreo();
+    this.user=this.authService.userinfo;
     this.getRateUser();
     
     }

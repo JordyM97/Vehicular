@@ -26,12 +26,12 @@ export class TerminosComponent implements OnInit {
     };
   }
   btnSi(){
+    //localStorage.setItem("aceptoterminos","1");
     this.modalctrl.dismiss()
-    localStorage.setItem("flag","0");
   }
   btnNo(){
+    //localStorage.setItem("aceptoterminos","0");
     this.modalctrl.dismiss()
-    localStorage.setItem("flag","1");
     this.router.navigateByUrl('Login')
   }
 }

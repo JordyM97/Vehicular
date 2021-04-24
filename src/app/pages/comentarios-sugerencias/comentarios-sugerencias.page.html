@@ -1,56 +1,27 @@
 <ion-header >
   <ion-toolbar class="toolbar-bg">
     <div class="toolbar-content">
-      <ion-button fill="clear" slot="start">
-        <ion-menu-button color="light" slot="start"></ion-menu-button>
-      </ion-button>
-
-
       <ion-title class="ion-text-center" text-capitalize>
-        Comentarios y sugerencias
+        COMENTARIOS Y SUGERENCIAS
       </ion-title>
-
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-progress-bar [value]="uploadProgress" color="success" ></ion-progress-bar>
+  <!--<ion-progress-bar [value]="uploadProgress" color="success" ></ion-progress-bar>-->
   <ion-grid>
     <ion-col>
-      
+      <p style="text-align: center;"> Dejanos un comentario sobre la App</p>
       <ion-row>
-        <ion-item class="tipo">
-          <ion-label  position="floating">Tipo:</ion-label>
-      
-          <ion-select [(ngModel)]="categoria">
-            <ion-select-option value="com">Comentario</ion-select-option>
-            <ion-select-option value="sug">Sugerencia</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item >
-          <ion-label position="floating"> Titulo</ion-label>
-          <ion-input type="text" [(ngModel)]="titulo" name="titulo"></ion-input>
-        </ion-item>
         <ion-item>
-          <ion-label position="floating"></ion-label>
-        <ion-textarea auto-grow="true" placeholder="Ingrese su texto" [(ngModel)]="msg"></ion-textarea>
-        </ion-item>
-        
-        <!--added-->
+          <ion-textarea auto-grow="true" placeholder="Ingrese su texto" [(ngModel)]="msg"></ion-textarea>
+        </ion-item> 
       </ion-row>
-      <ion-button (click)="takePicture()" style="width: 98%;">
-        Agregar una foto
-      </ion-button>
-      <ion-row>
-        <img [src]="pictureview" alt="">
-      </ion-row>
+      <!--<ion-button (click)="takePicture()" style="width: 98%;">        Agregar una foto      </ion-button>
+      <ion-row>        <img [src]="pictureview" alt="">      </ion-row>--> 
       
-      
-      
-      <ion-button style="width: 98%;">
-        Enviar
-      </ion-button>
+      <ion-button style="width: 98%; position: fixed;      bottom: 0px;">        Enviar      </ion-button>
     </ion-col>
   </ion-grid>
 </ion-content>

@@ -79,7 +79,7 @@ export class AceptarParametrosComponent implements OnInit {
       metodoPago: this.servicio.idPaymentService,
       valor: this.servicio.total,
       cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
-      idCliente: this.authService.getId() /*Necesito ID de la tabla cliente*/
+      idCliente: 6//this.authService.getId() /*Necesito ID de la tabla cliente*/
     }
    
     //this.enviarNotificacion(this.notificacionTransporter); //No es necesaria

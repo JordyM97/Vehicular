@@ -10,6 +10,7 @@ import { FcmService } from './fcm.service';
   providedIn: 'root'
 })
 export class AuthService {
+  public userinfo:any;
   public token: any;  
   public id:any;  
   public uid:any;  
@@ -36,6 +37,7 @@ export class AuthService {
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) 
           .subscribe(res => {
             let data = JSON.parse(JSON.stringify(res));
+            this.userinfo=data;
             this.id=data.id;          
             this.uid=data.uid;  
             this.token = "token "+data.token;            
@@ -43,7 +45,8 @@ export class AuthService {
             this.apellido = data.last_name;        
             this.correo = data.email; 
             this.img=""
-           // console.log(data);
+
+            console.log("ID del Usuario logueado ",this.id);
             resolve("ok");
             this.getClient()
             }, (err) => {
@@ -99,12 +102,13 @@ export class AuthService {
   
   
   registerclient(){
+    console.log("se va a registrar como cliente el id ", this.id);
     let r={
       userClient: this.id
     }
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
+      headers = headers.set('content-type','application/json') //.set('Authorization',String(this.token));
     
       this.http.post('https://axela.pythonanywhere.com/api/client/', r, {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
@@ -298,7 +302,7 @@ export class AuthService {
           resolve("bad");
         });  });
   }
-  getClient(){
+  getClient(){   //OBTIENE EL ID DE CLIENT DEL USUARIO
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
@@ -306,8 +310,8 @@ export class AuthService {
       this.http.get('https://axela.pythonanywhere.com/api/getpk/'+String(this.id)+'/1/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
-          console.log(data)
-          this.idClient=data.id;
+          console.log("Cliente ID",data)
+          //this.idClient=data.id;
           resolve("ok");
           }, (err) => {
           console.log(err);
@@ -317,9 +321,9 @@ export class AuthService {
   }
 
   getPoliticas(){
-    console.log("POLITICAS:")
-      var a =this.presentModal();
-      
+    console.log("POLITICAS")
+    this.presentModal();
+     
   }
 
   async presentModal() {
@@ -329,7 +333,7 @@ export class AuthService {
       componentProps: {
         
       },
-      swipeToClose: true,
+      swipeToClose: false,
     });
     return await modal.present();
   }

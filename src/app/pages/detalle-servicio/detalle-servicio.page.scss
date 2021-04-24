@@ -11,18 +11,14 @@ ion-content {
 }
 
 #header {
-    text-align: left;
-    background: linear-gradient(-90deg, #20478B, #2487C9);
+    text-align: center;
+    background: #282F69;
     color: white;
     font-size: 12px;
-    height: 50px;
+    height: 40px;
     padding-top: 3px;
     padding-left: 5px;
-    /* h5{
-    height: 100%;    
-    background: linear-gradient(#20478c ,#2485c9);
-    color:white;
-    }*/
+   
 }
 
 #confirmar {
@@ -37,7 +33,7 @@ ion-content {
 
 .detalles {
     font-weight: bold;
-}
+}   
 
 #botones {
     display: grid;
@@ -46,19 +42,7 @@ ion-content {
     justify-content: space-evenly;
     align-content: center;
 }
-#content{
-    display: grid;
-    width: 90%;
-    height: 25%;
-    padding-left: 5%;
-    font-size: 12px;
-    grid-template-rows: 24px 24px repeat(3,20px) ;
-    justify-content: center;
-    align-content: left;
-    //align-items: center;
-    grid-row: row gap 10px;
-  
-  }
+
 
 #chatbubble {
     --padding-top: 15px;
@@ -70,4 +54,66 @@ ion-content {
 
 ion-fab-button {
     margin: 5px;
+}
+.mid {
+    //border: black 1px solid;
+    width: 97vw;
+    //width: 370px;
+    text-align: center;
+    background-color: white;
+}
+
+.cabecera {
+    height: 50px;
+    background:  #282F69 ;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    color: white;
+    text-transform: uppercase;
+}
+
+popover-content sc-ion-popover-md {
+    --top: 250px;
+    --left: 5px;
+    --transform-origin: left top;
+}
+
+.titulo {
+    color: rgba(5, 5, 5, 0.877);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.titulo2 {
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.precio{
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+}
+ion-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price {
+    font-size: 18px;
+    color: red;
+}
+
+.btns {
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .mid {
+        //border: black 3px solid;
+        //border-radius: 12px;
+    }
 }

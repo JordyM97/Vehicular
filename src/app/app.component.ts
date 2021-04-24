@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { FcmService } from './services/fcm.service';
 import { TerminosComponent } from './pages/terminos/terminos.component';
 import { CalificarDriverComponent } from './components/calificar-driver/calificar-driver.component';
+import { DetalleServicioPage } from './pages/detalle-servicio/detalle-servicio.page';
+import { ComentariosSugerenciasPage } from './pages/comentarios-sugerencias/comentarios-sugerencias.page';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit{
     public authService: AuthService,
    // private firestore: AngularFirestore,
     public popovercontroller:PopoverController,
-    private fcmService: FcmService
+    private fcmService: FcmService,
+    private modalCtrl:ModalController
   ) {
     //this.tokensCollection=firestore.collection('tokens');
     //this.tokens= this.tokensCollection.valueChanges();
@@ -55,13 +58,24 @@ export class AppComponent implements OnInit{
     localStorage.clear();
     
   }
+  async comentarios(){
+    const modal = await this.modalCtrl.create({
+      component: ComentariosSugerenciasPage,
+      cssClass: 'NewClass',
+      componentProps: {
+        
+      },
+      swipeToClose: false,
+    });
+    return await modal.present();
+  }
   getPoliticas(){
     this.authService.getPoliticas();
   }
   async presentPopoverCalificacion() {
     //let idCliente = notification.data.idCliente;
     const popover = await this.popovercontroller.create({
-      component: CalificarDriverComponent,
+      component: DetalleServicioPage,
       cssClass: 'servicioasignado',
       componentProps:{},
       mode:"md",

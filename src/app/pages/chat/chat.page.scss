@@ -17,6 +17,7 @@ ion-list{
     height: 100%;
     background-color: white;
     padding-bottom: 10px;
+    overflow-y:scroll !important;
 }
 ion-img{
     width: 40px;
@@ -32,4 +33,7 @@ ion-avatar{
 .s{
     width: 05px;
     background-color: red;
+}
+ion-menu-button{
+    color:white
 }

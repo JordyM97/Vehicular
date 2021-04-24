@@ -40,7 +40,7 @@
           </ion-menu-toggle>
 
 
-          <ion-menu-toggle routerLink="/comentarios-sugerencias">
+          <ion-menu-toggle (click)="comentarios()"> <!--"/comentarios-sugerencias"-->
             <ion-item color="transparent">
               <ion-icon name="mail-open-outline"></ion-icon>Comentarios y sugerencias
             </ion-item>
@@ -59,7 +59,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle>
-            <ion-item color="transparent" (click)="presentPopoverCalificacion()">  <!--  getPoliticas()-->
+            <ion-item color="transparent" (click)="getPoliticas()">  <!--  getPoliticas()-->
               <ion-icon name="receipt-outline"></ion-icon>Terminos y Condiciones
             </ion-item>
           </ion-menu-toggle>

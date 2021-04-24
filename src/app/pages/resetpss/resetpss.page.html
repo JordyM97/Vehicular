@@ -9,16 +9,12 @@
 
   <ion-img class="icon" src="assets/imgs/LOGO2.png">  </ion-img>
 
-  
-  <form class="content-items" (submit)="send_reset_password()">
-    <small class="content-text ion-text-center">Ingresa tu correo electrónico para recuperar tu contraseña</small>
 
-    <ion-item class="content-input">
-      <ion-input placeholder="Correo electronico"  type="email" [(ngModel)]="email" name="email" required="true">
-      </ion-input>
+    <ion-item>
+      <ion-input placeholder="Correo electronico"  type="email" [(ngModel)]="email" name="email" required="true">Ingresa tu email      </ion-input>
     </ion-item>
      
-      <ion-button expand="full" class="boton" type="submit">
+      <ion-button expand="full" class="boton" (click)="send_reset_password()">
         RECUPERAR CONTRASEÑA
       </ion-button>
  

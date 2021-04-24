@@ -1,12 +1,13 @@
 
+  
     <ion-toolbar class="toolbar-bg">
         <ion-buttons slot="start">
             <ion-menu-button class="ion-margin" fill="clear" auto-hide="false"></ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
-
-
-<ion-content>
+  
+  
+  <ion-content>
     
     <!--<div>
     <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
@@ -36,42 +37,42 @@
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="name respuesta ion-no-margin">{{nombre}}</p>
+                        <p class="name respuesta ion-no-margin">{{user.first_name}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="respuesta ion-no-margin">{{apellido}}</p>
+                        <p class="respuesta ion-no-margin">{{user.last_name}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="respuesta2 ion-no-margin">Fecha de Nac.:{{fecha_nacimiento}}</p>
+                        <p class="respuesta2 ion-no-margin">Celular:  {{user.celular}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="respuesta2 ion-no-margin">{{correo}}</p>
+                        <p class="respuesta2 ion-no-margin">{{user.email}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="respuesta2 ion-no-margin">{{celular}}</p>
+                        <p class="respuesta2 ion-no-margin">{{user.cedula}}</p>
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="ion-no-padding">
                     <div class="ion-text-center">
-                        <p class="respuesta2 ion-no-margin">Registro {{registro}}</p>
+                        <p class="respuesta2 ion-no-margin">Registro {{user.registro}}</p>
                     </div>
                 </ion-col>
             </ion-row>
@@ -82,8 +83,7 @@
                     </div>
                 </ion-col>
             </ion-row>
-        
+            
         
     </ion-grid>
-    <app-pago></app-pago>
-</ion-content>
+  </ion-content>

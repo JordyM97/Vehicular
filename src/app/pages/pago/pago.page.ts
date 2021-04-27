@@ -42,9 +42,15 @@ export class PagoPage implements OnInit {
     formData.append("email", ""+this.authService.correo);
     formData.append("cardNumber", ""+ this.cardNumber);
     formData.append("holderName", ""+ this.holderName);
-    formData.append("expiryMonth", ""+ this.expiryMonth);
-    formData.append("expiryYear", ""+ this.expiryYear);
+    formData.append("expiryMonth", Number(this.expiryMonth));
+    formData.append("expiryYear", Number(this.expiryYear));
     formData.append("cvc", ""+ this.cvc);
+    var object = {};
+    formData.forEach(function(value, key){
+      object[key] = value;
+    });
+    var json = JSON.stringify(object);
+    console.log(json)
     this.transaction.saveCard(formData).then((result) => {
       console.log(result);
       if (result == "ok") {
@@ -54,6 +60,7 @@ export class PagoPage implements OnInit {
         this.presentToastFeedback("Tarjeta Guardada");
       } else {
         this.presentToastFeedback("Error");
+        
       }
     });
   }

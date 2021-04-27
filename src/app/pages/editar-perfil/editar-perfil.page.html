@@ -1,0 +1,50 @@
+<ion-toolbar class="toolbar-bg">
+  <ion-buttons slot="start">
+      <ion-menu-button class="ion-margin" fill="clear" auto-hide="false"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
+
+
+<ion-content>
+  <div class="head">
+    
+    <ion-img class="icon" src="assets/imgs/efletex-blanco.png"></ion-img>
+    <p>Editar Perfil</p>
+  </div>
+  
+  <div class="content-items">
+  <ion-grid>
+    <ion-row>
+      
+        
+          <ion-item >
+            <ion-input type="text" [(ngModel)]="firstname" name="firstname" placeholder="Nombres"></ion-input>
+          </ion-item>
+        
+    </ion-row>    
+    <ion-row>
+        <ion-item >
+          <ion-input type="text" [(ngModel)]="lastname" name="lastname" placeholder="Apellidos"></ion-input>
+        </ion-item>
+      
+    </ion-row>
+    <ion-row>
+      <ion-item >
+        <ion-input type="text" [(ngModel)]="celular" name="celular" placeholder="Numero de Celular"></ion-input>
+      </ion-item>
+    </ion-row>
+    
+
+    </ion-grid>
+
+  
+
+  
+</div>
+
+  
+  <ion-button expand="full" (click)="updatePerfil()" class="boton">
+    ACTUALIZAR 
+  </ion-button>
+  
+</ion-content>

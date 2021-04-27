@@ -52,6 +52,7 @@ export class HomePage implements OnInit {
   listenerInicio: any;  listenerFin: any;
   listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
+  typeServices:Array<any>;
   directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {
       strokeColor: "black"
     }});
@@ -96,6 +97,12 @@ export class HomePage implements OnInit {
   }
   ngOnInit(){
     this.loadMap();
+    this.authService.getTypeServices();
+    this.typeServices=this.authService.typeServices;
+    //this.authService.getTypeServices().then((data:any[any])=>{
+    //  data.forEach(element => {        this.typeServices.push(element);
+    //  });    })
+    //console.log("home typ",this.typeServices);
     //this.showTerms();
     //this.watchDriverPos(31);
   }
@@ -206,7 +213,8 @@ export class HomePage implements OnInit {
   }
 
   async aceptarParametros(){
-    const servicioElegido =  this.tipoServicio.find(element => element.isChecked == true)
+    console.log("carro",this.vehiculoSeleccionado)
+    let servicioElegido =  this.tipoServicio.find(element => element.isChecked == true)
     console.log(servicioElegido)
     var date = new Date();
     var isReservation = 0;
@@ -224,21 +232,21 @@ export class HomePage implements OnInit {
     var distancia = parseFloat(this.distanciaInicioFin);
     //console.log(distancia);
     var precio = ((distancia * 0.4) + 1.25).toFixed(2);
-    const popover= await this.popovercontroller.create({
+    let popover= await this.popovercontroller.create({
       component: AceptarParametrosComponent,
       translucent: true,      cssClass: 'contact-popover',
       componentProps:{
         info: {
           
           //idDriverService: null,
-          idClientService: 1,
+          idClientService: this.authService.idClient,
           uid:this.authService.uid,
           coordStart: JSON.stringify(this.latLngInicial),
           coordEnd: JSON.stringify(this.latLngFinal),
           startAddress: this.addressInicial,
           endAddress: this.addressFinal,
-          idTypePayment: '1',
-          idTypeService: '1',
+          idTypePayment: servicioElegido.id,
+          idTypeService: this.vehiculoSeleccionado,
           driverScore: 5,
           clientScore: 4,
           startDate: date,
@@ -465,12 +473,12 @@ export class HomePage implements OnInit {
   SelectTransport(item){
     if(item.isChecked==true){      item.isChecked=true;    
     }else{
-      this.vehiculos.forEach(function (vehiculos) {
+      this.typeServices.forEach(function (vehiculos) {
         vehiculos.isChecked=false;
     });
       item.isChecked=true;
-      this.vehiculoSeleccionado=item.tipoCarro;
-    //  console.log(this.vehiculoSeleccionado);
+      this.vehiculoSeleccionado=item.idTypeService;
+    //console.log(this.vehiculoSeleccionado);
     }
   }
 

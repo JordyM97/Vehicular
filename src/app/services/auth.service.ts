@@ -22,11 +22,12 @@ export class AuthService {
   public deviceToken:any;  
   public tokenGoogle : any;
   public historial : Array<any>;  servicios: Observable<any[]>;  serviciosCollection: AngularFirestoreCollection<any>;
-
+  public typeServices: Array<any>;
   constructor(
     public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
     ) { 
     this.historial = [];
+    this.typeServices = [];
     //this.uid="G8i5HhWk1OQx9JwLmilYSAlJyHC2";
   }
   login(credentials){
@@ -137,6 +138,41 @@ export class AuthService {
         //resolve("ok");
         resolve("bad");
       });  });
+  }
+  getTypeServices(){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization',String(this.token));
+      this.http.get('https://axela.pythonanywhere.com/api/typeservice/', {headers: headers}) 
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));  
+          data.forEach(element => {
+            //console.log(element) //Recorrer los elementos del array y extraer la info
+            this.typeServices.push(element);
+          });
+          console.log("des",this.typeServices); 
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          let nodata:any [];
+          resolve("nodata");
+        });  });
+  }
+  updateClient(cliente){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
+      this.http.put('https://axela.pythonanywhere.com/api/user/update/'+String(this.userinfo.id)+"/",cliente, {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          console.log(data);
+          this.userinfo=data;
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
   }
   sendNotification(notificacion){ 
     ///console.log(notificacion);

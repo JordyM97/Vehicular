@@ -23,9 +23,9 @@
         </ion-row>
         <ion-row>
           <ion-segment class="vehiculoSegment" scrollable value="1">
-            <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of vehiculos">
+            <ion-segment-button (click)="SelectTransport(item)" *ngFor="let item of typeServices">
               <ion-icon name="car-sport-outline"></ion-icon>
-              <ion-label> {{item.tipoCarro}}</ion-label>
+              <ion-label> {{item.nameTypeService}}</ion-label>
               <ion-checkbox  class="checkbox-round" mode="ios" [(ngModel)]="item.isChecked"></ion-checkbox>
             </ion-segment-button>
           </ion-segment>

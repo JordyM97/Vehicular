@@ -31,7 +31,7 @@ export class PerfilPage implements OnInit {
     this.apellido = this.authService.getApellido();
     this.correo = this.authService.getCorreo();
     this.user=this.authService.userinfo;
-    this.getRateUser();
+    //this.getRateUser();
     
     }
     async uploadImg(){

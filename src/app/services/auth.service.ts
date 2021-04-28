@@ -23,11 +23,14 @@ export class AuthService {
   public tokenGoogle : any;
   public historial : Array<any>;  servicios: Observable<any[]>;  serviciosCollection: AngularFirestoreCollection<any>;
   public typeServices: Array<any>;
+  public typePayment: Array<any>;
+
   constructor(
     public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
     ) { 
     this.historial = [];
     this.typeServices = [];
+    this.typePayment= [];
     //this.uid="G8i5HhWk1OQx9JwLmilYSAlJyHC2";
   }
   login(credentials){
@@ -157,6 +160,18 @@ export class AuthService {
           let nodata:any [];
           resolve("nodata");
         });  });
+  }
+  getTypePayments(){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();  headers = headers.set('Authorization',String(this.token));
+      this.http.get('https://axela.pythonanywhere.com/api/payment/', {headers: headers}).subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));  
+          data.forEach(element => {            this.typePayment.push(element);          });
+          console.log("tiposPago",this.typeServices); 
+          resolve("ok");
+          }, (err) => {  console.log(err);          let nodata:any [];          resolve("nodata");        
+        });  
+    });
   }
   updateClient(cliente){
     return new Promise((resolve, reject) => {

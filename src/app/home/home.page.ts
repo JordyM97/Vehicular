@@ -53,6 +53,7 @@ export class HomePage implements OnInit {
   listenerMoverInicio: any;  listenerMoverFin: any;
   showList=false;
   typeServices:Array<any>;
+  typePayments:Array<any>;
   directionsService = new google.maps.DirectionsService();  directionsDisplay = new google.maps.DirectionsRenderer({polylineOptions: {
       strokeColor: "black"
     }});
@@ -98,7 +99,10 @@ export class HomePage implements OnInit {
   ngOnInit(){
     this.loadMap();
     this.authService.getTypeServices();
+    
+    this.authService.getTypePayments();
     this.typeServices=this.authService.typeServices;
+    this.typePayments=this.authService.typePayment;
     //this.authService.getTypeServices().then((data:any[any])=>{
     //  data.forEach(element => {        this.typeServices.push(element);
     //  });    })

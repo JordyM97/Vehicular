@@ -21,7 +21,9 @@ export class AceptarParametrosComponent implements OnInit {
   servicios: Observable<any[]>;
   uploadForm: FormGroup; 
   esReserva = false;
-
+  typeServices:any[];
+  
+  typePayment:any[];
   constructor(
     private navParams: NavParams, 
     private popoverController: PopoverController,
@@ -34,7 +36,10 @@ export class AceptarParametrosComponent implements OnInit {
    } 
 
   ngOnInit() {
+    this.typeServices=this.authService.typeServices;
+    this.typePayment=this.authService.typePayment;
     this.servicio= this.navParams.get('info');
+    
     console.log(this.servicio);
     if(this.servicio.isReservationService==1){
       this.esReserva=true;

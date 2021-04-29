@@ -482,7 +482,7 @@ export class HomePage implements OnInit {
     });
       item.isChecked=true;
       this.vehiculoSeleccionado=item.idTypeService;
-    //console.log(this.vehiculoSeleccionado);
+      console.log(this.vehiculoSeleccionado);
     }
   }
 
@@ -496,8 +496,8 @@ export class HomePage implements OnInit {
         tipoServicio.isChecked=false;
     });
       item.isChecked=true;
-      this.servicioSeleccionado=item.tipoServicio;
-    //  console.log(this.servicioSeleccionado);
+      this.servicioSeleccionado=item.id;
+      console.log(this.servicioSeleccionado);
       if(item.id==2){
      //   console.log("fecha");
         this.selectDate();
@@ -525,12 +525,12 @@ export class HomePage implements OnInit {
     if(item.isChecked==true){
       item.isChecked=true;
     }else{
-      this.tipoPago.forEach(function (tipoPago) {
+      this.typePayments.forEach(function (tipoPago) {
         tipoPago.isChecked=false;
     });
       item.isChecked=true;
-      this.pagoSeleccionado=item.tipoPago;
-     // console.log(this.pagoSeleccionado);
+      this.pagoSeleccionado=item.idPayment;
+     console.log(this.pagoSeleccionado);
     }
   }
 

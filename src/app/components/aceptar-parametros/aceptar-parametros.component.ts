@@ -22,7 +22,8 @@ export class AceptarParametrosComponent implements OnInit {
   uploadForm: FormGroup; 
   esReserva = false;
   typeServices:any[];
-  
+  formaPago:any;
+  tipovehiculo:any;
   typePayment:any[];
   constructor(
     private navParams: NavParams, 
@@ -31,15 +32,16 @@ export class AceptarParametrosComponent implements OnInit {
     private firestore: AngularFirestore, 
     public authService: AuthService,
     private formBuilder: FormBuilder,private loadingservice:LoadingService) {
-    this.serviciosCollection=firestore.collection('Servicio');
-    this.servicios= this.serviciosCollection.valueChanges();
+      this.serviciosCollection=firestore.collection('Servicio');
+      this.servicios= this.serviciosCollection.valueChanges();
    } 
 
   ngOnInit() {
     this.typeServices=this.authService.typeServices;
     this.typePayment=this.authService.typePayment;
     this.servicio= this.navParams.get('info');
-    
+    this.formaPago=this.typePayment.find(e=>{ return e.idPayment==this.servicio.idTypePayment   });
+    this.tipovehiculo=this.typeServices.find(e=>{ return e.idTypeService==this.servicio.idTypeService   });
     console.log(this.servicio);
     if(this.servicio.isReservationService==1){
       this.esReserva=true;

@@ -25,6 +25,9 @@ export class AceptarParametrosComponent implements OnInit {
   formaPago:any;
   tipovehiculo:any;
   typePayment:any[];
+  public tipoServicio = [
+    { id: 1, tipoServicio: 'Viajar ahora', isChecked: false },    { id: 2, tipoServicio: 'Reservar viaje', isChecked: false }
+  ];
   constructor(
     private navParams: NavParams, 
     private popoverController: PopoverController,
@@ -74,8 +77,6 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
-    //this.servicio.idClientService=this.authService.idClient
-
     this.authService.sendService(JSON.stringify(this.servicio));
 
     this.notificacionTransporter = {

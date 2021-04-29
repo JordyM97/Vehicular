@@ -15,6 +15,8 @@ export class AuthService {
   public id:any;  
   public uid:any;  
   public idClient:any;
+
+  public clientId:any;
   public nombre: any;  
   public apellido: any;  
   public correo: any; 
@@ -361,8 +363,9 @@ export class AuthService {
       this.http.get('https://axela.pythonanywhere.com/api/getpk/'+String(this.id)+'/1/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
-          console.log("Cliente ID",data)
-          //this.idClient=data.id;
+          console.log("Id de Cliente es ",data.pk)
+          this.idClient=data.pk;
+          this.clientId=data.pk;
           resolve("ok");
           }, (err) => {
           console.log(err);

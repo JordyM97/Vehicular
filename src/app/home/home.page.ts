@@ -217,7 +217,7 @@ export class HomePage implements OnInit {
   }
 
   async aceptarParametros(){
-    console.log("carro",this.vehiculoSeleccionado)
+    console.log("id Cliente",this.authService.userinfo.id)
     let servicioElegido =  this.tipoServicio.find(element => element.isChecked == true)
     console.log(servicioElegido)
     var date = new Date();
@@ -243,7 +243,7 @@ export class HomePage implements OnInit {
         info: {
           
           //idDriverService: null,
-          idClientService: this.authService.idClient,
+          idClientService: this.authService.clientId,
           uid:this.authService.uid,
           coordStart: JSON.stringify(this.latLngInicial),
           coordEnd: JSON.stringify(this.latLngFinal),
@@ -497,7 +497,7 @@ export class HomePage implements OnInit {
     });
       item.isChecked=true;
       this.servicioSeleccionado=item.id;
-      console.log(this.servicioSeleccionado);
+      console.log("Servicio",this.servicioSeleccionado);
       if(item.id==2){
      //   console.log("fecha");
         this.selectDate();
@@ -530,7 +530,7 @@ export class HomePage implements OnInit {
     });
       item.isChecked=true;
       this.pagoSeleccionado=item.idPayment;
-     console.log(this.pagoSeleccionado);
+     console.log("Pago",this.pagoSeleccionado);
     }
   }
 

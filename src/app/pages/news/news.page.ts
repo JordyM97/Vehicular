@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Observable } from 'rxjs';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { NavController } from '@ionic/angular';
+
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({

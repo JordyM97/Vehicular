@@ -323,8 +323,9 @@ export class AuthService {
 
     this.http.post('https://axela.pythonanywhere.com/api/service/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
+        console.log("Respuesta del API Servicio",res)
         let data = JSON.parse(JSON.stringify(res));
-        console.log(data);
+        //console.log(data);
         console.log("pk="+data.pk);
         resolve("ok");
         }, (err) => {
@@ -332,6 +333,16 @@ export class AuthService {
         //resolve("ok");
         resolve("bad");
       });  });
+  }
+  cancelService(pk){ 
+    console.log("Se va a cancelar el Servicio: ",pk);
+    return new Promise((resolve, reject) => {    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', String(this.token));
+    this.http.post('https://axela.pythonanywhere.com/api/cancelService'+pk+'/',{headers: headers}).subscribe(res => {
+        console.log("Respuesta del API Servicio",res);
+        resolve("ok");
+        }, (err) => {        console.log(err);        resolve("bad");      });  
+    });
   }
 
   getRecordService(){

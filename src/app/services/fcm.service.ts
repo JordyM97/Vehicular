@@ -112,7 +112,7 @@ export class FcmService {
         this.shareData.notificacion = notification;
         this.shareData.detallesDriver=notification;
         //this.presentAlertConfirm(notification);
-        this.loadingservice.hideLoader();
+        //this.loadingservice.hideLoader();
         this.router.navigate(['/detalle-servicio']);
         //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.data.tipoNotificacion)==1){
@@ -151,7 +151,7 @@ export class FcmService {
         this.shareData.detallesDriver=notification.notification;
         this.shareData.idConductor=notification.notification.data.idConductor;
         //this.presentAlertConfirm(notification);
-        this.loadingservice.hideLoader();
+        //this.loadingservice.hideLoader();
         this.router.navigate(['/detalle-servicio']);
         //this.presentPopoverDetalle(notification);
         } else if(parseInt(notification.notification.data.tipoNotificacion)==1){

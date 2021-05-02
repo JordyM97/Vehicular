@@ -23,6 +23,7 @@ import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
 import { CalificarDriverComponent } from '../components/calificar-driver/calificar-driver.component';
 import { ResourceLoader } from '@angular/compiler';
 import { LoadingService } from './loading.service';
+import { ShowNotifComponent } from '../components/show-notif/show-notif.component';
 
 @Injectable({
   providedIn: 'root'
@@ -118,7 +119,9 @@ export class FcmService {
         } else if(parseInt(notification.data.tipoNotificacion)==1){
           console.log(notification.data)
           this.presentPopoverCalificacion();
-
+        } else if(parseInt(notification.data.tipoNotificacion)==2){
+          console.log(notification.data)
+          this.presentarPopoverNotificacion(notification);
         }
       }
     );
@@ -192,6 +195,24 @@ export class FcmService {
       component: CalificarDriverComponent,
       cssClass: 'servicioasignado',
       componentProps:{},
+      mode:"md",
+      translucent: true,
+      backdropDismiss: false
+    });
+    return await popover.present();
+  }
+
+  async presentarPopoverNotificacion(notification){
+    let title = notification.title;
+    let body = notification.body;
+    const popover = await this.popoverController.create({
+      component: ShowNotifComponent,
+      cssClass: 'servicioasignado',
+      componentProps:{
+        title: title,
+        body: body
+
+      },
       mode:"md",
       translucent: true,
       backdropDismiss: false

@@ -88,9 +88,10 @@ export class AceptarParametrosComponent implements OnInit {
       valor: this.servicio.total,
       cliente: this.authService.getNombre()+" "+this.authService.getApellido(),
       idCliente: 6//this.authService.getId() /*Necesito ID de la tabla cliente*/
+
     }
    
-    //this.enviarNotificacion(this.notificacionTransporter); //No es necesaria
+    this.enviarNotificacion(this.notificacionTransporter); //No es necesaria
     console.log("Enviando Info al API");
     //this.postDataAPI(this.servicio);
     await this.popoverController.dismiss();
@@ -106,12 +107,14 @@ export class AceptarParametrosComponent implements OnInit {
       this.uploadForm.get('body').setValue("Peticion de viaje");
       this.uploadForm.get('title').setValue("Detalle del servicio");
       this.uploadForm.get('data').setValue(JSON.stringify(data));
+      console.log(this.uploadForm)
 
       var formData: any = new FormData();
       formData.append("user", this.uploadForm.get('user').value);
       formData.append("body", this.uploadForm.get('body').value);
       formData.append("title", this.uploadForm.get('title').value);
       formData.append("data", this.uploadForm.get('data').value);
+      console.log(formData)
       this.authService.sendNotification(formData);
       //this.loadingservice.showLoader();
     }

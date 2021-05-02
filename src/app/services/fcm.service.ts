@@ -106,6 +106,7 @@ export class FcmService {
           'iddriver':notification.data.iddriver
         }
         localStorage.setItem('idConductor',notification.data.iddriver);
+        localStorage.setItem('idUsuarioConductor',notification.data.idConductor);
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
         console.log(notObjeto)
         this.shareData.notObj$.emit(notObjeto);

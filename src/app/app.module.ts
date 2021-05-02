@@ -22,6 +22,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CalificarDriverComponent } from './components/calificar-driver/calificar-driver.component';
 import { AceptarParametrosComponent } from './components/aceptar-parametros/aceptar-parametros.component';
 import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.component';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @NgModule({
   declarations: [AppComponent,PopoverComponent,CalificarDriverComponent,ShowNotifComponent,AceptarParametrosComponent,
@@ -42,6 +43,7 @@ import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.
     SplashScreen,
     Geolocation,    
     NativeGeocoder,
+    CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

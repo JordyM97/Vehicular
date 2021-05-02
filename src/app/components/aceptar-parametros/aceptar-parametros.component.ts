@@ -72,7 +72,7 @@ export class AceptarParametrosComponent implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Buscando conductor',
-      duration: 3000,
+      duration: 4000,
       position: 'top',
       color: 'success'
       });
@@ -95,7 +95,11 @@ export class AceptarParametrosComponent implements OnInit {
     //this.postDataAPI(this.servicio);
     await this.popoverController.dismiss();
     if(this.servicio.isReservationService==0){ //Para controlar que si es reserva, no se quede esperando
-      //this.loadingservice.showLoader();
+      this.loadingservice.showLoader();
+      setTimeout(() => {
+        
+        this.loadingservice.hideLoader();
+      }, 7000);
     }
     //this.PopOverConductorEncontrado();
 

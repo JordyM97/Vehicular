@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.component';
+import { AuthService } from 'src/app/services/auth.service';
 declare var google;
 
 @Component({
@@ -37,10 +39,11 @@ export class DetalleServicioPage implements OnInit {
   nombreNot: string ="";
   nombreNotSubs: Subscription;
  
-
+  public chatRooms: any=[];
   notObj: object={};
   notObjSub: Subscription;
   idConductor:any
+  idUsuarioConductor:any;
   constructor(
     private geolocation: Geolocation,
     public alertController: AlertController,
@@ -49,16 +52,24 @@ export class DetalleServicioPage implements OnInit {
     private firestore: AngularFirestore,
     public popoverController: PopoverController,
     private callNumber: CallNumber,
+    private modal: ModalController,
+    private authservice: AuthService
   ) {
     this.idConductor=localStorage.getItem('idConductor')
-    console.log(this.idConductor)
+    
+    this.idUsuarioConductor=localStorage.getItem('idUsuarioConductor');
+    console.log("Driver userid=",this.idUsuarioConductor+" ,  driverid= "+this.idConductor)
   }
   ngOnInit() {
+    this.authservice.getDriver(this.idUsuarioConductor)
   }
   callByCellphone(){
-    return this.callNumber.callNumber(this.numberClient, true)
+    return this.callNumber.callNumber(this.authservice.driverinfo.userDriver.celular, true)
     .then(res => console.log('Launched dialer!', res))
     .catch(err => console.error('Error launching dialer', err));
+  }
+  openChat(){
+    this.router.navigateByUrl('/chat');
   }
   ionViewWillEnter(){
     this.loadMap();

@@ -340,14 +340,14 @@ export class AuthService {
     });
   }
 
-  getRecordService(){
+  async getRecordService(){
     return new Promise((resolve, reject) => {
       
       console.log("Obteniendo historial para el Cliente :",this.idClient)
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', String(this.token));
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
   
-      this.http.get('https://axela.pythonanywhere.com/api/recordService/'+String(this.idClient)+'/1', {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/recordService/'+String(this.clientId)+'/1/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           console.log("respuesta del Endpoint",res)
           let data = JSON.parse(JSON.stringify(res));

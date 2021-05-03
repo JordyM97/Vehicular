@@ -179,7 +179,7 @@ export class HomePage implements OnInit {
 
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setOptions( { suppressMarkers: true } );
-    this.authService.getRecordService();
+    
     this.listenerDrag();
   }
   

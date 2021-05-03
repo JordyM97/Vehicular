@@ -22,13 +22,17 @@ export class HistorialPage implements OnInit {
   }
 
   ngOnInit() {
-    this.historialViajes = this.authService.getHistorial();
     console.log(this.historialViajes);
-    this.historialViajes.slice().reverse().forEach(element => {
-      if (element.startidLocation!=null) {
-        this.historialFinal.push(element);
-      }
-    });
+    this.authService.getRecordService().then((data: any) =>{
+      console.log(data)
+      this.historialViajes = data
+      this.historialViajes.slice().reverse().forEach(element => {
+        if (element.idDriverService!=null) {
+          this.historialFinal.push(element);
+        }
+      });
+      console.log(this.historialFinal)
+    })
   }
 
   botonDetalles(element: any){

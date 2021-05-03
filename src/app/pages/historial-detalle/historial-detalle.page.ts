@@ -36,7 +36,7 @@ export class HistorialDetallePage implements OnInit {
   ngOnInit() {
     this.historialViaje = JSON.parse(this.historialViaje.params.datos);
     console.log(this.historialViaje);
-    console.log(JSON.parse(this.historialViaje.startidLocation))
+    console.log(JSON.parse(this.historialViaje.coordStart))
     let date = new Date(this.historialViaje.startDate);
     this.anio = date.getFullYear(); 
     this.mes = String(date.getMonth() + 1).padStart(2, '0');
@@ -51,7 +51,7 @@ export class HistorialDetallePage implements OnInit {
     const mapEle: HTMLElement = document.getElementById('mapaHistorial');
     // Crear el mapa y renderizarlo
     this.map = new google.maps.Map(mapEle, {
-      center: JSON.parse(this.historialViaje.startidLocation),
+      center: JSON.parse(this.historialViaje.coordStart),
       zoom: 15,
       zoomControl:false,
       mapTypeControl:false,
@@ -65,8 +65,8 @@ export class HistorialDetallePage implements OnInit {
 
   calcularRuta(){
     this.directionsService.route({
-      origin: JSON.parse(this.historialViaje.startidLocation),
-      destination: JSON.parse(this.historialViaje.endidLocation),
+      origin: JSON.parse(this.historialViaje.coordStart),
+      destination: JSON.parse(this.historialViaje.coordEnd),
       travelMode: google.maps.TravelMode.DRIVING,
     }, (response, status)  => {
       if (status === google.maps.DirectionsStatus.OK) {

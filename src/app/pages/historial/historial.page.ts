@@ -19,26 +19,23 @@ export class HistorialPage implements OnInit {
     private router: Router
   ){
     this.historialFinal = []
-    this.authService.getRecordService();
-    this.historialViajes = this.authService.getHistorial();
-    console.log("Historial ",this.historialViajes);
-    this.historialViajes=this.historialViajes.map(el=>{
-      return el.idDriverService_id!=null;
-    })
-    this.historialViajes.forEach(element => {
-      console.log(element)
-      if (element.idDriverService_id!=null) {
-        this.historialFinal.push(element);
-      }else{
-        console.log("No hay carreras");
-        
-      }
-    });
   }
 
   ngOnInit() {
-    
+    console.log(this.historialViajes);
+    this.authService.getRecordService().then((data: any) =>{
+      console.log(data)
+      this.historialViajes = data
+      this.historialViajes.slice().reverse().forEach(element => {
+        if (element.idDriverService!=null) {
+          this.historialFinal.push(element);
+        }
+      });
+      console.log(this.historialFinal)
+    })
   }
+
+ 
 
   botonDetalles(element: any){
     this.detallesViaje = element;

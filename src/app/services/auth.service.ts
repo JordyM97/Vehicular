@@ -11,6 +11,7 @@ import { FcmService } from './fcm.service';
 })
 export class AuthService {
   public userinfo:any;
+  public driverinfo:any;
   public token: any;  
   public id:any;  
   public uid:any;  
@@ -60,6 +61,17 @@ export class AuthService {
             resolve("bad");
           });  });
  
+  }
+
+  getDriver(id){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));
+ 
+      this.http.get('https://axela.pythonanywhere.com/api/driver/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {   console.log("respuesta",res)
+          let data = JSON.parse(JSON.stringify(res)); this.driverinfo=data;  console.log(data);
+          resolve("ok");
+          }, (err) => {          console.log(err); resolve("bad");        });  });
   }
 
   logout(){
@@ -359,25 +371,6 @@ export class AuthService {
       headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
         
       this.http.get('https://axela.pythonanywhere.com/api/getpk/'+String(this.id)+'/1/', {headers: headers}) //http://127.0.0.1:8000
-        .subscribe(res => {
-          let data = JSON.parse(JSON.stringify(res));
-          console.log("Id de Cliente es ",data.pk)
-          this.idClient=data.pk;
-          this.clientId=data.pk;
-          resolve("ok");
-          }, (err) => {
-          console.log(err);
-          //resolve("ok");
-          resolve("bad");
-        });  });
-  }
-
-  getDriver(idDriver){   //OBTIENE EL ID DE CLIENT DEL USUARIO
-    return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization',String(this.token));
-        
-      this.http.get('https://axela.pythonanywhere.com/api/getpk/'+String(idDriver)+'/0/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log("Id de Cliente es ",data.pk)

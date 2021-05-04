@@ -35,6 +35,8 @@ export class HistorialPage implements OnInit {
     })
   }
 
+ 
+
   botonDetalles(element: any){
     this.detallesViaje = element;
     this.router.navigate(['historial-detalle/'+JSON.stringify(this.detallesViaje)])

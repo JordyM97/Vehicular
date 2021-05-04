@@ -346,7 +346,7 @@ export class AuthService {
       });  });
   }
 
-  getRecordService(){
+  async getRecordService(){
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders({ "Content-Type": "application/json",  "Authorization": String(this.token)});
   

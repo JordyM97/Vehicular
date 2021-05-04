@@ -69,7 +69,9 @@ export class DetalleServicioPage implements OnInit {
     .catch(err => console.error('Error launching dialer', err));
   }
   openChat(){
-    this.router.navigateByUrl('/chat');
+    let isDetalleServicio: any = {}
+    isDetalleServicio.isDetalle = true;
+    this.router.navigate(['chat/'+JSON.stringify(isDetalleServicio)])
   }
   ionViewWillEnter(){
     this.loadMap();

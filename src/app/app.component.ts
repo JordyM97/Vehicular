@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   tokensCollection: AngularFirestoreCollection<any>;
   tokens: Observable<any[]>
   politicas: Observable<any>;
+  isDetalleServicio;
   a: any;
   as:any;
   username="invitado"
@@ -41,7 +42,12 @@ export class AppComponent implements OnInit{
     this.initializeApp();
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+    let isDetalleServicio: any = {}
+    isDetalleServicio.isDetalle = false;
+
+    this.isDetalleServicio = JSON.stringify(isDetalleServicio)
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {

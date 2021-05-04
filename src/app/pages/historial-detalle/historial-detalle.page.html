@@ -1,18 +1,12 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar class="toolbar-bg">
     <div class="toolbar-content">
       <ion-button fill="clear" slot="start">
-        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+        <ion-menu-button color= "white" slot="start"></ion-menu-button>
       </ion-button>
 
 
-        <img class="center-img" src="assets/imgs/logf.png">
-     
-
-      <ion-avatar>
-        <img src="assets/icon/avatar.png">
-      </ion-avatar>
-
+      <img class="center-img" src="assets/imgs/logw.png"> <!--"assets/imgs/LOGO1.png-->
     </div>
   </ion-toolbar>
 </ion-header>
@@ -54,12 +48,16 @@
       <ion-row>
         <ion-col>
           <ion-row><ion-label class="titulo">Total:</ion-label></ion-row>
-          <ion-row><ion-label>$4.23</ion-label></ion-row>
+          <ion-row><ion-label>${{historialViaje.amountPayment}}</ion-label></ion-row>
         </ion-col>
 
         <ion-col>
           <ion-row><ion-label class="titulo">Estado Servicio:</ion-label></ion-row>
-          <ion-row><ion-label>Finalizado</ion-label></ion-row> <!--Cambiar cuando se tengan los estados del servicio-->
+          <ion-row>
+            <ion-label [ngStyle]="{'color':getColor(historialViaje.stateService)}" *ngIf="historialViaje.stateService==3"> Finalizado</ion-label> 
+            <ion-label [ngStyle]="{'color':getColor(historialViaje.stateService)}" *ngIf="historialViaje.stateService==2"> En Curso</ion-label> 
+            <ion-label [ngStyle]="{'color':getColor(historialViaje.stateService)}" *ngIf="historialViaje.stateService==4"> Cancelado</ion-label> 
+          </ion-row> <!--Cambiar cuando se tengan los estados del servicio-->
         </ion-col>
       </ion-row>
     </ion-grid>

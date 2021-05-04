@@ -88,7 +88,18 @@ export class AuthService {
           resolve("bad");
         });  });      
   }
-
+  cancelService(id){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));  
+      this.http.delete('https://axela.pythonanywhere.com/api/devices/cancelService'+id+'/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          console.log(res);          resolve("ok");
+          }, (err) => {
+         console.log(err);
+          resolve("bad");
+        });  });      
+  }
   sendDeviceToken(){
     //console.log(this.token);
     //console.log(this.deviceToken);
@@ -337,6 +348,7 @@ export class AuthService {
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
+        localStorage.setItem("idcarrera",data.pk)
         console.log("pk="+data.pk);
         resolve("ok");
         }, (err) => {
@@ -350,7 +362,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders({ "Content-Type": "application/json",  "Authorization": String(this.token)});
   
-      this.http.get('https://axela.pythonanywhere.com/api/service/?idClientService='+String(this.idClient), {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/service/?idDriverService!=null?idClientService='+String(this.idClient)+'?stateService!=1', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data)

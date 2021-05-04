@@ -45,6 +45,18 @@ export class HistorialDetallePage implements OnInit {
     this.minuto =String(date.getMinutes());
     this.loadMap();
   }
+  getColor(estado) {
+    switch (estado) {
+      case 4:
+        return 'red';
+      case 3:
+        return 'red';
+      case 2:
+        return 'green';
+      case 1:
+        return 'green';
+    }
+  }
 
   async loadMap(){
     //Crear nuevo mapa

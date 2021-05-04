@@ -22,12 +22,12 @@ export class HistorialPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.historialViajes);
+    //console.log(this.historialViajes);
     this.authService.getRecordService().then((data: any) =>{
       console.log(data)
       this.historialViajes = data
       this.historialViajes.slice().reverse().forEach(element => {
-        if (element.idDriverService!=null) {
+        if (element.idDriverService!=null && element.coordStart!=null) {
           this.historialFinal.push(element);
         }
       });
@@ -48,9 +48,13 @@ export class HistorialPage implements OnInit {
 
   getColor(estado) {
     switch (estado) {
-      case 1:
+      case 4:
         return 'red';
-      case 0:
+      case 3:
+        return 'red';
+      case 2:
+        return 'green';
+      case 1:
         return 'green';
     }
   }

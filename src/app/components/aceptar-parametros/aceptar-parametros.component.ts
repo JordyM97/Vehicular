@@ -49,6 +49,8 @@ export class AceptarParametrosComponent implements OnInit {
     if(this.servicio.isReservationService==1){
       this.esReserva=true;
     }
+    localStorage.setItem("valor",this.servicio.amountPayment);
+    console.log(this.servicio.total)
     console.log(this.servicio.isReservationService);
     this.uploadForm = this.formBuilder.group({
       user: [''],
@@ -77,8 +79,10 @@ export class AceptarParametrosComponent implements OnInit {
       color: 'success'
       });
     toast.present();
-    this.authService.sendService(JSON.stringify(this.servicio))
 
+    this.authService.sendService(JSON.stringify(this.servicio))
+    
+    //localStorage.setItem("descripcion",this.servicio.id);
     this.notificacionTransporter = {
       inicio: this.servicio.startidLocation,
       fin: this.servicio.endidLocation,
@@ -100,7 +104,8 @@ export class AceptarParametrosComponent implements OnInit {
       setTimeout(() => {
         
         this.loadingservice.hideLoader();
-      }, 7000);
+        this.authService.cancelService(localStorage.getItem("idcarrera"))
+      }, 5000);
     }
     //this.PopOverConductorEncontrado();
 

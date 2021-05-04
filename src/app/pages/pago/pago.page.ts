@@ -57,7 +57,7 @@ export class PagoPage implements OnInit {
         this.transaction.cards = [];
         this.transaction.loadCards();
         this.cards = this.transaction.getCards();
-        this.presentToastFeedback("Tarjeta Guardada");
+        this.presentToast("Tarjeta Guardada");
       } else {
         this.presentToastFeedback("Error");
         
@@ -68,7 +68,8 @@ export class PagoPage implements OnInit {
   pay(card) {
     this.transaction.token = card.token;
     var formData: any = new FormData();
-    formData.append("amount", "99.00");
+    let valor= localStorage.getItem('valor')
+    formData.append("amount", valor);
     formData.append("description", "descripcion");
     formData.append("dev_reference", "REF");
     formData.append("vat", "0.00");
@@ -100,7 +101,7 @@ export class PagoPage implements OnInit {
         this.transaction.cards = [];
         this.transaction.loadCards();
         this.cards = this.transaction.getCards();
-        this.presentToastFeedback("Tarjeta eliminada");
+        this.presentToast("Tarjeta eliminada");
       } else {
         this.presentToastFeedback("Error");
       }
@@ -112,6 +113,15 @@ export class PagoPage implements OnInit {
       position: "top",
       duration: 2000,
       color: "danger",
+    });
+    toast.present();
+  }
+  async presentToast(mensaje) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      position: "top",
+      duration: 2000,
+      color: "success",
     });
     toast.present();
   }

@@ -203,12 +203,16 @@ export class HomePage implements OnInit {
      
   }
 
-  async presentToast() {
+  async presentToast(msg,type,pos) {
+    var va="";
+    if (type==1) va='danger';
+    if(type==2) va='warning';
+    else va='success'; 
     const toast = await this.toastController.create({
-      message: 'Hay campos vacios!',
+      message: msg,
       duration: 1700,
-      position: 'top',
-      color: 'danger'
+      position: pos,
+      color: va
       }); 
     toast.present();
   }
@@ -536,8 +540,9 @@ export class HomePage implements OnInit {
 
   aceptarBoton(){
     if(this.vehiculoSeleccionado==null || this.servicioSeleccionado==null || this.pagoSeleccionado==null || this.latLngInicial==null ||this.latLngFinal==null){
-      this.presentToast();
+      this.presentToast("Oops..   Hay campos vacios!",1,"top");
     }else{
+      this.presentToast("Los precios incluyen I.V.A",2,"top")
       this.aceptarParametros();
     }
   }

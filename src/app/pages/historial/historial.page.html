@@ -34,14 +34,19 @@
       </ion-card>
       
     <ion-card>
-      <ion-item *ngFor="let viaje of historialViajes">
-        <ion-button fill="outline" slot="end" (click)="botonDetalles(viaje)">Detalles</ion-button>
+      <ion-item *ngFor="let viaje of historialFinal">
+        
 
-        <ion-card-content>
+        <ion-card-content (click)="botonDetalles(viaje)"> 
           <ion-grid>
             <ion-row> <b>Inicio: </b>{{viaje.startAddress}} </ion-row>
             <ion-row> <b>Fin: </b>{{viaje.endAddress}}  </ion-row>
-            <ion-row> <b>Estado: </b> <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}"> {{viaje.stateService === 1 ? 'Finalizado' : 'En curso'}}</ion-label>  </ion-row>
+            <ion-row> <b>Hora: </b>{{viaje.startDate | date:'short'}}  </ion-row>
+            <ion-row> <b>Estado: </b> 
+              <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}" *ngIf="viaje.stateService==3"> Finalizado</ion-label> 
+              <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}" *ngIf="viaje.stateService==2"> En Curso</ion-label> 
+              <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}" *ngIf="viaje.stateService==4"> Cancelado</ion-label> 
+            </ion-row>
           </ion-grid>
         </ion-card-content>
       </ion-item>

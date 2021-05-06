@@ -104,8 +104,8 @@ export class AceptarParametrosComponent implements OnInit {
       setTimeout(() => {
         
         this.loadingservice.hideLoader();
-        this.authService.cancelService(localStorage.getItem("idcarrera"))
-      }, 5000);
+        //this.authService.cancelService(localStorage.getItem("idcarrera"))
+      }, 25000);
     }
     //this.PopOverConductorEncontrado();
 

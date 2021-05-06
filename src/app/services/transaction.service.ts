@@ -19,7 +19,7 @@ export class TransactionService {
     console.log(JSON.stringify(credentials));
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
-      headers = headers.set('Authorization', String(this.tokenHeader));
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.tokenHeader));
       this.http
         .post("https://axela.pythonanywhere.com/api/card", credentials, {
           headers: headers,

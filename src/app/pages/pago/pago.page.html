@@ -17,11 +17,11 @@
             <ion-grid>
                 <ion-item>
                     
-                    <ion-input  placeholder="Numero de la Tarjeta" style="text-transform: uppercase;" [(ngModel)]="cardNumber"></ion-input> <!--type="number" to allow only numbers-->
+                    <ion-input  placeholder="Numero de la Tarjeta"  inputmode="numeric"   [(ngModel)]="cardNumber"></ion-input> <!--type="number" to allow only numbers-->
                 </ion-item>
                 <ion-item>
                     
-                    <ion-input placeholder="Nombre de Titular" [(ngModel)]="holderName"></ion-input>
+                    <ion-input placeholder="Nombre de Titular" style="text-transform: uppercase;" [(ngModel)]="holderName"></ion-input>
                 </ion-item>
                 <ion-row>
                     <ion-col>
@@ -51,7 +51,7 @@
     </ion-card>
     <div style="text-align: center;">
     <ion-button (click)="saveCard()">Guardar</ion-button>
-    <ion-button (click)="payCard()">Pagar</ion-button>
+    <!--<ion-button (click)="payCard()">Pagar</ion-button>-->
     <ion-button expand="full" (click)="back()">Volver a Detalles</ion-button>
     </div>
     <h2>SELECCIONA UNA DE TUS TARJETAS</h2>

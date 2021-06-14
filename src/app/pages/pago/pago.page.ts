@@ -27,7 +27,7 @@ export class PagoPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.transaction.user = this.authService.id;
+    this.transaction.user = this.authService.userinfo.uid;
     this.transaction.tokenHeader=this.authService.token;
     this.transaction.loadCards();
     this.cards = this.transaction.getCards();
@@ -38,7 +38,7 @@ export class PagoPage implements OnInit {
 
   saveCard() {
     var formData: any = new FormData();
-    formData.append("userId", ""+this.authService.id);
+    formData.append("userId", ""+this.authService.uid);
     formData.append("email", ""+this.authService.correo);
     formData.append("cardNumber", ""+ this.cardNumber);
     formData.append("holderName", ""+ this.holderName);
@@ -48,6 +48,7 @@ export class PagoPage implements OnInit {
     var object = {};
     formData.forEach(function(value, key){
       object[key] = value;
+      console.log(key+'   '+value)
     });
     var json = JSON.stringify(object);
     console.log(json)
@@ -57,9 +58,9 @@ export class PagoPage implements OnInit {
         this.transaction.cards = [];
         this.transaction.loadCards();
         this.cards = this.transaction.getCards();
-        this.presentToast("Tarjeta Guardada");
+        this.presentToast("Tarjeta Guardada con Exito!");
       } else {
-        this.presentToastFeedback("Error");
+        this.presentToastFeedback("Error, Intenta Nuevamente!");
         
       }
     });

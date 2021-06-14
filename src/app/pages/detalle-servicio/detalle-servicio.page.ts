@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -53,7 +53,8 @@ export class DetalleServicioPage implements OnInit {
     public popoverController: PopoverController,
     private callNumber: CallNumber,
     private modal: ModalController,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private toastController: ToastController
   ) {
     this.idConductor=localStorage.getItem('idConductor')
     
@@ -118,7 +119,11 @@ export class DetalleServicioPage implements OnInit {
     this.router.navigateByUrl('/pago');
   }
   private cancelar(){
-    this.router.navigateByUrl('/home');
+    if(localStorage.getItem("idcarrera")==null) this.presentToast("No se ha podido cancelar la carrera");
+    else{
+      this.authservice.cancelService(localStorage.getItem("idcarrera"));
+      this.router.navigateByUrl('/home');
+  }
   }
   private watchPosition(){
     this.watch= this.geolocation.watchPosition();
@@ -147,6 +152,18 @@ export class DetalleServicioPage implements OnInit {
       }
     })
   }
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2500,
+      position: 'top',
+      color: 'danger'
+      });
+      
+    toast.present();
+
+    await this.popoverController.dismiss();
+    }
   watchDriverPos(id: any){
     this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
     
